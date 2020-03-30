@@ -63,11 +63,17 @@ class Film
      */
     private $acteur_joue;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Scenariste", inversedBy="films")
+     */
+    private $scenario;
+
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
         $this->realise = new ArrayCollection();
         $this->acteur_joue = new ArrayCollection();
+        $this->scenario = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,6 +226,32 @@ class Film
     {
         if ($this->acteur_joue->contains($acteurJoue)) {
             $this->acteur_joue->removeElement($acteurJoue);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Scenariste[]
+     */
+    public function getScenario(): Collection
+    {
+        return $this->scenario;
+    }
+
+    public function addScenario(Scenariste $scenario): self
+    {
+        if (!$this->scenario->contains($scenario)) {
+            $this->scenario[] = $scenario;
+        }
+
+        return $this;
+    }
+
+    public function removeScenario(Scenariste $scenario): self
+    {
+        if ($this->scenario->contains($scenario)) {
+            $this->scenario->removeElement($scenario);
         }
 
         return $this;
