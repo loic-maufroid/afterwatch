@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,16 @@ class Film
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nationalite;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Genre", inversedBy="films")
+     */
+    private $genre_film;
+
+    public function __construct()
+    {
+        $this->genre_film = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +131,32 @@ class Film
     public function setNationalite(?string $nationalite): self
     {
         $this->nationalite = $nationalite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenreFilm(): Collection
+    {
+        return $this->genre_film;
+    }
+
+    public function addGenreFilm(Genre $genreFilm): self
+    {
+        if (!$this->genre_film->contains($genreFilm)) {
+            $this->genre_film[] = $genreFilm;
+        }
+
+        return $this;
+    }
+
+    public function removeGenreFilm(Genre $genreFilm): self
+    {
+        if ($this->genre_film->contains($genreFilm)) {
+            $this->genre_film->removeElement($genreFilm);
+        }
 
         return $this;
     }
