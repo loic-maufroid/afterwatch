@@ -53,9 +53,15 @@ class Film
      */
     private $genre_film;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Realisateur", inversedBy="films")
+     */
+    private $realise;
+
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
+        $this->realise = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +162,32 @@ class Film
     {
         if ($this->genre_film->contains($genreFilm)) {
             $this->genre_film->removeElement($genreFilm);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Realisateur[]
+     */
+    public function getRealise(): Collection
+    {
+        return $this->realise;
+    }
+
+    public function addRealise(Realisateur $realise): self
+    {
+        if (!$this->realise->contains($realise)) {
+            $this->realise[] = $realise;
+        }
+
+        return $this;
+    }
+
+    public function removeRealise(Realisateur $realise): self
+    {
+        if ($this->realise->contains($realise)) {
+            $this->realise->removeElement($realise);
         }
 
         return $this;
