@@ -73,12 +73,18 @@ class Film
      */
     private $statuses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="id_film", orphanRemoval=true)
+     */
+    private $statues_film;
+
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
         $this->realise = new ArrayCollection();
         $this->acteur_joue = new ArrayCollection();
         $this->scenario = new ArrayCollection();
+        $this->statues_film = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -268,6 +274,37 @@ class Film
     public function getStatuses(): Collection
     {
         return $this->statuses;
+    }
+
+    /**
+     * @return Collection|Status[]
+     */
+    public function getStatuesFilm(): Collection
+    {
+        return $this->statues_film;
+    }
+
+    public function addStatuesFilm(Status $statuesFilm): self
+    {
+        if (!$this->statues_film->contains($statuesFilm)) {
+            $this->statues_film[] = $statuesFilm;
+            $statuesFilm->setIdFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatuesFilm(Status $statuesFilm): self
+    {
+        if ($this->statues_film->contains($statuesFilm)) {
+            $this->statues_film->removeElement($statuesFilm);
+            // set the owning side to null (unless already changed)
+            if ($statuesFilm->getIdFilm() === $this) {
+                $statuesFilm->setIdFilm(null);
+            }
+        }
+
+        return $this;
     }
 
 }

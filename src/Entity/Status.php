@@ -32,6 +32,12 @@ class Status
      */
     private $id_utilisateur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Film", inversedBy="statues_film")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_film;
+
 
     public function getId(): ?int
     {
@@ -70,6 +76,18 @@ class Status
     public function setIdUtilisateur(?Utilisateur $id_utilisateur): self
     {
         $this->id_utilisateur = $id_utilisateur;
+
+        return $this;
+    }
+
+    public function getIdFilm(): ?Film
+    {
+        return $this->id_film;
+    }
+
+    public function setIdFilm(?Film $id_film): self
+    {
+        $this->id_film = $id_film;
 
         return $this;
     }
