@@ -58,10 +58,16 @@ class Film
      */
     private $realise;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Acteur", inversedBy="films")
+     */
+    private $acteur_joue;
+
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
         $this->realise = new ArrayCollection();
+        $this->acteur_joue = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,6 +194,32 @@ class Film
     {
         if ($this->realise->contains($realise)) {
             $this->realise->removeElement($realise);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Acteur[]
+     */
+    public function getActeurJoue(): Collection
+    {
+        return $this->acteur_joue;
+    }
+
+    public function addActeurJoue(Acteur $acteurJoue): self
+    {
+        if (!$this->acteur_joue->contains($acteurJoue)) {
+            $this->acteur_joue[] = $acteurJoue;
+        }
+
+        return $this;
+    }
+
+    public function removeActeurJoue(Acteur $acteurJoue): self
+    {
+        if ($this->acteur_joue->contains($acteurJoue)) {
+            $this->acteur_joue->removeElement($acteurJoue);
         }
 
         return $this;
