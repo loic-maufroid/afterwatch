@@ -68,18 +68,12 @@ class Film
      */
     private $scenario;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", mappedBy="a_vu")
-     */
-    private $utilisateurs_avu;
-
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
         $this->realise = new ArrayCollection();
         $this->acteur_joue = new ArrayCollection();
         $this->scenario = new ArrayCollection();
-        $this->utilisateurs_avu = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,31 +257,4 @@ class Film
         return $this;
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getUtilisateursAvu(): Collection
-    {
-        return $this->utilisateurs_avu;
-    }
-
-    public function addUtilisateursAvu(Utilisateur $utilisateursAvu): self
-    {
-        if (!$this->utilisateurs_avu->contains($utilisateursAvu)) {
-            $this->utilisateurs_avu[] = $utilisateursAvu;
-            $utilisateursAvu->addAVu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUtilisateursAvu(Utilisateur $utilisateursAvu): self
-    {
-        if ($this->utilisateurs_avu->contains($utilisateursAvu)) {
-            $this->utilisateurs_avu->removeElement($utilisateursAvu);
-            $utilisateursAvu->removeAVu($this);
-        }
-
-        return $this;
-    }
 }
