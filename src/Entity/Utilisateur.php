@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -42,6 +44,16 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Film", inversedBy="utilisateurs_avu")
+     */
+    private $a_vu;
+
+    public function __construct()
+    {
+        $this->a_vu = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +148,32 @@ class Utilisateur implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Film[]
+     */
+    public function getAVu(): Collection
+    {
+        return $this->a_vu;
+    }
+
+    public function addAVu(Film $aVu): self
+    {
+        if (!$this->a_vu->contains($aVu)) {
+            $this->a_vu[] = $aVu;
+        }
+
+        return $this;
+    }
+
+    public function removeAVu(Film $aVu): self
+    {
+        if ($this->a_vu->contains($aVu)) {
+            $this->a_vu->removeElement($aVu);
+        }
 
         return $this;
     }
