@@ -50,9 +50,15 @@ class Utilisateur implements UserInterface
      */
     private $a_vu;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="id_utilisateur", orphanRemoval=true)
+     */
+    private $statuses;
+
     public function __construct()
     {
         $this->a_vu = new ArrayCollection();
+        $this->statuses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +179,37 @@ class Utilisateur implements UserInterface
     {
         if ($this->a_vu->contains($aVu)) {
             $this->a_vu->removeElement($aVu);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Status[]
+     */
+    public function getStatuses(): Collection
+    {
+        return $this->statuses;
+    }
+
+    public function addStatus(Status $status): self
+    {
+        if (!$this->statuses->contains($status)) {
+            $this->statuses[] = $status;
+            $status->setIdUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatus(Status $status): self
+    {
+        if ($this->statuses->contains($status)) {
+            $this->statuses->removeElement($status);
+            // set the owning side to null (unless already changed)
+            if ($status->getIdUtilisateur() === $this) {
+                $status->setIdUtilisateur(null);
+            }
         }
 
         return $this;

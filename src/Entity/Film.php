@@ -68,6 +68,11 @@ class Film
      */
     private $scenario;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="id_utilisateur", orphanRemoval=true)
+     */
+    private $statuses;
+
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
@@ -255,6 +260,14 @@ class Film
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Status[]
+     */
+    public function getStatuses(): Collection
+    {
+        return $this->statuses;
     }
 
 }

@@ -26,6 +26,13 @@ class Status
      */
     private $veut_voir;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="statuses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_utilisateur;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,4 +61,17 @@ class Status
 
         return $this;
     }
+
+    public function getIdUtilisateur(): ?Utilisateur
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateur $id_utilisateur): self
+    {
+        $this->id_utilisateur = $id_utilisateur;
+
+        return $this;
+    }
+
 }
