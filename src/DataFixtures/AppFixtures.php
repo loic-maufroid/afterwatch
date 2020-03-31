@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use App\Entity\Acteur;
 use App\Entity\Film;
 use App\Entity\Genre;
+use App\Entity\Note;
 use App\Entity\Realisateur;
 use App\Entity\Scenariste;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -100,6 +101,37 @@ class AppFixtures extends Fixture
             $scenaristes[] = $scenariste;
         }
 
+        //Créer les Note
+        $scores = ['1', '2', '3', '4', '5'];
+        $notes = [];
+        foreach ($scores as $score)
+        {
+            $note = new Note();
+            $note->setScore($score);
+            $manager->persist($note);
+            $notes[] = $note;
+        }
+
+        //Créer les Commentaires
+        
+        
+
+
+        //Boucle
+        
+        
+        for ($i=0;$i <= count($utilisateurs) -1; ++$i)
+        {
+            $utilisateurs[$i]->addNote($faker->randomElement($notes));
+            $manager->persist($utilisateurs[$i]);
+        }
+
+        
+        for ($i=0;$i <= count($films) -1; ++$i)
+        {
+            $films[$i]->addNote($faker->randomElement($notes)); 
+            $manager->persist($films[$i]);
+        }
         
 
 
