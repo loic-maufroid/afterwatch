@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Utilisateur;
 use App\Entity\Acteur;
 use App\Entity\Commentaire;
+use App\Entity\Critique;
 use App\Entity\Film;
 use App\Entity\Genre;
 use App\Entity\Note;
@@ -127,11 +128,24 @@ class AppFixtures extends Fixture
             $commentaires[] = $commentaire;
         }
         
-    
+        //Créer Critique
+        $critiques = [];
+        for ($i = 1; $i <=15; ++$i)
+        {
+            $critique = new Critique();
+            $critique->setTitre('critique '.$i);
+            $critique->setContenu($faker->text);
+            $critique->setIdFilm($faker->randomElement($films));
+            $critique->setIdUtilisateur($faker->randomElement($utilisateurs));
+            $critique->setSlug($this->slugger->slug($critique->getTitre())->lower());
+            $manager->persist($critique);
+            $critiques[] = $critique;
+        }
+
+        //Status
         
-
-
-
+    
+    
         // $product = new Product();
         // $manager->persist($product);
 
