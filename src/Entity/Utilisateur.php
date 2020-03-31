@@ -65,6 +65,11 @@ class Utilisateur implements UserInterface
      */
     private $notes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Critique", mappedBy="id_utilisateur", orphanRemoval=true)
+     */
+    private $critiques;
+
 
     public function __construct()
     {
@@ -72,6 +77,7 @@ class Utilisateur implements UserInterface
         $this->statuses = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->critiques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -284,6 +290,37 @@ class Utilisateur implements UserInterface
             // set the owning side to null (unless already changed)
             if ($note->getIdUtilisateur() === $this) {
                 $note->setIdUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Critique[]
+     */
+    public function getCritiques(): Collection
+    {
+        return $this->critiques;
+    }
+
+    public function addCritique(Critique $critique): self
+    {
+        if (!$this->critiques->contains($critique)) {
+            $this->critiques[] = $critique;
+            $critique->setIdUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCritique(Critique $critique): self
+    {
+        if ($this->critiques->contains($critique)) {
+            $this->critiques->removeElement($critique);
+            // set the owning side to null (unless already changed)
+            if ($critique->getIdUtilisateur() === $this) {
+                $critique->setIdUtilisateur(null);
             }
         }
 
