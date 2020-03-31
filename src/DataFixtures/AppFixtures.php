@@ -2,15 +2,6 @@
 
 namespace App\DataFixtures;
 
-<<<<<<< HEAD
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
-
-class AppFixtures extends Fixture
-{
-    public function load(ObjectManager $manager)
-    {
-=======
 use App\Entity\Utilisateur;
 use App\Entity\Acteur;
 use App\Entity\Film;
@@ -71,7 +62,6 @@ class AppFixtures extends Fixture
 
 
 
->>>>>>> refs/remotes/origin/master
         // $product = new Product();
         // $manager->persist($product);
 

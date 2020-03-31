@@ -47,4 +47,11 @@ class FilmRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return Film[]
+     */
+    public function findByTitle($title){
+        
+    }
 }
