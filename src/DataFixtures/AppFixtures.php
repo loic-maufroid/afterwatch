@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Utilisateur;
 use App\Entity\Acteur;
 use App\Entity\Film;
+use App\Entity\Genre;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -36,6 +37,7 @@ class AppFixtures extends Fixture
             $utilisateurs[] = $utilisateur;
         }
 
+        //Créer les Films
         $films = [];
         for ($i = 1; $i <=75; ++$i)
         {
@@ -47,7 +49,19 @@ class AppFixtures extends Fixture
             $films[] = $film;
         }
 
+        //Créer les Genres
+        $categories = ['Aventure', 'Horreur', 'Comédie'];
+        $genres = [];
+        foreach ($categories as $categorie)
+        {
+            $genre = new Genre();
+            $genre->setType($categorie);
+            $manager->persist($genre);
+            $genres[] = $genre;
+        }
 
+
+        //Créer les Acteurs
         $acteurs = [];
         for ($i = 1; $i <=10; ++$i)
         {
