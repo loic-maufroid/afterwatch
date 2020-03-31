@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Utilisateur;
+use App\Entity\Acteur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -24,7 +25,7 @@ class AppFixtures extends Fixture
 
         //Créer les Utilisateurs
         $utilisateurs = [];
-        for ($i = 1; $i <=10; ++$i)
+        for ($i = 1; $i <=20; ++$i)
         {
             $utilisateur = new Utilisateur();
             $utilisateur->setUsername('utilisateur '.$i);
@@ -32,6 +33,16 @@ class AppFixtures extends Fixture
             $utilisateur->setPassword('password');
             $manager->persist($utilisateur);
             $utilisateurs[] = $utilisateur;
+        }
+
+        $acteurs = [];
+        for ($i = 1; $i <=10; ++$i)
+        {
+            $acteur = new Acteur();
+            $acteur->setNom('nom_acteur '.$i);
+            $acteur->setPrenom('prenom_acteur '.$i);
+            $manager->persist($acteur);
+            $acteurs[] = $acteur;
         }
 
 
