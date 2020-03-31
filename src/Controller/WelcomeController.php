@@ -22,8 +22,12 @@ class WelcomeController extends AbstractController
      */
     public function search(Request $request){
 
-        
+        dump($request);
 
-        return $this->render('welcome/search.html.twig',[]);
+        $query = $request->query->get('searchFilms');
+
+        return $this->render('welcome/search.html.twig',[
+            "query" => $query
+        ]);
     }
 }

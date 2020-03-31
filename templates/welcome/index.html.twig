@@ -5,7 +5,8 @@
 {% block body %}
 
 <form action="{{ path('search') }}" method="get">
-    
+    <input type="search" name="searchFilms" id="searchFilms" placeholder="Recherche un film...">
+    <button type="submit">Rechercher</button>
 </form>
 
 {% endblock %}
