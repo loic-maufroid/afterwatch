@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Utilisateur;
 use App\Entity\Acteur;
+use App\Entity\Commentaire;
 use App\Entity\Film;
 use App\Entity\Genre;
 use App\Entity\Note;
@@ -108,29 +109,25 @@ class AppFixtures extends Fixture
         {
             $note = new Note();
             $note->setScore($score);
+            $note->setIdFilm($faker->randomElement($films));
+            $note->setIdUtilisateur($faker->randomElement($utilisateurs));
             $manager->persist($note);
             $notes[] = $note;
         }
 
-        
-        
-
-
-        //Boucle
-        
-        
-        for ($i=0;$i <= count($utilisateurs) -1; ++$i)
+        //Créer Commentaire
+        $commentaires= [];
+        for ($i = 1; $i <=30; ++$i)
         {
-            $utilisateurs[$i]->addNote($faker->randomElement($notes));
-            $manager->persist($utilisateurs[$i]);
+            $commentaire = new Commentaire();
+            $commentaire->setContenu($faker->text);
+            $commentaire->setIdFilm($faker->randomElement($films));
+            $commentaire->setIdUtilisateur($faker->randomElement($utilisateurs));
+            $manager->persist($commentaire);
+            $commentaires[] = $commentaire;
         }
-
         
-        for ($i=0;$i <= count($films) -1; ++$i)
-        {
-            $films[$i]->addNote($faker->randomElement($notes)); 
-            $manager->persist($films[$i]);
-        }
+    
         
 
 
