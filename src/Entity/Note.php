@@ -21,6 +21,12 @@ class Note
      */
     private $score;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Film", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_film;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +40,18 @@ class Note
     public function setScore(?int $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getIdFilm(): ?Film
+    {
+        return $this->id_film;
+    }
+
+    public function setIdFilm(?Film $id_film): self
+    {
+        $this->id_film = $id_film;
 
         return $this;
     }

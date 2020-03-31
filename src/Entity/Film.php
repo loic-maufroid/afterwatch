@@ -83,6 +83,11 @@ class Film
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="id_film", orphanRemoval=true)
+     */
+    private $notes;
+
 
     public function __construct()
     {
@@ -92,6 +97,7 @@ class Film
         $this->scenario = new ArrayCollection();
         $this->statues_film = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -347,6 +353,37 @@ class Film
             // set the owning side to null (unless already changed)
             if ($commentaire->getIdFilm() === $this) {
                 $commentaire->setIdFilm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setIdFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getIdFilm() === $this) {
+                $note->setIdFilm(null);
             }
         }
 
