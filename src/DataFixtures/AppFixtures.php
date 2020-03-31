@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
             $realisateur->setPrenom($faker->firstName);
             $realisateur->addFilm($faker->randomElement($films));
             $manager->persist($realisateur);
-            $acteurs[] = $acteur;
+            $realisateurs[] = $realisateur;
         }
 
         
