@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\FilmRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,8 +28,6 @@ class WelcomeController extends AbstractController
 
         $query = $request->query->get('searchFilms');
 
-        dump($query);
-
         $films = $filmRepository->findByTitle($query);
 
         dump($films);
@@ -36,11 +35,7 @@ class WelcomeController extends AbstractController
         $idsDir = $filmRepository->findIdsByDirector($query);
         $idsAct = $filmRepository->findIdsByActor($query);
 
-        dump($idsDir);
-        dump($idsAct);
-
         $idsTemp = array_merge($idsDir,$idsAct);
-        dump($idsTemp);
 
         $ids = [];
         foreach ($idsTemp as $idTemp){
@@ -49,7 +44,6 @@ class WelcomeController extends AbstractController
 
         $ids = array_unique($ids);
 
-        dump($ids);
         foreach ($ids as $id) {            
             $films[] = $filmRepository->find($id);
         }
@@ -61,5 +55,47 @@ class WelcomeController extends AbstractController
             "query" => $query,
             "films" => $films
         ]);
+    }
+
+    /**
+     * @Route("/autocomplete",name="autocomplete_film_search")
+     */
+    public function autocomplete(Request $request,FilmRepository $filmRepository){
+
+        if ($request->isXmlHttpRequest()){
+            $query = $request->query->get('q');
+            $films = $filmRepository->findByTitle($query);
+
+
+            $idsDir = $filmRepository->findIdsByDirector($query);
+            $idsAct = $filmRepository->findIdsByActor($query);
+
+            $idsTemp = array_merge($idsDir,$idsAct);
+
+            $ids = [];
+            foreach ($idsTemp as $idTemp){
+                $ids [] = $idTemp["id"];
+            }
+
+            $ids = array_unique($ids);
+
+            foreach ($ids as $id) {            
+                $films[] = $filmRepository->find($id);
+            }
+
+            $jsonData = array();
+            $idx = 0;
+            foreach($films as $film) {  
+                $temp = array(
+                   'titre' => $film->getTitre() 
+                );   
+                $jsonData[$idx++] = $temp;  
+             } 
+        }
+        else
+        return $this->redirectToRoute('welcome');
+
+        return new JsonResponse($jsonData);
+
     }
 }

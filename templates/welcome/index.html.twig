@@ -4,9 +4,48 @@
 
 {% block body %}
 
-<form action="{{ path('search') }}" method="get">
+<form style="display:inline-block;" action="{{ path('search') }}" method="get">
+    <div id="autocomplete">
     <input type="search" name="searchFilms" id="searchFilms" placeholder="Recherche un film...">
+    </div>
     <button type="submit">Rechercher</button>
 </form>
 
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    $(function(){
+        
+        function envoyer(){
+            var query = $("#searchFilms").val();
+            $(".suggestion").remove();
+            if (query.trim() != "" && query.length > 3){
+              
+        $.ajax({
+            type : 'GET',
+            url : "{{ path('autocomplete_film_search') }}",
+            data : 'q='+query,
+            dataType : 'JSON',
+        success: function(response){
+            console.log(response);
+ 
+            for (let i = 0; i < response.length; i++) {
+                $("#autocomplete").append("<div class='suggestion'><a href='#'>"+response[i]["titre"]+"</a></div>");
+            }
+        }                 
+        });
+    }
+
+    }
+
+    var timer;
+    $("#searchFilms").keyup(function(event){
+        clearTimeout(timer);
+        timer = setTimeout(envoyer,500);
+        event.preventDefault();
+    })
+})
+</script>
 {% endblock %}
