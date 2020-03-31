@@ -52,6 +52,39 @@ class FilmRepository extends ServiceEntityRepository
      * @return Film[]
      */
     public function findByTitle($title){
-        
+
+        $result = $this->getEntityManager()
+        ->createQuery('SELECT f FROM App\Entity\Film f WHERE f.titre LIKE :title')
+        ->setParameter('title','%'.$title.'%')
+        ->getResult();
+
+        return $result;
+
     }
+
+    /**
+     * @return int[]
+     */
+    public function findIdsByDirector($director){
+        
+        $result = $this->getEntityManager()
+        ->createQuery("SELECT r.id FROM App\Entity\Realisateur r WHERE CONCAT(r.prenom,' ',r.nom) LIKE :director")
+        ->setParameter('director','%'.$director.'%')
+        ->getResult();
+
+        return $result;        
+    }
+
+    /**
+     * @return int[]
+     */
+    public function findIdsByActor($actor){
+        $result = $this->getEntityManager()
+        ->createQuery("SELECT a.id FROM App\Entity\Acteur a WHERE CONCAT(a.prenom,' ',a.nom) LIKE :actor")
+        ->setParameter('actor','%'.$actor.'%')
+        ->getResult();
+
+        return $result;     
+    }
+
 }

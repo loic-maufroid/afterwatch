@@ -7,5 +7,8 @@
 <a href="{{ path('welcome') }}">Retour à la recherche</a>
 
 <p>{{ query }}</p>
+{% for film in films %}
+    {{ film.titre }}
+{% endfor %}
 
 {% endblock %}
