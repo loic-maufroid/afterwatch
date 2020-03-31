@@ -103,6 +103,11 @@ class Film
      */
     private $legislation;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $trailer;
+
 
     public function __construct()
     {
@@ -457,6 +462,18 @@ class Film
     public function setLegislation(?int $legislation): self
     {
         $this->legislation = $legislation;
+
+        return $this;
+    }
+
+    public function getTrailer(): ?string
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer(?string $trailer): self
+    {
+        $this->trailer = $trailer;
 
         return $this;
     }

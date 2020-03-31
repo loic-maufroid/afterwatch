@@ -112,7 +112,6 @@ class AppFixtures extends Fixture
             $notes[] = $note;
         }
 
-        //Créer les Commentaires
         
         
 
