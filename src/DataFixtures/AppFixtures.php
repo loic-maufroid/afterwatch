@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use App\Entity\Acteur;
 use App\Entity\Film;
 use App\Entity\Genre;
+use App\Entity\Realisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -69,7 +70,20 @@ class AppFixtures extends Fixture
             $acteur = new Acteur();
             $acteur->setNom($faker->lastName);
             $acteur->setPrenom($faker->firstName);
+            $acteur->addFilm($faker->randomElement($films));
             $manager->persist($acteur);
+            $acteurs[] = $acteur;
+        }
+
+        //Créer les Réalisateur
+        $realisateurs = [];
+        for ($i = 1; $i <=10; ++$i)
+        {
+            $realisateur = new Realisateur();
+            $realisateur->setNom($faker->lastName);
+            $realisateur->setPrenom($faker->firstName);
+            $realisateur->addFilm($faker->randomElement($films));
+            $manager->persist($realisateur);
             $acteurs[] = $acteur;
         }
 
