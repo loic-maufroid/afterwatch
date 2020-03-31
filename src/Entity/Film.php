@@ -88,6 +88,11 @@ class Film
      */
     private $notes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Critique", mappedBy="id_film", orphanRemoval=true)
+     */
+    private $critiques;
+
 
     public function __construct()
     {
@@ -98,6 +103,7 @@ class Film
         $this->statues_film = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->critiques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -384,6 +390,37 @@ class Film
             // set the owning side to null (unless already changed)
             if ($note->getIdFilm() === $this) {
                 $note->setIdFilm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Critique[]
+     */
+    public function getCritiques(): Collection
+    {
+        return $this->critiques;
+    }
+
+    public function addCritique(Critique $critique): self
+    {
+        if (!$this->critiques->contains($critique)) {
+            $this->critiques[] = $critique;
+            $critique->setIdFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCritique(Critique $critique): self
+    {
+        if ($this->critiques->contains($critique)) {
+            $this->critiques->removeElement($critique);
+            // set the owning side to null (unless already changed)
+            if ($critique->getIdFilm() === $this) {
+                $critique->setIdFilm(null);
             }
         }
 
