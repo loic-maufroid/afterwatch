@@ -78,6 +78,12 @@ class Film
      */
     private $statues_film;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="id_film", orphanRemoval=true)
+     */
+    private $commentaires;
+
+
     public function __construct()
     {
         $this->genre_film = new ArrayCollection();
@@ -85,6 +91,7 @@ class Film
         $this->acteur_joue = new ArrayCollection();
         $this->scenario = new ArrayCollection();
         $this->statues_film = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -306,5 +313,46 @@ class Film
 
         return $this;
     }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getUtlisateurCommente(): Collection
+    {
+        return $this->utlisateur_commente;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setIdFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getIdFilm() === $this) {
+                $commentaire->setIdFilm(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 
 }

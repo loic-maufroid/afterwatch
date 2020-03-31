@@ -55,6 +55,7 @@ class Utilisateur implements UserInterface
      */
     private $statuses;
 
+
     public function __construct()
     {
         $this->a_vu = new ArrayCollection();
