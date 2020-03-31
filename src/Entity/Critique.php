@@ -38,6 +38,11 @@ class Critique
      */
     private $id_utilisateur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Critique
     public function setIdUtilisateur(?Utilisateur $id_utilisateur): self
     {
         $this->id_utilisateur = $id_utilisateur;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
