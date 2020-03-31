@@ -98,6 +98,11 @@ class Film
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $legislation;
+
 
     public function __construct()
     {
@@ -440,6 +445,18 @@ class Film
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getLegislation(): ?int
+    {
+        return $this->legislation;
+    }
+
+    public function setLegislation(?int $legislation): self
+    {
+        $this->legislation = $legislation;
 
         return $this;
     }
