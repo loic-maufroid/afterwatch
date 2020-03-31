@@ -11,6 +11,7 @@ use App\Entity\Genre;
 use App\Entity\Note;
 use App\Entity\Realisateur;
 use App\Entity\Scenariste;
+use App\Entity\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -143,7 +144,17 @@ class AppFixtures extends Fixture
         }
 
         //Status
-        
+        $status = [true, false];
+        for ($i = 1; $i <=15; ++$i)
+        {
+            $statu = new Status();
+            $statu->setAVue($status[random_int(0,1)]);
+            $statu->setVeutVoir($status[random_int(0,1)]);
+            $statu->setIdFilm($faker->randomElement($films));
+            $statu->setIdUtilisateur($faker->randomElement($utilisateurs));
+            $manager->persist($statu);
+            $status[] = $statu;
+        }
     
     
         // $product = new Product();
