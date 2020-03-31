@@ -60,12 +60,18 @@ class Utilisateur implements UserInterface
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="id_utilisateur", orphanRemoval=true)
+     */
+    private $notes;
+
 
     public function __construct()
     {
         $this->a_vu = new ArrayCollection();
         $this->statuses = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -247,6 +253,37 @@ class Utilisateur implements UserInterface
             // set the owning side to null (unless already changed)
             if ($commentaire->getIdUtilisateur() === $this) {
                 $commentaire->setIdUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setIdUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getIdUtilisateur() === $this) {
+                $note->setIdUtilisateur(null);
             }
         }
 

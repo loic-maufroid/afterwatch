@@ -27,6 +27,12 @@ class Note
      */
     private $id_film;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_utilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,18 @@ class Note
     public function setIdFilm(?Film $id_film): self
     {
         $this->id_film = $id_film;
+
+        return $this;
+    }
+
+    public function getIdUtilisateur(): ?Utilisateur
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateur $id_utilisateur): self
+    {
+        $this->id_utilisateur = $id_utilisateur;
 
         return $this;
     }
