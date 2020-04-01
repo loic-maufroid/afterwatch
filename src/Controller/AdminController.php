@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Entity\Critique;
 use App\Entity\Film;
 use App\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/users", name="admin_userList")
+     * @Route("/admin/users", name="admin_userlist")
      */
     public function userList()
     {
@@ -33,7 +34,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/commentsList", name="admin_commentsList")
+     * @Route("/admin/commentsList", name="admin_commentslist")
      */
     public function commentairesList()
     {
@@ -41,7 +42,17 @@ class AdminController extends AbstractController
         return $this->render('admin/commentsList.html.twig', [
             'comments' => $comments,
         ]);
-        
+    }
+
+    /**
+     * @Route("/admin/critiquesList", name="admin_critiqueslist")
+     */
+    public function critiquesList()
+    {
+        $critiques = $this->getDoctrine()->getRepository(Critique::class)->findAll();
+        return $this->render('admin/critiquesList.html.twig', [
+            'critiques' => $critiques,
+        ]);
     }
 }
 
