@@ -1,0 +1,165 @@
+/*font pour le titre*/
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap');
+/*Gabarit*/
+header{
+    margin-top: 2em;
+}
+h1{
+    font-family: "courgette";
+    font-size: 45px;
+}
+nav{
+    margin-top: 3em;
+}
+footer{
+    width: 100%;
+    height: auto;
+}
+/*Fin du Gabarit*/
+/*taille du logo*/
+.logo{
+    width:50%;
+}
+/*taille des images*/
+.taille{
+    width:150px;
+    height:165px;
+}
+/*mettre en display flex*/
+.flex{
+    display: flex;
+}
+/*aligner le header*/
+.jbetween{
+    justify-content: space-around;
+}
+/*aligner le menu onglet a droite*/
+.jflex{
+    justify-content: flex-end;
+}
+/*positition au centre*/
+.jcenter{
+    justify-content: center;
+}
+/*mettre les titres en gras*/
+.gras{
+    font-weight:bold;
+}
+/* align au centre les boutons */
+.aligni{
+    align-items: center;
+}
+/*marge droite des boutons */
+.marginr{
+    margin-right: 0.5em;
+}
+.paddingr{
+    padding-right: 0.1em;
+}
+/*taille de la police des titres*/
+.sizeg{
+    font-size: 15px;
+}
+/*taille ecriture menu*/
+.size{
+    font-size: 18px;
+}
+/*marge au dessus du tableau*/
+.margint{
+    margin-top: 22em;
+}
+/*margin top  entre le tableau et le bouton ajouter film*/
+.margintop{
+    margin-top: 2em;
+}
+/* marge sous le tableau*/
+.marginb{
+    margin-bottom: 4em;
+}
+/*centrer le text*/
+.textc{
+    text-align: center;
+}
+/*bouge le bouton ajouter un film*/
+.bouge{
+    display: flex;
+    justify-content: flex-end;
+}
+/*couleur donner au bouton */
+.btn-color{
+    background-color: #009391;
+    color: white;
+} 
+/*couleur donner au bouton au survol*/
+.btn-color:hover{
+    background-color: #006e6d;
+    color: white;
+}
+/*boutton supprimer au survol*/
+.btnsup:hover{
+    background-color: #860202;
+}
+/*boutton valider*/
+.btnval:hover{
+    background-color: #1a7902;
+}
+/*ul du header*/
+.menuh{
+    list-style: none;
+}
+/*li du header*/
+.lih{
+    padding-right: 1em;
+}
+/*a du header*/
+.lienh{
+    color: #3a3a3a;
+    font-size: 18px;
+}
+/*a du header en survol*/
+.lienh:hover{
+    color: #009391;
+    text-decoration: none;
+}
+.width{
+    width:100px;
+}
+/*scroll de la catégorie critiques*/
+.scroll{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: block;
+    height : 9em;
+    text-align: justify;
+}
+/*scroll de la catégorie synopsis*/
+.scrollsy{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: block;
+    height : 180px;
+    width: 200px;
+    text-align: justify;
+}
+/*définition de lecriture et de la taille du theme*/
+#thèmes {
+    width: 80%;
+    font-size: 14px;
+    height: auto;;
+}
+/*bordure entre les cases*/
+#thèmes td, #thèmes th {
+    border: 1px solid #e7e7e7;
+    padding: 5px;
+    width: auto;
+}
+/* apparence donner au passage de la souris*/
+#thèmes tr:hover {
+    background-color: #e7e7e7;
+}
+/*defini la hauteur la couleur et autres detail des cases titres*/
+#thèmes th {
+    text-align: center;
+    background-color: #009391;
+    color: white;
+}

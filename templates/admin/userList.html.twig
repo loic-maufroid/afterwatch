@@ -4,11 +4,35 @@
 {% block title %} {{ parent() }} - Users{% endblock %}
 
 {% block body %}
-
-    {% for user in users %}
-        
-        {{ user.username }}
-
-    {% endfor %}
-
+<section class="flex jcenter">
+    <table id="thèmes" class=" textc margint  marginb">
+        <thead class="gras sizeg">
+            <tr>
+                <th>Avatar </th>
+                <th>Pseudo </th>
+                <th>Email </th>
+                <th>Rôle</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.avatar }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td> {#{{ user.role }}#} </td>
+                    <td>
+                        <a href="#"><button type="button" class="btn btn-info btn-danger">Bannir</button></a>
+                    </td>
+                </tr>
+            {% else %}
+            <tr>
+                <td>Aucun Utilisateur Trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>    
+    </table>
+</section>
 {% endblock %}

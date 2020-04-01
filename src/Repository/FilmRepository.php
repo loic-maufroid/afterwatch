@@ -87,4 +87,19 @@ class FilmRepository extends ServiceEntityRepository
         return $result;     
     }
 
+
+    // 
+    public function findAllFilms()
+    {
+        $queryBuilder = $this->createQueryBuilder('f')
+            ->leftJoin('f.acteur_joue', 'a')
+            ->leftJoin('f.genre_film', 'g')
+            ->leftJoin('f.realise', 'r')
+            ->leftJoin('f.scenario', 's')
+            ->addSelect('a', 'g', 'r', 's')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
 }

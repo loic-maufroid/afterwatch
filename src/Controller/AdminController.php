@@ -14,7 +14,7 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-        $films = $this->getDoctrine()->getRepository(Film::class)->findAll();
+        $films = $this->getDoctrine()->getRepository(Film::class)->findAllFilms();
         return $this->render('admin/index.html.twig', [
             'films' => $films,
         ]);
