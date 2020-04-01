@@ -1,15 +1,63 @@
 {% extends 'baseAdmin.html.twig' %}
 
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block title %} {{ parent() }} Category index{% endblock %}
 
-<div class="example-wrapper">
-    {% for film in films %}
-        {{ film.titre }}
-    {% endfor %}
-</div>
+{% block body %}
+        <div>
+            <a href="#">Ajouter un Film</a>
+        </div>
+    <table>
+        
+        <thead class=" titre gras sizeg">
+            <tr>
+                <th>Affiches</th>
+                <th>Titres</th>
+                <th>Slug</th>
+                <th>Dates de sortie</th>
+                <th>Réalisateurs</th>
+                <th>Scénaristes</th>
+                <th>Acteurs Principaux</th>
+                <th>Genre</th>
+                <th>Durées</th>
+                <th>Nationnalités</th>
+                <th>CNC</th>
+                <th>Liens Bandes-Annonces</th>
+                <th>Synopsis</th>
+                <th>Actions</th>  
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for film in films %}
+            <tr>
+                <td>{{ film.affiche }}</td>
+                <td>{{ film.titre }}</td>
+                <td>{{ film.slug }}</td>
+                <td>{{ film.date }}</td>
+                <td>{#{{ film.realise.nom }}#}
+                    {{ dump( film.realise ) }}
+                </td>
+                <td>{#{{ film.scenario.nom }}#}</td>
+                <td>{#{{ film.acteur_joue.nom }} {{ film.acteur_joue.prenom }}#}</td>
+                <td>{#{{ film.genre_film.type }}#}</td>
+                <td>{{ film.duree }}</td>
+                <td>{{ film.nationalite }}</td>
+                <td>{{ film.legislation }}</td>
+                <td>{{ film.trailer }}</td>
+                <td>{{ film.synopsis }}</td>
+                <td>
+                    <a href="#">Modifier</a>
+                    <a href="#">supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Aucun Film Trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}
