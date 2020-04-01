@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Film;
 use App\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,4 +31,21 @@ class AdminController extends AbstractController
             'users' => $users,
         ]);
     }
+
+    /**
+     * @Route("/admin/commentsList", name="admin_commentsList")
+     */
+    public function commentairesList()
+    {
+        $comments = $this->getDoctrine()->getRepository(Commentaire::class)->findAll();
+        return $this->render('admin/commentsList.html.twig', [
+            'comments' => $comments,
+        ]);
+        
+    }
 }
+
+
+
+
+    
