@@ -1,0 +1,14 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block title %} {{ parent() }} - Users{% endblock %}
+
+{% block body %}
+
+    {% for user in users %}
+        
+        {{ user.username }}
+
+    {% endfor %}
+
+{% endblock %}
