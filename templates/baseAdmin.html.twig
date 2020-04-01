@@ -3,12 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}AfterWatch Admin{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/admin/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/admin/style.css')}}">
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
-        <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+            <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+            <script src="{{ asset('js/popper.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>
+
