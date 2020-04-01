@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}AfterWatch Admin{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
