@@ -4,11 +4,11 @@
 
 {% block body %}
 
-<form style="display:inline-block;" action="{{ path('search') }}" method="get">
-    <div id="autocomplete">
+<form style="display:flex;" action="{{ path('search') }}" method="get">
+    <div id="autocomplete" style="display:flex;flex-direction:column;width:50%">
     <input type="search" name="searchFilms" id="searchFilms" placeholder="Recherche un film...">
     </div>
-    <button type="submit">Rechercher</button>
+    <button style="max-height:20px" type="submit">Rechercher</button>
 </form>
 
 {% endblock %}
@@ -29,10 +29,9 @@
             data : 'q='+query,
             dataType : 'JSON',
         success: function(response){
-            console.log(response);
  
             for (let i = 0; i < response.length; i++) {
-                $("#autocomplete").append("<div class='suggestion'><a href='#'>"+response[i]["titre"]+"</a></div>");
+                $("#autocomplete").append("<a class='suggestion' href='#'>"+response[i]["titre"]+"</a>");
             }
         }                 
         });
