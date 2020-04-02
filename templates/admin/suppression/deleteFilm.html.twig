@@ -10,7 +10,7 @@
         <p class="textc">Voulez-vous supprimer ce Film?</p>
         <div class="margina">
             <div class="flex jcenter">
-                <a href="#"><button type="button" class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('film_delete', {id: film.id}) }}"><button type="button" class="btn btn-success marginr">OUI</button></a>
                 <a href="{{ path('admin') }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
             </div>
         </div>

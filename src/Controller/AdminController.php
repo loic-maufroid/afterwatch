@@ -8,13 +8,15 @@ use App\Entity\Film;
 use App\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
      */
-    public function index()
+    public function indexAdmin()
     {
         $films = $this->getDoctrine()->getRepository(Film::class)->findAllFilms();
         return $this->render('admin/index.html.twig', [
@@ -115,6 +117,19 @@ class AdminController extends AbstractController
         return $this->render('admin/suppression/deleteComments.html.twig', [
             'comment' => $comment,
         ]);
+    }
+
+
+    /**
+     * @Route("/admin/cdf/{id}/delete", name="film_delete")
+    */
+    public function filmDelete(Film $film)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($film);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin');
     }
 
     
