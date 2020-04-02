@@ -115,6 +115,9 @@ class FilmRepository extends ServiceEntityRepository
     }
 
     //Requete personnalisé pour réduire le nombre de requete du site
+    /**
+     * @return: Film[]
+     */
     public function findAllFilms()
     {
         $queryBuilder = $this->createQueryBuilder('f')
@@ -126,6 +129,54 @@ class FilmRepository extends ServiceEntityRepository
             ->getQuery();
 
         return $queryBuilder->getResult();
+    }
+
+
+    /**
+     * @return: []
+     */
+    public function findSixRandomAlafficheIds(){
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN DATE_SUB(CURDATE(),INTERVAL 90 day) AND CURDATE() LIMIT 6';
+        $result = $conn->query($sql);
+
+        return $result->fetchAll();
+    }
+
+    public function querySixFilms($num){
+        $resultat = 'SELECT f FROM App\Entity\Film f WHERE f.id';
+        if ($num > 0){
+            $resultat.=' IN(:id1';
+            for ($i=2; $i <= $num; $i++) { 
+                $resultat.=',:id'.$i;
+            }
+            $resultat.=')';
+        }
+        return $resultat;
+    }
+
+    /**
+     * @return: Film[]
+     */
+    public function findSixRandomAlafficheFilms(){
+
+        $ids = $this->findSixRandomAlafficheIds();
+        $tabid = array();
+        for ($i=0; $i < count($ids); $i++) { 
+            $tabid["id".($i+1)] = $ids[$i]["id"]; 
+        }
+
+        if (count($tabid) == 0)
+        $query = $this->getEntityManager()->createQuery(
+            $this->querySixFilms(count($tabid))
+        );
+        else
+        $query = $this->getEntityManager()->createQuery(
+            $this->querySixFilms(count($tabid))
+        )->setParameters($tabid);
+
+        return $query->getResult();
     }
 
 }

@@ -18,8 +18,11 @@ class WelcomeController extends AbstractController
 
         $filmsCarr = $filmRepository->findSevenRandomReleasedFilms();
 
+        $filmsAffiche = $filmRepository->findSixRandomAlafficheFilms();
+
         return $this->render('welcome/index.html.twig', [
-            "filmsCarr" => $filmsCarr
+            "filmsCarr" => $filmsCarr,
+            "filmsAffiche" => $filmsAffiche
         ]);
     }
 
