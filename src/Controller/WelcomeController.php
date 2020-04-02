@@ -22,9 +22,12 @@ class WelcomeController extends AbstractController
 
         $filmsAffiche = $filmRepository->findFiveRandomAlafficheFilms();
 
+        $filmsSortie = $filmRepository->findFiveRandomSortieFilms();
+
         return $this->render('welcome/index.html.twig', [
             "filmsCarr" => $filmsCarr,
-            "filmsAffiche" => $filmsAffiche
+            "filmsAffiche" => $filmsAffiche,
+            "filmsSortie" => $filmsSortie
         ]);
     }
 
@@ -94,7 +97,7 @@ class WelcomeController extends AbstractController
             $idx = 0;
             foreach($films as $film) {  
                 $temp = array(
-                   'titre' => $film->getTitre() 
+                   'titre' => $film->getTitre()
                 );   
                 $jsonData[$idx++] = $temp;  
              } 
