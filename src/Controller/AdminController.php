@@ -25,32 +25,9 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/commentslist", name="admin_commentslist")
-     */
-    public function commentairesList()
-    {
-        $comments = $this->getDoctrine()->getRepository(Commentaire::class)->findAll();
-        return $this->render('admin/commentsList.html.twig', [
-            'comments' => $comments,
-        ]);
-    }
+    
 
-    /**
-     * @Route("/admin/critiqueslist", name="admin_critiqueslist")
-     */
-    public function critiquesList()
-    {
-        $critiques = $this->getDoctrine()->getRepository(Critique::class)->findAll();
-        /*$tab = [];
-        foreach($critiques as $critique){
-        $tab[] = [$critique->getIdFilm()->getId(),$critique->getIdUtilisateur()->getId()];
-        }*/
-                
-        return $this->render('admin/critiquesList.html.twig', [
-            'critiques' => $critiques,
-        ]);
-    }
+    
 
 
     /**
@@ -69,33 +46,9 @@ class AdminController extends AbstractController
 
     
 
-    /**
-     * @Route("/admin/critiqueslist/cdct/{id}", name="admin_confirmcritdelete")
-     */
-    public function critConfirmSuppr($id)
-    {
-       $critique = $this->getDoctrine()
-            ->getRepository(Critique::class)
-            ->find($id);
     
-        return $this->render('admin/suppression/deleteCritique.html.twig', [
-            'critique' => $critique,
-        ]);
-    }
 
-    /**
-     * @Route("/admin/commentslist/cdcm/{id}", name="admin_confirmcommentsdelete")
-     */
-    public function commentConfirmSuppr($id)
-    {
-       $comment = $this->getDoctrine()
-            ->getRepository(Commentaire::class)
-            ->find($id);
-    
-        return $this->render('admin/suppression/deleteComments.html.twig', [
-            'comment' => $comment,
-        ]);
-    }
+   
 
 
     
@@ -112,32 +65,9 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_userlist');
     }
 
-    /**
-     * @Route("/admin/commentslist/cdu/{id}/delete", name="comment_delete")
-    */
-    public function commentDelete(Commentaire $comment)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($comment);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin_commentslist');
-    }
-
-    /**
-     * @Route("/admin/critiqueslist/cdct/{id}/delete", name="critique_delete")
-    */
-    public function critiqueDelete(Critique $critique)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($critique);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin_critiqueslist');
-    }
-
 
     
+
 }
 
 

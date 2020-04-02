@@ -38,7 +38,7 @@ class FilmController extends AbstractController
         ]);
     }
 
-    //Page de Confirmation de la Suppression
+    //Page de Confirmation de la Suppression des Films
 
     /**
      * @Route("/admin/cdf/{id}", name="admin_confirmfilmdelete")
@@ -54,7 +54,7 @@ class FilmController extends AbstractController
         ]);
     }
 
-    //Suppression
+    //Suppression des Films
 
     /**
      * @Route("/admin/cdf/{id}/delete", name="film_delete")
