@@ -1,0 +1,21 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} {{ parent() }} - Supprimer Commentaire{% endblock %}
+
+{% block body %}
+<section class="flex jcenter marget">
+    <div class="jumbotron widthsup ">
+        <h2 class="textc">{{ comment.idfilm.titre }}</h2>
+        <p class="textc size">De : {{ comment.idutilisateur.username }}</p>
+        <p class="texta">{{ comment.contenu }}</p>
+        <hr class="my-4">
+        <p class="textc">Voulez-vous supprimer ce commentaire?</p>
+        <div class="margina">
+            <div class="flex jcenter">
+                <a href="#"><button type="button" class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('admin_commentslist') }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
+            </div>
+        </div>
+      </div>
+</section>
+{% endblock %}

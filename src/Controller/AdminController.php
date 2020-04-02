@@ -89,6 +89,34 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/cdct/{id}", name="admin_confirmcritdelete")
+     */
+    public function critConfirmSuppr($id)
+    {
+       $critique = $this->getDoctrine()
+            ->getRepository(Critique::class)
+            ->find($id);
+    
+        return $this->render('admin/suppression/deleteCritique.html.twig', [
+            'critique' => $critique,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/cdcm/{id}", name="admin_confirmcommentsdelete")
+     */
+    public function commentConfirmSuppr($id)
+    {
+       $comment = $this->getDoctrine()
+            ->getRepository(Commentaire::class)
+            ->find($id);
+    
+        return $this->render('admin/suppression/deleteComments.html.twig', [
+            'comment' => $comment,
+        ]);
+    }
+
     
 }
 
