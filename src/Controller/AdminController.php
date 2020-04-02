@@ -34,7 +34,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/commentsList", name="admin_commentslist")
+     * @Route("/admin/commentslist", name="admin_commentslist")
      */
     public function commentairesList()
     {
@@ -45,16 +45,54 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/critiquesList", name="admin_critiqueslist")
+     * @Route("/admin/critiqueslist", name="admin_critiqueslist")
      */
     public function critiquesList()
     {
         $critiques = $this->getDoctrine()->getRepository(Critique::class)->findAll();
+        /*$tab = [];
+        foreach($critiques as $critique){
+        $tab[] = [$critique->getIdFilm()->getId(),$critique->getIdUtilisateur()->getId()];
+        }*/
+                
         return $this->render('admin/critiquesList.html.twig', [
             'critiques' => $critiques,
         ]);
     }
+
+
+    /**
+     * @Route("/admin/users/cdu/{id}", name="admin_confirmuserdelete")
+     */
+    public function userConfirmSuppr($id)
+    {
+       $user = $this->getDoctrine()
+            ->getRepository(Utilisateur::class)
+            ->find($id);
+    
+        return $this->render('admin/suppression/deleteUser.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/cdf/{id}", name="admin_confirmfilmdelete")
+     */
+    public function filmConfirmSuppr($id)
+    {
+       $film = $this->getDoctrine()
+            ->getRepository(Film::class)
+            ->find($id);
+    
+        return $this->render('admin/suppression/deleteFilm.html.twig', [
+            'film' => $film,
+        ]);
+    }
+
+    
 }
+
+
 
 
 

@@ -64,7 +64,7 @@
                 <td>{{ film.synopsis }}</td>
                 <td>
                     <a href="#"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
-                    <a href="#"><button type="button" class="btn btn-info btn-danger">Supprimer</button></a>
+                    <a href="{{ path('admin_confirmfilmdelete', {id: film.id}) }}"><button type="button" class="btn btn-info btn-danger">Supprimer</button></a>
                 </td>
             </tr>
             {% else %}
