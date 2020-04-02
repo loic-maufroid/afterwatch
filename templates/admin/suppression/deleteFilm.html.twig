@@ -1,0 +1,19 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} {{ parent() }} - Supprimer Film{% endblock %}
+
+{% block body %}
+<section class="flex jcenter margt">
+    <div class="jumbotron widthsup ">
+        <h2 class="textc">{{ film.titre }}</h2>
+        <hr class="my-4">
+        <p class="textc">Voulez-vous supprimer ce Film?</p>
+        <div class="margina">
+            <div class="flex jcenter">
+                <a href="#"><button type="button" class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('admin') }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
+            </div>
+        </div>
+      </div>
+</section>
+{% endblock %}
