@@ -116,7 +116,7 @@ class FilmRepository extends ServiceEntityRepository
     }
 =======
 
-    // 
+    //Requete personnalisé pour réduire le nombre de requete du site
     public function findAllFilms()
     {
         $queryBuilder = $this->createQueryBuilder('f')
