@@ -50,6 +50,11 @@ class AdminController extends AbstractController
     public function critiquesList()
     {
         $critiques = $this->getDoctrine()->getRepository(Critique::class)->findAll();
+        /*$tab = [];
+        foreach($critiques as $critique){
+        $tab[] = [$critique->getIdFilm()->getId(),$critique->getIdUtilisateur()->getId()];
+        }*/
+                
         return $this->render('admin/critiquesList.html.twig', [
             'critiques' => $critiques,
         ]);

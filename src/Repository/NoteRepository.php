@@ -19,6 +19,21 @@ class NoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Note::class);
     }
 
+    /*
+    pour comprendre
+    public function findOneNote($tab)
+    {
+        $queryBuilder = $this->createQueryBuilder('n')
+            ->where('n.id_film_id = :idfilm')
+            ->andWhere('n.id_utilisateur_id = :idutilisateur')
+            ->setParameters(["idfilm" => $tab[0], "idutilisateur" => $tab[1]])
+            ->getQuery()
+            ;
+
+        return $queryBuilder->setMaxResults(1)->getOneOrNullResult();
+    }
+    */
+
     // /**
     //  * @return Note[] Returns an array of Note objects
     //  */
