@@ -6,7 +6,7 @@ use App\Entity\Critique;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class CritiqueController extends AbstractController
 {
 
     //Partie Admin

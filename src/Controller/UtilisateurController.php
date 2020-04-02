@@ -6,7 +6,7 @@ use App\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class UtilisateurController extends AbstractController
 {
 
     //Partie Admin
