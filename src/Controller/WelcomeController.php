@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\ActeurRepository;
 use App\Repository\FilmRepository;
+use App\Repository\RealisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,7 @@ class WelcomeController extends AbstractController
 
         $filmsCarr = $filmRepository->findSevenRandomReleasedFilms();
 
-        $filmsAffiche = $filmRepository->findSixRandomAlafficheFilms();
+        $filmsAffiche = $filmRepository->findFiveRandomAlafficheFilms();
 
         return $this->render('welcome/index.html.twig', [
             "filmsCarr" => $filmsCarr,
@@ -29,38 +31,53 @@ class WelcomeController extends AbstractController
     /**
      * @Route("/search",name="search")
      */
-    public function search(Request $request,FilmRepository $filmRepository){
+    public function search(Request $request,FilmRepository $filmRepository,RealisateurRepository $realisateurRepository,ActeurRepository $acteurRepository){
 
         dump($request);
 
         $query = $request->query->get('searchFilms');
 
+        //Récupére les films dont le nom contient l'expression en recherche
         $films = $filmRepository->findByTitle($query);
 
         dump($films);
 
-        $idsDir = $filmRepository->findIdsByDirector($query);
-        $idsAct = $filmRepository->findIdsByActor($query);
+        //Récupére les films réalisés par le nom de l'expression en recherche
+        $idsDirTemp = $filmRepository->findIdsByDirector($query);
+        dump($idsDirTemp);
+        $idsDir = [];
 
-        $idsTemp = array_merge($idsDir,$idsAct);
-
-        $ids = [];
-        foreach ($idsTemp as $idTemp){
-            $ids [] = $idTemp["id"];
+        foreach ($idsDirTemp as $idDirTemp){
+            $idsDir[] = $idDirTemp["id"];
         }
 
-        $ids = array_unique($ids);
-
-        foreach ($ids as $id) {            
-            $films[] = $filmRepository->find($id);
+        dump($idsDir);
+        $directors = [];
+        for ($i=0; $i<count($idsDir); $i++) {         
+            $directors[] = $realisateurRepository->find($idsDir[$i]);
         }
 
+        dump($directors);
 
-        dump($films);
+        //Récupére les films dans lesquels joue le nom de l'expression en recherche
+        $idsActTemp = $filmRepository->findIdsByActor($query);
+        $idsAct = [];
+
+        foreach ($idsActTemp as $idActTemp){
+            $idsAct [] = $idActTemp["id"];
+        }
+
+        $actors = [];
+        for ($i=0; $i<count($idsAct); $i++) {            
+            $actors[] = $acteurRepository->find($idsAct[$i]);
+        }
+     
 
         return $this->render('welcome/search.html.twig',[
             "query" => $query,
-            "films" => $films
+            "films" => $films,
+            "directors" => $directors,
+            "actors" => $actors
         ]);
     }
 
@@ -73,7 +90,7 @@ class WelcomeController extends AbstractController
             $query = $request->query->get('q');
             $films = $filmRepository->findByTitle($query);
 
-
+            /*
             $idsDir = $filmRepository->findIdsByDirector($query);
             $idsAct = $filmRepository->findIdsByActor($query);
 
@@ -89,6 +106,7 @@ class WelcomeController extends AbstractController
             foreach ($ids as $id) {            
                 $films[] = $filmRepository->find($id);
             }
+            */
 
             $jsonData = array();
             $idx = 0;

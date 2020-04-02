@@ -26,6 +26,26 @@
 {
     padding-top: 0;
 }
+/*!! insertion de SCSS*/
+.split-character span {
+    display: inline-block;
+}
+
+.title span > span {
+   opacity: 0;
+    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
+}
+
+@keyframes flipAnimation {
+    from {
+        transform: scale(-1, 1);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
 </style>
 {% endblock %}
 
@@ -63,7 +83,7 @@
         </div>
     
         <div class="contenu-a-affiche">
-            <h1 class="intro-site">A découvrir sur AfterWatch</h1>
+            <h1 class="title split-character intro-site">A découvrir sur AfterWatch</h1>
         </div>
         <div class="contenu-a-affiche">
             <div id="contenu-a-affiche"></div>
@@ -86,7 +106,7 @@
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">
-                                          <img class="" data-rel="poster" alt="" src="{% if filmAffiche.affiche %}./img/0199399.jpg.webp{% endif %}" width="150" height="204"/>
+                                          <img class="" data-rel="poster" alt="" src="{% if filmAffiche.affiche %}{{ asset('img/'~filmAffiche.affiche) }}{% else %}{{ asset('img/0199399.jpg.webp') }}{% endif %}" width="150" height="204"/>
                                         </div>
                                     </div>
                                     <div class="face face2">
@@ -504,5 +524,26 @@
 
 {% block javascripts %}
 {{ parent() }}
-
+<script>
+    
+    (function() {
+      var elements, newContent = "";
+      elements = document.getElementsByClassName('split-character'); 
+      for (var element = 0; element < elements.length; ++element) { 
+        newContent += "<span>"
+        for (var character = 0; character < elements[element].innerText.length; character++) {
+          if (elements[element].innerText[character] !== " ") { 
+            newContent += "<span style='animation-delay: "+ 0.035*character + "s'>"+ elements[element].innerText[character] +"</span>";
+          }
+          else { 
+            newContent += "</span> <span>";
+          }
+        }
+        newContent += "</span>"
+        elements[element].innerHTML = newContent; 
+        newContent = ""; 
+      }
+      
+    })(); 
+    </script>
 {% endblock %}

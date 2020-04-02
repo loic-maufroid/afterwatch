@@ -6,9 +6,40 @@
 
 <a href="{{ path('welcome') }}">Retour à la recherche</a>
 
-<p>{{ query }}</p>
+<h1>L'expression en recherche :</h1>
+<h2>{{ query }}</h2>
+<hr>
+
+<h3>Les films dont le nom correspond à "{{ query }}"</h3>
+<ul>
 {% for film in films %}
-    {{ film.titre }}
+    <li>{{ film.titre }}</li>
 {% endfor %}
+</ul>
+<hr>
+
+<h3>Les films réalisés par {{ query }}</h3>
+<ul>
+    {% for director in directors %}
+    <li>{{ director.prenom }} {{ director.nom }} :<ul>
+    {% for filmDir in director.films %}
+    <li>{{ filmDir.titre }}</li>
+    {% endfor %}
+    </ul></li> 
+    {% endfor %}
+</ul>
+<hr>
+
+<h3>Les films dans lesquels joue {{ query }}</h3>
+<ul>
+    {% for actor in actors %}
+    <li>{{ actor.prenom }} {{ actor.nom }} :<ul>
+    {% for filmAct in actor.films %}
+    <li>{{ filmAct.titre }}</li>
+    {% endfor %}
+    </ul></li>
+    {% endfor %}
+</ul>
+<hr>
 
 {% endblock %}
