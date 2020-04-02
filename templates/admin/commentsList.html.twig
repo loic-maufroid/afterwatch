@@ -20,7 +20,7 @@
                 <td>{{ comment.idutilisateur.username }}</td>
                 <td>{{ comment.idfilm.titre }}</td>
                 <td>
-                    <a href="#"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
+                    <a href="{{ path('comment_modifier', {id: comment.id}) }}"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
                     <a href="{{ path('admin_confirmcommentsdelete', {id: comment.id}) }}"><button type="button" class="btn btn-danger btnsup">Supprimer</button></a>
                 </td>
             </tr>

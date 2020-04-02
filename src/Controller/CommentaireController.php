@@ -55,5 +55,20 @@ class CommentaireController extends AbstractController
     }
 
 
+    /**
+     * @Route("/admin/commentslist/modifier/{id}", name="comment_modifier")
+    */
+    public function commentFormModif($id)
+    {
+       $comment = $this->getDoctrine()
+            ->getRepository(Commentaire::class)
+            ->find($id);
+    
+        return $this->render('admin/formulaire/formCommentaire.html.twig', [
+            'comment' => $comment,
+        ]);
+    }
+
+
 }
     

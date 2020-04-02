@@ -1,6 +1,15 @@
 /*font pour le titre*/
-@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap');
-/*Gabarit*/
+@import url('https://fonts.googleapis.com/css2?family=Amita:wght@700&family=Courgette&family=Lobster&display=swap');/*Gabarit*/
+/*font police des formulaire de modif*/
+.courgette{
+    font-family: "courgette";
+    font-size: 20px;
+}
+.lobster{
+    font-family: "lobster";
+    font-size: 30px;
+}
+/*debut du gabarit*/
 header{
     margin-top: 2em;
 }
@@ -53,6 +62,10 @@ footer{
 .marginr{
     margin-right: 0.5em;
 }
+/*margin auto pour centrer les bouton du confirmation de suppression*/
+.margina{
+    margin:auto;
+}
 .paddingr{
     padding-right: 0.1em;
 }
@@ -68,17 +81,29 @@ footer{
 .margint{
     margin-top: 22em;
 }
+/*margintop des confirmationde suppresion films et users*/
+.margt{
+    margin-top: 12em;
+}
+/*marge top confirmation suppression critiques et commentaires*/
+.marget{
+    margin-top: 8em;
+}
 /*margin top  entre le tableau et le bouton ajouter film*/
 .margintop{
     margin-top: 2em;
 }
 /* marge sous le tableau*/
 .marginb{
-    margin-bottom: 4em;
+    margin-bottom: 3em;
 }
 /*centrer le text*/
 .textc{
     text-align: center;
+}
+/*justifier le text*/
+.texta{
+    text-align: justify;
 }
 /*bouge le bouton ajouter un film*/
 .bouge{
@@ -132,6 +157,27 @@ footer{
     height : 9em;
     text-align: justify;
 }
+/*scroll des formulaires*/
+.scrollform{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;    
+    position: absolute;
+    width: 70%;
+    display: block;
+    height : 36em;
+}
+/* defini la largeur de la scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+/* scrollbar */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #c2c2c2; 
+    -webkit-box-shadow: inset 0 0 6px rgba(124, 124, 124, 0.178); 
+}
 /*scroll de la catégorie synopsis*/
 .scrollsy{
     overflow-x: hidden;
@@ -162,4 +208,12 @@ footer{
     text-align: center;
     background-color: #009391;
     color: white;
+}
+/*taille de la confirmationde suppression*/
+.widthsup{
+    width:50%;
+}
+/*police name de l'utilisateur dans supprimer un user*/
+.nameuser{
+    font-family: "courgette";
 }
