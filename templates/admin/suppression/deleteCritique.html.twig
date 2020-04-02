@@ -3,5 +3,19 @@
 {% block title %} {{ parent() }} - Supprimer Critique{% endblock %}
 
 {% block body %}
-
+<section class="flex jcenter marget">
+    <div class="jumbotron widthsup ">
+        <h2 class="textc">{{ critique.titre }}</h2>
+        <p class="textc size">De : {{ critique.idutilisateur.username }}</p>
+        <p class="texta">{{ critique.contenu }}</p>
+        <hr class="my-4">
+        <p class="textc">Voulez-vous supprimer la critique?</p>
+        <div class="margina">
+            <div class="flex jcenter">
+                <a href="#"><button type="button" class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('admin_critiqueslist') }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
+            </div>
+        </div>
+      </div>
+</section>
 {% endblock %}
