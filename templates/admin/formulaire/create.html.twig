@@ -1,0 +1,15 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}{{ parent() }} - Ajouter un Film {% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <button class="btn btn-primary" formnovalidate>
+                Ajouter 
+            </button>
+        {{ form_end(form) }}
+    </div> 
+{% endblock %}

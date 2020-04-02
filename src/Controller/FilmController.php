@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Film;
 use App\Repository\FilmRepository;
+use App\Form\FilmType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class FilmController extends AbstractController
 {
@@ -83,5 +86,33 @@ class FilmController extends AbstractController
             'film' => $film,
         ]);
     }
+
+    //Affichage Formulaire Ajout
+
+     /**
+     * @Route("/admin/ajouter", name="addfilm")
+     */
+    public function addFilm(Request $request, SluggerInterface $slugger)
+    {
+        $film = new Film();
+        $form = $this->createForm(FilmType::class, $film);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+          
+            $film->setSlug($slugger->slug($film->getTitre())->lower());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $entityManager->persist($film);
+
+            $entityManager->flush();
+        }
+
+        return $this->render('admin/formulaire/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 
 }

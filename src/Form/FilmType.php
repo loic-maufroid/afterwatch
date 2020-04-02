@@ -21,10 +21,7 @@ class FilmType extends AbstractType
             ->add('slug')
             ->add('legislation')
             ->add('trailer')
-            ->add('genre_film')
-            ->add('realise')
-            ->add('acteur_joue')
-            ->add('scenario')
+            
         ;
     }
 
