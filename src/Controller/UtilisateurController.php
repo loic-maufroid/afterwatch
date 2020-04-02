@@ -2,18 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Commentaire;
-use App\Entity\Critique;
-use App\Entity\Film;
 use App\Entity\Utilisateur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
-    
+
+    //Partie Admin
+
+    // Affichage Liste des Utilisateur
+
     /**
      * @Route("/admin/users", name="admin_userlist")
      */
@@ -25,10 +24,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    
-
-    
-
+    //Page de Confirmation de la Suppression des Utilisateur
 
     /**
      * @Route("/admin/users/cdu/{id}", name="admin_confirmuserdelete")
@@ -44,14 +40,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    
-
-    
-
-   
-
-
-    
+    //Suppression des Utilisateur
 
     /**
      * @Route("/admin/users/cdu/{id}/delete", name="user_delete")
@@ -65,14 +54,4 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_userlist');
     }
 
-
-    
-
 }
-
-
-
-
-
-
-    
