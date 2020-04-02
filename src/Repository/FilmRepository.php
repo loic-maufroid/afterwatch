@@ -87,34 +87,6 @@ class FilmRepository extends ServiceEntityRepository
         return $result;     
     }
 
-<<<<<<< HEAD
-    /**
-     * @return []
-     */
-    public function findSevenRandomIds(){
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT f.id FROM film f ORDER BY RAND() LIMIT 7';
-        $result = $conn->query($sql);
-
-        return $result->fetchAll();
-    }
-
-    /**
-     * @return: Film[]
-     */
-    public function findSevenRandomReleasedFilms(){
-        $ids = $this->findSevenRandomIds();
-        $tabid = array("id1" => $ids[0]["id"],"id2" => $ids[1]["id"],"id3" => $ids[2]["id"],"id4" => $ids[3]["id"],"id5" => $ids[4]["id"],"id6" => $ids[5]["id"],"id7" => $ids[6]["id"]);
-
-        $query = $this->getEntityManager()->createQuery(
-            'SELECT f FROM App\Entity\Film f WHERE f.id IN(:id1,:id2,:id3,:id4,:id5,:id6,:id7)'
-        )
-        ->setParameters($tabid);
-
-        return $query->getResult();
-    }
-=======
 
     //Requete personnalisé pour réduire le nombre de requete du site
     public function findAllFilms()
@@ -130,5 +102,4 @@ class FilmRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
->>>>>>> 12409d0295d18ff5963eb02ec738052e1cbeaf46
 }
