@@ -2,9 +2,7 @@
 
 {% block title %}{{ parent() }} - Recherche de films{% endblock %}
 
-{% block body %}
-
-<a href="{{ path('welcome') }}">Retour à la recherche</a>
+{% block content %}
 
 <h1>L'expression en recherche :</h1>
 <h2>{{ query }}</h2>

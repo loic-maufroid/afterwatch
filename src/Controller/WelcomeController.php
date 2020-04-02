@@ -90,24 +90,6 @@ class WelcomeController extends AbstractController
             $query = $request->query->get('q');
             $films = $filmRepository->findByTitle($query);
 
-            /*
-            $idsDir = $filmRepository->findIdsByDirector($query);
-            $idsAct = $filmRepository->findIdsByActor($query);
-
-            $idsTemp = array_merge($idsDir,$idsAct);
-
-            $ids = [];
-            foreach ($idsTemp as $idTemp){
-                $ids [] = $idTemp["id"];
-            }
-
-            $ids = array_unique($ids);
-
-            foreach ($ids as $id) {            
-                $films[] = $filmRepository->find($id);
-            }
-            */
-
             $jsonData = array();
             $idx = 0;
             foreach($films as $film) {  
