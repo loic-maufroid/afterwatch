@@ -87,8 +87,7 @@ class FilmRepository extends ServiceEntityRepository
         return $result;     
     }
 
-<<<<<<< HEAD
-    /**
+     /**
      * @return []
      */
     public function findSevenRandomIds(){
@@ -114,7 +113,6 @@ class FilmRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
-=======
 
     //Requete personnalisé pour réduire le nombre de requete du site
     public function findAllFilms()
@@ -130,5 +128,4 @@ class FilmRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
->>>>>>> 12409d0295d18ff5963eb02ec738052e1cbeaf46
 }
