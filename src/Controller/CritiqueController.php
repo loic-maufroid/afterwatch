@@ -58,4 +58,18 @@ class CritiqueController extends AbstractController
 
         return $this->redirectToRoute('admin_critiqueslist');
     }
+
+    /**
+     * @Route("/admin/critiqueslist/modifiercritique/{id}", name="critique_modifier")
+    */
+    public function commentFormModif($id)
+    {
+       $critique = $this->getDoctrine()
+            ->getRepository(Critique::class)
+            ->find($id);
+    
+        return $this->render('admin/formulaire/formCritique.html.twig', [
+            'critique' => $critique,
+        ]);
+    }
 }

@@ -1,0 +1,30 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} {{ parent() }} - Modifier Critique{% endblock %}
+
+{% block body %}
+<section class="flex jcenter margintop ">
+    <form class="jumbotron scrollform">
+        <p class="lobster textc ">Modifier Critiques</p>
+        <div class="text flex jbetween marginb"> 
+            <p  class="courgette">{{ critique.titre }}</p>
+        </div>
+        <div class="text flex jbetween margintop">
+            <p class="courgette">Titre du Film : {{ critique.idfilm.titre }}</p>
+            <p  class="courgette">Créer par : {{ critique.idutilisateur.username }}</p>
+        </div>   
+        
+        <div class="form-group">
+            <label for="inputCritique">Critique</label>
+            <textarea type="text" class="form-control" id="inputCritique" placeholder="Critique">
+                {{ critique.contenu }}
+            </textarea>
+        </div>
+        <h4 class="flex jcenter">Modifier?</h4>
+        <div class="flex jcenter margintop">
+            <a href="#"><button type="button" class="btn btn-success marginr">Valider</button></a>
+            <a href="{{ path('admin_critiqueslist') }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
+        </div>    
+    </form>
+</section>
+{% endblock %}

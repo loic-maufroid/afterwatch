@@ -56,7 +56,7 @@ class CommentaireController extends AbstractController
 
 
     /**
-     * @Route("/admin/commentslist/modifier/{id}", name="comment_modifier")
+     * @Route("/admin/commentslist/modifiercommentaire/{id}", name="comment_modifier")
     */
     public function commentFormModif($id)
     {
