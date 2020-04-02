@@ -1,0 +1,38 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block title %} {{ parent() }} - Commentaires{% endblock %}
+
+{% block body %}
+<section class="flex jcenter">
+    <table id="thèmes" class=" textc  marginb margint">
+        <thead class="gras sizeg">
+            <th>Noms d'utilisateurs</th>
+            <th>Titres</th>
+            <th>Commentaires</th>
+            <th>Actions</th>
+        </thead>
+
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{ comment.contenu }}</td>
+                <td>{{ comment.idutilisateur.username }}</td>
+                <td>{{ comment.idfilm.titre }}</td>
+                <td>
+                    <a href="#"><button type="button" class="btn btn-info btn-color marginr gras">Modifier</button></a>
+                    <a href="#"><button type="button" class="btn btn-danger btnsup">Supprimer</button></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>Aucun Commentaire Trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+    
+{% endblock %}
+
+

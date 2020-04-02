@@ -1,0 +1,81 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block title %} {{ parent() }} - Films{% endblock %}
+
+{% block body %}
+<section class="flex jcenter">
+
+    <table id="thèmes" class=" textc margint marginb">
+        <div class="flex jflex">
+            <a href="#"><button type="button" class="btn btn-info btn-color">Ajouter un Film</button></a>
+        </div>
+        <thead class=" titre gras sizeg">
+                <th>Affiches</th>
+                <th>Titres</th>
+                <th>Slug</th>
+                <th>Dates de sortie</th>
+                <th>Réalisateurs</th>
+                <th>Scénaristes</th>
+                <th>Acteurs Principaux</th>
+                <th>Genre</th>
+                <th>Durées</th>
+                <th>Nationnalités</th>
+                <th>CNC</th>
+                <th>URL Bandes-Annonces</th>
+                <th>Synopsis</th>
+                <th>Actions</th>
+        </thead>
+
+        <tbody>
+            {% for film in films %}
+            <tr>
+                <td>{{ film.affiche }}</td>
+                <td>{{ film.titre }}</td>
+                <td>{{ film.slug }}</td>
+                <td>{{ film.date }}</td>
+                <td>
+                    {% for realise in film.realise %}
+                    {{ realise.nom }}
+                    {{ realise.prenom }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for scenario in film.scenario %}
+                    {{ scenario.nom }}
+                    {{ scenario.prenom }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for acteurjoue in film.acteurjoue %}
+                    {{ acteurjoue.nom }}
+                    {{ acteurjoue.prenom }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for genrefilm in film.genrefilm %}
+                    {{ genrefilm.type }}
+                    {% endfor %}
+                </td>
+                <td>{{ film.duree }}</td>
+                <td>{{ film.nationalite }}</td>
+                <td>{{ film.legislation }}</td>
+                <td>{{ film.trailer }}</td>
+                <td>{{ film.synopsis }}</td>
+                <td>
+                    <a href="#"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
+                    <a href="#"><button type="button" class="btn btn-info btn-danger">Supprimer</button></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>Aucun Film Trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+
+
+{% endblock %}

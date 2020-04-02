@@ -1,0 +1,43 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block title %} {{ parent() }} - Critique{% endblock %}
+
+{% block body %}
+<section class="flex jcenter">
+    <table id="thèmes" class=" textc margint marginb">
+        <thead class="gras sizeg">
+            <th>Titre de la critique</th>
+            <th>Titre Film</th>
+            <th>Posté par</th>
+            <th>Note</th>
+            <th>Slug</th>
+            <th>Contenu de la critique</th>
+            <th>Actions</th>
+        </thead>
+
+        <tbody>
+            {% for critique in critiques %}
+            <tr>
+                <td>{{ critique.titre }}</td>
+                <td>{{ critique.idfilm.titre }}</td>
+                <td>{{ critique.idutilisateur.username }}</td>
+                <td>Note</td>
+                <td>{{ critique.slug }}</td>
+                <td>{{ critique.contenu }}</td>
+                
+                <td>
+                    <a href="#"><button type="button" class="btn btn-info btn-color marginr gras">Modifier</button></a>
+                    <a href="#"><button type="button" class="btn btn-danger btnsup">Supprimer</button></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>Aucune Critique Trouvée</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</section>
+{% endblock %}

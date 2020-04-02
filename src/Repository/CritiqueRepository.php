@@ -19,6 +19,7 @@ class CritiqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Critique::class);
     }
 
+
     // /**
     //  * @return Critique[] Returns an array of Critique objects
     //  */

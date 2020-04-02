@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}AfterWatch Admin{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/admin/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/admin/styleAdmin.css')}}">
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+        <header>
+            <div class="flex aligni jbetween">
+                <div>
+                    <a href="#"><img class="logo" src="{{ asset('img/logo/afterwatch_logo.png')}}"></img></a>
+                </div>
+                <a class="lienh" href="#"><h1>AfterWatch</h1></a>
+                    <ul class="menuh flex">
+                            <li class="lih">Admin</li>
+                            <li class="lih"><a class="lienh"  href="#">Nom-Admin</a></li>
+                            <li class="lih"><a class="lienh"  href="#">Deconnexion</a></li>
+                    </ul>
+             </div>
+        </header>
+        {% endblock %}
+
+        {% block nav %}
+        <nav class="flex jcenter">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link paddingr" href="{{ path('admin') }}">
+                        <button type="button" class="btn btn-info btn-color size">
+                            Films
+                        </button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link paddingr" href="{{ path('admin_userlist') }}">
+                        <button type="button" class="btn btn-info btn-color marginr size">
+                            Liste Utilisateur
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link paddingr" href="{{ path('admin_commentslist') }}">
+                        <button type="button" class="btn btn-info btn-color marginr size">
+                            Commentaires
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link paddingr" href="{{ path('admin_critiqueslist') }}">
+                        <button type="button" class="btn btn-info btn-color marginr size">
+                            Critiques
+                        </button></a>
+                </li>
+            </ul>
+        </nav>
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+            <script src="{{ asset('js/popper.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
+
