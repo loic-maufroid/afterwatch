@@ -13,17 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function indexAdmin()
-    {
-        $films = $this->getDoctrine()->getRepository(Film::class)->findAllFilms();
-        return $this->render('admin/index.html.twig', [
-            'films' => $films,
-        ]);
-    }
-
+    
     /**
      * @Route("/admin/users", name="admin_userlist")
      */
@@ -77,19 +67,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/cdf/{id}", name="admin_confirmfilmdelete")
-     */
-    public function filmConfirmSuppr($id)
-    {
-       $film = $this->getDoctrine()
-            ->getRepository(Film::class)
-            ->find($id);
     
-        return $this->render('admin/suppression/deleteFilm.html.twig', [
-            'film' => $film,
-        ]);
-    }
 
     /**
      * @Route("/admin/critiqueslist/cdct/{id}", name="admin_confirmcritdelete")
@@ -120,17 +98,7 @@ class AdminController extends AbstractController
     }
 
 
-    /**
-     * @Route("/admin/cdf/{id}/delete", name="film_delete")
-    */
-    public function filmDelete(Film $film)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($film);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin');
-    }
+    
 
     /**
      * @Route("/admin/users/cdu/{id}/delete", name="user_delete")
