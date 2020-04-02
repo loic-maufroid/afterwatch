@@ -1,0 +1,93 @@
+.container 
+{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: transparent;
+}
+.container .card 
+{
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+  
+.container .card .face 
+{
+    width: 170px;
+    height: 221px;
+    transition: 0.5s;
+}
+  
+  .container .card .face.face1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    transform: translateY(110px);
+    background-color: transparent;
+  }
+    .container .card:hover .face.face1 {
+    background: #009193;
+    padding-top: 10px;
+    justify-content: center;
+    transform: translateY(0px);
+  }
+  .container .card .face.face2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px ;
+    transform: translateY(-120px);
+    background-color: transparent;
+  }
+  
+  .container .card:hover .face.face2 {
+    transform: translateY(0px);
+    background-color: #dbdbdb;
+  }
+  
+  .container .card .face.face2 .content p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container .card .face.face2 .content a 
+  {
+    margin: 10px 60px 0;
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px;
+  }
+  
+  .container .card .face.face2 .content a:hover 
+  {
+    color: black;
+  }
+  
+  .container .card .face.face1 .content {
+    opacity: 1;
+    transition: 0.5s;
+  }
+  
+  .container .card:hover .face.face1 .content {
+    opacity: 1;
+  }
+  
+  .container .card .face.face1 .content img {
+    max-width: auto;
+  }
+  
+  .container .card .face.face1 .content h4 {
+    margin: 0;
+    padding: 0;
+    color: black;
+    text-align: center;
+    font-size: .3em;
+  }
+
+  

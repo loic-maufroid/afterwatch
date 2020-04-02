@@ -13,10 +13,14 @@ class WelcomeController extends AbstractController
     /**
      * @Route("/", name="welcome")
      */
-    public function index()
+    public function index(FilmRepository $filmRepository)
     {
 
-        return $this->render('welcome/index.html.twig', []);
+        $filmsCarr = $filmRepository->findSevenRandomReleasedFilms();
+
+        return $this->render('welcome/index.html.twig', [
+            "filmsCarr" => $filmsCarr
+        ]);
     }
 
     /**

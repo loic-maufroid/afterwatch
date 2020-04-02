@@ -2,49 +2,598 @@
 
 {% block title %}{{ parent() }} - Accueil{% endblock %}
 
-{% block body %}
+{% block stylesheets %}
+{{ parent() }}
 
-<form style="display:flex;" action="{{ path('search') }}" method="get">
-    <div id="autocomplete" style="display:flex;flex-direction:column;width:50%">
-    <input type="search" name="searchFilms" id="searchFilms" placeholder="Recherche un film...">
+<style>
+
+.navig-main
+{
+    border: 3px solid #009193;
+    border-radius: 10%;
+    padding-left: 1.5%;
+}
+.main-contenu
+{
+        padding-top: 4%;
+}
+.contenu-main
+{
+        padding-top: 3%;
+        padding-bottom: 0;
+}
+.prise_de_tete
+{
+    padding-top: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="main-contenu">
+
+    <div class="contenu-main">
+
+        <div id="xl-carousel" class="carousel slide" data-ride="carousel"> 
+            <div class="carousel-inner">
+
+            {% for filmCarr in filmsCarr %}
+                
+           
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <img src="{% if filmCarr.affiche %}{{ asset('img/'~filmCarr.affiche) }}{% else %}./img/01.jpg{% endif %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>{{ filmCarr.titre }}</h3>
+                    <p>essai <strong>d'ajout de texte</strong> <i>sur une image</i> </p>
+                    <a href="https://www.google.fr/" target="_blank">Cliquer ici</a>
+                </div>
+            </div>
+
+            {% endfor %}
+            
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+        </div>
+    
+        <div class="contenu-a-affiche">
+            <h1 class="intro-site">A découvrir sur AfterWatch</h1>
+        </div>
+        <div class="contenu-a-affiche">
+            <div id="contenu-a-affiche"></div>
+
+            <section>
+                <div class="section-film-vu">
+                    <div class="film-a-affiche">
+                        <div class="a-affiche-resultats">
+                            <h2 class="tout-voir-affiche">
+                                <button class="tout-voir" type="button" data-rel="link" href="https://www.google.fr" target="_blank">Tout voir</button>
+                                 <a class="titre-section" href="https://www.allocine.fr" target="_blank">Actuellement à l'affiche</a>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <ul class="contenu-film-affiche">
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>    
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-film-vu">
+                    <div class="film-a-affiche">
+                        <div class="a-affiche-resultats">
+                            <h2 class="tout-voir-affiche">
+                                <button class="tout-voir" type="button" data-rel="link" href="https://www.google.fr" target="_blank">Tout voir</button>
+                                 <a class="titre-section" href="https://www.allocine.fr" target="_blank">Les futures sorties</a>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <ul class="contenu-film-affiche">
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>    
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-film-vu">
+                    <div class="film-a-affiche">
+                        <div class="a-affiche-resultats">
+                            <h2 class="tout-voir-affiche">
+                                <button class="tout-voir" type="button" data-rel="link" href="https://www.google.fr" target="_blank">Tout voir</button>
+                                 <a class="titre-section" href="https://www.allocine.fr" target="_blank">Mes films à voir</a>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <ul class="contenu-film-affiche">
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>    
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-film-vu">
+                    <div class="film-a-affiche">
+                        <div class="a-affiche-resultats">
+                            <h2 class="tout-voir-affiche">
+                                <button class="tout-voir" type="button" data-rel="link" href="https://www.google.fr" target="_blank">Tout voir</button>
+                                 <a class="titre-section" href="https://www.allocine.fr" target="_blank">Mes films vu</a>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <ul class="contenu-film-affiche">
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                        <p>
+                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>    
+                    </ul>
+                </div>
+            </section>
+        </div>
     </div>
-    <button style="max-height:20px" type="submit">Rechercher</button>
-</form>
-
+    
+</div>
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
-<script>
-    $(function(){
-        
-        function envoyer(){
-            var query = $("#searchFilms").val();
-            $(".suggestion").remove();
-            if (query.trim() != "" && query.length > 3){
-              
-        $.ajax({
-            type : 'GET',
-            url : "{{ path('autocomplete_film_search') }}",
-            data : 'q='+query,
-            dataType : 'JSON',
-        success: function(response){
- 
-            for (let i = 0; i < response.length; i++) {
-                $("#autocomplete").append("<a class='suggestion' href='#'>"+response[i]["titre"]+"</a>");
-            }
-        }                 
-        });
-    }
 
-    }
-
-    var timer;
-    $("#searchFilms").keyup(function(event){
-        clearTimeout(timer);
-        timer = setTimeout(envoyer,500);
-        event.preventDefault();
-    })
-})
-</script>
 {% endblock %}

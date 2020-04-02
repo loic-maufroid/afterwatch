@@ -2,13 +2,161 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{% block title %}AfterWatch{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        <div class="wrapbody">
+            <div class="rep-contenu-h"></div>
+
+        {% block header %}
+        <header class="fond-h">
+
+            <div class="contenu-h">
+                <img class="logo-med logo" src="{{ asset('img/afterwatch_logo.jpg') }}"></img>
+
+                <div class="partie-h-b">
+
+                    <div class="haut">
+                        <div class="barre-recherche">
+                            <div id="recherche-h">
+                                <div class="recherche-auto-flex">   
+                                <form action="{{ path('search') }}" method="get">
+                                <input list="films" class="h-recherche" type="search" size="75%" id="site-search" autocomplete="off" name="searchFilms" placeholder="recherche un film.." aria-label="Search through site content">
+                                
+                                <button class="buttonr">Rechercher</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <div class="co-et-regist"><!--parties connexion et inscripton-->
+                        <a class="connect" data-rel="btn-connect" href="">Connexion</a><!--ici pour la connexion de l'utilisateur-->
+                        <p class="rien"></p>
+                        <a class="registrer" data-rel="btn-registrer" href="">Inscription</a><!--ici pour l'inscription-->
+                    </div>
+                    
+                   
+                    </div>
+
+                    <div class="bas">
+                        <datalist id="films"></datalist>
+                        <nav class="barre-menus">
+                            <div class="barre-menus-navig">
+                                <div class="navig-list">
+                                    <ul class="navig-main">
+                                        <li class="navig-main-item">
+                                            <a href="./links/index_a_l_affiche.html">A l'affiche</a>
+                                        </li>
+                                        <li class="navig-main-item">
+                                            <a href="./links/index_futures_sorties.html">Les futures sorties</a>
+                                        </li>
+                                        <li class="navig-main-item">
+                                            <a href="./links/mes_films_a_voir.html">Mes films à voir</a>
+                                        </li>
+                                        <li class="navig-main-item">
+                                            <a href="./links/mes_films_vu.html">Mes films vu</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+
+                </div>
+
+            </div>
+        </header>
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block footer %}
+        <footer>
+            <div id="contener_footer">
+
+                <div class="navig-list-footer">
+                    <ul class="navig-footer">
+                        <li class="navig-main-item">
+                            <a href="#">A propos</a>
+                        </li>
+                        <li class="navig-main-item">
+                            <a href="#">Nous contacter</a>
+                        </li>
+                        <li class="navig-main-item">
+                            <a href="#">Conditions d'utilisation</a>
+                        </li>
+                        <li class="navig-main-item">
+                            <a href="#">Forum</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="icon">
+                    <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="#"><i class="fab fa-twitter-square fa-2x"></i></a>
+                    <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
+                    <a href="#"><i class="fab fa-pinterest fa-2x"></i></a>
+                    <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                </div>
+            </div>
+    </footer>
+        {% endblock %}
+
+        {% endblock %}
+        </div>
+
         {% block javascripts %}
         <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <script>
+    $(function(){
+
+        function envoyer(){
+            var query = $("#site-search").val();
+            $("#films select").remove();
+            if (query.trim() != "" && query.length > 3){
+              
+        $.ajax({
+            type : 'GET',
+            url : "{{ path('autocomplete_film_search') }}",
+            data : 'q='+query,
+            dataType : 'JSON',
+        success: function(response){
+            console.log("oui");
+            $("#films").append("<select></select>");
+ 
+            for (let i = 0; i < response.length; i++) {
+               
+                $("#films select").append("<option value='"+response[i]["titre"]+"'>Rechercher "+response[i]["titre"]+"</option>");
+
+            }
+            
+        }                 
+        });
+    }
+
+    }
+
+    var timer;
+    $("#site-search").keyup(function(event){
+        clearTimeout(timer);
+        timer = setTimeout(envoyer,1000);
+        event.preventDefault();
+    })
+})
+</script>
         {% endblock %}
     </body>
 </html>
