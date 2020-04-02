@@ -92,7 +92,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/cdct/{id}", name="admin_confirmcritdelete")
+     * @Route("/admin/critiqueslist/cdct/{id}", name="admin_confirmcritdelete")
      */
     public function critConfirmSuppr($id)
     {
@@ -106,7 +106,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/cdcm/{id}", name="admin_confirmcommentsdelete")
+     * @Route("/admin/commentslist/cdcm/{id}", name="admin_confirmcommentsdelete")
      */
     public function commentConfirmSuppr($id)
     {
@@ -131,6 +131,43 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin');
     }
+
+    /**
+     * @Route("/admin/users/cdu/{id}/delete", name="user_delete")
+    */
+    public function userDelete(Utilisateur $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_userlist');
+    }
+
+    /**
+     * @Route("/admin/commentslist/cdu/{id}/delete", name="comment_delete")
+    */
+    public function commentDelete(Commentaire $comment)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($comment);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_commentslist');
+    }
+
+    /**
+     * @Route("/admin/critiqueslist/cdct/{id}/delete", name="critique_delete")
+    */
+    public function critiqueDelete(Critique $critique)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($critique);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_critiqueslist');
+    }
+
 
     
 }

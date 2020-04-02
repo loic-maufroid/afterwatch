@@ -12,7 +12,7 @@
         <p class="textc">Voulez-vous supprimer la critique?</p>
         <div class="margina">
             <div class="flex jcenter">
-                <a href="#"><button type="button" class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('critique_delete', {id: critique.id}) }}"><button type="button" class="btn btn-success marginr">OUI</button></a>
                 <a href="{{ path('admin_critiqueslist') }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
             </div>
         </div>
