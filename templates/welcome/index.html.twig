@@ -52,11 +52,11 @@
             {% endfor %}
             
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#xl-carousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#xl-carousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
             </a>
@@ -80,18 +80,20 @@
                     </div>
 
                     <ul class="contenu-film-affiche">
+                        {% for filmAffiche in filmsAffiche %}
                         <li class="img-a-affiche">
                             <a class="a-film film-a" href="#" data-rel="button"><div class="container">
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
+                                          <img class="" data-rel="poster" alt="" src="{% if filmAffiche.affiche %}./img/0199399.jpg.webp{% endif %}" width="150" height="204"/>
                                         </div>
                                     </div>
                                     <div class="face face2">
                                         <div class="content">
                                         <p>
-                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
+                                        <h4>{{ filmAffiche.titre }}</h4>{% if filmAffiche.date %}{{ filmAffiche.date|date("Y") }}{% else %}Date de sortie inconnue
+                                            {% endif %}<a href="#">En savoir plus...</a>
                                         </p>
                                         </div>
                                     </div>
@@ -99,102 +101,9 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
-                                        </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">
-                                        <p>
-                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
-                                        </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
-                                        </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">
-                                        <p>
-                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
-                                        </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
-                                        </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">
-                                        <p>
-                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
-                                        </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
-                                        </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">
-                                        <p>
-                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
-                                        </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="./img/0199399.jpg.webp" width="150" height="204"/>
-                                        </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">
-                                        <p>
-                                        <h4>Godzilla II</h4>2019<a href="./links/index infos film.html">En savoir plus...</a>
-                                        </p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>    
+                        {% endfor %}
                     </ul>
+
                 </div>
             </section>
 

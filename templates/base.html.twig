@@ -20,7 +20,7 @@
         <header class="fond-h">
 
             <div class="contenu-h">
-                <img class="logo-med logo" src="{{ asset('img/afterwatch_logo.jpg') }}"></img>
+                <img class="logo-med logo" src="{{ asset('img/logo/afterwatch_logo.png') }}"></img>
 
                 <div class="partie-h-b">
 
@@ -152,7 +152,7 @@
     var timer;
     $("#site-search").keyup(function(event){
         clearTimeout(timer);
-        timer = setTimeout(envoyer,1000);
+        timer = setTimeout(envoyer,500);
         event.preventDefault();
     })
 })
