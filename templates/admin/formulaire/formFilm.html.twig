@@ -1,0 +1,68 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} {{ parent() }} - Modifier Film{% endblock %}
+
+{% block body %}
+<section class="flex jcenter margintop">
+    <form class="jumbotron scrollform">
+        <h2 class="textc">Ajouter un film</h2>
+        <div class="form-group">
+            <input type="file" class="form-control-file"  id="inputAffiche">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputTitre">Titre</label>
+                <input type="text" class="form-control" id="inputTitre"  value="{{ film.titre }}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputDate">Date de sortie</label>
+                <input type="text" class="form-control" id="inputDate" value="{{ film.date }}">
+            </div>
+        </div>
+            <div class="form-group  col-md-6">
+                <label for="inputReal">Réalisateur(s)</label>
+                <input type="text" class="form-control" id="inputReal" placeholder="Réalisateur(s)">
+            </div>
+            <div class="form-group  col-md-6">
+                <label for="inputScénariste">Scénariste(s)</label>
+                <input type="text" class="form-control" id="inputScénariste"  placeholder="Scénariste(s)">
+            </div>
+            <div class="form-group  col-md-6">
+                <label for="inputActeurs">Acteur(s)</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="Acteur(s)">
+            </div>
+            <div class="form-group  col-md-6">
+                <label for="inputGenre">Genre(s)</label>
+                <input type="text" class="form-control" id="inputZip"  placeholder="Genre(s)">
+            </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputDurée">Durée(s)</label>
+                <input type="text" class="form-control" id="inputDurée" value="{{ film.duree }}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputNationnalité">Nationnalité(s)</label>
+                <input type="text" class="form-control" id="inputNationnalité"  value="{{ film.nationalite }}">
+            </div>
+        </div> 
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputCNC">Limite d'âge</label>
+                <input type="text" class="form-control" id="inputCNC" value="{{ film.legislation }}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputBA">Bande-annonce</label>
+                <input type="text" class="form-control" id="inputBA"  value="{{ film.trailer }}">
+            </div>
+        </div> 
+        <div class="form-group">
+            <label for="inputSynopsis">Synopsis</label>
+            <textarea type="text" class="form-control" id="inputSynopsis" >{{ film.synopsis }}</textarea>
+        </div>
+        <div class="flex jcenter margintop">
+            <a href="#"><button type="button" class="btn btn-success marginr">Valider</button></a>
+            <a href="{{ path('admin') }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
+        </div>    
+    </form>
+</section>
+{% endblock %}

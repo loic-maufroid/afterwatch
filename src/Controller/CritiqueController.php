@@ -59,6 +59,8 @@ class CritiqueController extends AbstractController
         return $this->redirectToRoute('admin_critiqueslist');
     }
 
+    //Affichage Formulaire Modification
+
     /**
      * @Route("/admin/critiqueslist/modifiercritique/{id}", name="critique_modifier")
     */
