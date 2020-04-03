@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Critique;
+use App\Form\CritiqueType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CritiqueController extends AbstractController
@@ -59,19 +61,30 @@ class CritiqueController extends AbstractController
         return $this->redirectToRoute('admin_critiqueslist');
     }
 
-    //Affichage Formulaire Modification
+    //Modification
 
     /**
      * @Route("/admin/critiqueslist/modifiercritique/{id}", name="critique_modifier")
     */
-    public function commentFormModif($id)
+    public function commentFormModif($id, Request $request, Critique $critique)
     {
-       $critique = $this->getDoctrine()
+        $form = $this->createForm(CritiqueType::class, $critique);
+        $form->handleRequest($request);
+
+        $review = $this->getDoctrine()
             ->getRepository(Critique::class)
             ->find($id);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->getDoctrine()->getManager()->flush();
+    
+            return $this->redirectToRoute('admin_critiqueslist');
+        }
     
         return $this->render('admin/formulaire/formCritique.html.twig', [
-            'critique' => $critique,
+            'form' => $form->createView(),
+            'review' => $review,
         ]);
     }
 }

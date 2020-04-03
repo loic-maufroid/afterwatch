@@ -12,11 +12,7 @@ class CritiqueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
             ->add('contenu')
-            ->add('slug')
-            ->add('id_film')
-            ->add('id_utilisateur')
         ;
     }
 
