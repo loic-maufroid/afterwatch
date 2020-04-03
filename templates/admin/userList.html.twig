@@ -20,7 +20,10 @@
                     <td>{{ user.avatar }}</td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
-                    <td> {#{{ user.role }}#} </td>
+                    {% for role in user.roles %}
+                       <td> {{ role }} </td> 
+                    {% endfor %}
+                    
                     <td>
                         <a href="{{ path('admin_confirmuserdelete', {id: user.id}) }}"><button type="button" class="btn btn-info btn-danger">Bannir</button></a>
                     </td>

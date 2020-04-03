@@ -31,13 +31,21 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
 
         //Créer les Utilisateurs
+        $utilisateur = new Utilisateur();
+        $utilisateur->setUsername('utilisateur Admin');
+        $utilisateur->setEmail($faker->email);
+        $utilisateur->setPassword('password');
+        $utilisateur->setRoles(['ROLE_ADMIN']);
+        $manager->persist($utilisateur);
+
         $utilisateurs = [];
-        for ($i = 1; $i <=20; ++$i)
+        for ($i = 1; $i <=19; ++$i)
         {
             $utilisateur = new Utilisateur();
             $utilisateur->setUsername('utilisateur '.$i);
             $utilisateur->setEmail($faker->email);
             $utilisateur->setPassword('password');
+            $utilisateur->setRoles(['ROLE_USER']);
             $manager->persist($utilisateur);
             $utilisateurs[] = $utilisateur;
         }
@@ -50,6 +58,7 @@ class AppFixtures extends Fixture
             $film->setTitre('Titre Film '.$i);
             $film->setSynopsis($faker->text);
             $film->setSlug($this->slugger->slug($film->getTitre())->lower());
+
             $manager->persist($film);
             $films[] = $film;
         }
