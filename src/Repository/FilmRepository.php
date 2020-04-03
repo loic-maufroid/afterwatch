@@ -141,7 +141,25 @@ class FilmRepository extends ServiceEntityRepository
         $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN DATE_SUB(CURDATE(),INTERVAL 90 day) AND CURDATE() LIMIT 5';
         $result = $conn->query($sql);
 
+        if ($result)
         return $result->fetchAll();
+        else
+        return null;
+    }
+
+    /**
+     * @return: []
+     */
+    public function findFiveRandomSortieIds(){
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN CURDATE() AND DATE_ADD(CURDATE(),INTERVAL 365 day) LIMIT 5';
+        $result = $conn->query($sql);
+
+        if ($result)
+        return $result->fetchAll();
+        else
+        return null;
     }
 
     public function queryFiveFilms($num){
@@ -162,6 +180,32 @@ class FilmRepository extends ServiceEntityRepository
     public function findFiveRandomAlafficheFilms(){
 
         $ids = $this->findFiveRandomAlafficheIds();
+        if (!$ids)
+        return null;
+        $tabid = array();
+        for ($i=0; $i < count($ids); $i++) { 
+            $tabid["id".($i+1)] = $ids[$i]["id"]; 
+        }
+
+        if (count($tabid) == 0)
+        $query = $this->getEntityManager()->createQuery(
+            $this->queryFiveFilms(count($tabid))
+        );
+        else
+        $query = $this->getEntityManager()->createQuery(
+            $this->queryFiveFilms(count($tabid))
+        )->setParameters($tabid);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @return: Film[]
+     */
+    public function findFiveRandomSortieFilms(){
+        $ids = $this->findFiveRandomSortieIds();
+        if (!$ids)
+        return null;
         $tabid = array();
         for ($i=0; $i < count($ids); $i++) { 
             $tabid["id".($i+1)] = $ids[$i]["id"]; 

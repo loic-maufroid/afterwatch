@@ -43,7 +43,7 @@ body
 {
     left: 50%;
     max-width: 1500px;
-    padding: 30px 20px 15px;
+    padding: 30px 20px;
     position: relative;
     transform: translateX(-50%);
     width: 100%;
@@ -62,8 +62,8 @@ span
 {
     float: left;
     position: relative;
-    height: 130px;
-    width: 142px; 
+    height: 140px;
+    width: 152px; 
 }
 .partie-h-b
 {

@@ -22,9 +22,12 @@ class WelcomeController extends AbstractController
 
         $filmsAffiche = $filmRepository->findFiveRandomAlafficheFilms();
 
+        $filmsSortie = $filmRepository->findFiveRandomSortieFilms();
+
         return $this->render('welcome/index.html.twig', [
             "filmsCarr" => $filmsCarr,
-            "filmsAffiche" => $filmsAffiche
+            "filmsAffiche" => $filmsAffiche,
+            "filmsSortie" => $filmsSortie
         ]);
     }
 
@@ -90,29 +93,11 @@ class WelcomeController extends AbstractController
             $query = $request->query->get('q');
             $films = $filmRepository->findByTitle($query);
 
-            /*
-            $idsDir = $filmRepository->findIdsByDirector($query);
-            $idsAct = $filmRepository->findIdsByActor($query);
-
-            $idsTemp = array_merge($idsDir,$idsAct);
-
-            $ids = [];
-            foreach ($idsTemp as $idTemp){
-                $ids [] = $idTemp["id"];
-            }
-
-            $ids = array_unique($ids);
-
-            foreach ($ids as $id) {            
-                $films[] = $filmRepository->find($id);
-            }
-            */
-
             $jsonData = array();
             $idx = 0;
             foreach($films as $film) {  
                 $temp = array(
-                   'titre' => $film->getTitre() 
+                   'titre' => $film->getTitre()
                 );   
                 $jsonData[$idx++] = $temp;  
              } 
