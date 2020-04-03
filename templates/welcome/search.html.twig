@@ -3,40 +3,87 @@
 {% block title %}{{ parent() }} - Recherche de films{% endblock %}
 
 {% block content %}
-<h1>L'expression en recherche :</h1>
-<h2>{{ query }}</h2>
-<hr>
 
-<h3>Les films dont le nom correspond à "{{ query }}"</h3>
-<ul>
-{% for film in films %}
-    <li>{{ film.titre }}</li>
-{% endfor %}
-</ul>
-<hr>
+<div class="main-contenu">
 
-<h3>Les films réalisés par {{ query }}</h3>
-<ul>
-    {% for director in directors %}
-    <li>{{ director.prenom }} {{ director.nom }} :<ul>
-    {% for filmDir in director.films %}
-    <li>{{ filmDir.titre }}</li>
-    {% endfor %}
-    </ul></li> 
-    {% endfor %}
-</ul>
-<hr>
+    <div class="contenu-main">
 
-<h3>Les films dans lesquels joue {{ query }}</h3>
-<ul>
-    {% for actor in actors %}
-    <li>{{ actor.prenom }} {{ actor.nom }} :<ul>
-    {% for filmAct in actor.films %}
-    <li>{{ filmAct.titre }}</li>
-    {% endfor %}
-    </ul></li>
-    {% endfor %}
-</ul>
-<hr>
+        <div class="contenu-a-affiche">
+           <h1 class="title split-character intro-site">Résultat de la recherche pour "{{ query }}"</h1>
+        </div>
+        <div class="contenu-a-affiche">
+        <div id="contenu-a-affiche"></div>
+
+            
+        
+            <section class="t-recherche">
+                <div>
+                <div id="t-recherche">
+                <div class="par-film">
+                    <h3>Film(s) correspondant par titre à "{{ query }}" :</h3>
+                </div>
+                {% if films %}
+                <ul>
+                {% for film in films %}
+                    
+                    <li><a href="#">- {{ film.titre }} </a></li>
+
+                {% endfor %}
+                </ul>
+                {% else %}
+                    <p>aucun</p>
+                {% endif %}
+                </div>
+                </div>
+            </section>
+
+            {% if directors %}
+            <section class="t-recherche">
+                <div>
+                <div class="par-real">
+                    <h3>Film(s) correspondant(s) par réalisateur :</h3>
+                </div>
+                {% for director in directors %}
+                    
+                <h5>{{ director.prenom }} {{ director.nom }}</h5>
+                <div id="t-recherche">
+                    {% for filmDir in director.films %}
+
+                    <a href="#">- {{ filmDir.titre }}</a>
+
+                {% endfor %}
+                </div>
+                {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            {% if actors %}
+            <section class="t-recherche">
+                <div>
+                <div class="par-acteur">
+                    <h3>Film(s) correspondant(s) par acteur :</h3>
+                </div>
+                {% for actor in actors %}
+                    
+                <h5>{{ actor.prenom }} {{ actor.nom }}</h5>
+                <div id="t-recherche">
+                    {% for filmAct in actor.films %}
+
+                    <a href="#">- {{ filmAct.titre }}</a>
+
+                {% endfor %}
+                </div>
+                {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+
+
+        </div>
+    </div>
+    
+</div>
 
 {% endblock %}
