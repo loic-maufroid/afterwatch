@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CommentaireController extends AbstractController
@@ -54,19 +56,30 @@ class CommentaireController extends AbstractController
         return $this->redirectToRoute('admin_commentslist');
     }
 
-    //Affichage Formulaire Modification
+    // Modification
 
     /**
      * @Route("/admin/commentslist/modifiercommentaire/{id}", name="comment_modifier")
     */
-    public function commentFormModif($id)
+    public function commentFormModif($id, Request $request, Commentaire $comment)
     {
-       $comment = $this->getDoctrine()
+        $form = $this->createForm(CommentaireType::class, $comment);
+        $form->handleRequest($request);
+
+        $commentaire = $this->getDoctrine()
             ->getRepository(Commentaire::class)
             ->find($id);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_commentslist');
+        }
     
         return $this->render('admin/formulaire/formCommentaire.html.twig', [
-            'comment' => $comment,
+            'form' => $form->createView(),
+            'commentaire' => $commentaire,
         ]);
     }
 

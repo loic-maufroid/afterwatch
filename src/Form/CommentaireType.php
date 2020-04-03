@@ -13,8 +13,6 @@ class CommentaireType extends AbstractType
     {
         $builder
             ->add('contenu')
-            ->add('id_film')
-            ->add('id_utilisateur')
         ;
     }
 
