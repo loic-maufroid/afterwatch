@@ -2,53 +2,6 @@
 
 {% block title %}{{ parent() }} - Accueil{% endblock %}
 
-{% block stylesheets %}
-{{ parent() }}
-
-<style>
-
-.navig-main
-{
-    border: 3px solid #009193;
-    border-radius: 10%;
-    padding-left: 1.5%;
-}
-.main-contenu
-{
-        padding-top: 4%;
-}
-.contenu-main
-{
-        padding-top: 3%;
-        padding-bottom: 0;
-}
-.prise_de_tete
-{
-    padding-top: 0;
-}
-/*!! insertion de SCSS*/
-.split-character span {
-    display: inline-block;
-}
-
-.title span > span {
-   opacity: 0;
-    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
-}
-
-@keyframes flipAnimation {
-    from {
-        transform: scale(-1, 1);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1, 1);
-        opacity: 1;
-    }
-}
-</style>
-{% endblock %}
-
 {% block content %}
 <div class="main-contenu">
 
