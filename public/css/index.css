@@ -12,18 +12,17 @@ body
 .wrapbody
 {
     position: relative;
-    min-height: 500px;
+    min-height: 450px;
     width: 100%;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 0px 10px 10px;
     overflow: hidden;
     z-index: 2;
 }/*div qui englobe tout header+main+footer*/
 .rep-contenu-h
 {
-    height: 145px;
+    height: 140px;
     width: 100%;
     box-sizing: border-box;
-    color: white;
 }
 /*début du header*/
 .fond-h
@@ -172,7 +171,7 @@ form
 .bas
 {
     height: 40px;
-    margin-top: 20px;
+    margin-top: 10px;
     position: relative;
     z-index: 1;
     box-sizing: border-box;
@@ -237,17 +236,11 @@ li
 {
     
     position: relative;
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 #xl-carousel
 {
     position: relative;
-    margin-bottom: 0;
-    box-sizing: border-box;
-}
-.carousel-item
-{
-    color: yellow;
 }
 .contenu-a-affiche
 {
@@ -257,11 +250,10 @@ li
 }
 .intro-site
 {
-   margin: 25px;
+   margin: 20px;
    font-size: 46px;
    line-height: 50px;
    display: block;
-   word-wrap: break-word;
 }
 h1
 {
@@ -304,6 +296,10 @@ h1
     width: auto;
     font-size: 100%;
 }
+.tout-voir a
+{
+    color: black;
+}
 .tout-voir-affiche
 {
     font-size: 24px;
@@ -315,6 +311,7 @@ h2 a
     display: inline;
     font-weight: inherit;
     margin: 0;
+    padding: .5%;
     color: black;
 }
 .contenu-film-affiche

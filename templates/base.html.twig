@@ -9,6 +9,61 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
         <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+        <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
+*{
+    font-family: Courgette;
+}
+h5
+{
+    color: #009193;
+    font-size: 1em;
+    text-align: center;
+}
+.bas
+{
+    height: calc(-3% - 1%);
+}
+.navig-main
+{
+    border: 3px solid #009193;
+    border-radius: 10%;
+    padding-left: 1.5%;
+}
+.main-contenu
+{
+        padding-top: 4%;
+}
+.contenu-main
+{
+        padding-top: 2.5%;
+        padding-bottom: 0;
+}
+.prise_de_tete
+{
+    padding-top: 0;
+}
+/*!! insertion de SCSS*/
+.split-character span {
+    display: inline-block;
+}
+
+.title span > span {
+   opacity: 0;
+    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
+}
+
+@keyframes flipAnimation {
+    from {
+        transform: scale(-1, 1);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+</style>
         {% endblock %}
     </head>
     <body>
@@ -31,11 +86,11 @@
                                 <form action="{{ path('search') }}" method="get">
                                 <input list="films" class="h-recherche" type="search" size="75%" id="site-search" autocomplete="off" name="searchFilms" placeholder="recherche un film.." aria-label="Search through site content">
                                 
-                                <button class="buttonr">Rechercher</button>
+                                <button id="buttonr" class="buttonr">Rechercher</button>
                                 </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     
                     <div class="co-et-regist"><!--parties connexion et inscripton-->
                         <a class="connect" data-rel="btn-connect" href="">Connexion</a><!--ici pour la connexion de l'utilisateur-->
@@ -48,6 +103,7 @@
 
                     <div class="bas">
                         <datalist id="films"></datalist>
+                        <div id="messageErreur"></div>
                         <nav class="barre-menus">
                             <div class="barre-menus-navig">
                                 <div class="navig-list">
@@ -100,13 +156,6 @@
                     </ul>
                 </div>
 
-                <div class="icon">
-                    <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-twitter-square fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-pinterest fa-2x"></i></a>
-                    <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
-                </div>
             </div>
     </footer>
         {% endblock %}
@@ -124,9 +173,9 @@
     $(function(){
 
         function envoyer(){
-            var query = $("#site-search").val();
+            var query = $("#site-search").val().trim();
             $("#films select").remove();
-            if (query.trim() != "" && query.length > 3){
+            if (query != "" && query.length > 3){
               
         $.ajax({
             type : 'GET',
@@ -150,8 +199,18 @@
     }
 
     var timer;
+
+    $("#buttonr").click(function(event){
+        var q = $("#site-search").val();
+        if (q.trim().length <= 3){
+            event.preventDefault();
+            $("#messageErreur").append("<p class='text-center'>L'expression en recherche est trop courte</p>");
+        }
+    })
+
     $("#site-search").keyup(function(event){
         clearTimeout(timer);
+        $("#messageErreur").empty();
         timer = setTimeout(envoyer,500);
         event.preventDefault();
     })
