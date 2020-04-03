@@ -35,9 +35,9 @@ class AppFixtures extends Fixture
 
         //Créer les Utilisateurs
         $utilisateur = new Utilisateur();
-        $utilisateur->setUsername('utilisateur Admin');
-        $utilisateur->setEmail($faker->email);
-        $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'admin'));
+        $utilisateur->setUsername('RolandAdmin');
+        $utilisateur->setEmail('administateur.roland@afterwatch.fr');
+        $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Roland') );
         $utilisateur->setRoles(['ROLE_ADMIN']);
         $manager->persist($utilisateur);
 
