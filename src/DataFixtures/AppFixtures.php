@@ -14,16 +14,19 @@ use App\Entity\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AppFixtures extends Fixture
 {
 
     private $slugger;
+    private $passwordEncoder;
 
-    public function __construct(SluggerInterface $slugger)
+    public function __construct(SluggerInterface $slugger, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->slugger = $slugger;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function load(ObjectManager $manager)
@@ -34,7 +37,7 @@ class AppFixtures extends Fixture
         $utilisateur = new Utilisateur();
         $utilisateur->setUsername('utilisateur Admin');
         $utilisateur->setEmail($faker->email);
-        $utilisateur->setPassword('password');
+        $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'admin'));
         $utilisateur->setRoles(['ROLE_ADMIN']);
         $manager->persist($utilisateur);
 
@@ -42,9 +45,9 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <=19; ++$i)
         {
             $utilisateur = new Utilisateur();
-            $utilisateur->setUsername('utilisateur '.$i);
+            $utilisateur->setUsername('utilisateur'.$i);
             $utilisateur->setEmail($faker->email);
-            $utilisateur->setPassword('password');
+            $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, $faker->words($nb = 7, $asText=true) ));
             $utilisateur->setRoles(['ROLE_USER']);
             $manager->persist($utilisateur);
             $utilisateurs[] = $utilisateur;
