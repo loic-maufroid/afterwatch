@@ -60,10 +60,6 @@ class Utilisateur implements UserInterface
      */
     private $commentaires;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="id_utilisateur", orphanRemoval=true)
-     */
-    private $notes;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Critique", mappedBy="id_utilisateur", orphanRemoval=true)
@@ -76,7 +72,6 @@ class Utilisateur implements UserInterface
         $this->a_vu = new ArrayCollection();
         $this->statuses = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
-        $this->notes = new ArrayCollection();
         $this->critiques = new ArrayCollection();
     }
 
@@ -265,36 +260,6 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setIdUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->contains($note)) {
-            $this->notes->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getIdUtilisateur() === $this) {
-                $note->setIdUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Critique[]

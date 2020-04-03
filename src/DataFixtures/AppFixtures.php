@@ -8,7 +8,6 @@ use App\Entity\Commentaire;
 use App\Entity\Critique;
 use App\Entity\Film;
 use App\Entity\Genre;
-use App\Entity\Note;
 use App\Entity\Realisateur;
 use App\Entity\Scenariste;
 use App\Entity\Status;
@@ -104,19 +103,6 @@ class AppFixtures extends Fixture
             $scenaristes[] = $scenariste;
         }
 
-        //Créer les Note
-        $scores = ['1', '2', '3', '4', '5'];
-        $notes = [];
-        foreach ($scores as $score)
-        {
-            $note = new Note();
-            $note->setScore($score);
-            $note->setIdFilm($faker->randomElement($films));
-            $note->setIdUtilisateur($faker->randomElement($utilisateurs));
-            $manager->persist($note);
-            $notes[] = $note;
-        }
-
         //Créer Commentaire
         $commentaires= [];
         for ($i = 1; $i <=30; ++$i)
@@ -136,6 +122,7 @@ class AppFixtures extends Fixture
             $critique = new Critique();
             $critique->setTitre('critique '.$i);
             $critique->setContenu($faker->text);
+            $critique->setNote($faker->numberBetween(1,5));
             $critique->setIdFilm($faker->randomElement($films));
             $critique->setIdUtilisateur($faker->randomElement($utilisateurs));
             $critique->setSlug($this->slugger->slug($critique->getTitre())->lower());
