@@ -109,7 +109,7 @@ class FilmController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->render('admin/formulaire/create.html.twig', [
+        return $this->render('admin/formulaire/addFilm.html.twig', [
             'form' => $form->createView(),
         ]);
     }
