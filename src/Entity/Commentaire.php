@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
@@ -18,6 +19,14 @@ class Commentaire
 
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 30,
+     *      max = 255,
+     *      minMessage = "Le commentaire ne peut pas être inférieur à 30 caractères",
+     *      maxMessage = "Le commentaire ne peut pas être supérieur à 255 caractères",
+     * )
      */
     private $contenu;
 
