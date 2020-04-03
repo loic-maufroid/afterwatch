@@ -3,7 +3,8 @@
 {% block title %}{{ parent() }} - Informations sur le film {{ film.titre }}{% endblock %}
 
 {% block stylesheets %}
-{{ parent() }}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <style>
 body 
 {
@@ -27,7 +28,7 @@ video
     transition: 1s opacity;
 }
 
-#film 
+#films 
 { 
     font-weight:100; 
     background: rgba(0,0,0,0.3);
@@ -51,20 +52,25 @@ h2
     text-transform: uppercase;
     margin-top: 0;
     letter-spacing: .2rem;
+    
+}
+a
+{
+  max-width: max-content;
 }
 section
 {
     border-top: 1px solid #8080809d;
 }
 
-.flexbutton 
+.flexbutton
 {
     margin: auto;
     display: flex;
-    flex-direction: row;
     justify-content: space-between; 
 }
-#film button { 
+#films button, a
+{ 
   display: block;
   width: 100%;
   padding: .4rem;
@@ -77,11 +83,12 @@ section
   cursor: pointer;
   transition: .3s background;
 }
-#film button:hover { 
+#films button:hover { 
    background: rgba(0,0,0,0.5);
 }
 
-a {
+.btn, a
+{
   display: inline-block;
   color: #fff;
   text-decoration: none;
@@ -98,12 +105,11 @@ a:hover{
     position: fixed;
     top: 20%;
     left: 10%;
-    
 }
 iframe
 {
-    width:680px; 
-    height:380px;
+    width:640px; 
+    height:360px;
 }
 @media screen and (max-width: 500px) { 
   div{width:70%;} 
@@ -116,6 +122,95 @@ iframe
 </style>
 {% endblock %}
 
-{% block content %}
-@todo details du film
+{% block body %}
+
+<section>
+  <video poster="{{ asset('img/godzi2.jpg') }}" id="bgvid" playsinline autoplay muted loop>
+  </section>
+  
+  <div class="b-annonce">
+      <iframe src='http://player.allocine.fr/19583604.html' style='width:640px; height:360px;' scrolling='no'></iframe>   
+  </div>
+  
+  <div id="films">
+      <div class="flexbutton">
+          <div class="button">
+              <a class="film_a_voir button btn" href="#">Mes films à voir</a>
+              <a class="film_vu button btn">Mes films vu</a>
+              <a class="button btn flexbutton" href="{{ path('welcome') }}">Retour à l'accueil</a>
+          </div>
+          </div> 
+  </section>
+
+  <section class="infos">
+    <h1>{{ film.titre }}</h1>
+    <article>
+      <p><strong>Réalisateur(s): </strong>{% if film.realise|length > 0 %}{% for director in film.realise %} {{ director.prenom }} {{ director.nom }}{% endfor %}{% else %}Inconnu{% endif %}</p>
+      <p><strong>Synopsis: </strong>{{ film.synopsis }}</p>
+    <p><strong>Année: </strong>{{ film.date|date('Y') }}</p>
+    <p><strong>Durée: </strong>{% if film.duree %}{{ film.duree // 60 }}h {{ film.duree % 60 }}mns{% else %}Inconnue{% endif %}</p>
+    <p><strong>Nationalité: </strong>{% if film.nationalite %}{{ film.nationalite }}{% else %}Inconnue{% endif %}</p>
+    <p><strong>Genre: </strong>{% if film.genreFilm|length > 0 %}{% for genre in film.genreFilm %} {{ genre.type }}{% endfor %}{% else %}Inconnu{% endif %}</p>        
+    <p><strong>Scénariste(s): </strong>{% if film.scenario|length > 0 %}{% for scen in film.scenario %} {{ scen.prenom }} {{ scen.nom }}{% endfor %}{% else %}Inconnu{% endif %}</p>
+    <p><strong>Acteur(s): </strong>{% if film.acteurJoue|length > 0 %}{% for actor in film.acteurJoue %} {{ actor.prenom }} {{ actor.nom }}{% endfor %}{% else %}Inconnu{% endif %}</p> 
+    </article>
+    </section>
+
+    <section class="critique">
+      <h2>Critiques</h2>
+      <div class="button">
+          <a class="a-voir" href="#" type="button">Voir les critiques</a>
+      </div>
+  
+  </section>
+
+  <section>
+    <h2>Commentaires</h2>
+    {% for comment in film.commentaires %}
+      
+    <p><strong>{{ comment.idUtilisateur.username }} : </strong>
+    <i>{{ comment.contenu }}</i>
+    </p>
+
+    {% endfor %}
+
+    <div class="button">
+        <a class="Add button btn" type="button">Ajouter un commentaire</a>
+    </div>
+</section>
+
+{% block javascripts %}
+{{ parent() }}
+
+<script>
+var vid = document.getElementById("bgvid");
+var pauseButton = document.querySelector("#films .button");
+
+if (window.matchMedia('(prefers-reduced-motion)').matches) {
+    vid.removeAttribute("autoplay");
+    vid.pause();
+    pauseButton.innerHTML = "Paused";
+}
+function vidFade() {
+  vid.classList.add("stopfade");
+}
+vid.addEventListener('ended', function()
+{ 
+vid.pause();
+vidFade();
+}); 
+
+
+pauseButton.addEventListener("click", function() {
+  vid.classList.toggle("stopfade");
+  if (vid.paused) {
+    vid.play();
+    pauseButton.innerHTML = "Pause";
+  } else {
+    vid.pause();
+    pauseButton.innerHTML = "Paused";
+  }
+})
+</script>
+{% endblock %}
 {% endblock %}

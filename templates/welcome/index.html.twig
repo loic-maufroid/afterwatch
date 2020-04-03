@@ -18,7 +18,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h3>{{ filmCarr.titre }}</h3>
                     <p>essai <strong>d'ajout de texte</strong> <i>sur une image</i> </p>
-                    <a href="https://www.google.fr/" target="_blank">Cliquer ici</a>
+                    <a href="https://www.google.fr/">Cliquer ici</a>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
                     <ul class="contenu-film-affiche">
                         {% for filmAffiche in filmsAffiche %}
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmAffiche.slug}) }}" data-rel="button"><div class="container">
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">
@@ -65,7 +65,7 @@
                                     <div class="face face2">
                                         <div class="content row justify-content-center align-items-start">
                                         
-                                            <a href="#" class="col-lg-9"><h4>{% if filmAffiche.titre|length > 40 %}{{ filmAffiche.titre[:40] }}...{% else %}{{ filmAffiche.titre }}
+                                            <a href="{{ path('details_film',{slug: filmAffiche.slug}) }}" class="col-lg-9"><h4>{% if filmAffiche.titre|length > 40 %}{{ filmAffiche.titre[:40] }}...{% else %}{{ filmAffiche.titre }}
                                                 {% endif %}</h4></a>
                                         
                                         </div>
@@ -105,7 +105,7 @@
                                     <div class="face face2">
                                         <div class="content row justify-content-center align-items-start">
                                         
-                                        <a class="col-lg-8" href="#"><h4>{% if filmSortie.titre|length > 40 %}{{ filmSortie.titre[:40] }}...{% else %}{{ filmSortie.titre }}
+                                        <a class="col-lg-8" href="{{ path('details_film',{slug: filmSortie.slug}) }}"><h4>{% if filmSortie.titre|length > 40 %}{{ filmSortie.titre[:40] }}...{% else %}{{ filmSortie.titre }}
                                             {% endif %}</h4></a></h4></a>
                                         <p>{{ filmSortie.date|date('d M Y',"Europe/Paris") }}</p>
                                         
