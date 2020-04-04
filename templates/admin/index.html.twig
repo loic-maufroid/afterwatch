@@ -30,7 +30,7 @@
         <tbody>
             {% for film in films %}
             <tr>
-                <td>{{ film.affiche }}</td>
+                <td>{% if film.affiche %}<img src="{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}">{% endif %}</td>
                 <td>{{ film.titre }}</td>
                 <td>{{ film.slug }}</td>
                 <td>{{ film.date|date('d-m-y') }}</td>

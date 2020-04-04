@@ -2,12 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Acteur;
 use App\Entity\Film;
 use App\Entity\Genre;
+use App\Entity\Realisateur;
+use App\Entity\Scenariste;
 use App\Repository\FilmRepository;
 use App\Form\FilmType;
+use App\Repository\ActeurRepository;
 use App\Repository\GenreRepository;
 use App\Repository\RealisateurRepository;
+use App\Repository\ScenaristeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -95,7 +100,8 @@ class FilmController extends AbstractController
      /**
      * @Route("/admin/ajouter", name="addfilm")
      */
-    public function addFilm(Request $request, SluggerInterface $slugger,GenreRepository $genreRepository,RealisateurRepository $realisateurRepository)
+    public function addFilm(Request $request, SluggerInterface $slugger,GenreRepository $genreRepository,RealisateurRepository $realisateurRepository,
+    ScenaristeRepository $scenaristeRepository,ActeurRepository $acteurRepository)
     {
         $film = new Film();
         
@@ -120,24 +126,60 @@ class FilmController extends AbstractController
             }
         }
 
-       /* $directors = explode("+",$request->request->all()["film"]["real"]);
+        $directors = explode("+",$request->request->all()["film"]["real"]);
 
         foreach ($directors as $director) {
             $temp = $realisateurRepository->findOneBy(["nom" => $director]);
             if ($temp)
-            $form->getData()->addGenreFilm($temp);
+            $form->getData()->add($temp);
             else {
-            $genreTemp = new Genre();
-            $genreTemp->setType($genre);
-            dump($genreTemp);
+            $dirTemp = new Realisateur();
+            $dirTemp->setNom($director);
+            dump($dirTemp);
             $manager = $this->getDoctrine()->getManager();
-            $manager->persist($genreTemp);
+            $manager->persist($dirTemp);
             $manager->flush();
-            dump($genreTemp);
-            $form->getData()->addGenreFilm($genreTemp);
+            dump($dirTemp);
+            $form->getData()->addRealise($dirTemp);
             }
-        }*/
+        }
 
+
+        $scenas = explode("+",$request->request->all()["film"]["scen"]);
+
+        foreach ($scenas as $scena) {
+            $temp = $scenaristeRepository->findOneBy(["nom" => $scena]);
+            if ($temp)
+            $form->getData()->add($temp);
+            else {
+            $scenTemp = new Scenariste();
+            $scenTemp->setNom($scena);
+            dump($scenTemp);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($scenTemp);
+            $manager->flush();
+            dump($scenTemp);
+            $form->getData()->addScenario($scenTemp);
+            }
+        }
+
+        $actors = explode("+",$request->request->all()["film"]["act"]);
+
+        foreach ($actors as $actor) {
+            $temp = $acteurRepository->findOneBy(["nom" => $actor]);
+            if ($temp)
+            $form->getData()->add($temp);
+            else {
+            $actTemp = new Acteur();
+            $actTemp->setNom($actor);
+            dump($actTemp);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($actTemp);
+            $manager->flush();
+            dump($actTemp);
+            $form->getData()->addActeurJoue($actTemp);
+            }
+        }
 
     }
 

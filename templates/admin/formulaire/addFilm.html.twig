@@ -85,13 +85,19 @@
 
     <button id="boutonPopu" formnovalidate>Valider</button>
 
+    <div id="infos">
     <div id="titre"></div>
-    <div id="synopsis"></div>
     <div id="affiche"></div>
+    <div id="genres"></div>
+    <div id="synopsis"></div>
     <div id="date"></div>
     <div id="duree"></div>
     <div id="nationalite"></div>
     <div id="trailer"></div>
+    <div id="reals"></div>
+    <div id="acts"></div>
+    <div id="scens"></div>
+    </div>
     </div>
 <!--</section>-->
 {% endblock %}
@@ -102,7 +108,9 @@
 
 $("#boutonPopu").click(function(event){
     event.preventDefault();
+    $("#infos *").empty();
     var query = $("#film_titre").val();
+    if (query.trim().length > 3){
     var idFilm;
 
     $.ajax({
@@ -133,21 +141,23 @@ $("#boutonPopu").click(function(event){
                dataType : 'JSON',
                success: function(response){
                    var genresFilm = response.genres[0].name;
+                   $("#genres").append("<p></p>");
                    for (let i = 1; i < response.genres.length; i++) {
-                       genresFilm += "+"+response.genres[i].name;                       
+                       genresFilm += "+"+response.genres[i].name;
+                       $("#genres p").text(response.genres[i].name+" ");
                    }
                    $("#film_genre").val(genresFilm);
                    if(response.runtime){
-                   $("#duree").text(response.runtime);
+                   $("#duree").text(Math.floor(response.runtime / 60)+"h"+(response.runtime % 60)+"mn");
                    $("#film_duree").val(response.runtime);
                    }
                    if (response.poster_path){
                    $("#film_affiche").val(response.poster_path);
                    $("#affiche").append("<img src='http://image.tmdb.org/t/p/w185/"+response.poster_path+"'>");
                    }
-                   if (response.spoken_languages.length > 0){
-                   $("#film_nationalite").val(response.spoken_languages[0].name);
-                   $("#nationalite").text(response.spoken_languages[0].name);
+                   if (response.original_language){
+                   $("#film_nationalite").val(response.original_language);
+                   $("#nationalite").text(response.original_language);
                    }
 
                    $.ajax({
@@ -168,13 +178,18 @@ $("#boutonPopu").click(function(event){
                                success: function(response){
 
                                    var dirsFilm = "";
+                                   $("#reals").append("<p></p>");
                                    var actsFilm = "";
+                                   $("#acts").append("<p></p>");
                                    var scensFilm = "";
+                                   $("#scens").append("<p></p>");
                                   for (let i = 0; i < response.crew.length; i++) {
-                                      if (response.crew[i].job == "Director")
+                                      if (response.crew[i].job == "Director"){
                                          dirsFilm += response.crew[i].name+"+";
-                                      if (response.crew[i].job == "Storyboard")
+                                      }
+                                      if (response.crew[i].department == "Writing"){
                                          scensFilm += response.crew[i].name+"+";
+                                      }
                                   }
                                   for (let j = 0; j < response.cast.length; j++) {
                                       if (j == 5)
@@ -194,6 +209,10 @@ $("#boutonPopu").click(function(event){
                                   console.log(scensFilm);
                                   console.log(actsFilm);
 
+                                  $("#reals p").text("Réalisateur(s) : "+dirsFilm.split('+').join('/'));
+                                  $("#scens p").text("Scénariste(s) : "+scensFilm.split('+').join('/'));
+                                  $("#acts p").text("Acteur(s) : "+actsFilm.split('+').join('/'));
+
                                   $("#film_real").val(dirsFilm);
                                   $("#film_scen").val(scensFilm);
                                   $("#film_act").val(actsFilm);
@@ -207,7 +226,7 @@ $("#boutonPopu").click(function(event){
            }
         }                 
         });
-    
+    }
 });
 
 
