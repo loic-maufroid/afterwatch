@@ -84,8 +84,7 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <=10; ++$i)
         {
             $acteur = new Acteur();
-            $acteur->setNom($faker->lastName);
-            $acteur->setPrenom($faker->firstName);
+            $acteur->setNom($faker->lastName.' '.$faker->firstName);
             $acteur->addFilm($faker->randomElement($films));
             $manager->persist($acteur);
             $acteurs[] = $acteur;
@@ -96,8 +95,7 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <=10; ++$i)
         {
             $realisateur = new Realisateur();
-            $realisateur->setNom($faker->lastName);
-            $realisateur->setPrenom($faker->firstName);
+            $realisateur->setNom($faker->lastName.' '.$faker->firstName);
             $realisateur->addFilm($faker->randomElement($films));
             $manager->persist($realisateur);
             $realisateurs[] = $realisateur;
@@ -108,8 +106,7 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <=10; ++$i)
         {
             $scenariste = new Scenariste();
-            $scenariste->setNom($faker->lastName);
-            $scenariste->setPrenom($faker->firstName);
+            $scenariste->setNom($faker->lastName.' '.$faker->firstName);
             $scenariste->addFilm($faker->randomElement($films));
             $manager->persist($scenariste);
             $scenaristes[] = $scenariste;
