@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Film;
+use App\Entity\Genre;
 use App\Repository\FilmRepository;
 use App\Form\FilmType;
+use App\Repository\GenreRepository;
+use App\Repository\RealisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -92,15 +95,64 @@ class FilmController extends AbstractController
      /**
      * @Route("/admin/ajouter", name="addfilm")
      */
-    public function addFilm(Request $request, SluggerInterface $slugger)
+    public function addFilm(Request $request, SluggerInterface $slugger,GenreRepository $genreRepository,RealisateurRepository $realisateurRepository)
     {
         $film = new Film();
+        
         $form = $this->createForm(FilmType::class, $film);
+        
+        if (isset($request->request->all()["film"])){
+        $genres = explode("+",$request->request->all()["film"]["genre"]);
+
+        foreach ($genres as $genre) {
+            $temp = $genreRepository->findOneBy(["type" => $genre]);
+            if ($temp)
+            $form->getData()->addGenreFilm($temp);
+            else {
+            $genreTemp = new Genre();
+            $genreTemp->setType($genre);
+            dump($genreTemp);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($genreTemp);
+            $manager->flush();
+            dump($genreTemp);
+            $form->getData()->addGenreFilm($genreTemp);
+            }
+        }
+
+       /* $directors = explode("+",$request->request->all()["film"]["real"]);
+
+        foreach ($directors as $director) {
+            $temp = $realisateurRepository->findOneBy(["nom" => $director]);
+            if ($temp)
+            $form->getData()->addGenreFilm($temp);
+            else {
+            $genreTemp = new Genre();
+            $genreTemp->setType($genre);
+            dump($genreTemp);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($genreTemp);
+            $manager->flush();
+            dump($genreTemp);
+            $form->getData()->addGenreFilm($genreTemp);
+            }
+        }*/
+
+
+    }
+
+        
+
+
+        dump($form);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
           
+            dump($form);
+            dump($film);
             $film->setSlug($slugger->slug($film->getTitre())->lower());
+
 
             $entityManager = $this->getDoctrine()->getManager();
             

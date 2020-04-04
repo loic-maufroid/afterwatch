@@ -16,7 +16,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputDate">Date de sortie</label>
-                <input type="text" class="form-control" id="inputDate" value="{{ film.date }}">
+                <input type="text" class="form-control" id="inputDate" value="{{ film.date|date('d-m-y') }}">
             </div>
         </div>
             <div class="form-group  col-md-6">

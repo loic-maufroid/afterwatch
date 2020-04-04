@@ -33,7 +33,7 @@
                 <td>{{ film.affiche }}</td>
                 <td>{{ film.titre }}</td>
                 <td>{{ film.slug }}</td>
-                <td>{{ film.date }}</td>
+                <td>{{ film.date|date('d-m-y') }}</td>
                 <td>
                     {% for realise in film.realise %}
                     {{ realise.nom }}

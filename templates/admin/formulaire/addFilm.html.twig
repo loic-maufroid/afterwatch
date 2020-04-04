@@ -4,65 +4,212 @@
 
 {% block body %}
 <section class="flex jcenter margintop">
-    <form class="jumbotron scrollform">
+    <div class="jumbotron scrollform">
+
+        {{ form_start(form) }}
+
         <h2 class="textc">Ajouter un film</h2>
+
         <div class="form-group">
-            <input type="file" class="form-control-file"  id="inputAffiche">
+            <!--<input type="file" class="form-control-file" id="inputAffiche">-->
+            {{ form_row(form.affiche) }}
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputTitre">Titre</label>
-                <input type="text" class="form-control" id="inputTitre"  placeholder="Titre">
+                <!--<label for="inputTitre">Titre</label>
+                <input type="text" class="form-control" id="inputTitre" placeholder="Titre">-->
+                {{ form_row(form.titre) }}
             </div>
             <div class="form-group col-md-6">
-                <label for="inputDate">Date de sortie</label>
-                <input type="text" class="form-control" id="inputDate" placeholder="Date de sortie">
+                <!--<label for="inputDate">Date de sortie</label>
+                <input type="text" class="form-control" id="inputDate" placeholder="Date de sortie">-->
+                {{ form_row(form.date) }}
             </div>
         </div>
             <div class="form-group  col-md-6">
-                <label for="inputReal">Réalisateur(s)</label>
-                <input type="text" class="form-control" id="inputReal" placeholder="Réalisateur(s)">
+                <!--<label for="inputReal">Réalisateur(s)</label>
+                <input type="hidden" class="form-control" id="inputReal" placeholder="Réalisateur(s)">
+                -->
             </div>
             <div class="form-group  col-md-6">
-                <label for="inputScénariste">Scénariste(s)</label>
-                <input type="text" class="form-control" id="inputScénariste"  placeholder="Scénariste(s)">
+                <!--<label for="inputScénariste">Scénariste(s)</label>
+                <input type="hidden" class="form-control" id="inputScénariste" placeholder="Scénariste(s)">
+                -->
             </div>
             <div class="form-group  col-md-6">
-                <label for="inputActeurs">Acteur(s)</label>
-                <input type="text" class="form-control" id="inputCity" placeholder="Acteur(s)">
+                <!--<label for="inputActeurs">Acteur(s)</label>
+                <input type="hidden" class="form-control" id="inputAct" placeholder="Acteur(s)">
+                -->{{ form_row(form.act) }}
             </div>
             <div class="form-group  col-md-6">
-                <label for="inputGenre">Genre(s)</label>
-                <input type="text" class="form-control" id="inputZip"  placeholder="Genre(s)">
+                <!--<label for="inputGenre">Genre(s)</label>
+                <input type="hidden" class="form-control" name="inputGenre" id="inputGenre" placeholder="Genre(s)">-->
+                {{ form_row(form.genre) }}
             </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputDurée">Durée(s)</label>
-                <input type="text" class="form-control" id="inputDurée" placeholder="Durée(s)">
+                <!--<label for="inputDurée">Durée(s)</label>
+                <input type="text" class="form-control" id="inputDurée" placeholder="Durée(s)">-->
+                {{ form_row(form.duree) }}
             </div>
             <div class="form-group col-md-6">
-                <label for="inputNationnalité">Nationnalité(s)</label>
-                <input type="text" class="form-control" id="inputNationnalité"  placeholder="Nationnalité(s)">
+                <!--<label for="inputNationnalité">Nationnalité(s)</label>
+                <input type="text" class="form-control" id="inputNationnalité"  placeholder="Nationnalité(s)">-->
+                {{ form_row(form.nationalite) }}
             </div>
         </div> 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCNC">Limite d'âge</label>
-                <input type="text" class="form-control" id="inputCNC" placeholder="Age requis">
+                <!--<label for="inputCNC">Limite d'âge</label>
+                <input type="text" class="form-control" id="inputCNC" placeholder="Age requis">-->
+                {{ form_row(form.legislation) }}
             </div>
             <div class="form-group col-md-6">
-                <label for="inputBA">Bande-annonce</label>
-                <input type="text" class="form-control" id="inputBA"  placeholder="URL">
+                <!--<label for="inputBA">Bande-annonce</label>
+                <input type="text" class="form-control" id="inputBA"  placeholder="URL">-->
+                {{ form_row(form.trailer) }}
             </div>
         </div> 
         <div class="form-group">
-            <label for="inputSynopsis">Synopsis</label>
-            <textarea type="text" class="form-control" id="inputSynopsis" placeholder="Synopsis"></textarea>
+            <!--<label for="inputSynopsis">Synopsis</label>
+            <textarea type="text" class="form-control" id="inputSynopsis" placeholder="Synopsis"></textarea>-->
+            {{ form_row(form.synopsis) }}
         </div>
         <div class="flex jcenter margintop">
-            <a href="{{ path('addfilm') }}"><button type="button" class="btn btn-success marginr">Valider</button></a>
             <a href="{{ path('admin') }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
+            <button type="submit" class="btn btn-success marginr">Valider</button>
         </div>    
-    </form>
-</section>
+    
+    {{ form_end(form) }}
+
+
+    <button id="boutonPopu" formnovalidate>Valider</button>
+
+    <div id="titre"></div>
+    <div id="synopsis"></div>
+    <div id="affiche"></div>
+    <div id="date"></div>
+    <div id="duree"></div>
+    <div id="nationalite"></div>
+    <div id="trailer"></div>
+    </div>
+<!--</section>-->
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+
+$("#boutonPopu").click(function(event){
+    event.preventDefault();
+    var query = $("#film_titre").val();
+    var idFilm;
+
+    $.ajax({
+            type : 'GET',
+            url : "https://api.themoviedb.org/3/search/movie?language=fr&api_key=7024fabede73fed68005e5a632136b71&query="+query,
+            dataType : 'JSON',
+        success: function(response){
+
+           if (response.results.length > 0){
+           $("#titre").text(response.results[0].title);
+           $("#film_titre").val(response.results[0].title);
+           $("#synopsis").text(response.results[0].overview);
+           $("#film_synopsis").val(response.results[0].overview);
+
+           if (response.results[0].release_date){
+           $("#date").text(response.results[0].release_date);
+           var date = response.results[0].release_date;
+
+           $("#film_date").val(new Date(date).toISOString().substring(0,10));
+           console.log($("#film_date").val());
+           }
+
+           idFilm = response.results[0].id;
+
+           $.ajax({
+               type : 'GET',
+               url : "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=7024fabede73fed68005e5a632136b71&language=fr",
+               dataType : 'JSON',
+               success: function(response){
+                   var genresFilm = response.genres[0].name;
+                   for (let i = 1; i < response.genres.length; i++) {
+                       genresFilm += "+"+response.genres[i].name;                       
+                   }
+                   $("#film_genre").val(genresFilm);
+                   if(response.runtime){
+                   $("#duree").text(response.runtime);
+                   $("#film_duree").val(response.runtime);
+                   }
+                   if (response.poster_path){
+                   $("#film_affiche").val(response.poster_path);
+                   $("#affiche").append("<img src='http://image.tmdb.org/t/p/w185/"+response.poster_path+"'>");
+                   }
+                   if (response.spoken_languages.length > 0){
+                   $("#film_nationalite").val(response.spoken_languages[0].name);
+                   $("#nationalite").text(response.spoken_languages[0].name);
+                   }
+
+                   $.ajax({
+                       type : 'GET',
+                       url : "https://api.themoviedb.org/3/movie/"+idFilm+"/videos?api_key=7024fabede73fed68005e5a632136b71&language=fr",
+                       dataType : 'JSON',
+                       success: function(response){
+                           console.log(response);
+                           if (response.results.length > 0){
+                           $("#film_trailer").val(response.results[0].key);
+                           $("#trailer").append("<a href='https://youtube.com/watch/"+response.results[0].key+"'>Lien vers la bande-annonce</a>");
+                           }
+
+                           $.ajax({
+                               type : 'GET',
+                               url : 'https://api.themoviedb.org/3/movie/'+idFilm+'/credits?api_key=7024fabede73fed68005e5a632136b71',
+                               dataType : 'JSON',
+                               success: function(response){
+
+                                   var dirsFilm = "";
+                                   var actsFilm = "";
+                                   var scensFilm = "";
+                                  for (let i = 0; i < response.crew.length; i++) {
+                                      if (response.crew[i].job == "Director")
+                                         dirsFilm += response.crew[i].name+"+";
+                                      if (response.crew[i].job == "Storyboard")
+                                         scensFilm += response.crew[i].name+"+";
+                                  }
+                                  for (let j = 0; j < response.cast.length; j++) {
+                                      if (j == 5)
+                                      break;
+                                      actsFilm += response.cast[j].name+"+";
+                                  }
+                                  if (dirsFilm.length > 0)
+                                  dirsFilm = dirsFilm.substring(0,dirsFilm.length-1);
+
+                                  if (actsFilm.length > 0)
+                                  actsFilm = actsFilm.substring(0,actsFilm.length-1);
+
+                                  if (scensFilm.length > 0)
+                                  scensFilm = scensFilm.substring(0,scensFilm.length-1);
+
+                                  console.log(dirsFilm);
+                                  console.log(scensFilm);
+                                  console.log(actsFilm);
+
+                                  $("#film_real").val(dirsFilm);
+                                  $("#film_scen").val(scensFilm);
+                                  $("#film_act").val(actsFilm);
+
+                               }
+                           });
+                       }
+                   });
+               }
+           });
+           }
+        }                 
+        });
+    
+});
+
+
+</script>
 {% endblock %}

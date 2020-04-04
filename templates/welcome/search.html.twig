@@ -26,7 +26,7 @@
                 <ul>
                 {% for film in films %}
                     
-                    <li><a href="#">- {{ film.titre }} </a></li>
+                    <li><a href="{{ path('details_film',{slug: film.slug}) }}">- {{ film.titre }} </a></li>
 
                 {% endfor %}
                 </ul>
@@ -49,7 +49,7 @@
                 <div id="t-recherche">
                     {% for filmDir in director.films %}
 
-                    <a href="#">- {{ filmDir.titre }}</a>
+                    <a href="{{ path('details_film',{slug: filmDir.slug}) }}">- {{ filmDir.titre }}</a>
 
                 {% endfor %}
                 </div>
@@ -70,7 +70,7 @@
                 <div id="t-recherche">
                     {% for filmAct in actor.films %}
 
-                    <a href="#">- {{ filmAct.titre }}</a>
+                    <a href="{{ path('details_film',{slug: filmAct.slug}) }}">- {{ filmAct.titre }}</a>
 
                 {% endfor %}
                 </div>
