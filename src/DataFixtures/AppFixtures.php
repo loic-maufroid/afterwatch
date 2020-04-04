@@ -41,8 +41,15 @@ class AppFixtures extends Fixture
         $utilisateur->setRoles(['ROLE_ADMIN']);
         $manager->persist($utilisateur);
 
+        $utilisateur = new Utilisateur();
+        $utilisateur->setUsername('LoicAdmin');
+        $utilisateur->setEmail('administateur.loic@afterwatch.fr');
+        $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Loic') );
+        $utilisateur->setRoles(['ROLE_ADMIN']);
+        $manager->persist($utilisateur);
+
         $utilisateurs = [];
-        for ($i = 1; $i <=19; ++$i)
+        for ($i = 1; $i <=18; ++$i)
         {
             $utilisateur = new Utilisateur();
             $utilisateur->setUsername('utilisateur'.$i);
