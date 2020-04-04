@@ -1,16 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ parent() }} - Inscription{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}"> <!-- demander a Matthieu pour ecraser le style -->
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1 class="font size color textc margintop">AfterWatch</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <section class="flex jcenter ">
 
-        <button class="btn">Register</button>
+    {{ form_start(registrationForm, {'attr': {'class': 'jumbotron width margint'}}) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.username,{'attr': {'class': 'form-control'}}, {'label': 'Pseudo'})  }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}, {'label': 'Adresse Mail'}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}, {'label': 'Mot de Passe'}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-control'}}, {'label': 'Condition d\'utilisation'}) }}
+        </div>
+        
+        <p class="textc"> Si vous avez déjà un compte: <a class="colorin" href="{{ path('app_login') }}">Connectez-vous</a></p>
+        <div class="flex jcenter margintop">
+            <button class="btn btn-color marginr">Inscription</button>
+            <a href="{{ path('welcome') }}"><button type="button" class="btn btn-color">Retour</button></a>
+        </div> 
     {{ form_end(registrationForm) }}
+
+    </section>
 {% endblock %}

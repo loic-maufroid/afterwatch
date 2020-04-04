@@ -44,10 +44,10 @@
                 </label>
             </div>
         #}
-        <p class="textc"> Si vous n'avez pas de compte: <a class="colorin" href="inscription.html">Incrivez-vous</a></p>
+        <p class="textc"> Si vous n'avez pas de compte: <a href="{{ path('app_register') }}" class="colorin" href="inscription.html">Incrivez-vous</a></p>
         <div class="flex jcenter margintop">
             <a href="#"><button type="submit" class="btn btn-color marginr">Connexion</button></a>
-            <a href="#"><button type="button" class="btn btn-color">Retour</button></a>
+            <a href="{{ path('welcome') }}"><button type="button" class="btn btn-color">Retour</button></a>
         </div>     
     </form>
 </section>
