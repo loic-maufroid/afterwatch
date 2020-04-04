@@ -68,7 +68,7 @@ class FilmRepository extends ServiceEntityRepository
     public function findIdsByDirector($director){
         
         $result = $this->getEntityManager()
-        ->createQuery("SELECT r.id FROM App\Entity\Realisateur r WHERE CONCAT(r.prenom,' ',r.nom) LIKE :director")
+        ->createQuery("SELECT r.id FROM App\Entity\Realisateur r WHERE r.nom LIKE :director")
         ->setParameter('director','%'.$director.'%')
         ->getResult();
 
@@ -80,7 +80,7 @@ class FilmRepository extends ServiceEntityRepository
      */
     public function findIdsByActor($actor){
         $result = $this->getEntityManager()
-        ->createQuery("SELECT a.id FROM App\Entity\Acteur a WHERE CONCAT(a.prenom,' ',a.nom) LIKE :actor")
+        ->createQuery("SELECT a.id FROM App\Entity\Acteur a WHERE a.nom LIKE :actor")
         ->setParameter('actor','%'.$actor.'%')
         ->getResult();
 

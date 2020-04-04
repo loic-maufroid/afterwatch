@@ -45,7 +45,7 @@
                 </div>
                 {% for director in directors %}
                     
-                <h5>{{ director.prenom }} {{ director.nom }}</h5>
+                <h5>{{ director.nom }}</h5>
                 <div id="t-recherche">
                     {% for filmDir in director.films %}
 
@@ -66,7 +66,7 @@
                 </div>
                 {% for actor in actors %}
                     
-                <h5>{{ actor.prenom }} {{ actor.nom }}</h5>
+                <h5>{{ actor.nom }}</h5>
                 <div id="t-recherche">
                     {% for filmAct in actor.films %}
 

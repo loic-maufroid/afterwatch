@@ -23,10 +23,6 @@ class Realisateur
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Film", mappedBy="realise")
@@ -55,17 +51,6 @@ class Realisateur
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Film[]

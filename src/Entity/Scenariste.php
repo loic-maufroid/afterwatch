@@ -24,11 +24,6 @@ class Scenariste
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Film", mappedBy="scenario")
      */
     private $films;
@@ -55,17 +50,6 @@ class Scenariste
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Film[]
