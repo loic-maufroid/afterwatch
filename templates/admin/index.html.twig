@@ -30,7 +30,9 @@
         <tbody>
             {% for film in films %}
             <tr>
-                <td>{{ film.affiche }}</td>
+                <td>
+                    <img class="minimage" src="{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}" alt="{{ film.titre }}">
+                </td>
                 <td>{{ film.titre }}</td>
                 <td>{{ film.slug }}</td>
                 <td>{{ film.date|date('d-m-y') }}</td>
@@ -58,7 +60,11 @@
                 <td>{{ film.nationalite }}</td>
                 <td>{{ film.legislation }}</td>
                 <td>{{ film.trailer }}</td>
-                <td>{{ film.synopsis }}</td>
+                <td>
+                    {% if film.synopsis|length > 50 %}
+                    {{ film.synopsis|slice(0, 79) }} (...)
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('film_modifier', {id: film.id}) }}"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
                     <a href="{{ path('admin_confirmfilmdelete', {id: film.id}) }}"><button type="button" class="btn btn-info btn-danger">Supprimer</button></a>
