@@ -1,0 +1,42 @@
+@import "compass/css3";
+
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+$iconColor: #e7e7e7;
+$color: #009193;
+.search {
+  width: 75%;
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: $iconColor;
+    border-radius: 5px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-stretch: always;
+  }
+}
+.searchTerm {
+  @include box-sizing(border-box);
+  background-color: transparent;
+  width: 100%;
+  border: 2px solid #009193;
+  padding: 5px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+}
+.searchButton {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: 40px;
+  cursor: pointer;
+  background-color: #009193;
+  border-radius: 25%;
+}

@@ -8,61 +8,12 @@
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-        <style>
+        <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
+        <link rel="stylesheet" href="{{ asset('css/navbar_accueil.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('css/index_accueil.css') }}">
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
-*{
-    font-family: Courgette;
-}
-h5
-{
-    color: #009193;
-    font-size: 1em;
-    text-align: center;
-}
-.bas
-{
-    height: calc(-3% - 1%);
-}
-.navig-main
-{
-    border: 3px solid #009193;
-    border-radius: 10%;
-    padding-left: 1.5%;
-}
-.main-contenu
-{
-        padding-top: 4%;
-}
-.contenu-main
-{
-        padding-top: 2.5%;
-        padding-bottom: 0;
-}
-.prise_de_tete
-{
-    padding-top: 0;
-}
-/*!! insertion de SCSS*/
-.split-character span {
-    display: inline-block;
-}
-
-.title span > span {
-   opacity: 0;
-    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
-}
-
-@keyframes flipAnimation {
-    from {
-        transform: scale(-1, 1);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1, 1);
-        opacity: 1;
-    }
-}
 </style>
         {% endblock %}
     </head>
@@ -84,9 +35,9 @@ h5
                             <div id="recherche-h">
                                 <div class="recherche-auto-flex">   
                                 <form action="{{ path('search') }}" method="get">
-                                <input list="films" class="h-recherche" type="search" size="75%" id="site-search" autocomplete="off" name="searchFilms" placeholder="recherche un film.." aria-label="Search through site content">
+                                <input list="films" class="searchTerm" type="search" size="75%" id="site-search" autocomplete="off" name="searchFilms" placeholder="recherche un film.." aria-label="Search through site content">
                                 
-                                <button id="buttonr" class="buttonr">Rechercher</button>
+                                <button id="buttonr" class="searchButton">Rechercher</button>
                                 </form>
                                 </div>
                             </div>
@@ -98,44 +49,48 @@ h5
                             <div>
                                 <img src="{#{{AFAIRE}}#}" alt="">
                             </div>
-                            {{ app.user.username }},<a href="{{ path('app_logout') }}">Deconnexion</a>
+                            {{ app.user.username }},<button class="registrer btn" type="button"><a href="{{ path('app_logout') }}">Deconnexion</a></button>
                         </div>
                         {% else %}{# Si non connecté #}
-                        <a class="connect" data-rel="btn-connect" href="{{ path('app_login') }}"><button type="button">Connexion</button></a><!--ici pour la connexion de l'utilisateur-->
-                        <a class="registrer" data-rel="btn-registrer" href="{{ path('app_register') }}"><button type="button">Inscription</button></a><!--ici pour l'inscription-->
+                        <button class="registrer btn" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button><!--ici pour la connexion de l'utilisateur-->
+                        <button class="registrer btn" type="button" data-rel="btn-registrer" ><a href="{{ path('app_register') }}">Inscription</a></button><!--ici pour l'inscription-->
                         {% endif %}
                     </div>
                     
-                    
+                    <datalist id="films"></datalist>
+                        <div id="messageErreur"></div>
                    
                     </div>
 
-                    <div class="bas">
-                        <datalist id="films"></datalist>
-                        <div id="messageErreur"></div>
-                        <nav class="barre-menus">
-                            <div class="barre-menus-navig">
-                                <div class="navig-list">
-                                    <ul class="navig-main">
-                                        <li class="navig-main-item">
-                                            <a href="./links/index_a_l_affiche.html">A l'affiche</a>
-                                        </li>
-                                        <li class="navig-main-item">
-                                            <a href="./links/index_futures_sorties.html">Les futures sorties</a>
-                                        </li>
-                                        <li class="navig-main-item">
-                                            <a href="./links/mes_films_a_voir.html">Mes films à voir</a>
-                                        </li>
-                                        <li class="navig-main-item">
-                                            <a href="./links/mes_films_vu.html">Mes films vu</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
+                    <div class="nav">
+                        <input type="checkbox" id="nav-check">
+                        <div class="nav-header">
+                        </div>
+                        <div class="nav-btn">
+                        <label for="nav-check">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        </label>
+                        </div>
 
-                </div>
+                        <div class="nav-links">
+
+                                        {% if app.request.get('_route') != 'welcome' and app.request.get('_route') != 'search'  %}
+                                            <a href="{{ path('welcome') }}">Accueil</a>
+                                        {% endif %}
+                                        {% if app.request.get('_route') != 'alaffiche' %}
+                                            <a href="{{ path('alaffiche') }}">A l'affiche</a>
+                                        {% endif %}
+                                        {% if app.request.get('_route') != 'futures_sorties' %}
+                                            <a href="{{ path('futures_sorties') }}">Les futures sorties</a>
+                                        {% endif %}
+                                            <a href="./links/mes_films_a_voir.html">Recommandations</a>
+                                        
+                                            <a href="./links/mes_films_vu.html">Mes films</a>
+                    
+                        </div>
+                    </div>
 
             </div>
         </header>
@@ -211,7 +166,7 @@ h5
 
     $("#buttonr").click(function(event){
         var q = $("#site-search").val();
-        if (q.trim().length <= 3){
+        if (q.trim().length <= 1){
             event.preventDefault();
             $("#messageErreur").append("<p class='text-center'>L'expression en recherche est trop courte</p>");
         }

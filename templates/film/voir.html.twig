@@ -125,11 +125,11 @@ iframe
 {% block body %}
 
 <section>
-  <video poster="{{ asset('img/godzi2.jpg') }}" id="bgvid" playsinline autoplay muted loop>
+  <video poster="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}{% else %}{{ asset('img/godzi2.jpg') }}{% endif %}" id="bgvid" playsinline autoplay muted loop>
   </section>
   
   <div class="b-annonce">
-      <iframe src='http://player.allocine.fr/19583604.html' style='width:640px; height:360px;' scrolling='no'></iframe>   
+      <iframe src='{% if film.trailer %}{{ 'https://youtube.com/embed/'~film.trailer }}{% else %}http://player.allocine.fr/19583604.html{% endif %}' style='width:640px; height:360px;' scrolling='no'></iframe>   
   </div>
   
   <div id="films">
@@ -145,14 +145,14 @@ iframe
   <section class="infos">
     <h1>{{ film.titre }}</h1>
     <article>
-      <p><strong>Réalisateur(s): </strong>{% if film.realise|length > 0 %}{% for director in film.realise %} {{ director.nom }}{% endfor %}{% else %}Inconnu{% endif %}</p>
+      <p><strong>Réalisateur(s): </strong>{% if film.realise|length > 0 %}{% for director in film.realise %}{% if loop.index == 1 %}{{ director.nom }}{% else %} / {{ director.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
       <p><strong>Synopsis: </strong>{{ film.synopsis }}</p>
     <p><strong>Année: </strong>{{ film.date|date('Y') }}</p>
-    <p><strong>Durée: </strong>{% if film.duree %}{{ film.duree // 60 }}h {{ film.duree % 60 }}mns{% else %}Inconnue{% endif %}</p>
+    <p><strong>Durée: </strong>{% if film.duree %}{{ film.duree // 60 }}h {{ film.duree % 60 }}mn{% else %}Inconnue{% endif %}</p>
     <p><strong>Nationalité: </strong>{% if film.nationalite %}{{ film.nationalite }}{% else %}Inconnue{% endif %}</p>
-    <p><strong>Genre: </strong>{% if film.genreFilm|length > 0 %}{% for genre in film.genreFilm %} {{ genre.type }}{% endfor %}{% else %}Inconnu{% endif %}</p>        
-    <p><strong>Scénariste(s): </strong>{% if film.scenario|length > 0 %}{% for scen in film.scenario %} {{ scen.nom }}{% endfor %}{% else %}Inconnu{% endif %}</p>
-    <p><strong>Acteur(s): </strong>{% if film.acteurJoue|length > 0 %}{% for actor in film.acteurJoue %} {{ actor.nom }}{% endfor %}{% else %}Inconnu{% endif %}</p> 
+    <p><strong>Genre: </strong>{% if film.genreFilm|length > 0 %}{% for genre in film.genreFilm %}{% if loop.index == 1 %}{{ genre.type }}{% else %} / {{ genre.type }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>        
+    <p><strong>Scénariste(s): </strong>{% if film.scenario|length > 0 %}{% for scen in film.scenario %}{% if loop.index == 1 %}{{ scen.nom }}{% else %} / {{ scen.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
+    <p><strong>Acteur(s): </strong>{% if film.acteurJoue|length > 0 %}{% for actor in film.acteurJoue %}{% if loop.index == 1 %}{{ actor.nom }}{% else %} / {{ actor.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p> 
     </article>
     </section>
 

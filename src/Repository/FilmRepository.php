@@ -135,11 +135,13 @@ class FilmRepository extends ServiceEntityRepository
     /**
      * @return: []
      */
-    public function findFiveRandomAlafficheIds(){
+    public function findRandomAlafficheIds($num){
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN DATE_SUB(CURDATE(),INTERVAL 90 day) AND CURDATE() LIMIT 5';
-        $result = $conn->query($sql);
+        $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN DATE_SUB(CURDATE(),INTERVAL 90 day) AND CURDATE() LIMIT :num';
+        $result = $conn->prepare($sql);
+        $result->bindValue("num",$num,\PDO::PARAM_INT);
+        $result->execute();
 
         if ($result)
         return $result->fetchAll();
@@ -150,11 +152,13 @@ class FilmRepository extends ServiceEntityRepository
     /**
      * @return: []
      */
-    public function findFiveRandomSortieIds(){
+    public function findRandomSortieIds($num){
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN CURDATE() AND DATE_ADD(CURDATE(),INTERVAL 365 day) LIMIT 5';
-        $result = $conn->query($sql);
+        $sql = 'SELECT f.id FROM film f WHERE f.date BETWEEN CURDATE() AND DATE_ADD(CURDATE(),INTERVAL 365 day) LIMIT :num';
+        $result = $conn->prepare($sql);
+        $result->bindValue("num",$num,\PDO::PARAM_INT);
+        $result->execute();
 
         if ($result)
         return $result->fetchAll();
@@ -162,7 +166,7 @@ class FilmRepository extends ServiceEntityRepository
         return null;
     }
 
-    public function queryFiveFilms($num){
+    public function queryFilms($num){
         $resultat = 'SELECT f FROM App\Entity\Film f WHERE f.id';
         if ($num > 0){
             $resultat.=' IN(:id1';
@@ -177,9 +181,9 @@ class FilmRepository extends ServiceEntityRepository
     /**
      * @return: Film[]
      */
-    public function findFiveRandomAlafficheFilms(){
+    public function findRandomAlafficheFilms($num){
 
-        $ids = $this->findFiveRandomAlafficheIds();
+        $ids = $this->findRandomAlafficheIds($num);
         if (!$ids)
         return null;
         $tabid = array();
@@ -189,11 +193,11 @@ class FilmRepository extends ServiceEntityRepository
 
         if (count($tabid) == 0)
         $query = $this->getEntityManager()->createQuery(
-            $this->queryFiveFilms(count($tabid))
+            $this->queryFilms(count($tabid))
         );
         else
         $query = $this->getEntityManager()->createQuery(
-            $this->queryFiveFilms(count($tabid))
+            $this->queryFilms(count($tabid))
         )->setParameters($tabid);
 
         return $query->getResult();
@@ -202,8 +206,8 @@ class FilmRepository extends ServiceEntityRepository
     /**
      * @return: Film[]
      */
-    public function findFiveRandomSortieFilms(){
-        $ids = $this->findFiveRandomSortieIds();
+    public function findRandomSortieFilms($num){
+        $ids = $this->findRandomSortieIds($num);
         if (!$ids)
         return null;
         $tabid = array();
@@ -213,14 +217,40 @@ class FilmRepository extends ServiceEntityRepository
 
         if (count($tabid) == 0)
         $query = $this->getEntityManager()->createQuery(
-            $this->queryFiveFilms(count($tabid))
+            $this->queryFilms(count($tabid))
         );
         else
         $query = $this->getEntityManager()->createQuery(
-            $this->queryFiveFilms(count($tabid))
+            $this->queryFilms(count($tabid))
         )->setParameters($tabid);
 
         return $query->getResult();
+    }
+
+    /**
+     * @return: Film[]
+     */
+    public function findAllAlafficheFilms(){
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT * FROM film f WHERE f.date BETWEEN DATE_SUB(CURDATE(),INTERVAL 90 day) AND CURDATE()';
+        $result = $conn->query($sql);
+
+        return $result->fetchAll();
+    }
+
+    /**
+     * @return: Film[]
+     */
+    public function findAllSortieFilms(){
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT * FROM film f WHERE f.date BETWEEN CURDATE() AND DATE_ADD(CURDATE(),INTERVAL 365 day)';
+        $result = $conn->query($sql);
+
+        return $result->fetchAll();
     }
 
 }

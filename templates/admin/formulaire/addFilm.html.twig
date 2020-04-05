@@ -110,7 +110,7 @@ $("#boutonPopu").click(function(event){
     event.preventDefault();
     $("#infos *").empty();
     var query = $("#film_titre").val();
-    if (query.trim().length > 3){
+    if (query.trim().length > 1){
     var idFilm;
 
     $.ajax({

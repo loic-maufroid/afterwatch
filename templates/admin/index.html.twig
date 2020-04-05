@@ -31,7 +31,7 @@
             {% for film in films %}
             <tr>
                 <td>
-                    <img class="minimage" src="{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}" alt="{{ film.titre }}">
+                    <img class="minimage" src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}{% endif %}" alt="{{ film.titre }}">
                 </td>
                 <td>{{ film.titre }}</td>
                 <td>{{ film.slug }}</td>

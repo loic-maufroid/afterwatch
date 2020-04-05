@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Futures sorties{% endblock %}
+
+{% block content %}
+
+<div class="main-contenu">
+
+    <div class="contenu-main">
+
+        <div id="xl-carousel" class="carousel slide" data-ride="carousel"> 
+            <div class="carousel-inner">
+            
+            {% for filmCarr in filmsCarr %}
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}./img/01.jpg{% endif %}" class="d-block mx-auto img-fluid" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h6>{{ filmCarr.titre }}</h6>
+                    <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+                </div>
+            </div>
+            {% endfor %}
+            
+            </div>
+            <a class="carousel-control-prev" href="#xl-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#xl-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div class="contenu-a-affiche">
+            <h1 class="title split-character intro-site">A découvrir sur AfterWatch</h1>
+        </div>
+        <div class="contenu-a-affiche">
+            <div id="contenu-a-affiche"></div>
+
+            <section>
+                <div class="section-film-vu">
+                    <div class="film-a-affiche">
+                        <div class="a-affiche-resultats">
+                            <h2 class="tout-voir-affiche">
+                                <button class="tout-voir" type="button" data-rel="link"><a href="{{ path('welcome') }}">Accueil</a></button>
+                                <h2 class="tout-voir-affiche">Les futures sorties</h2>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <ul class="contenu-film-affiche">
+
+                        {% for film in films %}
+                            
+                        
+                        <li class="img-a-affiche">
+                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.affiche }}{% else %}./img/0199399.jpg.webp{% endif %}" width="150" height="204"/>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">    
+                                        <a href="{{ path('details_film',{slug: film.slug}) }}"><h5>{{ film.titre }}</h5></a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+
+
+    </div>
+
+</div>
+
+{% endblock %}

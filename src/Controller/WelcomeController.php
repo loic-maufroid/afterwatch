@@ -20,9 +20,9 @@ class WelcomeController extends AbstractController
 
         $filmsCarr = $filmRepository->findSevenRandomReleasedFilms();
 
-        $filmsAffiche = $filmRepository->findFiveRandomAlafficheFilms();
+        $filmsAffiche = $filmRepository->findRandomAlafficheFilms(5);
 
-        $filmsSortie = $filmRepository->findFiveRandomSortieFilms();
+        $filmsSortie = $filmRepository->findRandomSortieFilms(5);
 
         return $this->render('welcome/index.html.twig', [
             "filmsCarr" => $filmsCarr,
@@ -30,6 +30,36 @@ class WelcomeController extends AbstractController
             "filmsSortie" => $filmsSortie
         ]);
     }
+
+    /**
+     * @Route("/a-l-affiche",name="alaffiche")
+     */
+    public function showAlaffiche(FilmRepository $filmRepository){
+
+        $filmsCarr = $filmRepository->findRandomAlafficheFilms(7);
+        $films = $filmRepository->findAllAlafficheFilms();
+
+        return $this->render('welcome/alaffiche.html.twig',[
+            "filmsCarr" => $filmsCarr,
+            "films" => $films
+        ]);
+
+    }
+
+    /**
+     * @Route("/next",name="futures_sorties")
+     */
+    public function showFutures(FilmRepository $filmRepository){
+
+        $filmsCarr = $filmRepository->findRandomSortieFilms(7);
+        $films = $filmRepository->findAllSortieFilms();
+
+        return $this->render('welcome/next.html.twig',[
+            "filmsCarr" => $filmsCarr,
+            "films" => $films
+        ]);
+    }
+
 
     /**
      * @Route("/search",name="search")
