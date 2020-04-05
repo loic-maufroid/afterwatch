@@ -48,4 +48,21 @@ class CritiqueRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findWellReviewedFilmIds($num){
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT c.id_film_id as idFilm, AVG(c.note) as moyenne FROM critique c GROUP BY c.id_film_id ORDER BY moyenne DESC LIMIT :num';
+        $result = $conn->prepare($sql);
+        $result->bindValue("num",$num,\PDO::PARAM_INT);
+        $result->execute();
+
+        if ($result)
+        return $result;
+        else
+        return null;
+
+    }
+
 }

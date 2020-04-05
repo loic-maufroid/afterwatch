@@ -85,7 +85,9 @@
                                         {% if app.request.get('_route') != 'futures_sorties' %}
                                             <a href="{{ path('futures_sorties') }}">Les futures sorties</a>
                                         {% endif %}
-                                            <a href="./links/mes_films_a_voir.html">Recommandations</a>
+                                        {% if app.request.get('_route') != 'recommandations' %}
+                                            <a href="{{ path('recommandations') }}">Recommandations</a>
+                                        {% endif %}
                                         
                                             <a href="./links/mes_films_vu.html">Mes films</a>
                     

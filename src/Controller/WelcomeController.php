@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ActeurRepository;
+use App\Repository\CritiqueRepository;
 use App\Repository\FilmRepository;
 use App\Repository\RealisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,6 +61,33 @@ class WelcomeController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/popular",name="recommandations")
+     */
+    public function showPopular(CritiqueRepository $critiqueRepository,FilmRepository $filmRepository){
+
+        $tempCarr = $critiqueRepository->findWellReviewedFilmIds(7);
+        $filmsCarr = [];
+        foreach($tempCarr as $valueTempCarr){
+            $filmsCarr []= ["film" => $filmRepository->find($valueTempCarr["idFilm"]),"noteMoy" => $this->roundNote($valueTempCarr["moyenne"])];
+        }
+
+        $temp = $critiqueRepository->findWellReviewedFilmIds(30);
+        $films = [];
+        foreach($temp as $valueTemp){
+            $films []= ["film" => $filmRepository->find($valueTemp["idFilm"]),"noteMoy" => $this->roundNote($valueTemp["moyenne"])];
+        }
+
+
+        return $this->render('welcome/popular.html.twig',[
+            "filmsCarr" => $filmsCarr,
+            "films" => $films
+        ]);
+    }
+
+    public function roundNote($rawNote){
+        return intval(round($rawNote * 2))/2;
+    }
 
     /**
      * @Route("/search",name="search")

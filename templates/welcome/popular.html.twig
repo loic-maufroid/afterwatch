@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} - Films à l'affiche{% endblock %}
+{% block title %}{{ parent() }} - Recommandations{% endblock %}
 
 {% block content %}
 
@@ -13,10 +13,10 @@
             
             {% for filmCarr in filmsCarr %}
             <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}./img/01.jpg{% endif %}" class="d-block mx-auto img-fluid" alt="...">
+                <img src="{% if filmCarr.film.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.film.affiche }}{% else %}./img/01.jpg{% endif %}" class="d-block mx-auto img-fluid" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h6>{{ filmCarr.titre }}</h6>
-                    <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+                    <h6>{{ filmCarr.film.titre }} {{ filmCarr.noteMoy }}</h6>
+                    <a href="{{ path('details_film',{slug: filmCarr.film.slug}) }}">Cliquer ici</a>
                 </div>
             </div>
             {% endfor %}
@@ -44,7 +44,7 @@
                         <div class="a-affiche-resultats">
                             <h2 class="tout-voir-affiche">
                                 <button class="tout-voir" type="button" data-rel="link"><a href="{{ path('welcome') }}">Accueil</a></button>
-                                <h2 class="tout-voir-affiche">Actuellement à l'affiche</h2>
+                                <h2 class="tout-voir-affiche">Recommandations</h2>
                             </h2>
                         </div>
                     </div>
@@ -54,22 +54,28 @@
                         {% for film in films %}
                             
                         
-                        <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                        <li class="img-a-affiche w-100">
+                            
+                            <p>Note de {{ film.noteMoy }} en moyenne</p>
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: film.film.slug}) }}" data-rel="button"><div class="container">
                                 <div class="card">
+                                    
                                     <div class="face face1">
                                         <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.affiche }}{% else %}./img/0199399.jpg.webp{% endif %}" width="150" height="204"/>
+                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="{% if film.film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.film.affiche }}{% else %}./img/0199399.jpg.webp{% endif %}" width="150" height="204"/>
                                         </div>
                                     </div>
                                     <div class="face face2">
-                                        <div class="content">    
-                                        <a class="w-100 m-0 p-0" href="{{ path('details_film',{slug: film.slug}) }}"><h5 class="text-center">{{ film.titre }}</h5></a>
+                                        <div class="content"> 
+                                        <a class="w-100 m-0 p-0" href="{{ path('details_film',{slug: film.film.slug}) }}"><h5 class="text-center">{{ film.film.titre }}</h5></a>
                                         </div>
                                     </div>
-                                    </div>
+                                    
+                                </div>
+                                
                                 </div>
                             </a>
+                            
                         </li>
                         
                         {% endfor %}
@@ -82,4 +88,5 @@
     </div>
 
 </div>
+
 {% endblock %}
