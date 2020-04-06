@@ -2,8 +2,9 @@
 
 {% block title %}{{ parent() }} - Inscription{% endblock %}
 
-{% block stylesheet %}
-<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}"> <!-- demander a Matthieu pour ecraser le style -->
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}"> 
 {% endblock %}
 
 {% block body %}

@@ -5,11 +5,18 @@
 
 {% block body %}
 <section class="flex jcenter">
+    
 
     <table id="thèmes" class=" textc margint marginb">
         <div class="flex jflex">
             <a href="{{ path('addfilm') }}"><button type="button" class="btn btn-info btn-color">Ajouter un Film</button></a>
         </div>
+        <div>   
+            {% for message in app.flashes('success') %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        
         <thead class=" titre gras sizeg">
                 <th>Affiches</th>
                 <th>Titres</th>

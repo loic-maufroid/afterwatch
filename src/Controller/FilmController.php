@@ -183,9 +183,6 @@ class FilmController extends AbstractController
 
     }
 
-        
-
-
         dump($form);
         $form->handleRequest($request);
 
@@ -210,9 +207,12 @@ class FilmController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success',"Film bien ajouté !");
-            }
-        }
 
+            return $this->redirectToRoute('admin');
+            }
+            
+        }
+        
         return $this->render('admin/formulaire/addFilm.html.twig', [
             'form' => $form->createView()
         ]);
