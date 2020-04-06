@@ -20,7 +20,7 @@
                     <ul class="menuh flex">
                         {% if app.user %}
                             <li class="lih">Admin</li>
-                            <li class="lih"><a class="lienh"  href="#"><img src="" alt=""> {{ app.user.username }}</a></li>
+                            <li class="lih"><a class="lienh"  href="{{ path('profil_page', {username: app.user.username}) }}"><img src="" alt=""> {{ app.user.username }}</a></li>
                             <li class="lih"><a class="lienh"  href="{{ path('app_logout') }}">Deconnexion</a></li>
                         {% endif %}
                     </ul>
