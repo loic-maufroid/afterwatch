@@ -9,8 +9,7 @@
         <h2 class="textc">Modifier un film</h2>
         <div class="form-row">
             <div class="form-group col-md-6">
-                {{ form_row(form.affiche, {'attr': {'class': 'form-control'}}) }}
-            </div>
+                {{ form_row(form.affiche, {'attr': {'class': 'form-control'}}) }} 
             <div class="form-group col-md-12">
                 {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
             </div>
@@ -18,14 +17,14 @@
                 {{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
-            <div class="form-row">
+        <div class="form-row">
             {% for realise in film.realise %}   
             <div class="form-group  col-md-6">
-                <label for="inputReal">Réalisateur(s)</label>
-                <input type="text" class="form-control" id="inputReal" placeholder="Réalisateur(s)" value="{{ realise.nom }}">
+            <label for="inputReal">Réalisateur(s)</label>
+            <input type="text" class="form-control" id="inputReal" placeholder="Réalisateur(s)" value="{{ realise.nom }}">
             </div>
             {% endfor %}
-            </div>
+        </div>
             <div class="form-row">
             {% for scenario in film.scenario %}
             <div class="form-group  col-md-6">

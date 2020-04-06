@@ -65,7 +65,7 @@ class AppAutheticatorAuthenticator extends AbstractFormLoginAuthenticator implem
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['username' => $credentials['username']]);
+        $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy(['username' => $credentials['username']/*, 'ban' => true */]);
 
         if (!$user) {
             // fail authentication with a custom error

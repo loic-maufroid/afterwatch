@@ -18,6 +18,7 @@ class UtilisateurType extends AbstractType
             ->add('email')
             ->add('avatar')
             ->add('a_vu')
+            ->add('ban')
         ;
     }
 
