@@ -13,6 +13,7 @@ use App\Repository\ActeurRepository;
 use App\Repository\GenreRepository;
 use App\Repository\RealisateurRepository;
 use App\Repository\ScenaristeRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -34,10 +35,57 @@ class FilmController extends AbstractController
     }
 
     /**
-     * @Route("/myFilms",name="films_utilisateur")
+     * @Route("/{username}/myFilms",name="films_utilisateur")
      */
-    public function showMyFilms(){
-        
+    public function showMyFilms($username,UtilisateurRepository $utilisateurRepository,FilmRepository $filmRepository){
+
+        $user = $utilisateurRepository->findOneBy(["username" => $username]);
+
+        $filmsCarrTemp = [];
+        $filmsCarr = [];
+        $tabIdsAVoir = [];
+        $filmsAVoir = [];
+        $tabIdsVeutVoir = [];
+        $filmsVeutVoir = [];
+
+        $temp = $user->getStatuses();
+        foreach($temp as $t){
+            if ($t->getAVue()){
+            $tabIdsAVoir []= $t->getIdFilm();
+            }
+            if ($t->getVeutVoir()){
+            $tabIdsVeutVoir []= $t->getIdFilm();
+            $filmsCarrTemp []= $t->getIdFilm();
+            }
+        }
+        shuffle($filmsCarrTemp);
+        if(count($filmsCarrTemp)<7){
+            for ($i=0; $i < count($filmsCarrTemp); $i++) { 
+                $filmsCarr []= $filmRepository->find($filmsCarrTemp[$i]);
+            }
+        }
+        else{
+            for ($i=0; $i < 7; $i++) { 
+                $filmsCarr []= $filmRepository->find($filmsCarrTemp[$i]);
+            }
+        }
+
+       foreach ($tabIdsAVoir as $idAVoir) {
+           $filmsAVoir []= $filmRepository->find($idAVoir);
+       }
+
+       foreach ($tabIdsVeutVoir as $idVeutVoir){
+           $filmsVeutVoir []= $filmRepository->find($idVeutVoir);
+       }
+
+
+        return $this->render('film/myfilms.html.twig',[
+            "user" => $user,
+            "filmsCarr" => $filmsCarr,
+            "filmsAVoir" => $filmsAVoir,
+            "filmsVeutVoir" => $filmsVeutVoir
+        ]);
+
     }
 
     //Partie Admin

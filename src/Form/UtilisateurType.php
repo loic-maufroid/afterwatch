@@ -17,7 +17,6 @@ class UtilisateurType extends AbstractType
             ->add('password')
             ->add('email')
             ->add('avatar')
-            ->add('a_vu')
         ;
     }
 

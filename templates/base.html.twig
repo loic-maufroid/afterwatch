@@ -113,9 +113,9 @@
                                             <a href="{{ path('recommandations') }}">Recommandations</a>
                                         </li>
                                         {% endif %}
-                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') and app.request.get('_route') != 'films_utilisateur' %}
                                         <li class="navig-main-item">
-                                            <a href="#">Mes films</a>
+                                            <a href="{{ path('films_utilisateur',{username: app.user.username}) }}">Mes films</a>
                                         </li>
                                         {% endif %}
                                     </ul>
