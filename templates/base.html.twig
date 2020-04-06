@@ -73,11 +73,13 @@
                     <div class="co-et-regist">
                         {% if not app.user %}
                         <div>
-                        <button class="connect" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}" target="_blank">Connexion</a></button>
-                        <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}" target="_blank">Inscription</a></button>
+                        <button class="connect" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button>
+                        <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button>
                         </div>
                         {% else %}
-                        <button class="registrer" type="button" data-rel="btn-disconnect"><a href="{{ path('app_logout') }}" target="_blank">Déconnexion</a></button>
+                        <div></div>
+                        {{ app.user.username }},
+                        <button class="registrer" type="button" data-rel="btn-disconnect"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
                         {% endif %}
                         
                        

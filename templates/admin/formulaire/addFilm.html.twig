@@ -37,10 +37,10 @@
                 <input type="text" class="form-control" id="inputTitre" placeholder="Titre">-->
                 {{ form_row(form.titre) }}
             </div>
-            <div class="form-group col-md-6 invisible">
+            <div class="form-group col-md-6">
                 <!--<label for="inputDate">Date de sortie</label>
                 <input type="text" class="form-control" id="inputDate" placeholder="Date de sortie">-->
-                {{ form_row(form.date) }}
+                {{ form_widget(form.date) }}
             </div>
         </div>
             <div class="form-group  col-md-6">
@@ -94,14 +94,14 @@
         </div>
         <div class="flex jcenter margintop">
             <a href="{{ path('admin') }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
-            <button type="submit" id="submitFilm" class="btn btn-success marginr">Valider</button>
+            <button type="submit" id="submitFilm" class="btn btn-success marginr" formnovalidate>Valider</button>
         </div>    
     
     {{ form_end(form) }}
 
 
     <button id="boutonPopu" formnovalidate>Faire la recherche</button>
-    <h4 class="danger" id="messageRecherche"></h4>
+    <h4 id="messageRecherche"></h4>
 
     <div id="selection-films">
     <table class="table table-bordered" id="infos">
@@ -126,6 +126,7 @@
 {{ parent() }}
 <script>
 $("#submitFilm").hide();
+$("#film_date").hide();
 
 var films = [];
 var curEntry = [];
@@ -200,6 +201,10 @@ $("#boutonPopu").click(function(event){
            for(i=0;i<curEntry.length;i++){
                curEntry[i][0].children().last().append("<button type='button' class='selection btn btn-primary' value='"+i+"'>Sélectionner</button>");
            }
+
+           $("#messageRecherche").text("Chargement des suggestions...");
+
+           timer = setTimeout(showReady,5000);
            
            $(".selection").click(function(e){
            
@@ -214,12 +219,19 @@ $("#boutonPopu").click(function(event){
            $("#boutonPopu").hide();
            $("#submitFilm").show();
            $("#titre").html("<h4>"+curEntry[numero][1][1]+"</h4>");
+           if (curEntry[numero][1][6])
            $("#affiche").html("<img src='http://image.tmdb.org/t/p/w185/"+curEntry[numero][1][6]+"'>");
+           if (curEntry[numero][1][3])
            $("#date").html("<p>sorti le "+curEntry[numero][1][3]+"</p>");
+           console.log(curEntry[numero][1][9]);
+           if(curEntry[numero][1][9] != "")
            $("#director").html("<p> de "+curEntry[numero][1][9].split('+').join('/')+"</p>");
 
            $("#film_titre").val(curEntry[numero][1][1]);
+           if (curEntry[numero][1][3])
            $("#film_date").val(new Date(curEntry[numero][1][3]).toISOString().substring(0,10));
+           else
+           $("#film_date").val(null);
            $("#film_synopsis").val(curEntry[numero][1][2]);
            $("#film_act").val(curEntry[numero][1][11]);
            $("#film_genre").val(curEntry[numero][1][4]);
@@ -262,7 +274,11 @@ $("#boutonPopu").click(function(event){
     
 });
 
-
+function showReady(){
+    clearTimeout(timer);
+    $("#messageRecherche").text("Suggestions prêtes !");
+    setTimeout(function(){$("#messageRecherche").text("");},8000);
+}
 
 function detailsFilm(i){
 
