@@ -33,7 +33,12 @@ class FilmController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * @Route("/myFilms",name="films_utilisateur")
+     */
+    public function showMyFilms(){
+        
+    }
 
     //Partie Admin
 

@@ -1,5 +1,13 @@
 $("#submitFilm").hide();
 $("#film_date").hide();
+$("#film_affiche").hide();
+$("#film_act").hide();
+$("#film_genre").hide();
+$("#film_duree").hide();
+$("#film_legislation").hide();
+$("#film_synopsis").hide();
+$("#film_nationalite").hide();
+$("#film_trailer").hide();
 
 var films = [];
 var curEntry = [];
