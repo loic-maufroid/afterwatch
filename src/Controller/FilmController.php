@@ -33,6 +33,7 @@ class FilmController extends AbstractController
         ]);
     }
 
+    
 
     //Partie Admin
 
