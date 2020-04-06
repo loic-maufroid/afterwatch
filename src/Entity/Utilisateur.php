@@ -68,6 +68,11 @@ class Utilisateur implements UserInterface
      */
     private $critiques;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $ban;
+
 
     public function __construct()
     {
@@ -290,6 +295,18 @@ class Utilisateur implements UserInterface
                 $critique->setIdUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBan(): ?bool
+    {
+        return $this->ban;
+    }
+
+    public function setBan(bool $ban): self
+    {
+        $this->ban = $ban;
 
         return $this;
     }

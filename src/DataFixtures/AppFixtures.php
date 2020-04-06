@@ -39,6 +39,7 @@ class AppFixtures extends Fixture
         $utilisateur->setEmail('administateur.roland@afterwatch.fr');
         $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Roland') );
         $utilisateur->setRoles(['ROLE_ADMIN']);
+        $utilisateur->setBan(true);
         $manager->persist($utilisateur);
 
         $utilisateur = new Utilisateur();
@@ -46,6 +47,7 @@ class AppFixtures extends Fixture
         $utilisateur->setEmail('administateur.loic@afterwatch.fr');
         $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Loic') );
         $utilisateur->setRoles(['ROLE_ADMIN']);
+        $utilisateur->setBan(true);
         $manager->persist($utilisateur);
 
         $utilisateurs = [];
@@ -56,6 +58,7 @@ class AppFixtures extends Fixture
             $utilisateur->setEmail($faker->email);
             $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, $faker->words($nb = 7, $asText=true) ));
             $utilisateur->setRoles(['ROLE_USER']);
+            $utilisateur->setBan(true);
             $manager->persist($utilisateur);
             $utilisateurs[] = $utilisateur;
         }

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Connexion{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}"> 
+{% endblock %}
+
+{% block body %}
+<h1 class="font size color textc margintop">AfterWatch</h1>
+<main class="flex flexdr">
+    <section class="margint paddingr marginl">
+        <div class="flex jcenter card border border-light carte">
+            <div class="flex jcenter margintop">
+                <img src="" class="card-img-top rounded-circle avatar" alt="Avatar de votre profil">
+            </div>
+            <div class="flex jcenter flexdr alignit ">
+                <div class="ligne marginr"></div>
+                <h5 class="card-title textc marget marginr">{{ utilisateur.username }}</h5>
+                <div class="ligne"></div> 
+            </div>
+                
+        </div>  
+    </section>
+    <section class="taille">
+        <form  class=" margint scrollform" enctype="multipart/form-data">
+            <h2 class="font textc">Profil</h2>
+                <div class="form-group">
+                    <label for="Avatar">Avatar</label>
+                    <input type="file" accept="jpeg,jpg,png" class="form-control-file" id="Avatar">
+                </div>
+                <p class="card-title textc modifier">Modifier Mot de Passe</p>
+                <div class="form-group">
+                    <label for="Mot">Ancien Mot de passe</label>
+                    <input type="password" class="form-control" id="Pseudo" placeholder="Pseudo">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Nouveau Mot de passe</label>
+                    <input type="password" class="form-control" id="Password"  placeholder="Mot de passe">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Confirmer nouveau Mot de passe</label>
+                    <input type="password" class="form-control" id="Password"  placeholder="Mot de passe">
+                </div>
+            <div class="flex jcenter margint">
+                <a href="#"><button type="button" class="btn btn-color marginr">Enregistrer</button></a>
+                <a href="#"><button type="button" class="btn btn-danger">Annuler</button></a>
+            </div>    
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -3,11 +3,42 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UtilisateurController extends AbstractController
 {
+
+     // Afficher la page de Profil et Modifier donnée
+
+    /**
+     * @Route("/{username}/profil", name="profil_page")
+    */
+    public function profilPage($username, Request $request)
+    {
+        
+        $utilisateur = $this->getDoctrine()
+            ->getRepository(Utilisateur::class)
+            ->findOneBy(["username" => $username]);
+
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('welcome');
+        }
+
+        return $this->render('security/userProfil.html.twig', [
+            'form' => $form->createView(),
+            'utilisateur' => $utilisateur,
+        ]);
+    }
+
 
     //Partie Admin
 
@@ -54,4 +85,7 @@ class UtilisateurController extends AbstractController
         return $this->redirectToRoute('admin_userlist');
     }
 
+   
+
+    
 }
