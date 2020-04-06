@@ -17,9 +17,11 @@
                 </div>
                 <a class="lienh" href="{{ path('welcome') }}"><h1>AfterWatch</h1></a>
                     <ul class="menuh flex">
+                        {% if app.user %}
                             <li class="lih">Admin</li>
-                            <li class="lih"><a class="lienh"  href="#">Nom-Admin</a></li>
-                            <li class="lih"><a class="lienh"  href="#">Deconnexion</a></li>
+                            <li class="lih"><a class="lienh"  href="#"><img src="" alt=""> {{ app.user.username }}</a></li>
+                            <li class="lih"><a class="lienh"  href="{{ path('app_logout') }}">Deconnexion</a></li>
+                        {% endif %}
                     </ul>
              </div>
         </header>
