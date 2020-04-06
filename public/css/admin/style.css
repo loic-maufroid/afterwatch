@@ -217,7 +217,12 @@ footer{
 .nameuser{
     font-family: "courgette";
 }
+/* petite image du tableau film*/
 .minimage{
     height: 50px;
     width: 50px;
+}
+/* message de succes d'ajout de film */
+#successmess p{
+    color: green;
 }

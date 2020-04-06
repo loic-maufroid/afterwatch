@@ -84,13 +84,24 @@ class FilmController extends AbstractController
     /**
      * @Route("/admin/modifierfilm/{id}", name="film_modifier")
     */
-    public function filmFormModif($id)
+    public function filmFormModif($id, Request $request, Film $movie)
     {
+        $form = $this->createForm(FilmType::class, $movie);
+        $form->handleRequest($request);
+        
         $film = $this->getDoctrine()
             ->getRepository(Film::class)
             ->find($id);
 
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin');
+        }
+
         return $this->render('admin/formulaire/formFilm.html.twig', [
+            'form' => $form->createView(),
             'film' => $film,
         ]);
     }

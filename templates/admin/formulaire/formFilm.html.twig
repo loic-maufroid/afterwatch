@@ -4,8 +4,8 @@
 
 {% block body %}
 <section class="flex jcenter margintop">
-    <form class="jumbotron scrollform">
-        <h2 class="textc">Ajouter un film</h2>
+    {{ form_start(form, {'attr': {'class': 'jumbotron scrollform'}}) }}
+        <h2 class="textc">Modifier un film</h2>
         <div class="form-group">
             <input type="file" class="form-control-file"  id="inputAffiche">
         </div>
@@ -19,36 +19,57 @@
                 <input type="text" class="form-control" id="inputDate" value="{{ film.date|date('d-m-y') }}">
             </div>
         </div>
+            <div class="form-row">
+            {% for realise in film.realise %}   
             <div class="form-group  col-md-6">
                 <label for="inputReal">Réalisateur(s)</label>
-                <input type="text" class="form-control" id="inputReal" placeholder="Réalisateur(s)">
+                <input type="text" class="form-control" id="inputReal" placeholder="Réalisateur(s)" value="{{ realise.nom }}">
             </div>
+            {% endfor %}
+            </div>
+            <div class="form-row">
+            {% for scenario in film.scenario %}
             <div class="form-group  col-md-6">
                 <label for="inputScénariste">Scénariste(s)</label>
-                <input type="text" class="form-control" id="inputScénariste"  placeholder="Scénariste(s)">
+                <input type="text" class="form-control" id="inputScénariste"  placeholder="Scénariste(s)" value="{{ scenario.nom }}">
             </div>
+            {% endfor %}
+            </div>
+            <div class="form-row">
+            {% for acteurjoue in film.acteurjoue %}
             <div class="form-group  col-md-6">
                 <label for="inputActeurs">Acteur(s)</label>
-                <input type="text" class="form-control" id="inputCity" placeholder="Acteur(s)">
+                <input type="text" class="form-control" id="inputCity" placeholder="Acteur(s)" value="{{ acteurjoue.nom }}">
             </div>
+            {% endfor %}
+            </div>
+            <div class="form-row">
+            {% for genrefilm in film.genrefilm %}
             <div class="form-group  col-md-6">
                 <label for="inputGenre">Genre(s)</label>
-                <input type="text" class="form-control" id="inputZip"  placeholder="Genre(s)">
+                <input type="text" class="form-control" id="inputZip"  placeholder="Genre(s)" value="{{ genrefilm.type }}">
+            </div>
+            {% endfor %}
             </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputDurée">Durée(s)</label>
-                <input type="text" class="form-control" id="inputDurée" value="{{ film.duree }}">
+                {{ form_row(form.duree, {'attr': {'class': 'form-control'}}, {'label': 'Durée(s)'}) }}
             </div>
             <div class="form-group col-md-6">
-                <label for="inputNationnalité">Nationnalité(s)</label>
-                <input type="text" class="form-control" id="inputNationnalité"  value="{{ film.nationalite }}">
+                {{ form_row(form.nationalite, {'attr': {'class': 'form-control'}}, {'label': 'Nationnalité(s)'}) }}
             </div>
         </div> 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCNC">Limite d'âge</label>
-                <input type="text" class="form-control" id="inputCNC" value="{{ film.legislation }}">
+                <label for="inputCNC">Limite d'âge : {{ film.legislation }}</label>
+                <select name="legilation" id="inputCNC" class="form-control" value="{{ film.legislation }}">
+                    <option value="{{ film.legislation }}">{{ film.legislation }}</option>
+                    <option value="Tous Publique">Tous Publique</option>
+                    <option value="- 10">- 10 ans</option>
+                    <option value="-12">- 12 ans</option>
+                    <option value="-16">- 16 ans</option>
+                    <option value="-18">- 18 ans</option>
+                </select>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputBA">Bande-annonce</label>
@@ -60,9 +81,9 @@
             <textarea type="text" class="form-control" id="inputSynopsis" >{{ film.synopsis }}</textarea>
         </div>
         <div class="flex jcenter margintop">
-            <a href="#"><button type="button" class="btn btn-success marginr">Valider</button></a>
+           <button class="btn btn-success marginr">Valider</button>
             <a href="{{ path('admin') }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
         </div>    
-    </form>
+    {{ form_end(form) }}
 </section>
 {% endblock %}
