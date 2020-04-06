@@ -5,18 +5,17 @@
 {% block body %}
 <section class="flex jcenter margintop">
     {{ form_start(form, {'attr': {'class': 'jumbotron scrollform'}}) }}
+
         <h2 class="textc">Modifier un film</h2>
-        <div class="form-group">
-            <input type="text" class="form-control-file"  id="inputAffiche">
-            {{ form_row(form.affiche, {'attr': {'class': 'form-control'}}, {'label': 'Affiche'}) }}
-        </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                {{ form_row(form.titre, {'attr': {'class': 'form-control'}}, {'label': 'Titre(s)'}) }}
+                {{ form_row(form.affiche, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group col-md-12">
+                {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="form-group col-md-6">
-                <label for="inputDate">Date de sortie</label>
-                <input type="text" class="form-control" id="inputDate" value="{{ film.date|date('d-m-y') }}">
+                {{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
             <div class="form-row">
@@ -53,30 +52,22 @@
             </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                {{ form_row(form.duree, {'attr': {'class': 'form-control'}}, {'label': 'Durée(s)'}) }}
+                {{ form_row(form.duree, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="form-group col-md-6">
-                {{ form_row(form.nationalite, {'attr': {'class': 'form-control'}}, {'label': 'Nationnalité(s)'}) }}
+                {{ form_row(form.nationalite, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div> 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCNC">Limite d'âge : {{ film.legislation }}</label>
-                <select name="legilation" id="inputCNC" class="form-control" value="{{ film.legislation }}">
-                    <option value="{{ film.legislation }}">{{ film.legislation }}</option>
-                    <option value="Tous Publique">Tous Publique</option>
-                    <option value="- 10">- 10 ans</option>
-                    <option value="-12">- 12 ans</option>
-                    <option value="-16">- 16 ans</option>
-                    <option value="-18">- 18 ans</option>
-                </select>
+                {{ form_row(form.legislation, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="form-group col-md-6">
-                {{ form_row(form.trailer, {'attr': {'class': 'form-control'}}, {'label': 'Bande-annonce'}) }}
+                {{ form_row(form.trailer, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div> 
         <div class="form-group">
-            {{ form_row(form.synopsis, {'attr': {'class': 'form-control'}}, {'label': 'Synopsis'}) }}
+            {{ form_row(form.synopsis, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="flex jcenter margintop">
            <button class="btn btn-success marginr">Valider</button>

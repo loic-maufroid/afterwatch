@@ -42,7 +42,7 @@
         <header class="fond-h mb-auto">
 
             <div class="contenu-h">
-                <a href="{{ path('welcome') }}"><img class="logo-med logo" src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
+                <a href="{{ path('welcome') }}"><img class="logo-med" src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
 
                 <div class="partie-h-b">
 
@@ -73,11 +73,12 @@
                     <div class="co-et-regist">
                         {% if not app.user %}
                         <div>
-                        <button class="connect" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}" >Connexion</a></button>
-                        <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}" >Inscription</a></button>
+                        <button class="connect" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button>
+                        <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button>
                         </div>
                         {% else %}
-                        <button class="registrer" type="button" data-rel="btn-disconnect"><a href="{{ path('app_logout') }}" >Déconnexion</a></button>
+                        {{ app.user.username }},
+                        <button class="registrer" type="button" data-rel="btn-disconnect"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
                         {% endif %}
                     </div>
 
@@ -92,18 +93,31 @@
                             <div class="barre-menus-navig">
                                 <div class="navig-list">
                                     <ul class="navig-main">
+                                        {% if app.request.get('_route') != 'welcome' and app.request.get('_route') != 'search' %}
+                                        <li class="navig-main-item">
+                                            <a href="{{ path('welcome') }}">Accueil</a>
+                                        </li>
+                                        {% endif %}
+                                        {% if app.request.get('_route') != 'alaffiche' %}
                                         <li class="navig-main-item">
                                             <a href="{{ path('alaffiche') }}">A l'affiche</a>
                                         </li>
+                                        {% endif %}
+                                        {% if app.request.get('_route') != 'futures_sorties' %}
                                         <li class="navig-main-item">
                                             <a href="{{ path('futures_sorties') }}">Les futures sorties</a>
                                         </li>
+                                        {% endif %}
+                                        {% if app.request.get('_route') != 'recommandations' %}
                                         <li class="navig-main-item">
                                             <a href="{{ path('recommandations') }}">Recommandations</a>
                                         </li>
+                                        {% endif %}
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                         <li class="navig-main-item">
                                             <a href="#">Mes films</a>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>

@@ -5,8 +5,11 @@ namespace App\Form;
 use App\Entity\Film;
 use App\Repository\GenreRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -26,20 +29,36 @@ class FilmType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre',TextType::class,['label' => 'Titre'])
-            ->add('synopsis',HiddenType::class)
-            ->add('affiche',HiddenType::class)
+            ->add('titre',TextType::class,['label' => 'Titre',])
+            ->add('synopsis',TextareaType::class,['label' => 'Synopsis'])
+            ->add('affiche',TextType::class)
             ->add('date',DateType::class,[
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'label' => 'Date de Sortie'
             ])
-            ->add('duree',HiddenType::class)
-            ->add('nationalite',HiddenType::class)
-            ->add('legislation')
-            ->add('trailer',HiddenType::class)
-            ->add('genre',HiddenType::class,["mapped" => false])
-            ->add('real',HiddenType::class,["mapped" => false])
-            ->add('scen',HiddenType::class,["mapped" => false])
-            ->add('act',HiddenType::class,["mapped" => false])
+            ->add('duree',NumberType::class,['label' => 'Durée'])
+            ->add('nationalite',TextType::class,['label' => 'Nationalité'])
+            ->add('legislation',ChoiceType::class,[
+                'choices' => [
+                    'Tous Publics' => "touspublics",
+                    'Interdit -10 ans' => "i-10",
+                    'Interdit -12 ans' => "i-12",
+                    'Interdit -16 ans' => "i-16",
+                    "Interdit -18 ans" => "i-18"
+                ],
+                'expanded' => false,
+                'multiple' => false,
+                'label' => "Limite d'âge"
+            ])
+            ->add('trailer',TextType::class,[
+                'label' => 'Bande Annonce'
+            ])
+            ->add('genre',TextType::class,[
+                "mapped" => false
+            ])
+            ->add('real',TextType::class,["mapped" => false, "label" => "Réalisateur"])
+            ->add('scen',TextType::class,["mapped" => false, "label" => "Scénariste"])
+            ->add('act',TextType::class,["mapped" => false, "label" => "Acteur"])
         ;
 
         
