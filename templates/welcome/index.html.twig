@@ -94,7 +94,7 @@
                         {% for filmSortie in filmsSortie %}
                     
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmSortie.slug}) }}" data-rel="button"><div class="container">
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">

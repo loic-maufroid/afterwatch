@@ -4,7 +4,7 @@
 $iconColor: #e7e7e7;
 $color: #009193;
 .search {
-  width: 75%;
+  width: 70%;
   position: relative;
   &:before {
     position: absolute;
@@ -33,7 +33,7 @@ $color: #009193;
 .searchButton {
   position: relative;
   top: 0;
-  right: 0;
+  right: -1em;
   width: auto;
   height: 40px;
   cursor: pointer;

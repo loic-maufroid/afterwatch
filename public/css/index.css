@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
+*
+{
+    font-family: "Courgette";
+} 
 html
 {
     max-width: 99%;
@@ -79,7 +84,7 @@ span
 }
 .barre-recherche
 {
-    margin-left: 10%;
+    margin-left: 9%;
     width: calc(85% - 300px - 50px);
     display: flex;
     align-items: left;
@@ -150,13 +155,18 @@ form
 .connect
 {
     cursor: pointer;
+    background-color: #009193;
+    border-radius: 15px;
+    color: black;
+    display: inline-block;
     font-size: 18px;
+    outline: 0;
     box-sizing: border-box;
 }
 .registrer
 {
     background-color: #009193;
-    border-radius: 10px;
+    border-radius: 15px;
     color: black;
     display: inline-block;
     font-size: 18px;
@@ -201,7 +211,7 @@ form
 ul
 {
     list-style-type: none;
-    padding: 0;
+    padding: 0 0 0 0.5em;
     margin: 0;
     box-sizing: border-box;
 }
@@ -210,6 +220,8 @@ ul
     font-size: 20px;
     display: inline-block;
     white-space: nowrap;
+    border: 2px solid #009193;
+    border-radius: 10px;
 }
 li
 {
@@ -408,13 +420,4 @@ section
     display: flex;
     flex-direction: inherit;
     padding-left: 10%;
-}
-.icon
-{
-    padding-left: 230px;
-}
-.icon a
-{
-    background-color: red;
-    color:grey;
 }

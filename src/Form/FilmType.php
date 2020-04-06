@@ -3,9 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Film;
-use App\Entity\Genre;
 use App\Repository\GenreRepository;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;

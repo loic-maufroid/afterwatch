@@ -101,7 +101,7 @@ class FilmController extends AbstractController
      * @Route("/admin/ajouter", name="addfilm")
      */
     public function addFilm(Request $request, SluggerInterface $slugger,GenreRepository $genreRepository,RealisateurRepository $realisateurRepository,
-    ScenaristeRepository $scenaristeRepository,ActeurRepository $acteurRepository)
+    ScenaristeRepository $scenaristeRepository,ActeurRepository $acteurRepository,FilmRepository $filmRepository)
     {
         $film = new Film();
         
@@ -131,7 +131,7 @@ class FilmController extends AbstractController
         foreach ($directors as $director) {
             $temp = $realisateurRepository->findOneBy(["nom" => $director]);
             if ($temp)
-            $form->getData()->add($temp);
+            $form->getData()->addRealise($temp);
             else {
             $dirTemp = new Realisateur();
             $dirTemp->setNom($director);
@@ -150,7 +150,7 @@ class FilmController extends AbstractController
         foreach ($scenas as $scena) {
             $temp = $scenaristeRepository->findOneBy(["nom" => $scena]);
             if ($temp)
-            $form->getData()->add($temp);
+            $form->getData()->addScenario($temp);
             else {
             $scenTemp = new Scenariste();
             $scenTemp->setNom($scena);
@@ -168,7 +168,7 @@ class FilmController extends AbstractController
         foreach ($actors as $actor) {
             $temp = $acteurRepository->findOneBy(["nom" => $actor]);
             if ($temp)
-            $form->getData()->add($temp);
+            $form->getData()->addActeurJoue($temp);
             else {
             $actTemp = new Acteur();
             $actTemp->setNom($actor);
@@ -195,16 +195,26 @@ class FilmController extends AbstractController
             dump($film);
             $film->setSlug($slugger->slug($film->getTitre())->lower());
 
+            $verif = $filmRepository->findOneBy(["slug" => $film->getSlug()]);
+            dump($verif);
+
+            if ($verif){
+               $this->addFlash('error',"Film déja existant dans la base de données");
+            }
+            else{
 
             $entityManager = $this->getDoctrine()->getManager();
             
             $entityManager->persist($film);
 
             $entityManager->flush();
+
+            $this->addFlash('success',"Film bien ajouté !");
+            }
         }
 
         return $this->render('admin/formulaire/addFilm.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 

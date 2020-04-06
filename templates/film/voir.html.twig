@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
+*{
+    font-family: "Courgette";
+}
 body 
 {
     margin: 0;
@@ -179,38 +183,4 @@ iframe
     </div>
 </section>
 
-{% block javascripts %}
-{{ parent() }}
-
-<script>
-var vid = document.getElementById("bgvid");
-var pauseButton = document.querySelector("#films .button");
-
-if (window.matchMedia('(prefers-reduced-motion)').matches) {
-    vid.removeAttribute("autoplay");
-    vid.pause();
-    pauseButton.innerHTML = "Paused";
-}
-function vidFade() {
-  vid.classList.add("stopfade");
-}
-vid.addEventListener('ended', function()
-{ 
-vid.pause();
-vidFade();
-}); 
-
-
-pauseButton.addEventListener("click", function() {
-  vid.classList.toggle("stopfade");
-  if (vid.paused) {
-    vid.play();
-    pauseButton.innerHTML = "Pause";
-  } else {
-    vid.pause();
-    pauseButton.innerHTML = "Paused";
-  }
-})
-</script>
-{% endblock %}
 {% endblock %}

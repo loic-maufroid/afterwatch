@@ -9,11 +9,27 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
         <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
-        <link rel="stylesheet" href="{{ asset('css/navbar_accueil.css') }}">
-
-        <link rel="stylesheet" href="{{ asset('css/index_accueil.css') }}">
+       
+        <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
+    /*!! insertion de SCSS*/
+.split-character span {
+    display: inline-block;
+}
+.title span > span {
+   opacity: 0;
+    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
+}
+@keyframes flipAnimation {
+    from {
+        transform: scale(-1, 1);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
 </style>
         {% endblock %}
     </head>
@@ -23,10 +39,10 @@
             <div class="rep-contenu-h"></div>
 
         {% block header %}
-        <header class="fond-h">
+        <header class="fond-h mb-auto">
 
             <div class="contenu-h">
-                <img class="logo-med logo" src="{{ asset('img/logo/afterwatch_logo.png') }}"></img>
+                <a href="{{ path('welcome') }}"><img class="logo-med logo" src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
 
                 <div class="partie-h-b">
 
@@ -43,55 +59,58 @@
                             </div>
                         </div>                        
                     
-                    <div class="co-et-regist"><!--parties connexion et inscripton-->
+                    <!--<div class="co-et-regist">parties connexion et inscripton
                         {% if app.user %}{# Si connecté #}
-                        <div>
                             <div>
                                 <img src="{#{{AFAIRE}}#}" alt="">
                             </div>
-                            {{ app.user.username }},<button class="registrer btn" type="button"><a href="{{ path('app_logout') }}">Deconnexion</a></button>
-                        </div>
+                            {{ app.user.username }},<button class="registrer" type="button"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
                         {% else %}{# Si non connecté #}
-                        <button class="registrer btn" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button><!--ici pour la connexion de l'utilisateur-->
-                        <button class="registrer btn" type="button" data-rel="btn-registrer" ><a href="{{ path('app_register') }}">Inscription</a></button><!--ici pour l'inscription-->
+                        <button class="registrer" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button><!--ici pour la connexion de l'utilisateur-->
+                        <!--<button type="button" class="registrer" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button><!--ici pour l'inscription-->
+                        <!--{% endif %}
+                    </div>-->
+                    <div class="co-et-regist">
+                        {% if not app.user %}
+                        <div>
+                        <button class="connect" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}" target="_blank">Connexion</a></button>
+                        <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}" target="_blank">Inscription</a></button>
+                        </div>
+                        {% else %}
+                        <button class="registrer" type="button" data-rel="btn-disconnect"><a href="{{ path('app_logout') }}" target="_blank">Déconnexion</a></button>
                         {% endif %}
+                        
+                       
+                        
                     </div>
-                    
+
                     <datalist id="films"></datalist>
-                        <div id="messageErreur"></div>
+                        
                    
                     </div>
 
-                    <div class="nav">
-                        <input type="checkbox" id="nav-check">
-                        <div class="nav-header">
-                        </div>
-                        <div class="nav-btn">
-                        <label for="nav-check">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        </label>
-                        </div>
-
-                        <div class="nav-links">
-
-                                        {% if app.request.get('_route') != 'welcome' and app.request.get('_route') != 'search'  %}
-                                            <a href="{{ path('welcome') }}">Accueil</a>
-                                        {% endif %}
-                                        {% if app.request.get('_route') != 'alaffiche' %}
+                    <div class="bas">
+                        <div id="messageErreur"></div>
+                        <nav class="barre-menus">
+                            <div class="barre-menus-navig">
+                                <div class="navig-list">
+                                    <ul class="navig-main">
+                                        <li class="navig-main-item">
                                             <a href="{{ path('alaffiche') }}">A l'affiche</a>
-                                        {% endif %}
-                                        {% if app.request.get('_route') != 'futures_sorties' %}
+                                        </li>
+                                        <li class="navig-main-item">
                                             <a href="{{ path('futures_sorties') }}">Les futures sorties</a>
-                                        {% endif %}
-                                        {% if app.request.get('_route') != 'recommandations' %}
+                                        </li>
+                                        <li class="navig-main-item">
                                             <a href="{{ path('recommandations') }}">Recommandations</a>
-                                        {% endif %}
-                                        
-                                            <a href="./links/mes_films_vu.html">Mes films</a>
-                    
-                        </div>
+                                        </li>
+                                        <li class="navig-main-item">
+                                            <a href="#">Mes films</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
                     </div>
 
             </div>
@@ -136,6 +155,28 @@
         <script src="{{ asset('js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
         
         <script>
+        (function() {
+          var elements, newContent = "";
+          elements = document.getElementsByClassName('split-character'); 
+          for (var element = 0; element < elements.length; ++element) { 
+            newContent += "<span>"
+            for (var character = 0; character < elements[element].innerText.length; character++) {
+              if (elements[element].innerText[character] !== " ") { 
+                newContent += "<span style='animation-delay: "+ 0.035*character + "s'>"+ elements[element].innerText[character] +"</span>";
+              }
+              else { 
+                newContent += "</span> <span>";
+              }
+            }
+            newContent += "</span>"
+            elements[element].innerHTML = newContent; 
+            newContent = "";
+          }
+        })(); 
+        </script>
+        <script>
+
+        
     $(function(){
 
         function envoyer(){
