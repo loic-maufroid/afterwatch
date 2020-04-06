@@ -226,3 +226,7 @@ footer{
 #successmess p{
     color: green;
 }
+/* rendre invisible un element*/
+.invisible{
+    display: none;
+}

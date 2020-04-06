@@ -7,12 +7,12 @@
     {{ form_start(form, {'attr': {'class': 'jumbotron scrollform'}}) }}
         <h2 class="textc">Modifier un film</h2>
         <div class="form-group">
-            <input type="file" class="form-control-file"  id="inputAffiche">
+            <input type="text" class="form-control-file"  id="inputAffiche">
+            {{ form_row(form.affiche, {'attr': {'class': 'form-control'}}, {'label': 'Affiche'}) }}
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputTitre">Titre</label>
-                <input type="text" class="form-control" id="inputTitre"  value="{{ film.titre }}">
+                {{ form_row(form.titre, {'attr': {'class': 'form-control'}}, {'label': 'Titre(s)'}) }}
             </div>
             <div class="form-group col-md-6">
                 <label for="inputDate">Date de sortie</label>
@@ -72,13 +72,11 @@
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="inputBA">Bande-annonce</label>
-                <input type="text" class="form-control" id="inputBA"  value="{{ film.trailer }}">
+                {{ form_row(form.trailer, {'attr': {'class': 'form-control'}}, {'label': 'Bande-annonce'}) }}
             </div>
         </div> 
         <div class="form-group">
-            <label for="inputSynopsis">Synopsis</label>
-            <textarea type="text" class="form-control" id="inputSynopsis" >{{ film.synopsis }}</textarea>
+            {{ form_row(form.synopsis, {'attr': {'class': 'form-control'}}, {'label': 'Synopsis'}) }}
         </div>
         <div class="flex jcenter margintop">
            <button class="btn btn-success marginr">Valider</button>
