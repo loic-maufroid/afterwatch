@@ -19,9 +19,16 @@
                 <a class="lienh" href="{{ path('welcome') }}"><h1>AfterWatch</h1></a>
                     <ul class="menuh flex">
                         {% if app.user %}
-                            <li class="lih">Admin</li>
-                            <li class="lih"><a class="lienh"  href="{{ path('profil_page', {username: app.user.username}) }}"><img src="" alt=""> {{ app.user.username }}</a></li>
-                            <li class="lih"><a class="lienh"  href="{{ path('app_logout') }}">Deconnexion</a></li>
+                            <!-- menu en dropdown -->
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img style="height: 25px;" src="" alt=""> Admin ~ {{ app.user.username }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
+                                  <a class="dropdown-item"  href="{{ path('app_logout') }}">Deconnexion</a>
+                                </div>
+                            </div>
                         {% endif %}
                     </ul>
              </div>
