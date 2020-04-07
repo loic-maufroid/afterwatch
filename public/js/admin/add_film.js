@@ -15,10 +15,10 @@ $("label[for='film_legislation']").show();
 
 var films = [];
 var curEntry = [];
-var selected = -1;
 
 $("#boutonPopu").click(function(event){
     $("#boutonPopu").prop('disabled',true);
+    $("#infos").hide();
     $("#messageRecherche").text("");
     $("#infos thead").remove();
     $("#infos tbody").remove();
@@ -95,7 +95,7 @@ $("#boutonPopu").click(function(event){
            $(".selection").click(function(e){
            
            var numero = $(this).val();
-           selected = numero;
+           
            curEntry[numero][0].css("border","solid");
            curEntry[numero][0].toggleClass("border-primary");
            $(".selection").toggle();
@@ -137,7 +137,7 @@ $("#boutonPopu").click(function(event){
                 }, 2000);
 
            $(".deselection").click(function(e){
-               selected = -1;
+               
                $("#selectedFilm *").html("");
                $("label[for=film_titre]").show();
                $("#film_titre").show();
@@ -153,22 +153,27 @@ $("#boutonPopu").click(function(event){
            });
            });
            }
-           else
+           else{
            $("#messageRecherche").text("Pas de résultats.Vérifiez l'expression en recherche et réessayez."); 
+           $("#boutonPopu").prop('disabled',false);
+           }
   
            
     }
     }         
     );
     }
-    else
+    else{
     $("#messageRecherche").text("Saisissez un nom de film");
+    $("#boutonPopu").prop('disabled',false);
+    }
     
 });
 
 function showReady(){
     clearTimeout(timer);
     $("#boutonPopu").prop('disabled',false);
+    $("#infos").show();
     $("#messageRecherche").text("Suggestions prêtes !");
     $(".selection").prop('disabled', false);
     setTimeout(function(){$("#messageRecherche").text("");},8000);
