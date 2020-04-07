@@ -1,0 +1,81 @@
+/*Police d'ecriture du titre*/
+.font{
+    font-family: "courgette";
+}
+/*taille du titre*/
+.size{
+    font-size: 60px;
+}
+/*couleur du titre*/
+.color:hover{
+    color: #02807d;
+}
+/*Centrer le text*/
+.textc{
+    text-align: center;
+}
+/*centrer au milieu*/
+.marget{
+    margin-top: 5em;
+}
+/*couleur donner au bouton */
+.btn-color{
+    background-image:linear-gradient(60deg, #02aca9, #2d8d8d);
+    color: white;
+} 
+/*couleur donner au bouton au survol*/
+.btn-color:hover{
+    background-image:linear-gradient(60deg, #1e9593, #2e8f8d);
+    color: white;
+}
+/*margin au dessus du formulaire*/
+.margint{
+    margin-top: 2em;
+}
+/*margfint top au dessus du titre*/
+.margintop{
+    margin-top: 0.5em;
+}
+/*margin a droit du bouton envoyer*/
+.marginr{
+    margin-right: 1em;
+}
+/*margin a gauche de l'avatar et du pseudo*/
+.marginl{
+    margin-left: 2em;
+}
+/*style du lien incrivez vous*/
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: rgb(85, 85, 85);
+    text-decoration: none;
+}
+/*display flex du formulaire*/
+.flex{
+    display: flex;
+}
+/*flex direction entre le titre et le formulaire*/
+.flexd{
+    flex-direction: column;
+}
+/*flex direction entre l'avatar et le profil*/
+.flexdr{
+    flex-direction: row;
+}
+/*centrer le formulaire*/
+.jcenter{
+    justify-content: center;
+}
+/*taille du font du profil*/
+.taille{
+    width: 40%;
+}
+/*formulaire*/
+.form{
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-radius: 0.5em;
+}

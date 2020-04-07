@@ -40,7 +40,7 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $email; //rendre unique quand plus besoin de fixtures avec unique=true
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
