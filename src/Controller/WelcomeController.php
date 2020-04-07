@@ -166,4 +166,5 @@ class WelcomeController extends AbstractController
         return new JsonResponse($jsonData);
 
     }
+
 }
