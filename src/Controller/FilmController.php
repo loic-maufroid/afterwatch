@@ -39,6 +39,10 @@ class FilmController extends AbstractController
      */
     public function showMyFilms($username,UtilisateurRepository $utilisateurRepository,FilmRepository $filmRepository){
 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        if ($this->getUser()->getUsername() !== $username)
+        return $this->redirectToRoute('welcome');
+
         $user = $utilisateurRepository->findOneBy(["username" => $username]);
 
         $filmsCarrTemp = [];

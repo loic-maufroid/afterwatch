@@ -40,11 +40,11 @@ class FilmType extends AbstractType
             ->add('nationalite',TextType::class,['label' => 'Nationalité'])
             ->add('legislation',ChoiceType::class,[
                 'choices' => [
-                    'Tous Publics' => "touspublics",
-                    'Interdit -10 ans' => "i-10",
-                    'Interdit -12 ans' => "i-12",
-                    'Interdit -16 ans' => "i-16",
-                    "Interdit -18 ans" => "i-18"
+                    'Tous Publics' => 0,
+                    'Interdit -10 ans' => 10,
+                    'Interdit -12 ans' => 12,
+                    'Interdit -16 ans' => 16,
+                    "Interdit -18 ans" => 18
                 ],
                 'expanded' => false,
                 'multiple' => false,
