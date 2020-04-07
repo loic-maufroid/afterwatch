@@ -122,7 +122,7 @@ class FilmController extends AbstractController
         $entityManager->remove($film);
         $entityManager->flush();
 
-        return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('admin',['page' => 1]);
     }
 
     //Affichage Formulaire Modification
@@ -143,7 +143,7 @@ class FilmController extends AbstractController
         {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin',['page' => 1]);
         }
 
         return $this->render('admin/formulaire/formFilm.html.twig', [
@@ -265,7 +265,7 @@ class FilmController extends AbstractController
 
             $this->addFlash('success',"Film bien ajouté !");
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin',['page' => 1]);
             }
             
         }

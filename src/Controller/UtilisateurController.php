@@ -57,7 +57,7 @@ class UtilisateurController extends AbstractController
 
         $this->addFlash('success',$user->getBan() ? $user->getUsername()."(".$user->getEmail().") a bien été dé-banni" : $user->getUsername()."(".$user->getEmail().") a bien été banni");
 
-        return $this->redirectToRoute('admin_userlist');
+        return $this->redirectToRoute('admin_userlist',["page" => 1]);
     }
 
      // Affichage Liste des Utilisateur

@@ -66,7 +66,7 @@ class CommentaireController extends AbstractController
         $entityManager->remove($comment);
         $entityManager->flush();
 
-        return $this->redirectToRoute('admin_commentslist');
+        return $this->redirectToRoute('admin_commentslist',['page' => 1]);
     }
 
     // Modification
@@ -87,7 +87,7 @@ class CommentaireController extends AbstractController
         {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_commentslist');
+            return $this->redirectToRoute('admin_commentslist',['page' => 1]);
         }
     
         return $this->render('admin/formulaire/formCommentaire.html.twig', [

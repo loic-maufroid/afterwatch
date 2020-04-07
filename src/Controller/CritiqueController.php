@@ -41,7 +41,7 @@ class CritiqueController extends AbstractController
         $entityManager->remove($critique);
         $entityManager->flush();
 
-        return $this->redirectToRoute('admin_critiqueslist');
+        return $this->redirectToRoute('admin_critiqueslist',['page' => 1]);
     }
 
     //Modification
@@ -62,7 +62,7 @@ class CritiqueController extends AbstractController
         {
             $this->getDoctrine()->getManager()->flush();
     
-            return $this->redirectToRoute('admin_critiqueslist');
+            return $this->redirectToRoute('admin_critiqueslist',['page' => 1]);
         }
     
         return $this->render('admin/formulaire/formCritique.html.twig', [
