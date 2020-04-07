@@ -21,7 +21,11 @@
     
         <tbody>
             {% for user in users %}
+                {% if user.ban == false %}
+                <tr class="rouge">
+                {% else %}
                 <tr>
+                {% endif %}
                     <td><img src="{{ asset('img/avatar/'~user.avatar ) }}" style="height: 75px;" alt="image de profil {{ user.username }}"></td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>

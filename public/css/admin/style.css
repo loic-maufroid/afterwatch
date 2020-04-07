@@ -230,3 +230,6 @@ footer{
 .invisible{
     display: none;
 }
+.rouge{
+    background-color: #d3121244;
+}
