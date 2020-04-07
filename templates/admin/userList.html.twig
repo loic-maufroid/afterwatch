@@ -48,8 +48,10 @@
                 <td>Aucun Utilisateur Trouvé</td>
             </tr>
             {% endfor %}
-        </tbody>    
+        </tbody> 
+        
     </table>
+
     <nav>
         {% set route = 'admin_userlist' %}
         {% set params = {} %}
@@ -73,5 +75,6 @@
             {% endif %}
         </ul>
     </nav>
+    
 </section>
 {% endblock %}
