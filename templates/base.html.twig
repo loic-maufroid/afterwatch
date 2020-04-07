@@ -125,8 +125,11 @@
                                 <img style="height: 25px;" src="" alt=""> {{ app.user.username }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
-                                  <a class="dropdown-item"  href="{{ path('app_logout') }}">Deconnexion</a>
+                                    <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="dropdown-item" href="{{ path('admin') }}"> Administration</a>
+                                    {% endif %}
+                                    <a class="dropdown-item"  href="{{ path('app_logout') }}">Deconnexion</a>
                                 </div>
                             </div>
                             {% endif %}
