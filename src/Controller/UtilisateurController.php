@@ -7,6 +7,7 @@ use App\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UtilisateurRepository;
 
 class UtilisateurController extends AbstractController
 {
@@ -42,19 +43,6 @@ class UtilisateurController extends AbstractController
 
     //Partie Admin
 
-    // Affichage Liste des Utilisateur
-
-    /**
-     * @Route("/admin/users", name="admin_userlist")
-     */
-    public function userList()
-    {
-        $users = $this->getDoctrine()->getRepository(Utilisateur::class)->findAll();
-        return $this->render('admin/userList.html.twig', [
-            'users' => $users,
-        ]);
-    }
-
     //Bannissement des Utilisateur
 
     /**
@@ -72,7 +60,22 @@ class UtilisateurController extends AbstractController
         return $this->redirectToRoute('admin_userlist');
     }
 
+     // Affichage Liste des Utilisateur
    
+    /**
+     * @Route("/admin/users/{page}", name="admin_userlist",  requirements={"page"="[1-9]+"})
+     */
+    public function userList($page)
+    {
+        $users = $this->getDoctrine()->getRepository(Utilisateur::class)->findUserPaginator($page);
+        $maxPage = ceil(count($users)/25);
+
+        return $this->render('admin/userList.html.twig', [
+            'users' => $users,
+            'current_page' => $page,
+            'max_page' => $maxPage
+        ]);
+    }
 
     
 }

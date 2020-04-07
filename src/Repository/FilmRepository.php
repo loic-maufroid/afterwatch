@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Film;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Film|null find($id, $lockMode = null, $lockVersion = null)
@@ -253,4 +254,16 @@ class FilmRepository extends ServiceEntityRepository
         return $result->fetchAll();
     }
 
+    /**
+     * @return: Film[]
+     */
+    public function findFilmPaginator($page)
+    {
+        $queryBuilder = $this->createQueryBuilder('f')
+            ->orderBy('f.id')
+            ->setFirstResult(($page-1) * 20)
+            ->setMaxResults(20);
+
+        return new Paginator($queryBuilder->getQuery());
+    }
 }

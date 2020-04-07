@@ -84,6 +84,27 @@
             {% endfor %}
         </tbody>
     </table>
+    <nav>
+        <ul class="pagination">
+            {% if current_page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('admin', {page: current_page - 1}) }}">Précédent</a>
+            </li>
+            {% endif %}
+            {% if max_page > 0 %}
+                {% for page in 1..max_page %}
+                    <li class="page-item {% if page == current_page %}active{% endif %}">
+                        <a class="page-link" href="{{ path('admin', {page: page}) }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+            {% if current_page < max_page %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('admin', {page: current_page + 1}) }}">Suivant</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 </section>
 
 
