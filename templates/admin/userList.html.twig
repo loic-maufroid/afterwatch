@@ -22,7 +22,7 @@
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td>{{ user.avatar }}</td>
+                    <td><img src="{{ asset('img/avatar/'~user.avatar ) }}" style="height: 75px;" alt="image de profil {{ user.username }}"></td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
                     {% for role in user.roles %}

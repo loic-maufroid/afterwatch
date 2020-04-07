@@ -22,7 +22,7 @@
                             <!-- menu en dropdown -->
                             <div class="dropdown">
                                 <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin ~ <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}" alt=""> {{ app.user.username }}
+                                Admin ~ <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}" alt="image de profil {{ app.user.username }}"> {{ app.user.username }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
