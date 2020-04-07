@@ -118,10 +118,20 @@
                             <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button>
                             </div>
                             {% else %}
-                            {{ app.user.username }},
-                            <button class="registrer" type="button" data-rel="btn-disconnect"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
+                          
+                            <!-- menu en dropdown -->
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img style="height: 25px;" src="" alt=""> {{ app.user.username }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
+                                  <a class="dropdown-item"  href="{{ path('app_logout') }}">Deconnexion</a>
+                                </div>
+                            </div>
                             {% endif %}
                         </div>
+                       
                        
                     </div>
 
