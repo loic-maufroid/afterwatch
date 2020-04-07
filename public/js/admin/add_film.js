@@ -4,17 +4,21 @@ $("#film_affiche").hide();
 $("#film_act").hide();
 $("#film_genre").hide();
 $("#film_duree").hide();
-$("#film_legislation").hide();
 $("#film_synopsis").hide();
 $("#film_nationalite").hide();
 $("#film_trailer").hide();
+$("#film_real").hide();
+$("#film_scen").hide();
+$("label").hide();
+$("label[for='film_titre']").show();
+$("label[for='film_legislation']").show();
 
 var films = [];
 var curEntry = [];
-var selected = -1;
 
 $("#boutonPopu").click(function(event){
-    event.preventDefault();
+    $("#boutonPopu").prop('disabled',true);
+    $("#infos").hide();
     $("#messageRecherche").text("");
     $("#infos thead").remove();
     $("#infos tbody").remove();
@@ -84,22 +88,27 @@ $("#boutonPopu").click(function(event){
            }
 
            $("#messageRecherche").text("Chargement des suggestions...");
+           $(".selection").prop('disabled',true);
 
-           timer = setTimeout(showReady,5000);
+           timer = setTimeout(showReady,3000+500*curEntry.length);
            
            $(".selection").click(function(e){
            
            var numero = $(this).val();
-           selected = numero;
+           
            curEntry[numero][0].css("border","solid");
            curEntry[numero][0].toggleClass("border-primary");
            $(".selection").toggle();
            curEntry[numero][0].children().last().append("<button type='button' class='deselection btn btn-danger' value='"+numero+"'>Déselectionner</button>");
            $("label").hide();
            $("input").hide();
+           $("label[for=film_legislation]").show();
+           $("#film_legislation").show();
+           
            $("#boutonPopu").hide();
            $("#submitFilm").show();
            $("#titre").html("<h4>"+curEntry[numero][1][1]+"</h4>");
+           console.log(curEntry[numero][1][6]);
            if (curEntry[numero][1][6])
            $("#affiche").html("<img src='http://image.tmdb.org/t/p/w185/"+curEntry[numero][1][6]+"'>");
            if (curEntry[numero][1][3])
@@ -128,10 +137,12 @@ $("#boutonPopu").click(function(event){
                 }, 2000);
 
            $(".deselection").click(function(e){
-               selected = -1;
+               
                $("#selectedFilm *").html("");
-               $("label").show();
-               $("input").show();
+               $("label[for=film_titre]").show();
+               $("#film_titre").show();
+               $("label[for=film_legislation]").show();
+               $("#film_legislation").show();
                $("#boutonPopu").show();
                $("#submitFilm").hide();
                var index = $(this).val();
@@ -142,22 +153,29 @@ $("#boutonPopu").click(function(event){
            });
            });
            }
-           else
+           else{
            $("#messageRecherche").text("Pas de résultats.Vérifiez l'expression en recherche et réessayez."); 
+           $("#boutonPopu").prop('disabled',false);
+           }
   
            
     }
     }         
     );
     }
-    else
+    else{
     $("#messageRecherche").text("Saisissez un nom de film");
+    $("#boutonPopu").prop('disabled',false);
+    }
     
 });
 
 function showReady(){
     clearTimeout(timer);
+    $("#boutonPopu").prop('disabled',false);
+    $("#infos").show();
     $("#messageRecherche").text("Suggestions prêtes !");
+    $(".selection").prop('disabled', false);
     setTimeout(function(){$("#messageRecherche").text("");},8000);
 }
 
