@@ -4,6 +4,11 @@
 {% block title %} {{ parent() }} - Users{% endblock %}
 
 {% block body %}
+<div class= "w-100 bg-success text-center" id="messages">
+    {% for message in app.flashes('success') %}
+        {{ message }}
+    {% endfor %}
+</div>
 <section class="flex jcenter">
     <table id="thèmes" class=" textc margint  marginb">
         <thead class="gras sizeg">
@@ -25,8 +30,17 @@
                     {% endfor %}
                     
                     <td>
-                            <input type="checkbox" checked data-toggle="toggle" data-on="Actif" data-off="Banni" data-onstyle="success" data-offstyle="danger">
-                        <a href="{{ path('admin_confirmuserdelete', {id: user.id}) }}"><button type="button" class="btn btn-info btn-danger">Bannir</button></a>
+                        {% if user.roles[0] == 'ROLE_USER' %}
+
+                        <!--<input type="checkbox" checked data-toggle="toggle" data-on="Actif" data-off="Banni" data-onstyle="success" data-offstyle="danger">-->
+                        {% if user.ban %}
+                        <a href="{{ path('user_toggleban', {id: user.id}) }}"><button type="button" class="btn btn-danger">Bannir</button></a>
+
+                        {% else %}
+                            
+                        <a href="{{ path('user_toggleban', {id: user.id}) }}"><button type="button" class="btn btn-success">Dé-bannir</button></a>
+                        {% endif %}
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}

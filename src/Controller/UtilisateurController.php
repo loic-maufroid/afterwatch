@@ -55,32 +55,19 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    //Page de Confirmation de la Suppression des Utilisateur
+    //Bannissement des Utilisateur
 
     /**
-     * @Route("/admin/users/cdu/{id}", name="admin_confirmuserdelete")
-     */
-    public function userConfirmSuppr($id)
-    {
-       $user = $this->getDoctrine()
-            ->getRepository(Utilisateur::class)
-            ->find($id);
-    
-        return $this->render('admin/suppression/deleteUser.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    //Suppression des Utilisateur
-
-    /**
-     * @Route("/admin/users/cdu/{id}/delete", name="user_delete")
+     * @Route("/admin/users/cdu/{id}/toggleban", name="user_toggleban")
     */
-    public function userDelete(Utilisateur $user)
+    public function userToggleBan(Utilisateur $user)
     {
+        $user->setBan(!($user->getBan()));
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($user);
+        $entityManager->persist($user);
         $entityManager->flush();
+
+        $this->addFlash('success',$user->getBan() ? $user->getUsername()."(".$user->getEmail().") a bien été dé-banni" : $user->getUsername()."(".$user->getEmail().") a bien été banni");
 
         return $this->redirectToRoute('admin_userlist');
     }
