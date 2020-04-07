@@ -19,14 +19,17 @@ class CritiqueController extends AbstractController
     /**
      * @Route("/admin/critiqueslist/cdct/{id}", name="admin_confirmcritdelete")
      */
-    public function critConfirmSuppr($id)
+    public function critConfirmSuppr($id,CritiqueRepository $critiqueRepository)
     {
        $critique = $this->getDoctrine()
             ->getRepository(Critique::class)
             ->find($id);
     
+        $notification =  $critiqueRepository->findCountSubmittedCritiques();
+
         return $this->render('admin/suppression/deleteCritique.html.twig', [
             'critique' => $critique,
+            'notification' => $notification
         ]);
     }
 
@@ -49,7 +52,7 @@ class CritiqueController extends AbstractController
     /**
      * @Route("/admin/critiqueslist/modifiercritique/{id}", name="critique_modifier")
     */
-    public function commentFormModif($id, Request $request, Critique $critique)
+    public function commentFormModif($id, Request $request, Critique $critique, CritiqueRepository $critiqueRepository)
     {
         $form = $this->createForm(CritiqueType::class, $critique);
         $form->handleRequest($request);
@@ -65,9 +68,11 @@ class CritiqueController extends AbstractController
             return $this->redirectToRoute('admin_critiqueslist',['page' => 1]);
         }
     
+        $notification =  $critiqueRepository->findCountSubmittedCritiques();
         return $this->render('admin/formulaire/formCritique.html.twig', [
             'form' => $form->createView(),
             'review' => $review,
+            'notification' => $notification
         ]);
     }
 
@@ -84,11 +89,13 @@ class CritiqueController extends AbstractController
         foreach($critiques as $critique){
         $tab[] = [$critique->getIdFilm()->getId(),$critique->getIdUtilisateur()->getId()];
         }*/
-                
+        
+        $notification =  $critiqueRepository->findCountSubmittedCritiques();
         return $this->render('admin/critiquesList.html.twig', [
             'critiques' => $critiques,
             'current_page' => $page,
-            'max_page' => $maxPage
+            'max_page' => $maxPage,
+            'notification' => $notification
         ]);
     }
 }

@@ -42,13 +42,13 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
      */
     public function findUserPaginator($page){
         $queryBuilder = $this->createQueryBuilder('u')
-        ->orderBy('u.id')
+        ->orderBy('u.username')
         ->setFirstResult(($page-1) * 25)
         ->setMaxResults(25);
 
     return new Paginator($queryBuilder->getQuery());
     }
-    
+
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
     //  */

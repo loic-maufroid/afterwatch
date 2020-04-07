@@ -49,6 +49,7 @@ class AppFixtures extends Fixture
         $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Loic') );
         $utilisateur->setRoles(['ROLE_ADMIN']);
         $utilisateur->setBan(true);
+        $utilisateur->setAvatar('courgette.jpg');
         $manager->persist($utilisateur);
 
         $utilisateurs = [];
@@ -146,6 +147,7 @@ class AppFixtures extends Fixture
             $critique->setIdFilm($faker->randomElement($films));
             $critique->setIdUtilisateur($faker->randomElement($utilisateurs));
             $critique->setSlug($this->slugger->slug($critique->getTitre())->lower());
+            $critique->setPublication(false);
             $manager->persist($critique);
             $critiques[] = $critique;
         }

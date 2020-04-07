@@ -260,7 +260,7 @@ class FilmRepository extends ServiceEntityRepository
     public function findFilmPaginator($page)
     {
         $queryBuilder = $this->createQueryBuilder('f')
-            ->orderBy('f.id')
+            ->orderBy('f.id','DESC')
             ->setFirstResult(($page-1) * 20)
             ->setMaxResults(20);
 

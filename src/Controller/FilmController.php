@@ -10,6 +10,7 @@ use App\Entity\Scenariste;
 use App\Repository\FilmRepository;
 use App\Form\FilmType;
 use App\Repository\ActeurRepository;
+use App\Repository\CritiqueRepository;
 use App\Repository\GenreRepository;
 use App\Repository\RealisateurRepository;
 use App\Repository\ScenaristeRepository;
@@ -100,14 +101,17 @@ class FilmController extends AbstractController
     /**
      * @Route("/admin/cdf/{id}", name="admin_confirmfilmdelete")
      */
-    public function filmConfirmSuppr($id)
+    public function filmConfirmSuppr($id,CritiqueRepository $critiqueRepository)
     {
        $film = $this->getDoctrine()
             ->getRepository(Film::class)
             ->find($id);
-    
+
+
+        $notification = 0;
         return $this->render('admin/suppression/deleteFilm.html.twig', [
             'film' => $film,
+            'notification' => $notification
         ]);
     }
 
@@ -130,7 +134,7 @@ class FilmController extends AbstractController
     /**
      * @Route("/admin/modifierfilm/{id}", name="film_modifier")
     */
-    public function filmFormModif($id, Request $request, Film $movie)
+    public function filmFormModif($id, Request $request, Film $movie,CritiqueRepository $critiqueRepository)
     {
         $form = $this->createForm(FilmType::class, $movie);
         $form->handleRequest($request);
@@ -146,9 +150,12 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('admin',['page' => 1]);
         }
 
+        $notification = $critiqueRepository->findCountSubmittedCritiques();
+
         return $this->render('admin/formulaire/formFilm.html.twig', [
             'form' => $form->createView(),
             'film' => $film,
+            'notification' => $notification
         ]);
     }
 
@@ -158,7 +165,7 @@ class FilmController extends AbstractController
      * @Route("/admin/ajouter", name="addfilm")
      */
     public function addFilm(Request $request, SluggerInterface $slugger,GenreRepository $genreRepository,RealisateurRepository $realisateurRepository,
-    ScenaristeRepository $scenaristeRepository,ActeurRepository $acteurRepository,FilmRepository $filmRepository)
+    ScenaristeRepository $scenaristeRepository,ActeurRepository $acteurRepository,FilmRepository $filmRepository,CritiqueRepository $critiqueRepository)
     {
         $film = new Film();
         
@@ -270,8 +277,11 @@ class FilmController extends AbstractController
             
         }
         
+        $notification = $critiqueRepository->findCountSubmittedCritiques();
+
         return $this->render('admin/formulaire/addFilm.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            "notification" => $notification
         ]);
     }
 
@@ -280,15 +290,17 @@ class FilmController extends AbstractController
     /**
      * @Route("/admin/{page}", name="admin", requirements={"page"="[1-9]+"})
      */
-    public function indexAdmin($page,FilmRepository $filmRepository)
+    public function indexAdmin($page,FilmRepository $filmRepository,CritiqueRepository $critiqueRepository)
     {
         $films = $filmRepository->findFilmPaginator($page);
         $maxPage = ceil(count($films)/20);
+        $notification = $critiqueRepository->findCountSubmittedCritiques();;
 
         return $this->render('admin/index.html.twig', [
             'films' => $films,
             'current_page' => $page,
-            'max_page' => $maxPage
+            'max_page' => $maxPage,
+            'notification' => $notification
         ]);
     }
 

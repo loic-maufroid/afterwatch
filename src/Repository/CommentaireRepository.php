@@ -25,7 +25,7 @@ class CommentaireRepository extends ServiceEntityRepository
      */
     public function findCommentairePaginator($page){
         $queryBuilder = $this->createQueryBuilder('c')
-        ->orderBy('c.id')
+        ->orderBy('c.id','DESC')
         ->setFirstResult(($page-1) * 25)
         ->setMaxResults(25);
 

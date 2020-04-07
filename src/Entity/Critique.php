@@ -48,6 +48,11 @@ class Critique
      */
     private $note;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $publication;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,18 @@ class Critique
     public function setNote(int $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getPublication(): ?bool
+    {
+        return $this->publication;
+    }
+
+    public function setPublication(bool $publication): self
+    {
+        $this->publication = $publication;
 
         return $this;
     }

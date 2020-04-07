@@ -71,10 +71,22 @@ class CritiqueRepository extends ServiceEntityRepository
      */
     public function findCritiquePaginator($page){
         $queryBuilder = $this->createQueryBuilder('c')
-        ->orderBy('c.id')
+        ->orderBy('c.id','DESC')
         ->setFirstResult(($page-1) * 10)
         ->setMaxResults(10);
 
     return new Paginator($queryBuilder->getQuery());
+    }
+
+    /**
+     * @return: int
+     */
+    public function findCountSubmittedCritiques(){
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT COUNT(*) as nombre FROM critique c WHERE c.publication = 0';
+        $result = $conn->query($sql);
+
+        return $result->fetch();
     }
 }

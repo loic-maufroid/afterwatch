@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Repository\CritiqueRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,7 @@ class UtilisateurController extends AbstractController
 
         return $this->render('security/userProfil.html.twig', [
             'form' => $form->createView(),
-            'utilisateur' => $utilisateur,
+            'utilisateur' => $utilisateur
         ]);
     }
 
@@ -65,15 +66,17 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/admin/users/{page}", name="admin_userlist",  requirements={"page"="[1-9]+"})
      */
-    public function userList($page,UtilisateurRepository $utilisateurRepository)
+    public function userList($page,UtilisateurRepository $utilisateurRepository,CritiqueRepository $critiqueRepository)
     {
         $users = $utilisateurRepository->findUserPaginator($page);
         $maxPage = ceil(count($users)/25);
+        $notification = $critiqueRepository->findCountSubmittedCritiques();
 
         return $this->render('admin/userList.html.twig', [
             'users' => $users,
             'current_page' => $page,
-            'max_page' => $maxPage
+            'max_page' => $maxPage,
+            'notification' => $notification
         ]);
     }
 
