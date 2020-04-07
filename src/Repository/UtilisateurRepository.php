@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +37,17 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         $this->_em->flush();
     }
 
+    /**
+     * @return: Utilisateur[]
+     */
+    public function findUserPaginator($page){
+        $queryBuilder = $this->createQueryBuilder('u')
+        ->orderBy('u.id')
+        ->setFirstResult(($page-1) * 25)
+        ->setMaxResults(25);
+
+    return new Paginator($queryBuilder->getQuery());
+    }
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
     //  */

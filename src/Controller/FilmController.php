@@ -94,18 +94,6 @@ class FilmController extends AbstractController
 
     //Partie Admin
 
-    //Page Index de la Partie Admin(également affichage du tableau Films)
-
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function indexAdmin()
-    {
-        $films = $this->getDoctrine()->getRepository(Film::class)->findAllFilms();
-        return $this->render('admin/index.html.twig', [
-            'films' => $films,
-        ]);
-    }
 
     //Page de Confirmation de la Suppression des Films
 
@@ -287,5 +275,21 @@ class FilmController extends AbstractController
         ]);
     }
 
+     //Page Index de la Partie Admin(également affichage du tableau Films)
+
+    /**
+     * @Route("/admin/{page}", name="admin", requirements={"page"="[1-9]+"})
+     */
+    public function indexAdmin($page)
+    {
+        $films = $this->getDoctrine()->getRepository(Film::class)->findFilmPaginator($page);
+        $maxPage = ceil(count($films)/20);
+
+        return $this->render('admin/index.html.twig', [
+            'films' => $films,
+            'current_page' => $page,
+            'max_page' => $maxPage
+        ]);
+    }
 
 }
