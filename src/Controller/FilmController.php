@@ -122,7 +122,7 @@ class FilmController extends AbstractController
         $entityManager->remove($film);
         $entityManager->flush();
 
-        return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('admin',['page' => 1]);
     }
 
     //Affichage Formulaire Modification
@@ -143,7 +143,7 @@ class FilmController extends AbstractController
         {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin',['page' => 1]);
         }
 
         return $this->render('admin/formulaire/formFilm.html.twig', [
@@ -265,7 +265,7 @@ class FilmController extends AbstractController
 
             $this->addFlash('success',"Film bien ajouté !");
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin',['page' => 1]);
             }
             
         }
@@ -280,9 +280,9 @@ class FilmController extends AbstractController
     /**
      * @Route("/admin/{page}", name="admin", requirements={"page"="[1-9]+"})
      */
-    public function indexAdmin($page)
+    public function indexAdmin($page,FilmRepository $filmRepository)
     {
-        $films = $this->getDoctrine()->getRepository(Film::class)->findFilmPaginator($page);
+        $films = $filmRepository->findFilmPaginator($page);
         $maxPage = ceil(count($films)/20);
 
         return $this->render('admin/index.html.twig', [

@@ -20,7 +20,7 @@
         <h4 class="flex jcenter">Modifier?</h4>
         <div class="flex jcenter margintop">
             <button  class="btn btn-success marginr">Valider</button>
-            <a href="{{ path('admin_critiqueslist') }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
+            <a href="{{ path('admin_critiqueslist',{page: 1}) }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
         </div>    
     {{ form_end(form) }}
 </section>
