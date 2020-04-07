@@ -194,7 +194,6 @@ form
 .barre-menus-navig
 {
     width: 100%;
-    overflow: hidden;
     box-sizing: border-box;
 }
 .navig-list
