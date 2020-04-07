@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\UtilisateurRepository;
 
 class UtilisateurController extends AbstractController
 {
@@ -65,9 +65,9 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/admin/users/{page}", name="admin_userlist",  requirements={"page"="[1-9]+"})
      */
-    public function userList($page)
+    public function userList($page,UtilisateurRepository $utilisateurRepository)
     {
-        $users = $this->getDoctrine()->getRepository(Utilisateur::class)->findUserPaginator($page);
+        $users = $utilisateurRepository->findUserPaginator($page);
         $maxPage = ceil(count($users)/25);
 
         return $this->render('admin/userList.html.twig', [

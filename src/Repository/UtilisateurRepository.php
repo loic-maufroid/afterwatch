@@ -48,6 +48,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
 
     return new Paginator($queryBuilder->getQuery());
     }
+    
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
     //  */

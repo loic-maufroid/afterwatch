@@ -280,9 +280,9 @@ class FilmController extends AbstractController
     /**
      * @Route("/admin/{page}", name="admin", requirements={"page"="[1-9]+"})
      */
-    public function indexAdmin($page)
+    public function indexAdmin($page,FilmRepository $filmRepository)
     {
-        $films = $this->getDoctrine()->getRepository(Film::class)->findFilmPaginator($page);
+        $films = $filmRepository->findFilmPaginator($page);
         $maxPage = ceil(count($films)/20);
 
         return $this->render('admin/index.html.twig', [

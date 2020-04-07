@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Commentaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Commentaire|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,18 @@ class CommentaireRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Commentaire::class);
+    }
+
+    /**
+     * @return: Commentaire[]
+     */
+    public function findCommentairePaginator($page){
+        $queryBuilder = $this->createQueryBuilder('c')
+        ->orderBy('c.id')
+        ->setFirstResult(($page-1) * 25)
+        ->setMaxResults(25);
+
+    return new Paginator($queryBuilder->getQuery());
     }
 
     // /**

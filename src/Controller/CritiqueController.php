@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Critique;
 use App\Form\CritiqueType;
+use App\Repository\CritiqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,24 +13,6 @@ class CritiqueController extends AbstractController
 {
 
     //Partie Admin
-
-    // Affichage Liste des Critiques
-
-    /**
-     * @Route("/admin/critiqueslist", name="admin_critiqueslist")
-     */
-    public function critiquesList()
-    {
-        $critiques = $this->getDoctrine()->getRepository(Critique::class)->findAll();
-        /*$tab = [];
-        foreach($critiques as $critique){
-        $tab[] = [$critique->getIdFilm()->getId(),$critique->getIdUtilisateur()->getId()];
-        }*/
-                
-        return $this->render('admin/critiquesList.html.twig', [
-            'critiques' => $critiques,
-        ]);
-    }
 
     //Page de Confirmation de la Suppression des Critiques
 
@@ -85,6 +68,27 @@ class CritiqueController extends AbstractController
         return $this->render('admin/formulaire/formCritique.html.twig', [
             'form' => $form->createView(),
             'review' => $review,
+        ]);
+    }
+
+    // Affichage Liste des Critiques
+
+    /**
+     * @Route("/admin/critiqueslist/{page}", name="admin_critiqueslist",  requirements={"page"="[1-9]+"})
+     */
+    public function critiquesList($page,CritiqueRepository $critiqueRepository)
+    {
+        $critiques = $critiqueRepository->findCritiquePaginator($page);
+        $maxPage = ceil(count($critiques)/10);
+        /*$tab = [];
+        foreach($critiques as $critique){
+        $tab[] = [$critique->getIdFilm()->getId(),$critique->getIdUtilisateur()->getId()];
+        }*/
+                
+        return $this->render('admin/critiquesList.html.twig', [
+            'critiques' => $critiques,
+            'current_page' => $page,
+            'max_page' => $maxPage
         ]);
     }
 }

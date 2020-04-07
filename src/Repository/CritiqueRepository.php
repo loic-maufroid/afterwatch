@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Critique;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Critique|null find($id, $lockMode = null, $lockVersion = null)
@@ -65,4 +66,15 @@ class CritiqueRepository extends ServiceEntityRepository
 
     }
 
+      /**
+     * @return: Critique[]
+     */
+    public function findCritiquePaginator($page){
+        $queryBuilder = $this->createQueryBuilder('c')
+        ->orderBy('c.id')
+        ->setFirstResult(($page-1) * 10)
+        ->setMaxResults(10);
+
+    return new Paginator($queryBuilder->getQuery());
+    }
 }

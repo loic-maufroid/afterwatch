@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
+use App\Repository\CommentaireRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,19 +38,6 @@ class CommentaireController extends AbstractController
     }*/
 
     //Partie Admin
-
-    // Affichage Liste des Commentaires
-
-    /**
-     * @Route("/admin/commentslist", name="admin_commentslist")
-     */
-    public function commentairesList()
-    {
-        $comments = $this->getDoctrine()->getRepository(Commentaire::class)->findAll();
-        return $this->render('admin/commentsList.html.twig', [
-            'comments' => $comments,
-        ]);
-    }
 
     //Page de Confirmation de la Suppression des Commentaires
 
@@ -108,6 +96,22 @@ class CommentaireController extends AbstractController
         ]);
     }
 
+     // Affichage Liste des Commentaires
+
+    /**
+     * @Route("/admin/commentslist/{page}", name="admin_commentslist",   requirements={"page"="[1-9]+"})
+     */
+    public function commentairesList($page,CommentaireRepository $commentaireRepository)
+    {
+        $comments = $commentaireRepository->findCommentairePaginator($page);
+        $maxPage = ceil(count($comments)/25);
+
+        return $this->render('admin/commentsList.html.twig', [
+            'comments' => $comments,
+            'current_page' => $page,
+            'max_page' => $maxPage
+        ]);
+    }
 
 }
     
