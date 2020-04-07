@@ -6,6 +6,10 @@
 .size{
     font-size: 60px;
 }
+/*taille du text de retour*/
+.sizing{
+    font-size: 18px;
+}
 /*couleur du titre*/
 .color:hover{
     color: #02807d;
@@ -50,7 +54,7 @@ a{
     text-decoration: none;
 }
 a:hover{
-    color: rgb(85, 85, 85);
+    color: rgb(58, 58, 58);
     text-decoration: none;
 }
 /*display flex du formulaire*/
