@@ -16,6 +16,7 @@ class CritiqueController extends AbstractController
 
     //Page de Confirmation de la Suppression des Critiques
 
+
     /**
      * @Route("/admin/critiqueslist/cdct/{id}", name="admin_confirmcritdelete")
      */
@@ -33,7 +34,7 @@ class CritiqueController extends AbstractController
         ]);
     }
 
-    //Suppression des Critiques
+     //Suppression des Critiques
 
     /**
      * @Route("/admin/critiqueslist/cdct/{id}/delete", name="critique_delete")
@@ -52,7 +53,7 @@ class CritiqueController extends AbstractController
     /**
      * @Route("/admin/critiqueslist/modifiercritique/{id}", name="critique_modifier")
     */
-    public function commentFormModif($id, Request $request, Critique $critique, CritiqueRepository $critiqueRepository)
+    public function critiqueFormModif($id, Request $request, Critique $critique, CritiqueRepository $critiqueRepository)
     {
         $form = $this->createForm(CritiqueType::class, $critique);
         $form->handleRequest($request);
@@ -74,6 +75,40 @@ class CritiqueController extends AbstractController
             'review' => $review,
             'notification' => $notification
         ]);
+    }
+
+    // Affichage Critique soumise aux Admins pour être publiée
+
+    /**
+     * @Route("/admin/critiquesList/verifiercritique/{id}", name="critique_verifier")
+     */
+    public function critiqueVerif($id,CritiqueRepository $critiqueRepository){
+
+        $review = $critiqueRepository->find($id);
+        $notification =  $critiqueRepository->findCountSubmittedCritiques();
+
+        return $this->render('admin/critiqueVerif.html.twig',[
+            'review' => $review,
+            'notification' => $notification
+        ]);
+    }
+
+    // Validation de la publication de la critique par un Admin
+
+    /**
+     * @Route("/admin/critiquesList/publierCritique/{id}", name="critique_publier")
+     */
+    public function critiquePublier($id,CritiqueRepository $critiqueRepository){
+
+        $review = $critiqueRepository->find($id);
+        $review->setPublication(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($review);
+        $entityManager->flush();
+
+        $this->addFlash('success',"La critique '".$review->getTitre()."' par ".$review->getIdUtilisateur()->getUsername()." a bien été publiée");
+
+        return $this->redirectToRoute('admin_critiqueslist',["page" => 1]);
     }
 
     // Affichage Liste des Critiques
