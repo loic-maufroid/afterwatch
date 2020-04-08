@@ -64,9 +64,32 @@
     </div>
 </section>
 
-<section>
+<section id="commentaire">
   <h2>Commentaires</h2>
-  
+  {{ form_start(form, {'attr': {'class': 'form margint'}}) }}
+    
+    {{ form_row(form.contenu, {'attr': {'class': 'form-control'}}) }}
+    <button type="submit">Envoyer le Commentaire</button>  
+  {{ form_end(form) }}
+
+<!--{% for comment in film.commentaires %}
+<article >
+  <hr>
+  <div class="marginb flex flexdr">
+      <div>
+          <img src="public/img/11132014.jpg" class="avatar">
+      </div>
+      <div class="flex flexd">
+          <h6 class="margint marginle">Nom de l'utilisateur</h6>
+          <p class="card-text sizing justify margina width">
+              Saepissime igitur mihi de amicitia cogitanti maxime 
+              Post hanc adclinis.
+          </p>
+      </div>
+  </div>
+</article>
+{% endfor %}-->
+
 </section>
 
 {% endblock %}

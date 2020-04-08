@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Acteur;
+use App\Entity\Commentaire;
 use App\Entity\Film;
 use App\Entity\Genre;
 use App\Entity\Realisateur;
 use App\Entity\Scenariste;
+use App\Form\CommentaireType;
 use App\Repository\FilmRepository;
 use App\Form\FilmType;
 use App\Repository\ActeurRepository;
@@ -26,12 +28,32 @@ class FilmController extends AbstractController
     /**
      * @Route("/film/{slug}", name="details_film")
      */
-    public function voir($slug,FilmRepository $filmRepository){
+    public function voir($slug,FilmRepository $filmRepository,Request $request){
         
         $film = $filmRepository->findOneBy(["slug" => $slug]);
+        $user = $this->getUser();
+        $commentaire = new Commentaire();
+
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager = $this->getDoctrine()->getManager();
+
+            $film->addCommentaire($commentaire);
+            $user->addCommentaire($commentaire);
+
+            $manager->persist($commentaire);
+            $manager->flush();
+
+            return $this->redirectToRoute('details_film', ['slug' => $slug]);
+        }
+        
 
         return $this->render('film/voir.html.twig',[
-            "film" => $film
+            "film" => $film,
+            'form' => $form->createView(),
         ]);
     }
 
