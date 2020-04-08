@@ -53,8 +53,8 @@ class AppFixtures extends Fixture
         $manager->persist($utilisateur);
 
         $utilisateur = new Utilisateur();
-        $utilisateur->setUsername('Courgette');
-        $utilisateur->setEmail('administateur.fern@afterwatch.fr');
+        $utilisateur->setUsername('Farn');
+        $utilisateur->setEmail('administateur.farn@afterwatch.fr');
         $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Courgette') );
         $utilisateur->setRoles(['ROLE_ADMIN']);
         $utilisateur->setBan(true);

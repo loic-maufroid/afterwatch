@@ -67,13 +67,12 @@
 <section id="commentaire">
   <h2>Commentaires</h2>
   {{ form_start(form, {'attr': {'class': 'form margint'}}) }}
-    
-    {{ form_row(form.contenu, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
     <button type="submit">Envoyer le Commentaire</button>  
   {{ form_end(form) }}
 
-<!--{% for comment in film.commentaires %}
-<article >
+{% for comment in film.commentaires %}
+<article>
   <hr>
   <div class="marginb flex flexdr">
       <div>
@@ -88,7 +87,7 @@
       </div>
   </div>
 </article>
-{% endfor %}-->
+{% endfor %}
 
 </section>
 
