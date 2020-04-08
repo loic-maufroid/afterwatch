@@ -100,5 +100,9 @@ class CritiqueController extends AbstractController
     }
 
     //Affichage des critique d'un film
-    
+
+    /**
+     * @Route("/film/{slug}/critiques", name="critiques")
+     */
+    public function critiqueView
 }
