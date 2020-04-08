@@ -5,9 +5,9 @@
 
 {% block body %}
 <div class="bg-success">
-{% for message in app.flashes('success') %}
+    {% for message in app.flashes('success') %}
     {{ message }}
-{% endfor %}
+    {% endfor %}
 </div>
 <section class="flex jcenter">
     <table id="thèmes" class=" textc margint marginb">
@@ -33,14 +33,16 @@
                 <td>{{ critique.idutilisateur.username }}</td>
                 <td>{{ critique.note }}</td>
                 <td>{{ critique.slug }}</td>
-                <td>{% if critique.contenu|length > 80 %}{{ critique.contenu|slice(0,79) }}{% else %}{{ critique.contenu }}{% endif %}</td>
+                <td>{% if critique.contenu|length > 80 %}{{ critique.contenu|slice(0,79) }}{% else %}{{ critique.contenu }}{% endif %}
+                </td>
 
                 <td>{% if critique.publication == 0 %}
-                    <a href="{{ path('critique_verifier',{id: critique.id}) }}"><button class="btn btn-info btn-color marginr">Vérifier avant de publier</button></a>
+                    <a href="{{ path('critique_verifier',{id: critique.id}) }}"><button
+                            class="btn btn-info btn-color marginr">Vérifier avant de publier</button></a>
                     {% else %}
                     <a href="{{ path('critique_modifier', {id: critique.id}) }}"><button type="button"
                             class="btn btn-info btn-color marginr ">Modifier</button></a>
-                            {% endif %}
+                    {% endif %}
                     <a href="{{ path('admin_confirmcritdelete', {id: critique.id}) }}"><button type="button"
                             class="btn btn-danger btnsup">Supprimer</button></a>
                 </td>
@@ -53,28 +55,29 @@
         </tbody>
 
     </table>
-    <nav>
-        {% set route = 'admin_critiqueslist' %}
-        {% set params = {} %}
-        <ul class="pagination">
-            {% if current_page > 1 %}
-            <li class="page-item">
-                <a class="page-link" href="{{ path(route, params|merge({page: current_page - 1})) }}">Précédent</a>
-            </li>
-            {% endif %}
-            {% if max_page > 0 %}
-            {% for page in 1..max_page %}
-            <li class="page-item {% if page == current_page %}active{% endif %}">
-                <a class="page-link" href="{{ path(route, params|merge({page: page})) }}">{{ page }}</a>
-            </li>
-            {% endfor %}
-            {% endif %}
-            {% if current_page < max_page %}
-            <li class="page-item">
-                <a class="page-link" href="{{ path(route, params|merge({page: current_page + 1})) }}">Suivant</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
 </section>
+<nav>
+    {% set route = 'admin_critiqueslist' %}
+    {% set params = {} %}
+    <ul class="pagination">
+        {% if current_page > 1 %}
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, params|merge({page: current_page - 1})) }}">Précédent</a>
+        </li>
+        {% endif %}
+        {% if max_page > 0 %}
+        {% for page in 1..max_page %}
+        <li class="page-item {% if page == current_page %}active{% endif %}">
+            <a class="page-link" href="{{ path(route, params|merge({page: page})) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+        {% endif %}
+        {% if current_page < max_page %}
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, params|merge({page: current_page + 1})) }}">Suivant</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
 {% endblock %}

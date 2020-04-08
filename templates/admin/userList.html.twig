@@ -55,13 +55,13 @@
         </tbody> 
         
     </table>
-
+</section>
     <nav>
         {% set route = 'admin_userlist' %}
         {% set params = {} %}
-        <ul class="pagination">
+        <ul class="pagination ">
             {% if current_page > 1 %}
-            <li class="page-item">
+            <li class="page-item ">
                 <a class="page-link" href="{{ path(route, params|merge({page: current_page - 1})) }}">Précédent</a>
             </li>
             {% endif %}
@@ -80,5 +80,5 @@
         </ul>
     </nav>
     
-</section>
+
 {% endblock %}

@@ -12,6 +12,63 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CritiqueController extends AbstractController
 {
+    //partie Commune
+
+     //Affichage des critiques d'un film
+
+    /**
+     * @Route("/film/{slug}/critiques", name="critiques")
+     */
+    public function critiqueView($slug,FilmRepository $filmRepository)
+    {
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        return $this->render('film/listeCritique.html.twig', [
+            'film' => $film,
+        ]);
+    }
+    
+    //Affichage d'une critique d'un film
+
+    /**
+     * @Route("/film/{slug}/critiques/{slug2}", name="critiqueview")
+     */
+    public function detailCritique($slug,$slug2,FilmRepository $filmRepository, CritiqueRepository $critiqueRepository)
+    {
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+        $critique = $critiqueRepository->findOneBy(["slug" => $slug2]);
+
+        return $this->render('film/detailCritique.html.twig', [
+            'film' => $film,
+            'critique' => $critique,
+        ]);
+    }
+
+    
+    /**
+     * @Route("/film/{slug}/critiques/edit", name="ajout_critique")
+     */
+    /*public function addCritique($slug, FilmRepository $filmRepository,Request $request, SluggerInterface $slugger)
+    {
+        $critique = new Critique();
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        $form = $this->createForm(CritiqueType::class, $critique);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {   
+            $critique->setSlug($slugger->slug($critique->getTitre())->lower());
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($critique);
+            $manager->flush(); 
+        }
+
+        return $this->render('admin/formulaire/addCritique.html.twig', [
+            'form' => $form->createView(),
+            'film' => $film,
+        ]);
+    }*/
 
     //Partie Admin
 
@@ -135,17 +192,5 @@ class CritiqueController extends AbstractController
         ]);
     }
 
-    //Affichage des critique d'un film
-
-    /**
-     * @Route("/film/{slug}/critiques", name="critiques")
-     */
-    public function critiqueView($slug,FilmRepository $filmRepository)
-    {
-        $film = $filmRepository->findOneBy(["slug" => $slug]);
-
-        return $this->render('film/listeCritique.html.twig', [
-            'film' => $film,
-        ]);
-    }
+   
 }

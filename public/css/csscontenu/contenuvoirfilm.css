@@ -161,8 +161,12 @@ iframe
 #commentaire .width{
     width: 70%;
 }
-
-
+/*retour a la ligne commentaire vueDétailFilm*/
 #commentaire .ligne{
     word-break: break-word;
+}
+
+/* Background par défaut si pas d'affiche de film */
+.background{
+    background-color: #777777;
 }

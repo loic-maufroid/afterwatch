@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Critiques de {{ film.titre }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/csscontenu/contenucritique.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<h1 class="font size color textc margintop">AfterWatch</h1>
+
+<main class="main flex flexd marget bk width margina">
+    <a href="{{ path('critiques', { slug: film.slug }) }}"><button>précedent</button></a>
+    <section class="marget margina">
+        <!--section qui comprend la carte du film-->
+        <div class="card mb-3 margint" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}" class="card-img" alt="Affiche du Film {{ film.titre }} indisponible">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ film.titre }}</h4>
+                        <p class="card-text"><span class="gras">Synopsis :</span> {{ film.synopsis }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--section qui comprend Le nom et le titre et la critique-->
+    <section class="margintop margina width">
+        <article class="marginb">
+            <h5 class="margint flex jcenter">{{ critique.titre }}</h5>
+            <h6 class="margintop flex jcenter">Auteur: {{ critique.idUtilisateur.username }}</h6>
+            <div id="stars" class="flex jcenter marginb">
+                {{ critique.note }}
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+            </div>
+            <p class="card-text sizing justify margina width">
+                {{ critique.contenu }}
+            </p>
+        </article>
+    </section>
+</main>
+
+{% endblock %}
