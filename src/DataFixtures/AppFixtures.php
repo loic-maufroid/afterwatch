@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
         $utilisateur->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'DeathEm') );
         $utilisateur->setRoles(['ROLE_ADMIN']);
         $utilisateur->setBan(true);
-        $utilisateur->setAvatar('Fruit_basket.jpg');
+        $utilisateur->setAvatar('800086324.jpg');
         $manager->persist($utilisateur);
 
         $utilisateurs = [];
