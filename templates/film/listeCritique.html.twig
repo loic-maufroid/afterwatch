@@ -1,0 +1,108 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Critiques de {{ film.titre }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/csscontenu/contenucritique.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<h1 class="font size color textc margintop">AfterWatch</h1>
+<main class="flex flexd bk width margina">
+    <section class="margintop margina">
+        <div class="card mb-4 margint" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="public/img/la_reine_des_neiges-2.jpg" class="card-img" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title">La Reine des Neiges 2</h4>
+                  <p class="card-text"><span class="gras">Synopsis :</span> This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+        </div>
+                <div class="flex jcenter margintop">
+                    <a href="#"><button type="button" class="btn btn-color marginr">Ajouter un critique</button></a>
+                </div>  
+    </section>
+    <section class="margintop margina width">
+        <article >
+            <hr>        
+            <div>          
+                <a class=" flexd textalign" href="#"><p>Tout voir</p></a>
+            </div> 
+            <div class="marginb margint flex flexdr">
+                <div class="flex flexd">
+                    <h6 class=" margina marginb">Nom de l'utilisateur ~ Titre de la critique</h6>
+                    <p class="card-text sizing justify margina width">
+                        Saepissime igitur mihi de amicitia cogitanti maxime 
+                        Post hanc adclinis. Saepissime igitur mihi de amicitia cogitanti 
+                        maxime Post hanc adclinis.Saepissime igitur mihi de amicitia cogitanti
+                        maxime Post hanc adclinis...
+                    </p>
+                    <div id="stars" class="flex jend">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div> 
+                </div>
+            </div>
+        </article>
+        <article class="marginb">
+            <hr>        
+            <div>          
+                <a class=" flexd textalign" href="#"><p>Tout voir</p></a>
+            </div> 
+            <div class="marginb margint flex flexdr">
+                <div class="flex flexd">
+                    <h6 class=" margina marginb">Nom de l'utilisateur ~ Titre de la critique</h6>
+                    <p class="card-text sizing justify margina width">
+                        Saepissime igitur mihi de amicitia cogitanti maxime 
+                        Post hanc adclinis. Saepissime igitur mihi de amicitia cogitanti 
+                        maxime Post hanc adclinis.Saepissime igitur mihi de amicitia cogitanti
+                        maxime Post hanc adclinis...
+                    </p>
+                    <div id="stars" class="flex jend">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div> 
+                </div>
+            </div>
+        </article>
+        <article class="marginb">
+            <hr>        
+            <div>          
+                <a class=" flexd textalign" href="#"><p>Tout voir</p></a>
+            </div>  
+            <div class="marginb margint flex">
+                <div class="flex flexd">
+                    <h6 class=" margina marginb">Nom de l'utilisateur ~ Titre de la critique</h6>
+                    <p class="card-text sizing justify margina width">
+                        Saepissime igitur mihi de amicitia cogitanti maxime 
+                        Post hanc adclinis. Saepissime igitur mihi de amicitia cogitanti 
+                        maxime Post hanc adclinis.Saepissime igitur mihi de amicitia cogitanti
+                        maxime Post hanc adclinis...
+                    </p>
+                    <div id="stars" class="flex jend">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                    </div> 
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+
+{% endblock %}

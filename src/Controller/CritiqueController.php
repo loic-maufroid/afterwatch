@@ -98,4 +98,7 @@ class CritiqueController extends AbstractController
             'notification' => $notification
         ]);
     }
+
+    //Affichage des critique d'un film
+    
 }
