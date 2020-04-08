@@ -18,17 +18,23 @@
 
         <tbody>
             {% for critique in critiques %}
+            {% if critique.publication == false %}
+            <tr class="rouge">
+                {% else %}
             <tr>
+                {% endif %}
                 <td>{{ critique.titre }}</td>
                 <td>{{ critique.idfilm.titre }}</td>
                 <td>{{ critique.idutilisateur.username }}</td>
                 <td>{{ critique.note }}</td>
                 <td>{{ critique.slug }}</td>
                 <td>{{ critique.contenu }}</td>
-                
+
                 <td>
-                    <a href="{{ path('critique_modifier', {id: critique.id}) }}"><button type="button" class="btn btn-info btn-color marginr ">Modifier</button></a>
-                    <a href="{{ path('admin_confirmcritdelete', {id: critique.id}) }}"><button type="button" class="btn btn-danger btnsup">Supprimer</button></a>
+                    <a href="{{ path('critique_modifier', {id: critique.id}) }}"><button type="button"
+                            class="btn btn-info btn-color marginr ">Modifier</button></a>
+                    <a href="{{ path('admin_confirmcritdelete', {id: critique.id}) }}"><button type="button"
+                            class="btn btn-danger btnsup">Supprimer</button></a>
                 </td>
             </tr>
             {% else %}
@@ -49,11 +55,11 @@
             </li>
             {% endif %}
             {% if max_page > 0 %}
-                {% for page in 1..max_page %}
-                    <li class="page-item {% if page == current_page %}active{% endif %}">
-                        <a class="page-link" href="{{ path(route, params|merge({page: page})) }}">{{ page }}</a>
-                    </li>
-                {% endfor %}
+            {% for page in 1..max_page %}
+            <li class="page-item {% if page == current_page %}active{% endif %}">
+                <a class="page-link" href="{{ path(route, params|merge({page: page})) }}">{{ page }}</a>
+            </li>
+            {% endfor %}
             {% endif %}
             {% if current_page < max_page %}
             <li class="page-item">

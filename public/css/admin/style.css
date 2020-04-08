@@ -230,11 +230,11 @@ footer{
 .invisible{
     display: none;
 }
-
+/* position de l'élement relatif a critique */
 #lienCritiques{
     position: relative;
 }
-
+/* notifier lors de critique non traité */
 .notif
 {
   position: absolute;
@@ -254,6 +254,7 @@ footer{
   color: #FFF;
   text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
 }
+/* mettre en rouge */
 .rouge{
     background-color: #d3121244;
 }
