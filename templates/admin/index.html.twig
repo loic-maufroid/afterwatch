@@ -5,40 +5,43 @@
 
 {% block body %}
 <section class="flex jcenter">
-    
+
 
     <table id="thèmes" class=" textc margint marginb">
         <div class="flex jflex">
-            <a href="{{ path('addfilm') }}"><button type="button" class="btn btn-info btn-color">Ajouter un Film</button></a>
+            <a href="{{ path('addfilm') }}"><button type="button" class="btn btn-info btn-color">Ajouter un
+                    Film</button></a>
         </div>
-        <div id="successmess">   
+        <div id="successmess">
             {% for message in app.flashes('success') %}
-                {{ message }}
+            {{ message }}
             {% endfor %}
         </div>
-        
+
         <thead class=" titre gras sizeg">
-                <th>Affiches</th>
-                <th>Titres</th>
-                <th>Slug</th>
-                <th>Dates de sortie</th>
-                <th>Réalisateurs</th>
-                <th>Scénaristes</th>
-                <th>Acteurs Principaux</th>
-                <th>Genre</th>
-                <th>Durées</th>
-                <th>Nationnalités</th>
-                <th>CNC</th>
-                <th>URL Bandes-Annonces</th>
-                <th>Synopsis</th>
-                <th>Actions</th>
+            <th>Affiches</th>
+            <th>Titres</th>
+            <th>Slug</th>
+            <th>Dates de sortie</th>
+            <th>Réalisateurs</th>
+            <th>Scénaristes</th>
+            <th>Acteurs Principaux</th>
+            <th>Genre</th>
+            <th>Durées</th>
+            <th>Nationnalités</th>
+            <th>CNC</th>
+            <th>URL Bandes-Annonces</th>
+            <th>Synopsis</th>
+            <th>Actions</th>
         </thead>
 
         <tbody>
             {% for film in films %}
             <tr>
                 <td>
-                    <img class="minimage" src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}{% endif %}" alt="{{ film.titre }}">
+                    <img class="minimage"
+                        src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}{% endif %}"
+                        alt="{{ film.titre }}">
                 </td>
                 <td>{{ film.titre }}</td>
                 <td>{{ film.slug }}</td>
@@ -65,7 +68,8 @@
                 </td>
                 <td>{{ film.duree }}</td>
                 <td>{{ film.nationalite }}</td>
-                <td>{% if film.legislation == 0 %}Tous publics{% else %}Interdit {{ film.legislation }} ans{% endif %}</td>
+                <td>{% if film.legislation == 0 %}Tous publics{% else %}Interdit {{ film.legislation }} ans{% endif %}
+                </td>
                 <td>{{ film.trailer }}</td>
                 <td>
                     {% if film.synopsis|length > 80 %}
@@ -75,8 +79,10 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('film_modifier', {id: film.id}) }}"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
-                    <a href="{{ path('admin_confirmfilmdelete', {id: film.id}) }}"><button type="button" class="btn btn-info btn-danger">Supprimer</button></a>
+                    <a href="{{ path('film_modifier', {id: film.id}) }}"><button type="button"
+                            class="btn btn-info btn-color marginr">Modifier</button></a>
+                    <a href="{{ path('admin_confirmfilmdelete', {id: film.id}) }}"><button type="button"
+                            class="btn btn-info btn-danger">Supprimer</button></a>
                 </td>
             </tr>
             {% else %}
@@ -86,28 +92,32 @@
             {% endfor %}
         </tbody>
     </table>
-    <nav>
-        <ul class="pagination">
-            {% if current_page > 1 %}
-            <li class="page-item">
-                <a class="page-link" href="{{ path('admin', {page: current_page - 1}) }}">Précédent</a>
-            </li>
-            {% endif %}
-            {% if max_page > 0 %}
-                {% for page in 1..max_page %}
-                    <li class="page-item {% if page == current_page %}active{% endif %}">
-                        <a class="page-link" href="{{ path('admin', {page: page}) }}">{{ page }}</a>
-                    </li>
-                {% endfor %}
-            {% endif %}
-            {% if current_page < max_page %}
-            <li class="page-item">
-                <a class="page-link" href="{{ path('admin', {page: current_page + 1}) }}">Suivant</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
+
+
 </section>
+
+<nav>
+    <ul class="pagination">
+        {% if current_page > 1 %}
+        <li class="page-item">
+            <a class="page-link" href="{{ path('admin', {page: current_page - 1}) }}">Précédent</a>
+        </li>
+        {% endif %}
+        {% if max_page > 0 %}
+        {% for page in 1..max_page %}
+        <li class="page-item {% if page == current_page %}active{% endif %}">
+            <a class="page-link" href="{{ path('admin', {page: page}) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+        {% endif %}
+        {% if current_page < max_page %}
+        <li class="page-item">
+            <a class="page-link" href="{{ path('admin', {page: current_page + 1}) }}">Suivant</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
 
 
 

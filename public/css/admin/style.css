@@ -258,3 +258,7 @@ footer{
 .rouge{
     background-color: #d3121244;
 }
+/* centrer la pagination  */
+.pagination{
+    justify-content: center;
+}
