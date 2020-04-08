@@ -70,6 +70,8 @@
                 <td>
                     {% if film.synopsis|length > 80 %}
                     {{ film.synopsis|slice(0, 79) }} (...)
+                    {% else %}
+                    {{ film.synopsis }}
                     {% endif %}
                 </td>
                 <td>

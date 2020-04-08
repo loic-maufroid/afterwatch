@@ -131,7 +131,7 @@ class FilmController extends AbstractController
             ->find($id);
 
 
-        $notification = 0;
+        $notification = $critiqueRepository->findCountSubmittedCritiques();
         return $this->render('admin/suppression/deleteFilm.html.twig', [
             'film' => $film,
             'notification' => $notification
