@@ -135,7 +135,7 @@ class CritiqueController extends AbstractController
         ]);
     }
 
-    //Affichage des critique d'un film
+    //Affichage des critiques d'un film
 
     /**
      * @Route("/film/{slug}/critiques", name="critiques")
@@ -146,6 +146,22 @@ class CritiqueController extends AbstractController
 
         return $this->render('film/listeCritique.html.twig', [
             'film' => $film,
+        ]);
+    }
+    
+    //Affichage d'une critique d'un film
+
+    /**
+     * @Route("/film/{slug}/critiques/{slug2}", name="critiqueview")
+     */
+    public function detailCritique($slug,$slug2,FilmRepository $filmRepository, CritiqueRepository $critiqueRepository)
+    {
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+        $critique = $critiqueRepository->findOneBy(["slug" => $slug2]);
+
+        return $this->render('film/detailCritique.html.twig', [
+            'film' => $film,
+            'critique' => $critique,
         ]);
     }
 }
