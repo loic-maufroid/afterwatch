@@ -10,85 +10,84 @@
 {% block body %}
 
 <section>
-  <video poster="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}{% else %}{{ asset('img/godzi2.jpg') }}{% endif %}" id="bgvid" playsinline autoplay muted loop>
-  </section>
-  
-  <div class="b-annonce">
-      <iframe src='{% if film.trailer %}{{ 'https://youtube.com/embed/'~film.trailer }}{% else %}http://player.allocine.fr/19583604.html{% endif %}' style='width:640px; height:360px;' scrolling='no'></iframe>   
+  <video
+    poster="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}{% else %}{{ asset('img/godzi2.jpg') }}{% endif %}"
+    id="bgvid" playsinline autoplay muted loop>
+</section>
+
+<div class="b-annonce">
+  <iframe
+    src='{% if film.trailer %}{{ 'https://youtube.com/embed/'~film.trailer }}{% else %}http://player.allocine.fr/19583604.html{% endif %}'
+    style='width:640px; height:360px;' scrolling='no'></iframe>
+</div>
+
+<div id="films">
+  <div class="flexbutton">
+    <div class="button">
+      <a class="film_a_voir button btn" href="#">Mes films à voir</a>
+      <a class="film_vu button btn">Mes films vu</a>
+      <a class="button btn flexbutton" href="{{ path('welcome') }}">Retour à l'accueil</a>
+    </div>
   </div>
-  
-  <div id="films">
-      <div class="flexbutton">
-          <div class="button">
-              <a class="film_a_voir button btn" href="#">Mes films à voir</a>
-              <a class="film_vu button btn">Mes films vu</a>
-              <a class="button btn flexbutton" href="{{ path('welcome') }}">Retour à l'accueil</a>
-          </div>
-          </div> 
   </section>
 
   <section class="infos">
     <h1>{{ film.titre }}</h1>
     <article>
-      <p><strong>Réalisateur(s): </strong>{% if film.realise|length > 0 %}{% for director in film.realise %}{% if loop.index == 1 %}{{ director.nom }}{% else %} / {{ director.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
+      <p><strong>Réalisateur(s):
+        </strong>{% if film.realise|length > 0 %}{% for director in film.realise %}{% if loop.index == 1 %}{{ director.nom }}{% else %}
+        / {{ director.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
       <p><strong>Synopsis: </strong>{{ film.synopsis }}</p>
-    <p><strong>Année: </strong>{{ film.date|date('Y') }}</p>
-    <p><strong>Durée: </strong>{% if film.duree %}{{ film.duree // 60 }}h {{ film.duree % 60 }}mn{% else %}Inconnue{% endif %}</p>
-    <p><strong>Nationalité: </strong>{% if film.nationalite %}{{ film.nationalite }}{% else %}Inconnue{% endif %}</p>
-    <p><strong>Genre: </strong>{% if film.genreFilm|length > 0 %}{% for genre in film.genreFilm %}{% if loop.index == 1 %}{{ genre.type }}{% else %} / {{ genre.type }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>        
-    <p><strong>Scénariste(s): </strong>{% if film.scenario|length > 0 %}{% for scen in film.scenario %}{% if loop.index == 1 %}{{ scen.nom }}{% else %} / {{ scen.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
-    <p><strong>Acteur(s): </strong>{% if film.acteurJoue|length > 0 %}{% for actor in film.acteurJoue %}{% if loop.index == 1 %}{{ actor.nom }}{% else %} / {{ actor.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p> 
+      <p><strong>Année: </strong>{{ film.date|date('Y') }}</p>
+      <p><strong>Durée: </strong>{% if film.duree %}{{ film.duree // 60 }}h
+        {{ film.duree % 60 }}mn{% else %}Inconnue{% endif %}</p>
+      <p><strong>Nationalité: </strong>{% if film.nationalite %}{{ film.nationalite }}{% else %}Inconnue{% endif %}</p>
+      <p><strong>Genre:
+        </strong>{% if film.genreFilm|length > 0 %}{% for genre in film.genreFilm %}{% if loop.index == 1 %}{{ genre.type }}{% else %}
+        / {{ genre.type }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
+      <p><strong>Scénariste(s):
+        </strong>{% if film.scenario|length > 0 %}{% for scen in film.scenario %}{% if loop.index == 1 %}{{ scen.nom }}{% else %}
+        / {{ scen.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
+      <p><strong>Acteur(s):
+        </strong>{% if film.acteurJoue|length > 0 %}{% for actor in film.acteurJoue %}{% if loop.index == 1 %}{{ actor.nom }}{% else %}
+        / {{ actor.nom }}{% endif %}{% endfor %}{% else %}Inconnu{% endif %}</p>
     </article>
-    </section>
-
-    <section class="critique">
-      <h2>Critiques</h2>
-      <div class="button">
-          <a class="a-voir" href="#" type="button">Voir les critiques</a>
-      </div>
-  
   </section>
 
-  <section>
-    <h2>Commentaires</h2>
-    {% for comment in film.commentaires %}
-      
-    <p><strong>{{ comment.idUtilisateur.username }} : </strong>
-    <i>{{ comment.contenu }}</i>
-    </p>
-
-    {% endfor %}
-
+  <section class="critique">
+    <h2>Critiques</h2>
     <div class="button">
-        <a class="Add button btn" type="button">Ajouter un commentaire</a>
+      <a class="a-voir" href="#" type="button">Voir les critiques</a>
     </div>
-</section>
 
-<section id="commentaire">
-  <h2>Commentaires</h2>
-  {{ form_start(form, {'attr': {'class': 'form margint'}}) }}
-  {{ form_errors(form.contenu) }}
+  </section>
+
+  <section id="commentaire">
+    <h2>Commentaires</h2>
+    {{ form_start(form, {'attr': {'class': 'form margint'}}) }}
+    {{ form_errors(form.contenu) }}
     {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
-    <button type="submit">Envoyer le Commentaire</button>  
-  {{ form_end(form) }}
+    <button type="submit">Envoyer le Commentaire</button>
+    {{ form_end(form) }}
 
-{% for comment in film.commentaires %}
-<article class="marginb">
-  <hr>
-  <div class="marginb flex flexdr">
-      <div>
+    {% for comment in film.commentaires %}
+    <article class="marginb">
+      <hr>
+      <div class="marginb flex flexdr">
+        <div>
           <img class='avatar' src="{{ asset('img/avatar/'~comment.idUtilisateur.avatar ) }}" class="avatar">
-      </div>
-      <div class="flex flexd">
-          <h6 class="margint marginle">de :  {% if is_granted('ROLE_ADMIN') %} (Admin){% endif %}{{ comment.idUtilisateur.username }}</h6>
-          <p class="card-text sizing justify marginle width">
+        </div>
+        <div class="flex flexd">
+          <h6 class="margint marginle">de : {% if is_granted('ROLE_ADMIN') %}
+            (Admin){% endif %}{{ comment.idUtilisateur.username }}</h6>
+          <p class="card-text sizing justify marginle width ligne">
             {{ comment.contenu }}
           </p>
+        </div>
       </div>
-  </div>
-</article>
-{% endfor %}
+    </article>
+    {% endfor %}
 
-</section>
-
-{% endblock %}
+  </section>
+</div>
+  {% endblock %}

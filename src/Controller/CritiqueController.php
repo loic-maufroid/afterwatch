@@ -133,4 +133,11 @@ class CritiqueController extends AbstractController
             'notification' => $notification
         ]);
     }
+
+    //Affichage des critique d'un film
+
+    /**
+     * @Route("/film/{slug}/critiques", name="critiques")
+     */
+    public function critiqueView
 }

@@ -161,3 +161,8 @@ iframe
 #commentaire .width{
     width: 70%;
 }
+
+
+#commentaire .ligne{
+    word-break: break-word;
+}
