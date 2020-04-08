@@ -33,7 +33,7 @@
                 <td>{{ critique.idutilisateur.username }}</td>
                 <td>{{ critique.note }}</td>
                 <td>{{ critique.slug }}</td>
-                <td>{{ critique.contenu }}</td>
+                <td>{% if critique.contenu|length > 80 %}{{ critique.contenu|slice(0,79) }}{% else %}{{ critique.contenu }}{% endif %}</td>
 
                 <td>{% if critique.publication == 0 %}
                     <a href="{{ path('critique_verifier',{id: critique.id}) }}"><button class="btn btn-info btn-color marginr">Vérifier avant de publier</button></a>

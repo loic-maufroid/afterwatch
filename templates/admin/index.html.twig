@@ -68,8 +68,10 @@
                 <td>{% if film.legislation == 0 %}Tous publics{% else %}Interdit {{ film.legislation }} ans{% endif %}</td>
                 <td>{{ film.trailer }}</td>
                 <td>
-                    {% if film.synopsis|length > 50 %}
+                    {% if film.synopsis|length > 80 %}
                     {{ film.synopsis|slice(0, 79) }} (...)
+                    {% else %}
+                    {{ film.synopsis }}
                     {% endif %}
                 </td>
                 <td>
