@@ -4,6 +4,11 @@
 {% block title %} {{ parent() }} - Critique{% endblock %}
 
 {% block body %}
+<div class="bg-success">
+{% for message in app.flashes('success') %}
+    {{ message }}
+{% endfor %}
+</div>
 <section class="flex jcenter">
     <table id="thèmes" class=" textc margint marginb">
         <thead class="gras sizeg">
@@ -30,9 +35,12 @@
                 <td>{{ critique.slug }}</td>
                 <td>{{ critique.contenu }}</td>
 
-                <td>
+                <td>{% if critique.publication == 0 %}
+                    <a href="{{ path('critique_verifier',{id: critique.id}) }}"><button class="btn btn-info btn-color marginr">Vérifier avant de publier</button></a>
+                    {% else %}
                     <a href="{{ path('critique_modifier', {id: critique.id}) }}"><button type="button"
                             class="btn btn-info btn-color marginr ">Modifier</button></a>
+                            {% endif %}
                     <a href="{{ path('admin_confirmcritdelete', {id: critique.id}) }}"><button type="button"
                             class="btn btn-danger btnsup">Supprimer</button></a>
                 </td>
