@@ -139,5 +139,7 @@ class CritiqueController extends AbstractController
     /**
      * @Route("/film/{slug}/critiques", name="critiques")
      */
-    public function critiqueView
+    public function critiqueView(){
+        
+    }
 }
