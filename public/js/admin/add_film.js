@@ -17,6 +17,9 @@ var films = [];
 var curEntry = [];
 
 $("#boutonPopu").click(function(event){
+
+    try {
+        
     $("#boutonPopu").prop('disabled',true);
     $("#infos").hide();
     $("#messageRecherche").text("");
@@ -167,7 +170,20 @@ $("#boutonPopu").click(function(event){
     $("#messageRecherche").text("Saisissez un nom de film");
     $("#boutonPopu").prop('disabled',false);
     }
-    
+} catch (error) {
+        console.log(error);
+        $("#submitFilm").hide()
+        $("#selectedFilm *").html("");
+        $("label").hide();
+        $("input").hide();
+        $("#film_titre").show();
+        $("#film_legislation").show();
+        $("label[for='film_titre']").show();
+        $("label[for='film_legislation']").show();
+        $("#infos").hide();
+        $("#boutonPopu").prop('disabled',false);
+        $("#messageRecherche").text("La recherche a échoué : "+error);
+}
 });
 
 function showReady(){
