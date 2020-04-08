@@ -28,8 +28,9 @@ class FilmController extends AbstractController
     /**
      * @Route("/film/{slug}", name="details_film")
      */
-    public function voir($slug,FilmRepository $filmRepository,Request $request){
-        
+    public function voir($slug,FilmRepository $filmRepository,Request $request)
+    {
+
         $film = $filmRepository->findOneBy(["slug" => $slug]);
         $user = $this->getUser();
         $commentaire = new Commentaire();
