@@ -73,17 +73,16 @@
   {{ form_end(form) }}
 
 {% for comment in film.commentaires %}
-<article>
+<article class="marginb">
   <hr>
   <div class="marginb flex flexdr">
       <div>
-          <img src="public/img/11132014.jpg" class="avatar">
+          <img class='avatar' src="{{ asset('img/avatar/'~comment.idUtilisateur.avatar ) }}" class="avatar">
       </div>
       <div class="flex flexd">
-          <h6 class="margint marginle">Nom de l'utilisateur</h6>
-          <p class="card-text sizing justify margina width">
-              Saepissime igitur mihi de amicitia cogitanti maxime 
-              Post hanc adclinis.
+          <h6 class="margint marginle">de :  {% if is_granted('ROLE_ADMIN') %} (Admin){% endif %}{{ comment.idUtilisateur.username }}</h6>
+          <p class="card-text sizing justify marginle width">
+            {{ comment.contenu }}
           </p>
       </div>
   </div>

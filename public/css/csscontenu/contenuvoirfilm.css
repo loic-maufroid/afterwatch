@@ -114,3 +114,50 @@ iframe
   html { background: url('') #000 no-repeat center center fixed; }
   #bgvid { display: none; }
 }
+
+/* -Zone des commentaires- */
+
+/*taille de l'avatar*/
+#commentaire .avatar{
+    width: 100px;
+    height: 150px;
+}
+/*margin auto*/
+.margina{
+    margin: auto;
+}
+/*margin en bas*/
+#commentaire .marginb{
+    margin-bottom: 2em;
+}
+/*margin au dessus du formulaire*/
+#commentaire .margint{
+    margin-top: 2em;
+}
+/*margin a gauche de l'avatar et du pseudo*/
+#commentaire .marginle{
+    margin-left: 1em;
+}
+/*display flex du formulaire*/
+#commentaire .flex{
+    display: flex;
+}
+/*flex direction entre l'avatar et le profil*/
+#commentaire .flexdr{
+    flex-direction: row;
+}/*flex direction entre le titre et le formulaire*/
+#commentaire .flexd{
+    flex-direction: column;
+}
+/*justifier le text*/
+#commentaire .justify{
+    text-align: justify;
+}
+/*taille des paragraphe*/
+#commentaire .sizing{
+    font-size: 17px;
+}
+/*taille de la section*/
+#commentaire .width{
+    width: 70%;
+}
