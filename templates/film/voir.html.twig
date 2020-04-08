@@ -24,8 +24,10 @@
 <div id="films">
   <div class="flexbutton">
     <div class="button">
-      <a class="film_a_voir button btn" href="#">Mes films à voir</a>
-      <a class="film_vu button btn">Mes films vu</a>
+      {% if app.user %}
+      <a class="film_a_voir button btn" href="{{ path('ajouter_aVoir',{username: app.user.username,slug: film.slug}) }}">Je veux voir</a>
+      <a class="film_vu button btn" href="#">J'ai vu</a>
+      {% endif %}
       <a class="button btn flexbutton" href="{{ path('welcome') }}">Retour à l'accueil</a>
     </div>
   </div>

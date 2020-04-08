@@ -47,4 +47,18 @@ class StatusRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return: Status|null
+     */
+    public function findByDoubleId($idu,$idf){
+
+        return $this->createQueryBuilder('s')
+        ->where('s.id_utilisateur = :idu')
+        ->andWhere('s.id_film = :idf')
+        ->setParameters(['idu' => $idu,'idf' => $idf])
+        ->getQuery()
+        ->getOneOrNullResult();
+
+    }
 }

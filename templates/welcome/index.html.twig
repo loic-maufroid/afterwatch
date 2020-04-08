@@ -14,7 +14,7 @@
                 
            
             <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}./img/01.jpg{% endif %}" class="d-block mx-auto img-fluid" alt="...">
+                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmCarr.affiche }}{% else %}./img/01.jpg{% endif %}" class="d-block mx-auto img-fluid" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>{{ filmCarr.titre }}</h3>
                     <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>

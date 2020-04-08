@@ -8,6 +8,7 @@ use App\Entity\Film;
 use App\Entity\Genre;
 use App\Entity\Realisateur;
 use App\Entity\Scenariste;
+use App\Entity\Status;
 use App\Form\CommentaireType;
 use App\Repository\FilmRepository;
 use App\Form\FilmType;
@@ -16,6 +17,7 @@ use App\Repository\CritiqueRepository;
 use App\Repository\GenreRepository;
 use App\Repository\RealisateurRepository;
 use App\Repository\ScenaristeRepository;
+use App\Repository\StatusRepository;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,6 +60,45 @@ class FilmController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/{username}/myFilms/ajouter-a-voir/{slug}", name="ajouter_aVoir")
+     */
+    public function addToSee($username,$slug,FilmRepository $filmRepository,UtilisateurRepository $utilisateurRepository,StatusRepository $statusRepository){
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        if ($this->getUser()->getUsername() !== $username)
+        return $this->redirectToRoute('welcome');
+
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        $user = $utilisateurRepository->findOneBy(["username" => $username]);
+
+        $status = $statusRepository->findByDoubleId($user->getId(),$film->getId());
+
+        $manager = $this->getDoctrine()->getManager();
+
+        if ($status){
+            $status->setVeutVoir(true);
+            
+           $manager->persist($status);
+           $manager->flush();
+        
+        }
+        else{
+            $status = new Status();
+            $status->setVeutVoir(true);
+            $status->setAVue(false);
+            $user->addStatus($status);
+            $film->addStatuesFilm($status);
+            $manager->persist($status);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('films_utilisateur',['username' => $username]);
+
+
+    }
+
     /**
      * @Route("/{username}/myFilms",name="films_utilisateur")
      */
@@ -71,15 +112,15 @@ class FilmController extends AbstractController
 
         $filmsCarrTemp = [];
         $filmsCarr = [];
-        $tabIdsAVoir = [];
-        $filmsAVoir = [];
+        $tabIdsAVu = [];
+        $filmsAVu = [];
         $tabIdsVeutVoir = [];
         $filmsVeutVoir = [];
 
         $temp = $user->getStatuses();
         foreach($temp as $t){
             if ($t->getAVue()){
-            $tabIdsAVoir []= $t->getIdFilm();
+            $tabIdsAVu []= $t->getIdFilm();
             }
             if ($t->getVeutVoir()){
             $tabIdsVeutVoir []= $t->getIdFilm();
@@ -98,8 +139,8 @@ class FilmController extends AbstractController
             }
         }
 
-       foreach ($tabIdsAVoir as $idAVoir) {
-           $filmsAVoir []= $filmRepository->find($idAVoir);
+       foreach ($tabIdsAVu as $idAVu) {
+           $filmsAVu []= $filmRepository->find($idAVu);
        }
 
        foreach ($tabIdsVeutVoir as $idVeutVoir){
@@ -110,7 +151,7 @@ class FilmController extends AbstractController
         return $this->render('film/myfilms.html.twig',[
             "user" => $user,
             "filmsCarr" => $filmsCarr,
-            "filmsAVoir" => $filmsAVoir,
+            "filmsAVu" => $filmsAVu,
             "filmsVeutVoir" => $filmsVeutVoir
         ]);
 
