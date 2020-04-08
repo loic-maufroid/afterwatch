@@ -40,7 +40,7 @@
             </div> 
             <div class="marginb margint flex flexdr">
                 <div class="flex flexd">
-                    <h6 class=" margina marginb">{{ critique.idUtilisateur.username }} ~ {{ critique.titre }}</h6>
+                    <h6 class=" margina marginb"><a href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}">{{ critique.idUtilisateur.username }} ~ {{ critique.titre }}</a></h6>
                     <p class="card-text sizing justify margina width">
                         {{ critique.contenu }}
                     </p>
