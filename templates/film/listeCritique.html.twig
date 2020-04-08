@@ -5,58 +5,81 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/csscontenu/contenucritique.css') }}">
+<style>
+    .backgrounddynamique {
+        background:url({{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }});
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
+{% if film.affiche == null %}
 
-<h1 class="font size color textc margintop">AfterWatch</h1>
+<body class="background">
+    {% else %}
 
-<main class="flex flexd bk width margina">
-    <a href="{{ path('details_film', { slug: film.slug }) }}"><button>précedent</button></a>
-    <section class="margintop margina">
-        <div class="card mb-4 margint" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}" class="card-img" alt="Affiche du Film {{ film.titre }} indisponible">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h4 class="card-title">{{ film.titre }}</h4>
-                  <p class="card-text"><span class="gras">Synopsis :</span> {{ film.synopsis }}</p>
-                </div>
-              </div>
-            </div>
-        </div>
-                <div class="flex jcenter margintop">
-                    <a href="#"><button type="button" class="btn btn-color marginr">Ajouter une Critique</button></a>
-                </div>  
-    </section>
-    <section class="margintop margina width">
-        {% for critique in film.critiques %}
-        <article class="marginb">
-            <hr>        
-            <div>          
-                <a class=" flexd textalign" href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}"><p>Tout voir</p></a>
-            </div> 
-            <div class="marginb margint flex flexdr">
-                <div class="flex flexd">
-                    <h6 class=" margina marginb"><a href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}">{{ critique.idUtilisateur.username }} ~ {{ critique.titre }}</a></h6>
-                    <p class="card-text sizing justify margina width">
-                        {{ critique.contenu }}
-                    </p>
-                    <div id="stars" class="flex jend">
-                        {{ critique.note }}
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                    </div> 
-                </div>
-            </div>
-        </article>  
-        {% endfor %}
-    </section>
-</main>
+    <body class="backgrounddynamique">
+        {% endif %}
 
-{% endblock %}
+        <section>
+
+            <h1 class="font size color textc margintop">AfterWatch</h1>
+
+            <main class="flex flexd bk width margina">
+                <a href="{{ path('details_film', { slug: film.slug }) }}"><button>précedent</button></a>
+                <section class="margintop margina">
+                    <div class="card mb-4 margint" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}" class="card-img"
+                                    alt="Affiche du Film {{ film.titre }} indisponible">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ film.titre }}</h4>
+                                    <p class="card-text"><span class="gras">Synopsis :</span> {{ film.synopsis }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex jcenter margintop">
+                        <a href="#"><button type="button" class="btn btn-color marginr">Ajouter une
+                                Critique</button></a>
+                    </div>
+                </section>
+                <section class="margintop margina width">
+                    {% for critique in film.critiques %}
+                    <article class="marginb">
+                        <hr>
+                        <div>
+                            <a class=" flexd textalign"
+                                href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}">
+                                <p>Tout voir</p>
+                            </a>
+                        </div>
+                        <div class="marginb margint flex flexdr">
+                            <div class="flex flexd">
+                                <h6 class=" margina marginb"><a
+                                        href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}">{{ critique.idUtilisateur.username }}
+                                        ~ {{ critique.titre }}</a></h6>
+                                <p class="card-text sizing justify margina width">
+                                    {{ critique.contenu }}
+                                </p>
+                                <div id="stars" class="flex jend">
+                                    {{ critique.note }}
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </section>
+            </main>
+    </body>
+    {% endblock %}

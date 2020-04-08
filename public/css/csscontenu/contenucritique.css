@@ -124,9 +124,9 @@ a:hover{
     transition: all 150ms;
     top: 160%;
 }
-/*background*/
+/*background de la section de contenu*/
 .bk{
-    background-color:#e7e7e7;
+    background-color:#e7e7e7d0;
 }
 .main{
     height: auto;
@@ -134,4 +134,8 @@ a:hover{
 /*aligne le text a droite*/
 .textalign{
     text-align: end;
+}
+/* Background par défaut si pas d'affiche de film */
+.background{
+    background-color: #777777;
 }
