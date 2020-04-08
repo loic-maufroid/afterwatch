@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Critique;
 use App\Form\CritiqueType;
 use App\Repository\CritiqueRepository;
+use App\Repository\FilmRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -139,5 +140,12 @@ class CritiqueController extends AbstractController
     /**
      * @Route("/film/{slug}/critiques", name="critiques")
      */
-    public function critiqueView
+    public function critiqueView($slug,FilmRepository $filmRepository)
+    {
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        return $this->render('film/listeCritique.html.twig', [
+            'film' => $film,
+        ]);
+    }
 }
