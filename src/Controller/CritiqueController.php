@@ -9,6 +9,7 @@ use App\Repository\FilmRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CritiqueController extends AbstractController
 {
@@ -43,6 +44,32 @@ class CritiqueController extends AbstractController
             'critique' => $critique,
         ]);
     }
+
+    
+    /**
+     * @Route("/film/{slug}/critiques/edit", name="ajout_critique")
+     */
+    /*public function addCritique($slug, FilmRepository $filmRepository,Request $request, SluggerInterface $slugger)
+    {
+        $critique = new Critique();
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        $form = $this->createForm(CritiqueType::class, $critique);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {   
+            $critique->setSlug($slugger->slug($critique->getTitre())->lower());
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($critique);
+            $manager->flush(); 
+        }
+
+        return $this->render('admin/formulaire/addCritique.html.twig', [
+            'form' => $form->createView(),
+            'film' => $film,
+        ]);
+    }*/
 
     //Partie Admin
 
