@@ -10,7 +10,9 @@
 {% block body %}
 
 <h1 class="font size color textc margintop">AfterWatch</h1>
+
 <main class="flex flexd bk width margina">
+    <a href="{{ path('details_film', { slug: film.slug }) }}"><button>précedent</button></a>
     <section class="margintop margina">
         <div class="card mb-4 margint" style="max-width: 540px;">
             <div class="row no-gutters">
@@ -38,14 +40,12 @@
             </div> 
             <div class="marginb margint flex flexdr">
                 <div class="flex flexd">
-                    <h6 class=" margina marginb">Nom de l'utilisateur ~ Titre de la critique</h6>
+                    <h6 class=" margina marginb">{{ critique.idUtilisateur.username }} ~ {{ critique.titre }}</h6>
                     <p class="card-text sizing justify margina width">
-                        Saepissime igitur mihi de amicitia cogitanti maxime 
-                        Post hanc adclinis. Saepissime igitur mihi de amicitia cogitanti 
-                        maxime Post hanc adclinis.Saepissime igitur mihi de amicitia cogitanti
-                        maxime Post hanc adclinis...
+                        {{ critique.contenu }}
                     </p>
                     <div id="stars" class="flex jend">
+                        {{ critique.note }}
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
