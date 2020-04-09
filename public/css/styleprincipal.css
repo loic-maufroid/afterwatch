@@ -410,7 +410,6 @@ span
     box-sizing: border-box;
 }
 
-
 /*Bouton delete film de la collection*/
 
 .boutonSuppCollection{
@@ -428,6 +427,42 @@ span
     background-image:linear-gradient(60deg, #1e9593, #2e8f8d);
     color: white;
 }
+
+/*Notification "new" dans myFilms*/
+
+/*display flex*/
+.display{
+    display: flex;
+    position: absolute;
+    top: 80%;
+    left: 150%;
+    z-index: 1;
+   }
+   /*justify content center*/
+   .jcenter{
+       justify-content: center;
+   }
+   /* align items center*/
+   .alignit{
+       align-items: center;
+   }
+   .nouveau
+   {
+     width: auto;
+     height: 2em;
+     padding: 0 .75em;
+     background: #2e8f8d;
+     border-radius: 0.2em;
+     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+     font-family: Arial;
+     font-size: 20px;
+     color: #FFF;
+     text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+   }
+
+   .nouveau p{
+       margin-bottom: 0;
+   }
 
 section
 {

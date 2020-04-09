@@ -57,7 +57,11 @@
 
                         <li class="img-a-affiche">
                             {% if app.session.flashbag.peek('new')|length > 0 %}
-                            <i>{{ app.session.flashbag.peek('new')[0] == filmVeutVoir.id ? 'Nouveau !' : '' }}</i>
+                            {% if app.session.flashbag.peek('new')[0] == filmVeutVoir.id %}
+                            <div class="display jcenter alignit">
+                            <div class="nouveau display alignit"><p>New</p></div>
+                            </div>
+                            {% endif %}
                             {% endif %}
                             <a class="a-film film-a" href="{{ path('details_film',{slug: filmVeutVoir.slug}) }}" data-rel="button"><div class="container">
                                 <div class="card">
