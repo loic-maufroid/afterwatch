@@ -114,6 +114,10 @@ class FilmController extends AbstractController
             $manager->flush();
         }
 
+        $flashbag = $this->get('session')->getFlashBag();
+        $flashbag->get("new");
+        $flashbag->add("new",$film->getId());
+
         return $this->redirectToRoute('films_utilisateur',['username' => $username]);
 
 
@@ -154,9 +158,37 @@ class FilmController extends AbstractController
             $manager->flush();
         }
 
+        $this->get('session')->getFlashBag()->clear();
+
         return $this->redirectToRoute('films_utilisateur',['username' => $username]);
 
 
+    }
+
+
+    /**
+     * @Route("/{username}/myFilms/supprimer/{slug}",name="supprimer_filmfromcollection")
+     */
+    public function deleteFromCollection($username,$slug,FilmRepository $filmRepository,UtilisateurRepository $utilisateurRepository,StatusRepository $statusRepository){
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        if ($this->getUser()->getUsername() !== $username)
+        return $this->redirectToRoute('welcome');
+
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        $user = $utilisateurRepository->findOneBy(["username" => $username]);
+
+        $status = $statusRepository->findByDoubleId($user->getId(),$film->getId());
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($status);
+        $manager->flush();
+
+        $this->get('session')->getFlashBag()->clear();
+
+        return $this->redirectToRoute('films_utilisateur',['username' => $username]);
     }
 
 
