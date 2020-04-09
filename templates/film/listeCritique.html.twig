@@ -63,8 +63,8 @@
                                 <h6 class=" margina marginb"><a
                                         href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}">{{ critique.idUtilisateur.username }}
                                         ~ {{ critique.titre }}</a></h6>
-                                <p class="card-text sizing justify margina width">
-                                    {{ critique.contenu }}
+                                <p class="card-text sizing justify margina width ligne">
+                                    {% if critique.contenu|length > 80 %}{{ critique.contenu|slice(0,99) }}{% else %}{{ critique.contenu }}{% endif %}
                                 </p>
                                 <div id="stars" class="flex jend">
                                     {{ critique.note }}

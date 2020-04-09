@@ -14,30 +14,6 @@ class CommentaireController extends AbstractController
 {
     //Partie Commune
 
-    //Ajouter un commentaire
-
-   
-    /*public function addCommentaire(Request $request)
-    {
-        $commentaire = new Commentaire();
-        $form = $this->createForm(CommentaireType::class, $commentaire);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($commentaire);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('details_film');
-        }
-
-        return $this->render('admin/formulaire/addCommentaire.html.twig', [
-            'form' => $form->createView(),
-        ]);
-
-    }*/
-
     //Partie Admin
 
     //Page de Confirmation de la Suppression des Commentaires

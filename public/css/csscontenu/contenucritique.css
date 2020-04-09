@@ -139,3 +139,9 @@ a:hover{
 .background{
     background-color: #777777;
 }
+
+
+/*retour a la ligne critique vueListeCritique*/
+.ligne{
+    word-break: break-word;
+}

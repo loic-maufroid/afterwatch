@@ -16,7 +16,7 @@ class CritiqueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre',TextType::class,['label' => 'Titre de votre Critique'])
+            ->add('titre',TextType::class,['label' => 'Titre de la Critique'])
             ->add('contenu',TextareaType::class,['label' => 'Mettez votre Critique'])
             ->add('note',ChoiceType::class,[
                 'choices' => [

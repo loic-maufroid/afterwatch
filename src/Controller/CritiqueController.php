@@ -44,13 +44,15 @@ class CritiqueController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {   
-            $critique->setSlug($slugger->slug($critique->getTitre())->lower());
+            $critique->setSlug($slugger->slug($critique->getTitre())->lower())->setPublication(false);
             $user->addCritique($critique);
             $film->addCritique($critique);
         
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($critique);
             $manager->flush(); 
+
+            return $this->redirectToRoute('critiques', ['slug' => $slug]);
         }
 
         return $this->render('admin/formulaire/addCritique.html.twig', [

@@ -27,28 +27,31 @@
             <h3 class="font textc">Titre du film</h3>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="Titre">Titre de la critique</label>
-                    <input type="text" class="form-control" id="Titre">
+                    {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="Critique">Critique</label>
-                    <textarea type="text" class="form-control" id="Critique"></textarea>
+                <div id="stars" class="flex jcenter margintop col-md-6">
+                    {{ form_row(form.note) }}
+                </div>
+                <div class="form-group col-md-12">
+                    {{ form_row(form.contenu, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            <div id="stars" class="flex jcenter margintop">
-                
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-            </div>
+            
             <div class="flex jcenter marget">
-                <a href="#"><button type="button" class="btn btn-color marginr">Envoyer</button></a>
-                <a href="#"><button type="button" class="btn btn-danger">Retour</button></a>
+                <button class="btn btn-color marginr">Envoyer</button></a>
+                <a href="{{ path('critiques', {slug: film.slug}) }}"><button type="button" class="btn btn-danger">Retour</button></a>
             </div>
 
             {{ form_end(form) }}
+
+            <!--<div id="stars" class="flex jcenter margintop col-md-6">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+            </div> -->
+
         </section>
 
         {% endblock %}
