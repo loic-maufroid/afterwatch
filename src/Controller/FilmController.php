@@ -117,6 +117,48 @@ class FilmController extends AbstractController
 
     }
 
+     /**
+     * @Route("/{username}/myFilms/ajouter-a-vu/{slug}", name="ajouter_aVu")
+     */
+    public function addHasSeen($username,$slug,FilmRepository $filmRepository,UtilisateurRepository $utilisateurRepository,StatusRepository $statusRepository){
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        if ($this->getUser()->getUsername() !== $username)
+        return $this->redirectToRoute('welcome');
+
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+
+        $user = $utilisateurRepository->findOneBy(["username" => $username]);
+
+        $status = $statusRepository->findByDoubleId($user->getId(),$film->getId());
+
+        $manager = $this->getDoctrine()->getManager();
+
+        if ($status){
+            $status->setAVue(true);
+            $status->setVeutVoir(false);
+            
+           $manager->persist($status);
+           $manager->flush();
+        
+        }
+        else{
+            $status = new Status();
+            $status->setVeutVoir(false);
+            $status->setAVue(true);
+            $user->addStatus($status);
+            $film->addStatuesFilm($status);
+            $manager->persist($status);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('films_utilisateur',['username' => $username]);
+
+
+    }
+
+
+
     /**
      * @Route("/{username}/myFilms",name="films_utilisateur")
      */
