@@ -9,9 +9,10 @@
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
+    <!-- import SCSS -->
     <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styleprincipal.css') }}">
     <style>
         /*!! insertion de SCSS*/
         .split-character span {
@@ -40,7 +41,8 @@
 
 <body>
     {% block body %}
-    <div class="wrapbody">
+    
+        <!-- a supprimer sans conséquence -->
         <div class="rep-contenu-h"></div>
 
         {% block header %}
@@ -101,18 +103,6 @@
                                 </div>
                             </div>
                         </nav>
-                        <!--<div class="co-et-regist">parties connexion et inscripton
-                        {% if app.user %}{# Si connecté #}
-                            <div>
-                                <img src="{#{{AFAIRE}}#}" alt="">
-                            </div>
-                            {{ app.user.username }},<button class="registrer" type="button"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
-                        {% else %}{# Si non connecté #}
-                        <button class="registrer" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button><!--ici pour la connexion de l'utilisateur-->
-                        <!--<button type="button" class="registrer" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button><!--ici pour l'inscription-->
-                        <!--{% endif %}
-                    </div>-->
-
 
                         <datalist id="films"></datalist>
 
@@ -185,7 +175,6 @@
         {% endblock %}
 
         {% endblock %}
-    </div>
 
     {% block javascripts %}
     <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
