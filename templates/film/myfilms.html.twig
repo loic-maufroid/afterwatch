@@ -12,15 +12,14 @@
         <div id="xl-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
 
-                {% for filmCarr in filmsCarr %}
-
-
-                <div class="carousel-item active">
-                    <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/01.jpg') }}{% endif %}"
-                        class="d-block mx-auto img-fluid" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h6>{{ filmCarr.titre }}</h6>
-                        <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+            {% for filmCarr in filmsCarr %}
+                
+             
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/01.jpg') }}{% endif %}" class="d-block mx-auto img-fluid" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h6>{{ filmCarr.titre }}</h6>
+                    <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
                     </div>
                 </div>
 
@@ -57,16 +56,16 @@
                         {% for filmVeutVoir in filmsVeutVoir %}
 
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmVeutVoir.slug}) }}"
-                                data-rel="button">
-                                <div class="container">
-                                    <div class="card">
-                                        <div class="face face1">
-                                            <div class="content">
-                                                <img src="{% if filmVeutVoir.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmVeutVoir.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                                                    data-rel="poster" alt="" width="150" height="204" />
-                                            </div>
+                            {% if app.session.flashbag.peek('new')|length > 0 %}
+                            <i>{{ app.session.flashbag.peek('new')[0] == filmVeutVoir.id ? 'Nouveau !' : '' }}</i>
+                            {% endif %}
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmVeutVoir.slug}) }}" data-rel="button"><div class="container">
+                                <div class="card">
+                                    <div class="face face1">
+                                        <div class="content">
+                                          <img src="{% if filmVeutVoir.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmVeutVoir.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" data-rel="poster" alt="" width="150" height="204"/>
                                         </div>
+                                    </div>
                                         <div class="face face2">
                                             <div class="content">
                                                 <a class="w-100 m-0 p-0"
@@ -76,8 +75,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                
                                 </div>
                             </a>
+                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmVeutVoir.slug}) }}"><button type="button" class="btn btn-color"><i class="fas fa-times"></i></button></a>
                         </li>
 
                         {% endfor %}
@@ -123,6 +124,7 @@
                                     </div>
                                 </div>
                             </a>
+                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmAVu.slug}) }}"><button type="button" class="btn btn-color"><i class="fas fa-times"></i></button></a>
                         </li>
 
                         {% endfor %}

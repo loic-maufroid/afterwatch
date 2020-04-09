@@ -25,6 +25,8 @@ class WelcomeController extends AbstractController
 
         $filmsSortie = $filmRepository->findRandomSortieFilms(5);
 
+        $this->get('session')->getFlashBag()->clear();
+
         return $this->render('welcome/index.html.twig', [
             "filmsCarr" => $filmsCarr,
             "filmsAffiche" => $filmsAffiche,
@@ -40,6 +42,8 @@ class WelcomeController extends AbstractController
         $filmsCarr = $filmRepository->findRandomAlafficheFilms(7);
         $films = $filmRepository->findAllAlafficheFilms();
 
+        $this->get('session')->getFlashBag()->clear();
+
         return $this->render('welcome/alaffiche.html.twig',[
             "filmsCarr" => $filmsCarr,
             "films" => $films
@@ -54,6 +58,8 @@ class WelcomeController extends AbstractController
 
         $filmsCarr = $filmRepository->findRandomSortieFilms(7);
         $films = $filmRepository->findAllSortieFilms();
+
+        $this->get('session')->getFlashBag()->clear();
 
         return $this->render('welcome/next.html.twig',[
             "filmsCarr" => $filmsCarr,
@@ -78,6 +84,7 @@ class WelcomeController extends AbstractController
             $films []= ["film" => $filmRepository->find($valueTemp["idFilm"]),"noteMoy" => $this->roundNote($valueTemp["moyenne"])];
         }
 
+        $this->get('session')->getFlashBag()->clear();
 
         return $this->render('welcome/popular.html.twig',[
             "filmsCarr" => $filmsCarr,
@@ -132,7 +139,8 @@ class WelcomeController extends AbstractController
         for ($i=0; $i<count($idsAct); $i++) {            
             $actors[] = $acteurRepository->find($idsAct[$i]);
         }
-     
+
+        $this->get('session')->getFlashBag()->clear();   
 
         return $this->render('welcome/search.html.twig',[
             "query" => $query,
