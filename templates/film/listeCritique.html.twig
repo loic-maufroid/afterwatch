@@ -50,6 +50,7 @@
                 </section>
                 <section class="margintop margina width">
                     {% for critique in film.critiques %}
+                    {% if critique.publication == 1 %}
                     <article class="marginb">
                         <hr>
                         <div>
@@ -77,6 +78,9 @@
                             </div>
                         </div>
                     </article>
+                    {% else %}
+                        
+                    {% endif %}
                     {% endfor %}
                 </section>
             </main>
