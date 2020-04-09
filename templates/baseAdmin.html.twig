@@ -1,86 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}AfterWatch Admin{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/admin/style.css')}}">
-            <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-        {% endblock %}
-    </head>
-    <body>
-        {% block header %}
-        <header>
-            <div class="flex aligni jbetween">
-                <div>
-                    <a href="{{ path('welcome') }}"><img class="logo" src="{{ asset('img/logo/afterwatch_logo.png')}}"></img></a>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}AfterWatch Admin{% endblock %}</title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/style.css')}}">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+        rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+    {% block header %}
+    <header>
+        <div class="flex aligni jbetween">
+            <div>
+                <a href="{{ path('welcome') }}"><img class="logo"
+                        src="{{ asset('img/logo/afterwatch_logo.png')}}"></img></a>
+            </div>
+            <a class="lienh" href="{{ path('welcome') }}">
+                <h1>AfterWatch</h1>
+            </a>
+            <ul class="menuh flex">
+                {% if app.user %}
+                <!-- menu en dropdown -->
+                <div class="dropdown">
+                    <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Admin ~ <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}"
+                            alt="image de profil {{ app.user.username }}"> {{ app.user.username }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de
+                            Profil</a>
+                        <a class="dropdown-item" href="{{ path('welcome') }}">Retour au Site</a>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
+                    </div>
                 </div>
-                <a class="lienh" href="{{ path('welcome') }}"><h1>AfterWatch</h1></a>
-                    <ul class="menuh flex">
-                        {% if app.user %}
-                            <!-- menu en dropdown -->
-                            <div class="dropdown">
-                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin ~ <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}" alt="image de profil {{ app.user.username }}"> {{ app.user.username }}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
-                                  <a class="dropdown-item" href="{{ path('welcome') }}">Retour au Site</a>
-                                  <a class="dropdown-item"  href="{{ path('app_logout') }}">Deconnexion</a>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </ul>
-             </div>
-        </header>
-        {% endblock %}
-
-        {% block nav %}
-        <nav class="flex jcenter">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link paddingr" href="{{ path('admin',{page: 1}) }}">
-                        <button type="button" class="btn btn-info btn-color size">
-                            Films
-                        </button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link paddingr" href="{{ path('admin_userlist',{page: 1}) }}">
-                        <button type="button" class="btn btn-info btn-color marginr size">
-                            Liste Utilisateur
-                        </button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link paddingr" href="{{ path('admin_commentslist',{page: 1}) }}">
-                        <button type="button" class="btn btn-info btn-color marginr size">
-                            Commentaires
-                        </button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a id="lienCritiques" class="nav-link paddingr" href="{{ path('admin_critiqueslist',{page: 1}) }}">
-                        <button type="button" class="btn btn-info btn-color marginr size">
-                            Critiques
-                        </button>
-                        {% if notification.nombre > 0 %}<div class="notif">{{ notification.nombre }}</div>{% endif %}
-                    </a>
-                       
-                </li>
+                {% endif %}
             </ul>
-        </nav>
-        {% endblock %}
+        </div>
+    </header>
+    {% endblock %}
 
-        {% block body %}{% endblock %}
+    {% block nav %}
+    <nav class="flex jcenter">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link paddingr" href="{{ path('admin',{page: 1}) }}">
+                    <button type="button" class="btn btn-info btn-color size">
+                        Films
+                    </button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link paddingr" href="{{ path('admin_userlist',{page: 1}) }}">
+                    <button type="button" class="btn btn-info btn-color marginr size">
+                        Liste Utilisateur
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link paddingr" href="{{ path('admin_commentslist',{page: 1}) }}">
+                    <button type="button" class="btn btn-info btn-color marginr size">
+                        Commentaires
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="lienCritiques" class="nav-link paddingr" href="{{ path('admin_critiqueslist',{page: 1}) }}">
+                    <button type="button" class="btn btn-info btn-color marginr size">
+                        Critiques
+                    </button>
+                    {% if notification.nombre > 0 %}<div class="notif">{{ notification.nombre }}</div>{% endif %}
+                </a>
 
-        {% block javascripts %}
-            <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
-            <script src="{{ asset('js/popper.min.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            </li>
+        </ul>
+    </nav>
+    {% endblock %}
 
-            <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-        {% endblock %}
-    </body>
+    {% block body %}{% endblock %}
+
+    {% block javascripts %}
+    <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    {% endblock %}
+</body>
+
 </html>
-

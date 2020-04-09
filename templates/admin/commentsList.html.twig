@@ -20,8 +20,10 @@
                 <td>{{ comment.idutilisateur.username }}</td>
                 <td>{{ comment.idfilm.titre }}</td>
                 <td>
-                    <a href="{{ path('comment_modifier', {id: comment.id}) }}"><button type="button" class="btn btn-info btn-color marginr">Modifier</button></a>
-                    <a href="{{ path('admin_confirmcommentsdelete', {id: comment.id}) }}"><button type="button" class="btn btn-danger btnsup">Supprimer</button></a>
+                    <a href="{{ path('comment_modifier', {id: comment.id}) }}"><button type="button"
+                            class="btn btn-info btn-color marginr">Modifier</button></a>
+                    <a href="{{ path('admin_confirmcommentsdelete', {id: comment.id}) }}"><button type="button"
+                            class="btn btn-danger btnsup">Supprimer</button></a>
                 </td>
             </tr>
             {% else %}
@@ -41,11 +43,11 @@
             </li>
             {% endif %}
             {% if max_page > 0 %}
-                {% for page in 1..max_page %}
-                    <li class="page-item {% if page == current_page %}active{% endif %}">
-                        <a class="page-link" href="{{ path(route, params|merge({page: page})) }}">{{ page }}</a>
-                    </li>
-                {% endfor %}
+            {% for page in 1..max_page %}
+            <li class="page-item {% if page == current_page %}active{% endif %}">
+                <a class="page-link" href="{{ path(route, params|merge({page: page})) }}">{{ page }}</a>
+            </li>
+            {% endfor %}
             {% endif %}
             {% if current_page < max_page %}
             <li class="page-item">
@@ -55,7 +57,5 @@
         </ul>
     </nav>
 </section>
-    
+
 {% endblock %}
-
-

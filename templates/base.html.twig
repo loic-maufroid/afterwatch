@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{% block title %}AfterWatch{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
-       
-        <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-<style>
-    
-    /*!! insertion de SCSS*/
-.split-character span {
-    display: inline-block;
-}
-.title span > span {
-   opacity: 0;
-    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
-}
-@keyframes flipAnimation {
-    from {
-        transform: scale(-1, 1);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1, 1);
-        opacity: 1;
-    }
-}
-</style>
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-        <div class="wrapbody">
-            <div class="rep-contenu-h"></div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}AfterWatch{% endblock %}</title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <style>
+        /*!! insertion de SCSS*/
+        .split-character span {
+            display: inline-block;
+        }
+
+        .title span>span {
+            opacity: 0;
+            animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
+        }
+
+        @keyframes flipAnimation {
+            from {
+                transform: scale(-1, 1);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1, 1);
+                opacity: 1;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    <div class="wrapbody">
+        <div class="rep-contenu-h"></div>
 
         {% block header %}
         <header class="fond-h">
 
             <div class="contenu-h row mb-4">
-                <a class="col-lg-2 col-12" href="{{ path('welcome') }}"><img class="logo-med" src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
+                <a class="col-lg-2 col-12" href="{{ path('welcome') }}"><img class="logo-med"
+                        src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
 
                 <div class="partie-h-b col-lg-8 col-12">
 
                     <div class="haut row">
                         <div class="barre-recherche col-lg-12 align-top">
                             <div id="recherche-h">
-                                <div class="recherche-auto-flex">   
-                                <form action="{{ path('search') }}" method="get">
-                                <input list="films" class="searchTerm" type="search" size="75%" id="site-search" autocomplete="off" name="searchFilms" placeholder="recherche un film.." aria-label="Search through site content">
-                                
-                                <button id="buttonr" class="searchButton">Rechercher</button>
-                                </form>
+                                <div class="recherche-auto-flex">
+                                    <form action="{{ path('search') }}" method="get">
+                                        <input list="films" class="searchTerm" type="search" size="75%" id="site-search"
+                                            autocomplete="off" name="searchFilms" placeholder="recherche un film.."
+                                            aria-label="Search through site content">
+
+                                        <button id="buttonr" class="searchButton">Rechercher</button>
+                                    </form>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-lg-12 align-middle text-center" id="messageErreur"></div>
                         <nav class="barre-menus col-lg-12 align-bottom">
                             <div class="barre-menus-navig">
@@ -86,14 +93,15 @@
                                         {% endif %}
                                         {% if is_granted('IS_AUTHENTICATED_FULLY') and app.request.get('_route') != 'films_utilisateur' %}
                                         <li class="navig-main-item">
-                                            <a href="{{ path('films_utilisateur',{username: app.user.username}) }}">Mes films</a>
+                                            <a href="{{ path('films_utilisateur',{username: app.user.username}) }}">Mes
+                                                films</a>
                                         </li>
                                         {% endif %}
                                     </ul>
                                 </div>
                             </div>
                         </nav>
-                    <!--<div class="co-et-regist">parties connexion et inscripton
+                        <!--<div class="co-et-regist">parties connexion et inscripton
                         {% if app.user %}{# Si connecté #}
                             <div>
                                 <img src="{#{{AFAIRE}}#}" alt="">
@@ -104,42 +112,47 @@
                         <!--<button type="button" class="registrer" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button><!--ici pour l'inscription-->
                         <!--{% endif %}
                     </div>-->
-                   
 
-                    <datalist id="films"></datalist>
-                        
-                   </div>
+
+                        <datalist id="films"></datalist>
+
                     </div>
+                </div>
 
-                    <div class="bas col-lg-2 col-12">
-                        <div class="co-et-regist">
-                            {% if not app.user %}
-                            <div>
-                            <button class="connect" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button>
-                            <button class="registrer" type="button" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button>
-                            </div>
-                            {% else %}
-                          
-                            <!-- menu en dropdown -->
-                            <div class="dropdown">
-                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}" alt="image de profil {{ app.user.username }}"> {{ app.user.username }}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                    <a class="dropdown-item" href="{{ path('admin',{page: 1}) }}"> Administration</a>
-                                    {% endif %}
-                                    <a class="dropdown-item"  href="{{ path('app_logout') }}">Deconnexion</a>
-                                </div>
-                            </div>
-                            {% endif %}
+                <div class="bas col-lg-2 col-12">
+                    <div class="co-et-regist">
+                        {% if not app.user %}
+                        <div>
+                            <button class="connect" type="button" data-rel="btn-connect"><a
+                                    href="{{ path('app_login') }}">Connexion</a></button>
+                            <button class="registrer" type="button" data-rel="btn-registrer"><a
+                                    href="{{ path('app_register') }}">Inscription</a></button>
                         </div>
-                       
-                       
+                        {% else %}
+
+                        <!-- menu en dropdown -->
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}"
+                                    alt="image de profil {{ app.user.username }}"> {{ app.user.username }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item"
+                                    href="{{ path('profil_page', {username: app.user.username}) }}">Page de Profil</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('admin',{page: 1}) }}"> Administration</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
 
-            
+
+                </div>
+
+
         </header>
         {% endblock %}
 
@@ -168,87 +181,89 @@
                 </div>
 
             </div>
-    </footer>
+        </footer>
         {% endblock %}
 
         {% endblock %}
-        </div>
+    </div>
 
-        {% block javascripts %}
-        <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
-        
-        <script src="{{ asset('js/popper.min.js') }}" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
-        
-        <script>
-        (function() {
-          var elements, newContent = "";
-          elements = document.getElementsByClassName('split-character'); 
-          for (var element = 0; element < elements.length; ++element) { 
-            newContent += "<span>"
-            for (var character = 0; character < elements[element].innerText.length; character++) {
-              if (elements[element].innerText[character] !== " ") { 
-                newContent += "<span style='animation-delay: "+ 0.035*character + "s'>"+ elements[element].innerText[character] +"</span>";
-              }
-              else { 
-                newContent += "</span> <span>";
-              }
+    {% block javascripts %}
+    <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+
+    <script src="{{ asset('js/popper.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
+
+    <script>
+        (function () {
+            var elements, newContent = "";
+            elements = document.getElementsByClassName('split-character');
+            for (var element = 0; element < elements.length; ++element) {
+                newContent += "<span>"
+                for (var character = 0; character < elements[element].innerText.length; character++) {
+                    if (elements[element].innerText[character] !== " ") {
+                        newContent += "<span style='animation-delay: " + 0.035 * character + "s'>" + elements[
+                            element].innerText[character] + "</span>";
+                    } else {
+                        newContent += "</span> <span>";
+                    }
+                }
+                newContent += "</span>"
+                elements[element].innerHTML = newContent;
+                newContent = "";
             }
-            newContent += "</span>"
-            elements[element].innerHTML = newContent; 
-            newContent = "";
-          }
-        })(); 
-        </script>
-        <script>
+        })();
+    </script>
+    <script>
+        $(function () {
 
-        
-    $(function(){
+            function envoyer() {
+                var query = $("#site-search").val().trim();
+                $("#films select").remove();
+                if (query != "" && query.length > 3) {
 
-        function envoyer(){
-            var query = $("#site-search").val().trim();
-            $("#films select").remove();
-            if (query != "" && query.length > 3){
-              
-        $.ajax({
-            type : 'GET',
-            url : "{{ path('autocomplete_film_search') }}",
-            data : 'q='+query,
-            dataType : 'JSON',
-        success: function(response){
-            console.log("oui");
-            $("#films").append("<select></select>");
- 
-            for (let i = 0; i < response.length; i++) {
-                console.log(response[i]["titre"]);
-                $("#films select").append("<option value='"+response[i]["titre"].replace("'","&#39;")+"'>Rechercher "+response[i]["titre"]+"</option>");
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ path('autocomplete_film_search') }}",
+                        data: 'q=' + query,
+                        dataType: 'JSON',
+                        success: function (response) {
+                            console.log("oui");
+                            $("#films").append("<select></select>");
+
+                            for (let i = 0; i < response.length; i++) {
+                                console.log(response[i]["titre"]);
+                                $("#films select").append("<option value='" + response[i]["titre"]
+                                    .replace("'", "&#39;") + "'>Rechercher " + response[i][
+                                        "titre"
+                                    ] + "</option>");
+
+                            }
+
+                        }
+                    });
+                }
 
             }
-            
-        }                 
-        });
-    }
 
-    }
+            var timer;
 
-    var timer;
+            $("#buttonr").click(function (event) {
+                var q = $("#site-search").val();
+                if (q.trim().length <= 1) {
+                    event.preventDefault();
+                    $("#messageErreur").text("L'expression en recherche est trop courte");
+                }
+            })
 
-    $("#buttonr").click(function(event){
-        var q = $("#site-search").val();
-        if (q.trim().length <= 1){
-            event.preventDefault();
-            $("#messageErreur").text("L'expression en recherche est trop courte");
-        }
-    })
+            $("#site-search").keyup(function (event) {
+                clearTimeout(timer);
+                $("#messageErreur").empty();
+                timer = setTimeout(envoyer, 1000);
+                event.preventDefault();
+            })
+        })
+    </script>
+    {% endblock %}
+</body>
 
-    $("#site-search").keyup(function(event){
-        clearTimeout(timer);
-        $("#messageErreur").empty();
-        timer = setTimeout(envoyer,1000);
-        event.preventDefault();
-    })
-})
-</script>
-        {% endblock %}
-    </body>
 </html>

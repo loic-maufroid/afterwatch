@@ -3,17 +3,19 @@
 {% block title %} {{ parent() }} - Supprimer Utilisateurs{% endblock %}
 
 {% block body %}
-    <section class="flex jcenter margt">
-        <div class="jumbotron widthsup ">
-            <h2 class="textc">{{ user.username }}</h2>
-            <hr class="my-4">
-            <p class="textc">Voulez-vous Bannir cet Utilisateur?</p>
-            <div class="margina">
-                <div class="flex jcenter">
-                    <a href="{{ path('user_delete', {id: user.id}) }}"><button type="button" class="btn btn-success marginr">OUI</button></a>
-                    <a href="{{ path('admin_userlist',{page: 1}) }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
-                </div>
+<section class="flex jcenter margt">
+    <div class="jumbotron widthsup ">
+        <h2 class="textc">{{ user.username }}</h2>
+        <hr class="my-4">
+        <p class="textc">Voulez-vous Bannir cet Utilisateur?</p>
+        <div class="margina">
+            <div class="flex jcenter">
+                <a href="{{ path('user_delete', {id: user.id}) }}"><button type="button"
+                        class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('admin_userlist',{page: 1}) }}"><button type="button"
+                        class="btn btn-danger btnsup">ANNULER</button></a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
