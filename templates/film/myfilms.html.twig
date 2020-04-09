@@ -60,7 +60,7 @@
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">
-                                          <img src="{% if filmVeutVoir.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmVeutVoir.affiche }}{% else %}./img/0199399.jpg.webp{% endif %}" data-rel="poster" alt="" width="150" height="204"/>
+                                          <img src="{% if filmVeutVoir.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmVeutVoir.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" data-rel="poster" alt="" width="150" height="204"/>
                                         </div>
                                     </div>
                                     <div class="face face2">
@@ -98,7 +98,7 @@
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">
-                                          <img class="" data-rel="poster" alt="" src="{% if filmAVu.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmAVu.affiche }}{% else %}./img/0199399.jpg.webp{% endif %}" width="150" height="204"/>
+                                          <img class="" data-rel="poster" alt="" src="{% if filmAVu.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmAVu.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" width="150" height="204"/>
                                         </div>
                                     </div>
                                     <div class="face face2">
