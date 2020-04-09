@@ -1,11 +1,31 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} - Ajout d'une Critiques de {{ film.titre }}{% endblock %}
+{% block title %}{{ parent() }} - Critiques de {{ film.titre }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/csscontenu/contenucritique.css') }}">
+<style>
+    .backgrounddynamique {
+        background:url({{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }});
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
+{% if film.affiche == null %}
+
+<body class="background">
+    {% else %}
+
+    <body class="backgrounddynamique">
+        {% endif %}
+
+
+
 
 {{ form_start(form) }}
-
 {{ form_end(form) }}
-
 {% endblock %}

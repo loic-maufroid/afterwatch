@@ -10,7 +10,7 @@
             <p  class="courgette">{{ review.titre }}</p>
         </div>
         <div class="text flex jbetween margintop">
-            <p class="courgette">Titre du Film : {{ review.idfilm.titre }}</p>
+            {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
             <p  class="courgette">Créer par : {{ review.idutilisateur.username }}</p>
         </div>   
         

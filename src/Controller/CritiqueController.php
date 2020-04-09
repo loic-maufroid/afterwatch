@@ -28,22 +28,6 @@ class CritiqueController extends AbstractController
             'film' => $film,
         ]);
     }
-    
-    //Affichage d'une critique d'un film
-
-    /**
-     * @Route("/film/{slug}/critiques/{slug2}", name="critiqueview")
-     */
-    public function detailCritique($slug,$slug2,FilmRepository $filmRepository, CritiqueRepository $critiqueRepository)
-    {
-        $film = $filmRepository->findOneBy(["slug" => $slug]);
-        $critique = $critiqueRepository->findOneBy(["slug" => $slug2]);
-
-        return $this->render('film/detailCritique.html.twig', [
-            'film' => $film,
-            'critique' => $critique,
-        ]);
-    }
 
     
     /**
@@ -75,6 +59,24 @@ class CritiqueController extends AbstractController
         ]);
     }
 
+    
+    //Affichage d'une critique d'un film
+
+    /**
+     * @Route("/film/{slug}/critiques/{slug2}", name="critiqueview")
+     */
+    public function detailCritique($slug,$slug2,FilmRepository $filmRepository, CritiqueRepository $critiqueRepository)
+    {
+        $film = $filmRepository->findOneBy(["slug" => $slug]);
+        $critique = $critiqueRepository->findOneBy(["slug" => $slug2]);
+
+        return $this->render('film/detailCritique.html.twig', [
+            'film' => $film,
+            'critique' => $critique,
+        ]);
+    }
+
+    
     //Partie Admin
 
     //Page de Confirmation de la Suppression des Critiques
