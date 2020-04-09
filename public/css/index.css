@@ -404,6 +404,22 @@ span
     width: 100%;
     box-sizing: border-box;
 }
+
+/*Notification film ajouté*/
+
+/*couleur donner au bouton */
+.btn-color{
+    position: absolute;
+    top: 10%;
+    background-image:linear-gradient(60deg, #02aca9, #2d8d8d);
+    color: white;
+} 
+/*couleur donner au bouton au survol*/
+.btn-color:hover{
+    background-image:linear-gradient(60deg, #1e9593, #2e8f8d);
+    color: white;
+}
+
 section
 {
     border-bottom: 1px grey solid;
