@@ -78,7 +78,7 @@
                                 
                                 </div>
                             </a>
-                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmVeutVoir.slug}) }}"><button type="button" class="btn btn-color"><i class="fas fa-times"></i></button></a>
+                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmVeutVoir.slug}) }}"><button type="button" class="btn delete-color"><i class="fas fa-times"></i></button></a>
                         </li>
 
                         {% endfor %}
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmAVu.slug}) }}"><button type="button" class="btn btn-color"><i class="fas fa-times"></i></button></a>
+                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmAVu.slug}) }}"><button type="button" class="btn delete-color"><i class="fas fa-times"></i></button></a>
                         </li>
 
                         {% endfor %}
