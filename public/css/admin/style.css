@@ -68,7 +68,7 @@ footer{
 }
 /*Marge a gauche*/
 .marginl{
-    margin-left: 8.1em;
+    margin-left: 8.8em;
 }
 /* Marge supérieur */
 .margintnull{
@@ -272,4 +272,13 @@ footer{
 /* centrer la pagination  */
 .pagination{
     justify-content: center;
+}
+/*couleur de la pagination*/
+.color{
+    color: rgb(41, 112, 105);
+}
+/*a au survol de la pagination*/
+.apagination:hover{
+    color: #02aca9;
+    background-color: #e2e2e2;
 }
