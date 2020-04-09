@@ -36,10 +36,11 @@
                     {{ form_row(form.contenu, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
-            
+
             <div class="flex jcenter marget">
                 <button class="btn btn-color marginr">Envoyer</button></a>
-                <a href="{{ path('critiques', {slug: film.slug}) }}"><button type="button" class="btn btn-danger">Retour</button></a>
+                <a href="{{ path('critiques', {slug: film.slug}) }}"><button type="button"
+                        class="btn btn-danger">Retour</button></a>
             </div>
 
             {{ form_end(form) }}

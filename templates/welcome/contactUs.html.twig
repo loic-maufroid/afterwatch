@@ -3,54 +3,54 @@
 {% block title %}{{ parent() }} - Contacter Nous{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-   
-    <link rel="stylesheet" href="{{ asset('css/cssfrontoffice/style.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+
+<link rel="stylesheet" href="{{ asset('css/cssfrontoffice/style.css') }}">
+<link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
 
 <h1 class="font size color textc margintop">AfterWatch</h1>
-    <main class="flex jcenter">
-        
-        <section class="taille">
-            <form  class="form margint" enctype="multipart/form-data">
-                <h4 class="textc">Nous Contacter</h4>
-                <div class="form-group">
-                    <label for="contact">Choisir contact</label>
-                    <select class="form-control" id="contact" placeholder="contact" required>
-                        <option selected disabled value="">Personne à contacter...</option>
-                        <option>...</option>
-                        <option>...</option>
-                        <option>...</option>
-                        <option>...</option>
-                        <option>...</option>
-                        <option>...</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Vous n'avez pas selectionné de champ.
-                    </div>
+<main class="flex jcenter">
+
+    <section class="taille">
+        <form class="form margint" enctype="multipart/form-data">
+            <h4 class="textc">Nous Contacter</h4>
+            <div class="form-group">
+                <label for="contact">Choisir contact</label>
+                <select class="form-control" id="contact" placeholder="contact" required>
+                    <option selected disabled value="">Personne à contacter...</option>
+                    <option>...</option>
+                    <option>...</option>
+                    <option>...</option>
+                    <option>...</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+                <div class="invalid-feedback">
+                    Vous n'avez pas selectionné de champ.
                 </div>
-                    <div class="form-group">
-                        <label for="Sujet">Sujet</label>
-                        <input type="text" class="form-control" id="Pseudo" placeholder="Sujet"  required>
-                        <div class="invalid-feedback">
-                            Vous n'avez pas rempli ce champ.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Contenu">Contenu de votre message</label>
-                        <textarea type="text" class="form-control" id="Contenu"  placeholder="Contenu" required></textarea>
-                        <div class="invalid-feedback">
-                            Vous n'avez pas rempli ce champ.
-                        </div>
-                    </div>  
-                    <div class="flex jcenter margintop">
-                        <a href="#"><button type="button" class="btn btn-color marginr">Envoyer</button></a>
-                        <a href="#"><button type="button" class="btn btn-danger">Retour</button></a>
-                    </div>  
-            </form>
-        </section>
-        
-{% endblock %}
+            </div>
+            <div class="form-group">
+                <label for="Sujet">Sujet</label>
+                <input type="text" class="form-control" id="Pseudo" placeholder="Sujet" required>
+                <div class="invalid-feedback">
+                    Vous n'avez pas rempli ce champ.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Contenu">Contenu de votre message</label>
+                <textarea type="text" class="form-control" id="Contenu" placeholder="Contenu" required></textarea>
+                <div class="invalid-feedback">
+                    Vous n'avez pas rempli ce champ.
+                </div>
+            </div>
+            <div class="flex jcenter margintop">
+                <a href="#"><button type="button" class="btn btn-color marginr">Envoyer</button></a>
+                <a href="#"><button type="button" class="btn btn-danger">Retour</button></a>
+            </div>
+        </form>
+    </section>
+
+    {% endblock %}

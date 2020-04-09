@@ -7,33 +7,34 @@
 
     <div class="contenu-main">
 
-        <div id="xl-carousel" class="carousel slide" data-ride="carousel"> 
+        <div id="xl-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
 
-            {% for filmCarr in filmsCarr %}
-                
-           
-            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmCarr.affiche }}{% else %}./img/01.jpg{% endif %}" class="d-block mx-auto img-fluid" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>{{ filmCarr.titre }}</h3>
-                    <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
-                </div>
-            </div>
+                {% for filmCarr in filmsCarr %}
 
-            {% endfor %}
-            
+
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                    <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmCarr.affiche }}{% else %}./img/01.jpg{% endif %}"
+                        class="d-block mx-auto img-fluid" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{ filmCarr.titre }}</h3>
+                        <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
             </div>
             <a class="carousel-control-prev" href="#xl-carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#xl-carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
             </a>
         </div>
-    
+
         <div class="contenu-a-affiche">
             <h1 class="title split-character intro-site">A découvrir sur AfterWatch</h1>
         </div>
@@ -45,8 +46,9 @@
                     <div class="film-a-affiche">
                         <div class="a-affiche-resultats">
                             <h2 class="tout-voir-affiche">
-                                <button class="tout-voir" type="button" data-rel="link"><a href="{{ path('alaffiche') }}">Tout voir</a></button>
-                                 <button class="titre-section">Actuellement à l'affiche</button>
+                                <button class="tout-voir" type="button" data-rel="link"><a
+                                        href="{{ path('alaffiche') }}">Tout voir</a></button>
+                                <button class="titre-section">Actuellement à l'affiche</button>
                             </h2>
                         </div>
                     </div>
@@ -54,21 +56,28 @@
                     <ul class="contenu-film-affiche">
                         {% for filmAffiche in filmsAffiche %}
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmAffiche.slug}) }}" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="" src="{% if filmAffiche.affiche %}{{ 'http://image.tmdb.org/t/p/w154/'~filmAffiche.affiche }}{% else %}{{ asset('img/0199399.jpg.webp') }}{% endif %}" width="150" height="204"/>
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmAffiche.slug}) }}"
+                                data-rel="button">
+                                <div class="container">
+                                    <div class="card">
+                                        <div class="face face1">
+                                            <div class="content">
+                                                <img class="" data-rel="poster" alt=""
+                                                    src="{% if filmAffiche.affiche %}{{ 'http://image.tmdb.org/t/p/w154/'~filmAffiche.affiche }}{% else %}{{ asset('img/0199399.jpg.webp') }}{% endif %}"
+                                                    width="150" height="204" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content row justify-content-center align-items-start">
-                                        
-                                            <a href="{{ path('details_film',{slug: filmAffiche.slug}) }}" class="col-lg-9"><h4>{% if filmAffiche.titre|length > 40 %}{{ filmAffiche.titre[:40] }}...{% else %}{{ filmAffiche.titre }}
-                                                {% endif %}</h4></a>
-                                        
+                                        <div class="face face2">
+                                            <div class="content row justify-content-center align-items-start">
+
+                                                <a href="{{ path('details_film',{slug: filmAffiche.slug}) }}"
+                                                    class="col-lg-9">
+                                                    <h4>{% if filmAffiche.titre|length > 40 %}{{ filmAffiche.titre[:40] }}...{% else %}{{ filmAffiche.titre }}
+                                                        {% endif %}</h4>
+                                                </a>
+
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </a>
@@ -84,72 +93,80 @@
                     <div class="film-a-affiche">
                         <div class="a-affiche-resultats">
                             <h2 class="tout-voir-affiche">
-                                <button class="tout-voir" type="button" data-rel="link"><a href="{{ path('futures_sorties') }}">Tout voir</a></button>
-                                 <button class="titre-section">Les futures sorties</button>
+                                <button class="tout-voir" type="button" data-rel="link"><a
+                                        href="{{ path('futures_sorties') }}">Tout voir</a></button>
+                                <button class="titre-section">Les futures sorties</button>
                             </h2>
                         </div>
                     </div>
 
                     <ul class="contenu-film-affiche">
                         {% for filmSortie in filmsSortie %}
-                    
+
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmSortie.slug}) }}" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="Affiche Godzilla II" src="{% if filmSortie.affiche %}{{ 'http://image.tmdb.org/t/p/w154/'~filmSortie.affiche }}{% else %}{{ asset('img/0199399.jpg.webp') }}{% endif %}" width="150" height="204"/>
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: filmSortie.slug}) }}"
+                                data-rel="button">
+                                <div class="container">
+                                    <div class="card">
+                                        <div class="face face1">
+                                            <div class="content">
+                                                <img class="" data-rel="poster" alt="Affiche Godzilla II"
+                                                    src="{% if filmSortie.affiche %}{{ 'http://image.tmdb.org/t/p/w154/'~filmSortie.affiche }}{% else %}{{ asset('img/0199399.jpg.webp') }}{% endif %}"
+                                                    width="150" height="204" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content row justify-content-center align-items-start">
-                                        
-                                        <a class="col-lg-8" href="{{ path('details_film',{slug: filmSortie.slug}) }}"><h4>{% if filmSortie.titre|length > 40 %}{{ filmSortie.titre[:40] }}...{% else %}{{ filmSortie.titre }}
-                                            {% endif %}</h4></a></h4></a>
-                                        <p>{{ filmSortie.date|date('d M Y',"Europe/Paris") }}</p>
-                                        
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                        <div class="face face2">
+                                            <div class="content row justify-content-center align-items-start">
+
+                                                <a class="col-lg-8"
+                                                    href="{{ path('details_film',{slug: filmSortie.slug}) }}">
+                                                    <h4>{% if filmSortie.titre|length > 40 %}{{ filmSortie.titre[:40] }}...{% else %}{{ filmSortie.titre }}
+                                                        {% endif %}</h4>
+                                                </a></h4>
                             </a>
-                        </li>
-                       
-                        {% endfor %}
-                    </ul>
+                            <p>{{ filmSortie.date|date('d M Y',"Europe/Paris") }}</p>
+
                 </div>
-            </section>
-
-
-            
         </div>
     </div>
-    
+</div>
+</a>
+</li>
+
+{% endfor %}
+</ul>
+</div>
+</section>
+
+
+
+</div>
+</div>
+
 </div>
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
 <script>
-    
-    (function() {
-      var elements, newContent = "";
-      elements = document.getElementsByClassName('split-character'); 
-      for (var element = 0; element < elements.length; ++element) { 
-        newContent += "<span>"
-        for (var character = 0; character < elements[element].innerText.length; character++) {
-          if (elements[element].innerText[character] !== " ") { 
-            newContent += "<span style='animation-delay: "+ 0.035*character + "s'>"+ elements[element].innerText[character] +"</span>";
-          }
-          else { 
-            newContent += "</span> <span>";
-          }
+    (function () {
+        var elements, newContent = "";
+        elements = document.getElementsByClassName('split-character');
+        for (var element = 0; element < elements.length; ++element) {
+            newContent += "<span>"
+            for (var character = 0; character < elements[element].innerText.length; character++) {
+                if (elements[element].innerText[character] !== " ") {
+                    newContent += "<span style='animation-delay: " + 0.035 * character + "s'>" + elements[element]
+                        .innerText[character] + "</span>";
+                } else {
+                    newContent += "</span> <span>";
+                }
+            }
+            newContent += "</span>"
+            elements[element].innerHTML = newContent;
+            newContent = "";
         }
-        newContent += "</span>"
-        elements[element].innerHTML = newContent; 
-        newContent = ""; 
-      }
-      
-    })(); 
-    </script>
+
+    })();
+</script>
 {% endblock %}

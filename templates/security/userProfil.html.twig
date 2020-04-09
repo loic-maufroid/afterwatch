@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}"> 
+<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
 </style>
@@ -16,40 +16,41 @@
     <section class="margint paddingr marginl">
         <div class="flex jcenter card border border-light carte">
             <div class="flex jcenter margintop">
-                <img src="{{ asset('img/avatar/'~utilisateur.avatar ) }}" class="card-img-top rounded-circle avatar" alt="image de profil {{ utilisateur.username }}">
+                <img src="{{ asset('img/avatar/'~utilisateur.avatar ) }}" class="card-img-top rounded-circle avatar"
+                    alt="image de profil {{ utilisateur.username }}">
             </div>
             <div class="flex jcenter flexdr alignit ">
                 <div class="ligne marginr"></div>
                 <h5 class="card-title textc marget marginr">{{ utilisateur.username }}</h5>
-                <div class="ligne"></div> 
+                <div class="ligne"></div>
             </div>
-                
-        </div>  
+
+        </div>
     </section>
     <section class="taille">
-        <form  class=" margint scrollform" enctype="multipart/form-data">
+        <form class=" margint scrollform" enctype="multipart/form-data">
             <h2 class="font textc">Profil</h2>
-                <div class="form-group">
-                    <label for="Avatar">Avatar</label>
-                    <input type="file" accept="jpeg,jpg,png" class="form-control-file" id="Avatar">
-                </div>
-                <p class="card-title textc modifier">Modifier Mot de Passe</p>
-                <div class="form-group">
-                    <label for="Mot">Ancien Mot de passe</label>
-                    <input type="password" class="form-control" id="Pseudo" placeholder="Pseudo">
-                </div>
-                <div class="form-group">
-                    <label for="Password">Nouveau Mot de passe</label>
-                    <input type="password" class="form-control" id="Password"  placeholder="Mot de passe">
-                </div>
-                <div class="form-group">
-                    <label for="Password">Confirmer nouveau Mot de passe</label>
-                    <input type="password" class="form-control" id="Password"  placeholder="Mot de passe">
-                </div>
+            <div class="form-group">
+                <label for="Avatar">Avatar</label>
+                <input type="file" accept="jpeg,jpg,png" class="form-control-file" id="Avatar">
+            </div>
+            <p class="card-title textc modifier">Modifier Mot de Passe</p>
+            <div class="form-group">
+                <label for="Mot">Ancien Mot de passe</label>
+                <input type="password" class="form-control" id="Pseudo" placeholder="Pseudo">
+            </div>
+            <div class="form-group">
+                <label for="Password">Nouveau Mot de passe</label>
+                <input type="password" class="form-control" id="Password" placeholder="Mot de passe">
+            </div>
+            <div class="form-group">
+                <label for="Password">Confirmer nouveau Mot de passe</label>
+                <input type="password" class="form-control" id="Password" placeholder="Mot de passe">
+            </div>
             <div class="flex jcenter margint">
                 <a href="#"><button type="button" class="btn btn-color marginr">Enregistrer</button></a>
                 <a href="{{ path('welcome') }}"><button type="button" class="btn btn-danger">Annuler</button></a>
-            </div>    
+            </div>
         </form>
     </section>
 </main>

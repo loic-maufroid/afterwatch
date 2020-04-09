@@ -8,27 +8,28 @@
 
     <div class="contenu-main">
 
-        <div id="xl-carousel" class="carousel slide" data-ride="carousel"> 
+        <div id="xl-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-            
-            {% for filmCarr in filmsCarr %}
-            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="d-block mx-auto img-fluid" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h6>{{ filmCarr.titre }}</h6>
-                    <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+
+                {% for filmCarr in filmsCarr %}
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                    <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
+                        class="d-block mx-auto img-fluid" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h6>{{ filmCarr.titre }}</h6>
+                        <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
-            
+                {% endfor %}
+
             </div>
             <a class="carousel-control-prev" href="#xl-carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#xl-carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
             </a>
         </div>
 
@@ -44,32 +45,38 @@
                         <div class="a-affiche-resultats">
                             <h2 class="tout-voir-affiche">Actuellement à l'affiche</h2>
 
-                                </div>
+                        </div>
                     </div>
 
                     <ul class="contenu-film-affiche">
 
                         {% for film in films %}
-                            
-                        
+
+
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button"><div class="container">
-                                <div class="card">
-                                    <div class="face face1">
-                                        <div class="content">
-                                          <img class="" data-rel="poster" alt="" src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" width="150" height="204"/>
+                            <a class="a-film film-a" href="#" data-rel="button">
+                                <div class="container">
+                                    <div class="card">
+                                        <div class="face face1">
+                                            <div class="content">
+                                                <img class="" data-rel="poster" alt=""
+                                                    src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
+                                                    width="150" height="204" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">    
-                                        <a class="w-100 m-0 p-0" href="{{ path('details_film',{slug: film.slug}) }}"><h5 class="text-center">{{ film.titre }}</h5></a>
+                                        <div class="face face2">
+                                            <div class="content">
+                                                <a class="w-100 m-0 p-0"
+                                                    href="{{ path('details_film',{slug: film.slug}) }}">
+                                                    <h5 class="text-center">{{ film.titre }}</h5>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        
+
                         {% endfor %}
                     </ul>
                 </div>
@@ -77,7 +84,7 @@
 
 
 
-    </div>
+        </div>
 
-</div>
-{% endblock %}
+    </div>
+    {% endblock %}

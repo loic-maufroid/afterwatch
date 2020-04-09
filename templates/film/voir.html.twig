@@ -32,10 +32,9 @@
 
 
     <div class="b-annonce">
-    {% if film.trailer %}
-      <iframe
-        src='{{ 'https://youtube.com/embed/'~film.trailer }}'
-        style='width:640px; height:360px;' scrolling='no'></iframe>
+      {% if film.trailer %}
+      <iframe src='{{ 'https://youtube.com/embed/'~film.trailer }}' style='width:640px; height:360px;'
+        scrolling='no'></iframe>
       {% endif %}
     </div>
 
@@ -44,10 +43,12 @@
         <div class="button">
           {% if app.user %}
           {% if enabledVeutVoir %}
-          <a class="film_a_voir button btn" href="{{ path('ajouter_aVoir',{username: app.user.username,slug: film.slug}) }}">Je veux voir</a>
+          <a class="film_a_voir button btn"
+            href="{{ path('ajouter_aVoir',{username: app.user.username,slug: film.slug}) }}">Je veux voir</a>
           {% endif %}
           {% if enabledAVu %}
-          <a class="film_vu button btn" href="{{ path('ajouter_aVu',{username: app.user.username,slug: film.slug}) }}">J'ai vu</a>
+          <a class="film_vu button btn"
+            href="{{ path('ajouter_aVu',{username: app.user.username,slug: film.slug}) }}">J'ai vu</a>
           {% endif %}
           {% endif %}
           <a class="button btn flexbutton" href="{{ path('welcome') }}">Retour à l'accueil</a>
@@ -99,7 +100,9 @@
           <hr>
           <div class="marginb flex flexdr">
             <div>
-              <img class='avatar' src="{% if comment.idUtilisateur.avatar %}{{ asset('img/avatar/'~comment.idUtilisateur.avatar ) }}{% else %}{{ asset('img/avatar/utilisateur.png') }}{% endif %}" class="avatar">
+              <img class='avatar'
+                src="{% if comment.idUtilisateur.avatar %}{{ asset('img/avatar/'~comment.idUtilisateur.avatar ) }}{% else %}{{ asset('img/avatar/utilisateur.png') }}{% endif %}"
+                class="avatar">
             </div>
             <div class="flex flexd">
               <h6 class="margint marginle">de : {% if is_granted('ROLE_ADMIN') %}

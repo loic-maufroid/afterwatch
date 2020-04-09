@@ -1,0 +1,31 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} {{ parent() }} - Modifier Commentaire{% endblock %}
+
+{% block body %}
+<section class="flex jcenter margintop ">
+    {{ form_start(form, {'attr': {'class': 'jumbotron scrollform'}}) }}
+    <p class="lobster textc ">Modifier Commentaire</p>
+    <div class="text flex jbetween marginb">
+        <p class="courgette">Commentaire de : {{ commentaire.idutilisateur.username }}</p>
+    </div>
+    <div class="text flex jbetween margintop">
+        <p class="courgette">Pour : {{ commentaire.idfilm.titre }}</p>
+    </div>
+
+
+
+    <div class="form-group">
+        {{ form_row(form.contenu, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <h4 class="flex jcenter">Modifier?</h4>
+    <div class="flex jcenter margintop">
+        <button class="btn btn-success marginr">Valider</button>
+        <a href="{{ path('admin_commentslist',{page: 1}) }}"><button type="button"
+                class="btn btn-danger btnsup">Annuler</button></a>
+    </div>
+    {{ form_end(form) }}
+</section>
+
+
+{% endblock %}

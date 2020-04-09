@@ -55,7 +55,7 @@ class CritiqueController extends AbstractController
             return $this->redirectToRoute('critiques', ['slug' => $slug]);
         }
 
-        return $this->render('admin/formulaire/addCritique.html.twig', [
+        return $this->render('formulaire/addCritique.html.twig', [
             'form' => $form->createView(),
             'film' => $film,
         ]);
@@ -137,7 +137,7 @@ class CritiqueController extends AbstractController
         }
     
         $notification =  $critiqueRepository->findCountSubmittedCritiques();
-        return $this->render('admin/formulaire/formCritique.html.twig', [
+        return $this->render('formulaire/formCritique.html.twig', [
             'form' => $form->createView(),
             'review' => $review,
             'notification' => $notification

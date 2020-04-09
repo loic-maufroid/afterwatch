@@ -4,15 +4,16 @@
 {% block title %} {{ parent() }} - Films{% endblock %}
 
 {% block body %}
-<section class="flex jcenter">
-
-
-    <table id="thèmes" class=" textc margint marginb">
-        <div class="flex jflex">
+<div class="flex marginl marginb">
             <a href="{{ path('addfilm') }}"><button type="button" class="btn btn-info btn-color">Ajouter un
                     Film</button></a>
         </div>
-        <div id="successmess">
+<section class="flex jcenter">
+
+
+    <table id="thèmes" class=" textc marginb">
+        
+        <div id="successmess" class="flex ">
             {% for message in app.flashes('success') %}
             {{ message }}
             {% endfor %}
@@ -79,8 +80,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('film_modifier', {id: film.id}) }}"><button type="button"
-                            class="btn btn-info btn-color marginr">Modifier</button></a>
+                    <!--<a href="{{ path('film_modifier', {id: film.id}) }}"><button type="button"
+                            class="btn btn-info btn-color marginr">Modifier</button></a>-->
                     <a href="{{ path('admin_confirmfilmdelete', {id: film.id}) }}"><button type="button"
                             class="btn btn-info btn-danger">Supprimer</button></a>
                 </td>
@@ -96,7 +97,7 @@
 
 </section>
 
-<nav>
+<nav class="margintnull">
     <ul class="pagination">
         {% if current_page > 1 %}
         <li class="page-item">

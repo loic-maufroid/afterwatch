@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}"> 
+<link rel="stylesheet" href="{{ asset('css/csslogin/logstyle.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -13,24 +13,26 @@
 <section class="flex jcenter">
     <form method="post" class="jumbotron width margint">
         {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
         {% if app.user %}
-            <div>
-                Vous êtes connectée {{ app.user.username }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
-            </div>
+        <div>
+            Vous êtes connectée {{ app.user.username }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
+        </div>
         {% endif %}
 
         <h3 class="font textc">Connexion</h3>
         <div class="form-group">
             <label for="inputUsername">Pseudo</label>
-            <input type="text" class="form-control" value="{{ last_username }}" name="username" id="inputUsername" placeholder="Pseudo" required autofocus>
+            <input type="text" class="form-control" value="{{ last_username }}" name="username" id="inputUsername"
+                placeholder="Pseudo" required autofocus>
         </div>
 
         <div class="form-group">
             <label for="inputPassword">Mot de Passe</label>
-            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe" required>
+            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Mot de passe"
+                required>
         </div>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -45,11 +47,12 @@
                 </label>
             </div>
         #}
-        <p class="textc"> Si vous n'avez pas de compte: <a href="{{ path('app_register') }}" class="colorin" href="inscription.html">Inscrivez-vous</a></p>
+        <p class="textc"> Si vous n'avez pas de compte: <a href="{{ path('app_register') }}" class="colorin"
+                href="inscription.html">Inscrivez-vous</a></p>
         <div class="flex jcenter margintop">
             <a href="#"><button type="submit" class="btn btn-color marginr">Connexion</button></a>
             <a href="{{ path('welcome') }}"><button type="button" class="btn btn-color">Retour</button></a>
-        </div>     
+        </div>
     </form>
 </section>
 {% endblock %}

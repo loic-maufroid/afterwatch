@@ -45,11 +45,13 @@
                         </div>
                     </div>
                     <div class="flex jcenter margintop">
-                        <a href="{{ path('ajout_critique', { slug: film.slug }) }}"><button type="button" class="btn btn-color marginr">Ajouter une Critique</button></a>
+                        <a href="{{ path('ajout_critique', { slug: film.slug }) }}"><button type="button"
+                                class="btn btn-color marginr">Ajouter une Critique</button></a>
                     </div>
                 </section>
                 <section class="margintop margina width">
                     {% for critique in film.critiques %}
+                    {% if critique.publication == 1 %}
                     <article class="marginb">
                         <hr>
                         <div>
@@ -77,6 +79,9 @@
                             </div>
                         </div>
                     </article>
+                    {% else %}
+
+                    {% endif %}
                     {% endfor %}
                 </section>
             </main>

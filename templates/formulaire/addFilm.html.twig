@@ -5,7 +5,7 @@
 {% block body %}
 <div class="bg-danger">
     {% for error in app.flashes('error') %}
-        {{ error }}
+    {{ error }}
     {% endfor %}
 </div>
 <section class="flex jcenter margintop">
@@ -38,26 +38,26 @@
                 {{ form_widget(form.date) }}
             </div>
         </div>
-            <div class="form-group  col-md-6">
-                <!--<label for="inputReal">Réalisateur(s)</label>
+        <div class="form-group  col-md-6">
+            <!--<label for="inputReal">Réalisateur(s)</label>
                 <input type="hidden" class="form-control" id="inputReal" placeholder="Réalisateur(s)">
                 -->
-            </div>
-            <div class="form-group  col-md-6">
-                <!--<label for="inputScénariste">Scénariste(s)</label>
+        </div>
+        <div class="form-group  col-md-6">
+            <!--<label for="inputScénariste">Scénariste(s)</label>
                 <input type="hidden" class="form-control" id="inputScénariste" placeholder="Scénariste(s)">
                 -->
-            </div>
-            <div class="form-group  col-md-6">
-                <!--<label for="inputActeurs">Acteur(s)</label>
+        </div>
+        <div class="form-group  col-md-6">
+            <!--<label for="inputActeurs">Acteur(s)</label>
                 <input type="hidden" class="form-control" id="inputAct" placeholder="Acteur(s)">
                 -->{{ form_row(form.act) }}
-            </div>
-            <div class="form-group  col-md-6">
-                <!--<label for="inputGenre">Genre(s)</label>
+        </div>
+        <div class="form-group  col-md-6">
+            <!--<label for="inputGenre">Genre(s)</label>
                 <input type="hidden" class="form-control" name="inputGenre" id="inputGenre" placeholder="Genre(s)">-->
-                {{ form_row(form.genre) }}
-            </div>
+            {{ form_row(form.genre) }}
+        </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <!--<label for="inputDurée">Durée(s)</label>
@@ -69,7 +69,7 @@
                 <input type="text" class="form-control" id="inputNationnalité"  placeholder="Nationnalité(s)">-->
                 {{ form_row(form.nationalite) }}
             </div>
-        </div> 
+        </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <!--<label for="inputCNC">Limite d'âge</label>
@@ -81,27 +81,28 @@
                 <input type="text" class="form-control" id="inputBA"  placeholder="URL">-->
                 {{ form_row(form.trailer) }}
             </div>
-        </div> 
+        </div>
         <div class="form-group">
             <!--<label for="inputSynopsis">Synopsis</label>
             <textarea type="text" class="form-control" id="inputSynopsis" placeholder="Synopsis"></textarea>-->
             {{ form_row(form.synopsis) }}
         </div>
         <div class="flex jcenter margintop">
-            <a href="{{ path('admin',{page: 1}) }}"><button type="button" class="btn btn-danger btnsup">Annuler</button></a>
+            <a href="{{ path('admin',{page: 1}) }}"><button type="button"
+                    class="btn btn-danger btnsup">Annuler</button></a>
             <button type="submit" id="submitFilm" class="btn btn-success marginr" formnovalidate>Valider</button>
-        </div>    
-    
-    {{ form_end(form) }}
+        </div>
+
+        {{ form_end(form) }}
 
 
-    <button id="boutonPopu" formnovalidate>Faire la recherche</button>
-    <h4 id="messageRecherche"></h4>
+        <button id="boutonPopu" formnovalidate>Faire la recherche</button>
+        <h4 id="messageRecherche"></h4>
 
-    <div id="selection-films">
-    <table class="table table-bordered" id="infos">
-    </table>
-    <!--<div id="titre"></div>
+        <div id="selection-films">
+            <table class="table table-bordered" id="infos">
+            </table>
+            <!--<div id="titre"></div>
     <div id="affiche"></div>
     <div id="genres"></div>
     <div id="synopsis"></div>
@@ -112,12 +113,12 @@
     <div id="reals"></div>
     <div id="acts"></div>
     <div id="scens"></div>-->
+        </div>
     </div>
-    </div>
-<!--</section>-->
-{% endblock %}
+    <!--</section>-->
+    {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/admin/add_film.js') }}"></script>
-{% endblock %}
+    {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin/add_film.js') }}"></script>
+    {% endblock %}

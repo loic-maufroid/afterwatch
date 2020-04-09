@@ -12,10 +12,12 @@
         <p class="textc">Voulez-vous supprimer ce commentaire?</p>
         <div class="margina">
             <div class="flex jcenter">
-                <a href="{{ path('comment_delete', {id: comment.id}) }}"><button type="button" class="btn btn-success marginr">OUI</button></a>
-                <a href="{{ path('admin_commentslist',{page: 1}) }}"><button type="button" class="btn btn-danger btnsup">ANNULER</button></a>
+                <a href="{{ path('comment_delete', {id: comment.id}) }}"><button type="button"
+                        class="btn btn-success marginr">OUI</button></a>
+                <a href="{{ path('admin_commentslist',{page: 1}) }}"><button type="button"
+                        class="btn btn-danger btnsup">ANNULER</button></a>
             </div>
         </div>
-      </div>
+    </div>
 </section>
 {% endblock %}
