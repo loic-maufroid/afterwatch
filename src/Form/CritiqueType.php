@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Critique;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +18,19 @@ class CritiqueType extends AbstractType
         $builder
             ->add('titre',TextType::class,['label' => 'Titre de votre Critique'])
             ->add('contenu',TextareaType::class,['label' => 'Mettez votre Critique'])
-        ;
+            ->add('note',ChoiceType::class,[
+                'choices' => [
+                    '0' => 0,
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                ],
+                'label' => "Note",
+                'expanded' => true,
+                'multiple' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -22,10 +22,33 @@
 
     <body class="backgrounddynamique">
         {% endif %}
+        <section class="flex jcenter ">
+            {{ form_start(form, {'attr': {'class': 'jumbotron width margint'}}) }}
+            <h3 class="font textc">Titre du film</h3>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Titre">Titre de la critique</label>
+                    <input type="text" class="form-control" id="Titre">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Critique">Critique</label>
+                    <textarea type="text" class="form-control" id="Critique"></textarea>
+                </div>
+            </div>
+            <div id="stars" class="flex jcenter margintop">
+                
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+            </div>
+            <div class="flex jcenter marget">
+                <a href="#"><button type="button" class="btn btn-color marginr">Envoyer</button></a>
+                <a href="#"><button type="button" class="btn btn-danger">Retour</button></a>
+            </div>
 
+            {{ form_end(form) }}
+        </section>
 
-
-
-{{ form_start(form) }}
-{{ form_end(form) }}
-{% endblock %}
+        {% endblock %}
