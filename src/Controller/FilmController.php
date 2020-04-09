@@ -30,7 +30,7 @@ class FilmController extends AbstractController
     /**
      * @Route("/film/{slug}", name="details_film")
      */
-    public function voir($slug,FilmRepository $filmRepository,Request $request)
+    public function voir($slug,FilmRepository $filmRepository,Request $request,StatusRepository $statusRepository)
     {
 
         $film = $filmRepository->findOneBy(["slug" => $slug]);
@@ -53,10 +53,28 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('details_film', ['slug' => $slug]);
         }
         
+        $status = $statusRepository->findByDoubleId($user->getId(),$film->getId());
+
+        if ($status){
+            if ($status->getVeutVoir())
+            $boutonVeutVoirEnabled = false;
+            else
+            $boutonVeutVoirEnabled = true;
+            if ($status->getAVue())
+            $boutonAVuEnabled = false;
+            else
+            $boutonAVuEnabled = true;
+        }
+        else{
+            $boutonVeutVoirEnabled = true;
+            $boutonAVuEnabled = true;
+        }
 
         return $this->render('film/voir.html.twig',[
             "film" => $film,
             'form' => $form->createView(),
+            "enabledVeutVoir" => $boutonVeutVoirEnabled,
+            "enabledAVu" => $boutonAVuEnabled
         ]);
     }
 
