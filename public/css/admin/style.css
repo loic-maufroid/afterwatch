@@ -66,6 +66,13 @@ footer{
 .margina{
     margin:auto;
 }
+/* Marge supérieur */
+.margintnull{
+    margin-top:0;
+}
+.margintun{
+    margin-top:1em;
+}
 .paddingr{
     padding-right: 0.1em;
 }
@@ -79,7 +86,7 @@ footer{
 }
 /*marge au dessus du tableau*/
 .margint{
-    margin-top: 15em;
+    margin-top: 5em;
 }
 /*margintop des confirmationde suppresion films et users*/
 .margt{
@@ -95,7 +102,7 @@ footer{
 }
 /* marge sous le tableau*/
 .marginb{
-    margin-bottom: 3em;
+    margin-bottom: 1em;
 }
 /*centrer le text*/
 .textc{
