@@ -60,8 +60,10 @@ class FilmController extends AbstractController
             $boutonVeutVoirEnabled = false;
             else
             $boutonVeutVoirEnabled = true;
-            if ($status->getAVue())
+            if ($status->getAVue()){
             $boutonAVuEnabled = false;
+            $boutonVeutVoirEnabled = false;
+            }
             else
             $boutonAVuEnabled = true;
         }

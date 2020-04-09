@@ -99,7 +99,7 @@
           <hr>
           <div class="marginb flex flexdr">
             <div>
-              <img class='avatar' src="{{ asset('img/avatar/'~comment.idUtilisateur.avatar ) }}" class="avatar">
+              <img class='avatar' src="{% if comment.idUtilisateur.avatar %}{{ asset('img/avatar/'~comment.idUtilisateur.avatar ) }}{% else %}{{ asset('img/avatar/utilisateur.png') }}{% endif %}" class="avatar">
             </div>
             <div class="flex flexd">
               <h6 class="margint marginle">de : {% if is_granted('ROLE_ADMIN') %}
