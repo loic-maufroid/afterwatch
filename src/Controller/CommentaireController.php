@@ -70,7 +70,7 @@ class CommentaireController extends AbstractController
         }
     
         $notification =  $critiqueRepository->findCountSubmittedCritiques();
-        return $this->render('admin/formulaire/formCommentaire.html.twig', [
+        return $this->render('formulaire/formCommentaire.html.twig', [
             'form' => $form->createView(),
             'commentaire' => $commentaire,
             'notification' => $notification

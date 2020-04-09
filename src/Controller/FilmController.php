@@ -278,7 +278,7 @@ class FilmController extends AbstractController
 
         $notification = $critiqueRepository->findCountSubmittedCritiques();
 
-        return $this->render('admin/formulaire/formFilm.html.twig', [
+        return $this->render('formulaire/formFilm.html.twig', [
             'form' => $form->createView(),
             'film' => $film,
             'notification' => $notification
@@ -405,7 +405,7 @@ class FilmController extends AbstractController
         
         $notification = $critiqueRepository->findCountSubmittedCritiques();
 
-        return $this->render('admin/formulaire/addFilm.html.twig', [
+        return $this->render('formulaire/addFilm.html.twig', [
             'form' => $form->createView(),
             "notification" => $notification
         ]);
