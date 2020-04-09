@@ -66,6 +66,10 @@ footer{
 .margina{
     margin:auto;
 }
+/*Marge a gauche*/
+.marginl{
+    margin-left: 8.1em;
+}
 /* Marge supérieur */
 .margintnull{
     margin-top:0;

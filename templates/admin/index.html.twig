@@ -4,15 +4,16 @@
 {% block title %} {{ parent() }} - Films{% endblock %}
 
 {% block body %}
-<section class="flex jcenter">
-
-
-    <table id="thèmes" class=" textc margint marginb">
-        <div class="flex jflex">
+<div class="flex marginl marginb">
             <a href="{{ path('addfilm') }}"><button type="button" class="btn btn-info btn-color">Ajouter un
                     Film</button></a>
         </div>
-        <div id="successmess">
+<section class="flex jcenter">
+
+
+    <table id="thèmes" class=" textc marginb">
+        
+        <div id="successmess" class="flex ">
             {% for message in app.flashes('success') %}
             {{ message }}
             {% endfor %}
