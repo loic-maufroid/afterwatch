@@ -9,9 +9,10 @@
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
+    <!-- import SCSS -->
     <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styleprincipal.css') }}">
     <style>
         /*!! insertion de SCSS*/
         .split-character span {
@@ -40,11 +41,13 @@
 
 <body>
     {% block body %}
+    
+        <!-- a supprimer sans conséquence -->
         <div class="rep-contenu-h"></div>
 
         {% block header %}
         <header class="fond-h">
-
+            <h1 class="font margint textc">AfterWatch</h1>
             <div class="contenu-h row mb-4">
                 <a class="col-lg-2 col-12" href="{{ path('welcome') }}"><img class="logo-med"
                         src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
@@ -52,15 +55,15 @@
                 <div class="partie-h-b col-lg-8 col-12">
 
                     <div class="haut row">
-                        <div class="barre-recherche col-lg-12 align-top">
+                        <div class="barre-recherche display col-lg-12 align-top">
                             <div id="recherche-h">
-                                <div class="recherche-auto-flex">
-                                    <form action="{{ path('search') }}" method="get">
+                                <div class="recherche-auto-flex display alignit">
+                                    <form class="display" action="{{ path('search') }}" method="get">
                                         <input list="films" class="searchTerm" type="search" size="75%" id="site-search"
                                             autocomplete="off" name="searchFilms" placeholder="recherche un film.."
                                             aria-label="Search through site content">
 
-                                        <button id="buttonr" class="searchButton">Rechercher</button>
+                                        <button id="buttonr" class="searchButton btn btn-color">Rechercher</button>
                                     </form>
                                 </div>
                             </div>
@@ -100,18 +103,6 @@
                                 </div>
                             </div>
                         </nav>
-                        <!--<div class="co-et-regist">parties connexion et inscripton
-                        {% if app.user %}{# Si connecté #}
-                            <div>
-                                <img src="{#{{AFAIRE}}#}" alt="">
-                            </div>
-                            {{ app.user.username }},<button class="registrer" type="button"><a href="{{ path('app_logout') }}">Déconnexion</a></button>
-                        {% else %}{# Si non connecté #}
-                        <button class="registrer" type="button" data-rel="btn-connect"><a href="{{ path('app_login') }}">Connexion</a></button><!--ici pour la connexion de l'utilisateur-->
-                        <!--<button type="button" class="registrer" data-rel="btn-registrer"><a href="{{ path('app_register') }}">Inscription</a></button><!--ici pour l'inscription-->
-                        <!--{% endif %}
-                    </div>-->
-
 
                         <datalist id="films"></datalist>
 

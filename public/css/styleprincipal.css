@@ -1,9 +1,37 @@
-html
-{
-    max-width: 99%;
-}
-*{
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
+.font {
     font-family: "Courgette";
+    font-size: 60px;
+}
+.font:hover {
+    color: #0b7c7e;
+}
+.display{
+    display: flex;
+}
+.jcenter{
+    justify-content: center;
+}
+.jend{
+    justify-content: end;
+}
+.textc{
+    text-align: center;
+}
+.alignit{
+    align-items: center;
+}
+.margint{
+    margin-top: 1em;
+}
+.margintop{
+    margin-top: 12em;
+}
+.marginb{
+    margin-bottom: 4em;
+}
+.width{
+    width: 100%;
 }
 body
 {
@@ -12,21 +40,13 @@ body
     font-size: 18px;
     height: 100%;
 }
-.wrapbody
-{
-    position: relative;
-    min-height: 450px;
-    width: 100%;
-    margin: 10px 0px 10px 10px;
-    overflow: hidden;
-    z-index: 2;
-}/*div qui englobe tout header+main+footer*/
 .rep-contenu-h
 {
     height: 140px;
     width: 100%;
     box-sizing: border-box;
 }
+
 /*début du header*/
 .fond-h
 {
@@ -45,7 +65,7 @@ body
 {
     left: 50%;
     max-width: 1500px;
-    padding: 30px 20px;
+    padding: 20px 20px;
     position: relative;
     transform: translateX(-50%);
     width: 100%;
@@ -74,7 +94,6 @@ span
 }
 .haut
 {
-    margin-left: 120px;
     height: 45px;
     position: relative;
     z-index: 1;
@@ -82,33 +101,34 @@ span
 }
 .barre-recherche
 {
-    margin-left: 10%;
+    margin-left: 9%;
     width: calc(85% - 300px - 50px);
-    display: flex;
     align-items: left;
     float: left;
     height: 45px;
-    
     z-index: 1;
     flex-grow: 1;
     border-radius: 10px;
 }
 form
 {
-    display:flex;
     width: 200%;
 }
-
+.buttonr
+{
+    background-color: #009193;
+    border-radius: 15%;
+    box-shadow: transparent;
+    margin-left: 4%;
+    -webkit-margin-start: 20%;
+}
 .recherche-auto-flex
 {
-    align-items: center;
     border: 1px solid inherit;
-    display: flex;
     height: 100%;
     padding: 0 10px;
     width: 100%;
 }
-
 .h-recherche
 {
     background-color: inherit;
@@ -122,7 +142,7 @@ form
     margin: 0;
     line-height: 18px;
     transition: all .3s ease;
-    -webkit-user-select: text    
+    -webkit-user-select: text;    
 }
 .rechercher
 {
@@ -140,53 +160,34 @@ form
     position: relative;
     top: 50%;
     transform: translateY(-25%);
-    float: right;
+    float: right;;
     text-align: right;
     box-sizing: border-box;
 }
 .connect
 {
     cursor: pointer;
+    background-color: #009193;
+    border-radius: 15px;
+    color: black;
+    display: inline-block;
     font-size: 18px;
+    outline: 0;
     box-sizing: border-box;
-    border: none;
-    background-color: transparent;
 }
-/* modifications des boutons du header */
-.registrer.btn
+.registrer
 {
     background-color: #009193;
     border-radius: 15px;
     color: black;
     display: inline-block;
     font-size: 18px;
-    margin: 0 0 0.5em;
+    margin-left: 10px;
     outline: 0;
     padding: 10px 20px;
     text-decoration: none;
     box-sizing: border-box;
-    position: relative;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -o-transition: 0.3s;
-    transition: 0.3s;
-    text-transform: uppercase;
-     text-align: center;
-    text-decoration: none;   
 }
-.btn:hover, .btn:focus 
-{
-    opacity: 0.8;
-}
-.btn:active 
-{
-    -webkit-transform: scale(0.80);
-    -moz-transform: scale(0.80);
-    -ms-transform: scale(0.80);
-    -o-transform: scale(0.80);
-    transform: scale(0.80);
-}
-/* fin des modifs boutons du header */
 .bas
 {
     height: 40px;
@@ -199,8 +200,6 @@ form
 {
     width: calc(100% -150px);
     text-align: center;
-    position: relative;
-    top: 50%;
     transform: translateY(55%) translateX(-15%);
     display: flex;
     box-sizing: border-box;
@@ -208,7 +207,6 @@ form
 .barre-menus-navig
 {
     width: 100%;
-    overflow: hidden;
     box-sizing: border-box;
 }
 .navig-list
@@ -222,7 +220,7 @@ form
 ul
 {
     list-style-type: none;
-    padding: 0;
+    padding: 0 0 0 0.5em;
     margin: 0;
     box-sizing: border-box;
 }
@@ -231,6 +229,8 @@ ul
     font-size: 20px;
     display: inline-block;
     white-space: nowrap;
+    border: 2px solid #009193;
+    border-radius: 10px;
 }
 li
 {
@@ -244,24 +244,40 @@ li
     text-transform: uppercase;
     vertical-align: center;
 }
-.navig-main-item a 
+.navig-main-item a
 {
     color: #009193;
     display: block;
     text-decoration: none;
 }
-/*Fin du header, début du main*/
+/* fin du header */
+
+/* Footer */
+#contener_footer
+{
+    display: flex;
+    flex-direction: inherit;
+    padding-left: 10%;
+}
+/* Fin du footer */
+
+/* Caroussel 
+
+#xl-carousel
+{
+    position: relative;
+}
+*/
+/* Caroussel */
+
+/* Début Main */
 .main-contenu
 {
     
     position: relative;
     box-sizing: content-box;
 }
-#xl-carousel
-{
-    position: relative;
-    
-}
+
 .contenu-a-affiche
 {
     margin: auto;
@@ -322,12 +338,11 @@ h1
 }
 .tout-voir-affiche
 {
-    background-color: #009193;
-    width: 10%;
     font-size: 24px;
     line-height: 36px;
+    vertical-align: middle;
 }
-h2 
+h2 a
 {
     display: inline;
     font-weight: inherit;
@@ -419,6 +434,22 @@ span
     width: 100%;
     box-sizing: border-box;
 }
+
+/*Notification film ajouté*/
+
+/*couleur donner au bouton */
+.btn-color{
+    position: absolute;
+    top: 10%;
+    background-image:linear-gradient(60deg, #02aca9, #2d8d8d);
+    color: white;
+} 
+/*couleur donner au bouton au survol*/
+.btn-color:hover{
+    background-image:linear-gradient(60deg, #1e9593, #2e8f8d);
+    color: white;
+}
+
 section
 {
     border-bottom: 1px grey solid;
@@ -426,60 +457,4 @@ section
     justify-content: center;
     padding-top: 2%;
 }
-#contener_footer
-{
-    display: flex;
-    flex-direction: inherit;
-    padding-left: 10%;
-}
-.icon
-{
-    padding-left: 230px;
-}
-.icon a
-{
-    background-color: red;
-    color:grey;
-}
- 
-.bas
-{
-    height: calc(-3% - 1%);
-}
-.navig-main
-{   
-    border: 3px solid #009193;
-    border-radius: 10%;
-    padding-left: 1.5%;
-}
-.contenu-main
-{
-        padding-top: 2.5%;
-        padding-bottom: 0;
-}
-.prise_de_tete
-{
-    padding-top: 0;
-}
-.contenu_p_u
-{min-height: 20em;}
-/*!! insertion de SCSS*/
-.split-character span {
-    display: inline-block;
-}
-
-.title span > span {
-   opacity: 0;
-    animation: flipAnimation 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035) 3 forwards;
-}
-
-@keyframes flipAnimation {
-    from {
-        transform: scale(-1, 1);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1, 1);
-        opacity: 1;
-    }
-}
+/* fin Main */
