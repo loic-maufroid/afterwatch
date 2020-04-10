@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <!--<input type="file" class="form-control-file" id="inputAffiche">-->
-            {{ form_row(form.affiche) }}
+            {{ form_row(form.affiche, {'type': 'hidden'}) }}
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -35,7 +35,7 @@
             <div class="form-group col-md-6">
                 <!--<label for="inputDate">Date de sortie</label>
                 <input type="text" class="form-control" id="inputDate" placeholder="Date de sortie">-->
-                {{ form_widget(form.date) }}
+                {{ form_widget(form.date, {'type': 'hidden'}) }}
             </div>
         </div>
         <div class="form-group  col-md-6">
@@ -51,23 +51,23 @@
         <div class="form-group  col-md-6">
             <!--<label for="inputActeurs">Acteur(s)</label>
                 <input type="hidden" class="form-control" id="inputAct" placeholder="Acteur(s)">
-                -->{{ form_row(form.act) }}
+                -->{{ form_row(form.act, {'type': 'hidden'}) }}
         </div>
         <div class="form-group  col-md-6">
             <!--<label for="inputGenre">Genre(s)</label>
                 <input type="hidden" class="form-control" name="inputGenre" id="inputGenre" placeholder="Genre(s)">-->
-            {{ form_row(form.genre) }}
+            {{ form_row(form.genre, {'type': 'hidden'}) }}
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <!--<label for="inputDurée">Durée(s)</label>
                 <input type="text" class="form-control" id="inputDurée" placeholder="Durée(s)">-->
-                {{ form_row(form.duree) }}
+                {{ form_row(form.duree, {'type': 'hidden'}) }}
             </div>
             <div class="form-group col-md-6">
                 <!--<label for="inputNationnalité">Nationnalité(s)</label>
                 <input type="text" class="form-control" id="inputNationnalité"  placeholder="Nationnalité(s)">-->
-                {{ form_row(form.nationalite) }}
+                {{ form_row(form.nationalite, {'type': 'hidden'}) }}
             </div>
         </div>
         <div class="form-row">
@@ -79,13 +79,14 @@
             <div class="form-group col-md-6">
                 <!--<label for="inputBA">Bande-annonce</label>
                 <input type="text" class="form-control" id="inputBA"  placeholder="URL">-->
-                {{ form_row(form.trailer) }}
+                {{ form_row(form.trailer, {'type': 'hidden'}) }}
             </div>
         </div>
         <div class="form-group">
             <!--<label for="inputSynopsis">Synopsis</label>
             <textarea type="text" class="form-control" id="inputSynopsis" placeholder="Synopsis"></textarea>-->
-            {{ form_row(form.synopsis) }}
+            {{ form_row(form.real, {'type': 'hidden'}) }}
+            {{ form_row(form.scen, {'type': 'hidden'}) }}
         </div>
         <div class="flex jcenter">
             <button id="boutonPopu" class="btn btn-color" formnovalidate>Faire la recherche</button>

@@ -26,7 +26,7 @@
                 {% else %}
             <tr>
                 {% endif %}
-                <td><img src="{{ asset('img/avatar/'~user.avatar ) }}" style="height: 75px;"
+                <td><img src="{% if user.avatar %}{{ asset('img/avatar/'~user.avatar ) }}{% else %}{{ asset('img/avatar/utilisateur.png') }}{% endif %}" style="height: 75px;"
                         alt="image de profil {{ user.username }}"></td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
