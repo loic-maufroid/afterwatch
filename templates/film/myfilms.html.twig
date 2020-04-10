@@ -16,7 +16,7 @@
                 
              
             <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/01.jpg') }}{% endif %}" class="d-block mx-auto img-fluid" alt="...">
+                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="d-block mx-auto img-fluid" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h6>{{ filmCarr.titre }}</h6>
                     <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
@@ -57,7 +57,11 @@
 
                         <li class="img-a-affiche">
                             {% if app.session.flashbag.peek('new')|length > 0 %}
-                            <i>{{ app.session.flashbag.peek('new')[0] == filmVeutVoir.id ? 'Nouveau !' : '' }}</i>
+                            {% if app.session.flashbag.peek('new')[0] == filmVeutVoir.id %}
+                            <div class="display jcenter alignit">
+                            <div class="nouveau display alignit"><p>New</p></div>
+                            </div>
+                            {% endif %}
                             {% endif %}
                             <a class="a-film film-a" href="{{ path('details_film',{slug: filmVeutVoir.slug}) }}" data-rel="button"><div class="container">
                                 <div class="card">
@@ -78,7 +82,7 @@
                                 
                                 </div>
                             </a>
-                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmVeutVoir.slug}) }}"><button type="button" class="btn btn-color"><i class="fas fa-times"></i></button></a>
+                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmVeutVoir.slug}) }}"><button type="button" class="btn delete-color"><i class="fas fa-times"></i></button></a>
                         </li>
 
                         {% endfor %}
@@ -124,7 +128,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmAVu.slug}) }}"><button type="button" class="btn btn-color"><i class="fas fa-times"></i></button></a>
+                            <a class="boutonSuppCollection" href="{{ path('supprimer_filmfromcollection',{username: user.username,slug: filmAVu.slug}) }}"><button type="button" class="btn delete-color"><i class="fas fa-times"></i></button></a>
                         </li>
 
                         {% endfor %}

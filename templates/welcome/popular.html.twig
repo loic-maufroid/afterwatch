@@ -13,7 +13,7 @@
 
                 {% for filmCarr in filmsCarr %}
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                    <img src="{% if filmCarr.film.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.film.affiche }}{% else %}./img/01.jpg{% endif %}"
+                    <img src="{% if filmCarr.film.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                         class="d-block mx-auto img-fluid" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h6>{{ filmCarr.film.titre }} {{ filmCarr.noteMoy }}</h6>
@@ -67,7 +67,7 @@
                                         <div class="face face1">
                                             <div class="content">
                                                 <img class="" data-rel="poster" alt="Affiche Godzilla II"
-                                                    src="{% if film.film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.film.affiche }}{% else %}./img/0199399.jpg.webp{% endif %}"
+                                                    src="{% if film.film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                                                     width="150" height="204" />
                                             </div>
                                         </div>

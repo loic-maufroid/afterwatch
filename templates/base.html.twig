@@ -8,6 +8,7 @@
     <title>{% block title %}AfterWatch{% endblock %}</title>
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Effethover.css') }}">
     <!-- import SCSS -->
     <link rel="stylesheet" href="{{ asset('css/form.search.style.scss') }}">
@@ -49,59 +50,55 @@
         <header class="fond-h">
             <h1 class="font margint textc">AfterWatch</h1>
             <div class="contenu-h row mb-4">
-                <a class="col-lg-2 col-12" href="{{ path('welcome') }}"><img class="logo-med"
-                        src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
+                <a href="{{ path('welcome') }}"><img class="marget marginl logo-med"
+                    src="{{ asset('img/logo/afterwatch_logo.png') }}"></a>
 
                 <div class="partie-h-b col-lg-8 col-12">
 
                     <div class="haut row">
-                        <div class="barre-recherche display col-lg-12 align-top">
+                        <div class="flex jcenter flex col-lg-12 align-top">
                             <div id="recherche-h">
-                                <div class="recherche-auto-flex display alignit">
-                                    <form class="display" action="{{ path('search') }}" method="get">
+                                <div class="recherche-auto-flex flex alignit">
+                                    <form class="flex" action="{{ path('search') }}" method="get">
                                         <input list="films" class="searchTerm" type="search" size="75%" id="site-search"
-                                            autocomplete="off" name="searchFilms" placeholder="recherche un film.."
+                                            autocomplete="off" name="searchFilms" placeholder="recherche un film..."
                                             aria-label="Search through site content">
 
-                                        <button id="buttonr" class="searchButton btn btn-color">Rechercher</button>
+                                        <button class="searchButton btn btn-color">Rechercher</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 align-middle text-center" id="messageErreur"></div>
-                        <nav class="barre-menus col-lg-12 align-bottom">
-                            <div class="barre-menus-navig">
-                                <div class="navig-list">
-                                    <ul class="navig-main">
+                        <div class="col-lg-12 align-middle textc" id="messageErreur"></div>
+                        <nav class="flex jcenter col-lg-12 align-bottom">
+                                    <ul class="ul bordure flex flexdr margint">
                                         {% if app.request.get('_route') != 'welcome' and app.request.get('_route') != 'search' %}
-                                        <li class="navig-main-item">
+                                        <li class="nav-li">
                                             <a href="{{ path('welcome') }}">Accueil</a>
                                         </li>
                                         {% endif %}
                                         {% if app.request.get('_route') != 'alaffiche' %}
-                                        <li class="navig-main-item">
-                                            <a href="{{ path('alaffiche') }}">A l'affiche</a>
+                                        <li class="nav-li">
+                                            <a href="{{ path('alaffiche') }}">A L'Affiche</a>
                                         </li>
                                         {% endif %}
                                         {% if app.request.get('_route') != 'futures_sorties' %}
-                                        <li class="navig-main-item">
-                                            <a href="{{ path('futures_sorties') }}">Les futures sorties</a>
+                                        <li class="nav-li">
+                                            <a href="{{ path('futures_sorties') }}">Les Futures Sorties</a>
                                         </li>
                                         {% endif %}
                                         {% if app.request.get('_route') != 'recommandations' %}
-                                        <li class="navig-main-item">
+                                        <li class="nav-li">
                                             <a href="{{ path('recommandations') }}">Recommandations</a>
                                         </li>
                                         {% endif %}
                                         {% if is_granted('IS_AUTHENTICATED_FULLY') and app.request.get('_route') != 'films_utilisateur' %}
-                                        <li class="navig-main-item">
+                                        <li class="nav-li">
                                             <a href="{{ path('films_utilisateur',{username: app.user.username}) }}">Mes
                                                 films</a>
                                         </li>
                                         {% endif %}
                                     </ul>
-                                </div>
-                            </div>
                         </nav>
 
                         <datalist id="films"></datalist>
@@ -109,14 +106,14 @@
                     </div>
                 </div>
 
-                <div class="bas col-lg-2 col-12">
-                    <div class="co-et-regist">
+                <div class=" col-lg-2 col-12">
+                    <div>
                         {% if not app.user %}
-                        <div>
-                            <button class="connect" type="button" data-rel="btn-connect"><a
-                                    href="{{ path('app_login') }}">Connexion</a></button>
-                            <button class="registrer" type="button" data-rel="btn-registrer"><a
-                                    href="{{ path('app_register') }}">Inscription</a></button>
+                        <div class="flex flexdr">
+                            <a href="{{ path('app_login') }}"><button type="button" class="btn btn-color marginr"
+                                data-rel="btn-color">Connexion</button></a>
+                            <a href="{{ path('app_register') }}"><button type="button" class="btn btn-color" 
+                                data-rel="btn-color">Inscription</button></a>
                         </div>
                         {% else %}
 
@@ -154,17 +151,17 @@
             <div id="contener_footer">
 
                 <div class="navig-list-footer">
-                    <ul class="navig-footer">
-                        <li class="navig-main-item">
+                    <ul class="ul flex flexdr">
+                        <li class="nav-li">
                             <a href="{{ path('a_propos') }}">A propos</a>
                         </li>
-                        <li class="navig-main-item">
+                        <li class="nav-li">
                             <a href="#">Nous contacter</a>
                         </li>
-                        <li class="navig-main-item">
+                        <li class="nav-li">
                             <a href="{{ path('condition') }}">Conditions d'utilisation</a>
                         </li>
-                        <li class="navig-main-item">
+                        <li class="nav-li">
                             <a href="{{ path('vers_forum') }}">Forum</a>
                         </li>
                     </ul>

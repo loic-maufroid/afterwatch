@@ -53,6 +53,7 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('details_film', ['slug' => $slug]);
         }
         
+        if ($user){
         $status = $statusRepository->findByDoubleId($user->getId(),$film->getId());
 
         if ($status){
@@ -71,6 +72,11 @@ class FilmController extends AbstractController
             $boutonVeutVoirEnabled = true;
             $boutonAVuEnabled = true;
         }
+    }
+    else{
+        $boutonAVuEnabled = null;
+        $boutonVeutVoirEnabled = null;
+    }
 
         return $this->render('film/voir.html.twig',[
             "film" => $film,

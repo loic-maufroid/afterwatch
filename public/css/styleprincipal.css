@@ -1,37 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans&display=swap%27');
+/*police des titre*/
 .font {
     font-family: "Courgette";
     font-size: 60px;
 }
+/*couleur du titre au survol*/
 .font:hover {
     color: #0b7c7e;
 }
-.display{
+/*met en flex*/
+.flex{
     display: flex;
 }
+/*met les flex en ligne*/
+.flexdr{
+    flex-direction: row;
+}
+/*centre les flex*/
 .jcenter{
     justify-content: center;
 }
+/*met les flex a droite*/
 .jend{
     justify-content: end;
 }
+/*centre le text*/
 .textc{
     text-align: center;
 }
+/*align au milieu par rapport au haut*/
 .alignit{
     align-items: center;
 }
+/*margint haut du titre*/
 .margint{
     margin-top: 1em;
 }
+/*margin auto met au centre*/
+.margina{
+    margin: auto;
+}
+/*margin a droite des bouton*/
+.marginr{
+    margin-right: 1em;
+}
+/*margin haut*/
 .margintop{
     margin-top: 12em;
 }
+/* margin bas*/
 .marginb{
     margin-bottom: 4em;
 }
+/*margin a gauche*/
+.marginl{
+    margin-left: 2em;
+}
+/*determiner la taille a 100%*/
 .width{
     width: 100%;
+}
+/*couleur donner au bouton */
+.btn-color{
+    background-color: #009391;
+    color: white;
+} 
+/*couleur donner au bouton au survol*/
+.btn-color:hover{
+    background-color: #006e6d;
+    color: white;
 }
 body
 {
@@ -80,10 +117,13 @@ span
 {
     box-sizing: border-box;
 }
+/*margin au dessus du logo*/
+.marget{
+    margin-top: -5em;
+}
+/*taille du logo*/
 .logo-med 
 {
-    float: left;
-    position: relative;
     height: 140px;
     width: 152px; 
 }
@@ -98,17 +138,6 @@ span
     position: relative;
     z-index: 1;
     box-sizing: content-box;
-}
-.barre-recherche
-{
-    margin-left: 9%;
-    width: calc(85% - 300px - 50px);
-    align-items: left;
-    float: left;
-    height: 45px;
-    z-index: 1;
-    flex-grow: 1;
-    border-radius: 10px;
 }
 form
 {
@@ -154,40 +183,6 @@ form
     text-decoration: none;
     box-sizing: border-box;
 }
-.co-et-regist
-{
-    width: 200px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-25%);
-    float: right;;
-    text-align: right;
-    box-sizing: border-box;
-}
-.connect
-{
-    cursor: pointer;
-    background-color: #009193;
-    border-radius: 15px;
-    color: black;
-    display: inline-block;
-    font-size: 18px;
-    outline: 0;
-    box-sizing: border-box;
-}
-.registrer
-{
-    background-color: #009193;
-    border-radius: 15px;
-    color: black;
-    display: inline-block;
-    font-size: 18px;
-    margin-left: 10px;
-    outline: 0;
-    padding: 10px 20px;
-    text-decoration: none;
-    box-sizing: border-box;
-}
 .bas
 {
     height: 40px;
@@ -196,58 +191,32 @@ form
     z-index: 1;
     box-sizing: border-box;
 }
-.barre-menus
-{
-    width: calc(100% -150px);
-    text-align: center;
-    transform: translateY(55%) translateX(-15%);
-    display: flex;
-    box-sizing: border-box;
-}
 .barre-menus-navig
 {
     width: 100%;
     box-sizing: border-box;
 }
-.navig-list
-{
-    white-space: nowrap;
-    box-sizing: border-box;
-    text-align: center;
-    padding-left: 25%;
-    color: black;
-}
-ul
+/*enleve les puces*/
+.ul
 {
     list-style-type: none;
-    padding: 0 0 0 0.5em;
-    margin: 0;
-    box-sizing: border-box;
-}
-.navig-main
-{
     font-size: 20px;
-    display: inline-block;
-    white-space: nowrap;
+}
+/* bordure du menu dans le ul*/
+.bordure{
     border: 2px solid #009193;
     border-radius: 10px;
 }
-li
-{
-    display: inline-block;
-    box-sizing: border-box;
-}
-.navig-main-item
+/*definir un curseur et un margin droite des li*/
+.nav-li
 {
     margin-right: 15px;
     cursor: pointer;
-    text-transform: uppercase;
-    vertical-align: center;
 }
-.navig-main-item a
+/*coleur et soulignage none des a lien*/
+.nav-li a
 {
     color: #009193;
-    display: block;
     text-decoration: none;
 }
 /* fin du header */
@@ -261,15 +230,13 @@ li
 }
 /* Fin du footer */
 
-/* Caroussel 
-
-#xl-carousel
+/* Caroussel*/
+.dimCarr
 {
-    position: relative;
+    width: 342px;
+    height: 413px;
 }
-*/
-/* Caroussel */
-
+/*fin du carousel*/
 /* Début Main */
 .main-contenu
 {
@@ -353,7 +320,7 @@ h2 a
 .contenu-film-affiche
 {
     display: grid;
-    grid-template-columns: repeat(6, max-content);/*nombre maximum d'affiche sur la ligne*/
+    grid-template-columns: repeat(4, max-content);/*nombre maximum d'affiche sur la ligne*/
     justify-content: space-evenly;
     list-style-type: none;
     padding: 0;
@@ -435,20 +402,59 @@ span
     box-sizing: border-box;
 }
 
-/*Notification film ajouté*/
+/*Bouton delete film de la collection*/
 
-/*couleur donner au bouton */
-.btn-color{
+.boutonSuppCollection{
     position: absolute;
     top: 10%;
+}
+
+/*couleur donner au bouton */
+.delete-color{
     background-image:linear-gradient(60deg, #02aca9, #2d8d8d);
     color: white;
 } 
 /*couleur donner au bouton au survol*/
-.btn-color:hover{
+.delete-color:hover{
     background-image:linear-gradient(60deg, #1e9593, #2e8f8d);
     color: white;
 }
+
+/*Notification "new" dans myFilms*/
+
+/*display flex*/
+.display{
+    display: flex;
+    position: absolute;
+    top: 80%;
+    left: 150%;
+    z-index: 1;
+   }
+   /*justify content center*/
+   .jcenter{
+       justify-content: center;
+   }
+   /* align items center*/
+   .alignit{
+       align-items: center;
+   }
+   .nouveau
+   {
+     width: auto;
+     height: 2em;
+     padding: 0 .75em;
+     background: #2e8f8d;
+     border-radius: 0.2em;
+     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+     font-family: Arial;
+     font-size: 20px;
+     color: #FFF;
+     text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+   }
+
+   .nouveau p{
+       margin-bottom: 0;
+   }
 
 section
 {
