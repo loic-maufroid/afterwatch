@@ -23,6 +23,8 @@ class CommentaireController extends AbstractController
      */
     public function commentConfirmSuppr($id,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
        $comment = $this->getDoctrine()
             ->getRepository(Commentaire::class)
             ->find($id);
@@ -41,6 +43,8 @@ class CommentaireController extends AbstractController
     */
     public function commentDelete(Commentaire $comment)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($comment);
         $entityManager->flush();
@@ -55,6 +59,8 @@ class CommentaireController extends AbstractController
     */
     public function commentFormModif($id, Request $request, Commentaire $comment, CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(CommentaireType::class, $comment);
         $form->handleRequest($request);
 
@@ -84,6 +90,8 @@ class CommentaireController extends AbstractController
      */
     public function commentairesList($page,CommentaireRepository $commentaireRepository, CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $comments = $commentaireRepository->findCommentairePaginator($page);
         $maxPage = ceil(count($comments)/25);
 
