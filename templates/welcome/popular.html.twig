@@ -14,7 +14,7 @@
                 {% for filmCarr in filmsCarr %}
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
                     <img src="{% if filmCarr.film.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                        class="d-block mx-auto img-fluid" alt="...">
+                        class="d-block mx-auto img-fluid dimCarr" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h6>{{ filmCarr.film.titre }} {{ filmCarr.noteMoy }}</h6>
                         <a href="{{ path('details_film',{slug: filmCarr.film.slug}) }}">Cliquer ici</a>
@@ -66,13 +66,11 @@
 
                                         <div class="face face1">
                                             <div class="content">
-                                                <img class="" data-rel="poster" alt="Affiche Godzilla II"
-                                                    src="{% if film.film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                                                    width="150" height="204" />
+                                                <img class="dimCard" alt="" src="{% if film.film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"/>
                                             </div>
                                         </div>
                                         <div class="face face2">
-                                            <div class="content">
+                                            <div class="content dimCard">
                                                 <a class="w-100 m-0 p-0"
                                                     href="{{ path('details_film',{slug: film.film.slug}) }}">
                                                     <h5 class="text-center">{{ film.film.titre }}</h5>

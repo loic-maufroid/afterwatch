@@ -267,6 +267,8 @@ class FilmController extends AbstractController
      */
     public function filmConfirmSuppr($id,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
        $film = $this->getDoctrine()
             ->getRepository(Film::class)
             ->find($id);
@@ -286,6 +288,8 @@ class FilmController extends AbstractController
     */
     public function filmDelete(Film $film)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($film);
         $entityManager->flush();
@@ -300,6 +304,8 @@ class FilmController extends AbstractController
     */
     public function filmFormModif($id, Request $request, Film $movie,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(FilmType::class, $movie);
         $form->handleRequest($request);
         
@@ -331,6 +337,7 @@ class FilmController extends AbstractController
     public function addFilm(Request $request, SluggerInterface $slugger,GenreRepository $genreRepository,RealisateurRepository $realisateurRepository,
     ScenaristeRepository $scenaristeRepository,ActeurRepository $acteurRepository,FilmRepository $filmRepository,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $film = new Film();
         
         $form = $this->createForm(FilmType::class, $film);
@@ -456,6 +463,8 @@ class FilmController extends AbstractController
      */
     public function indexAdmin($page,FilmRepository $filmRepository,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $films = $filmRepository->findFilmPaginator($page);
         $maxPage = ceil(count($films)/20);
         $notification = $critiqueRepository->findCountSubmittedCritiques();;

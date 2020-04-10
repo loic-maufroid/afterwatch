@@ -345,10 +345,7 @@ h2 a
     text-decoration: none;
     box-sizing: border-box;
 }
-.img-a-affiche img
-{
-    height: auto;
-}
+
 img
 {
     border: 0;
@@ -402,6 +399,12 @@ span
     box-sizing: border-box;
 }
 
+/*Dimensions de l'image des cards*/
+
+.dimCard{
+    width: 150px;
+    height: 204px;
+}
 /*Bouton delete film de la collection*/
 
 .boutonSuppCollection{

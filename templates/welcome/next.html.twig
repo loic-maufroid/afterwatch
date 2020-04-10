@@ -14,7 +14,7 @@
                 {% for filmCarr in filmsCarr %}
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
                     <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                        class="d-block mx-auto img-fluid" alt="...">
+                        class="d-block mx-auto img-fluid dimCarr" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h6>{{ filmCarr.titre }}</h6>
                         <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
@@ -62,13 +62,13 @@
                                     <div class="card">
                                         <div class="face face1">
                                             <div class="content">
-                                                <img class="" data-rel="poster" alt="Affiche Godzilla II"
+                                                <img class="dimCard" data-rel="poster" alt="Affiche Godzilla II"
                                                     src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                                                    width="150" height="204" />
+                                                    />
                                             </div>
                                         </div>
                                         <div class="face face2">
-                                            <div class="content">
+                                            <div class="content dimCard">
                                                 <a class="w-100 m-0 p-0"
                                                     href="{{ path('details_film',{slug: film.slug}) }}">
                                                     <h5 class="text-center">{{ film.titre }}</h5>
