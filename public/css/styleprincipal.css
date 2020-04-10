@@ -231,6 +231,15 @@ form
     width: 342px;
     height: 413px;
 }
+/*lien du carousel qui dirige vers le film*/
+.lien-carousel{
+    color: #2e2e2e;
+}
+/*lien du carousel qui dirige vers le film*/
+.lien-carousel:hover{
+    text-decoration: none;
+    color: #696969;
+}
 /*fin du carousel*/
 /* Début Main */
 .main-contenu

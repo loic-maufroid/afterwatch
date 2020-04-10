@@ -18,8 +18,8 @@
                     <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                         class="d-block mx-auto img-fluid dimCarr" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3>{{ filmCarr.titre }}</h3>
-                        <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+                        <p>{{ filmCarr.titre }}</p>
+                        <a class="lien-carousel" href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
                     </div>
                 </div>
 
