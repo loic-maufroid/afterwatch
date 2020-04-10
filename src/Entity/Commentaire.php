@@ -20,12 +20,14 @@ class Commentaire
     /**
      * @ORM\Column(type="text")
      * 
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *      message = "Le commentaire ne peut pas être vide"
+     * )
      * @Assert\Length(
-     *      min = 30,
-     *      max = 255,
-     *      minMessage = "Le commentaire ne peut pas être inférieur à 30 caractères",
-     *      maxMessage = "Le commentaire ne peut pas être supérieur à 255 caractères",
+     *      min = 20,
+     *      max = 200,
+     *      minMessage = "Le commentaire ne peut pas être inférieur à 20 caractères",
+     *      maxMessage = "Le commentaire ne peut pas être supérieur à 200 caractères",
      * )
      */
     private $contenu;

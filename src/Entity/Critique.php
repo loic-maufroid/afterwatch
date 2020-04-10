@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CritiqueRepository")
@@ -18,11 +19,31 @@ class Critique
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Assert\NotBlank(
+     *      message = "Le Titre ne peut pas être vide",
+     * )
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 255,
+     *      minMessage = "Le Titre ne peut pas être inférieur à 1 caractères",
+     *      maxMessage = "Le Titre ne peut pas être supérieur à 255 caractères",
+     * )
      */
     private $titre;
 
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Assert\NotBlank(
+     *      message = "La critique ne peut pas être vide",
+     * )
+     * @Assert\Length(
+     *      min = 50,
+     *      max = 1500,
+     *      minMessage = "La critique ne peut pas être inférieur à 50 caractères",
+     *      maxMessage = "La critique ne peut pas être supérieur à 1500 caractères",
+     * )
      */
     private $contenu;
 
@@ -45,6 +66,10 @@ class Critique
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * @Assert\NotBlank(
+     *      message = "Un note doit être soumise",
+     * )
      */
     private $note;
 

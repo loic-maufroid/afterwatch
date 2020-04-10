@@ -3,9 +3,25 @@
 {% block title %}{{ parent() }} - Vérification avant publication{% endblock %}
 
 {% block body %}
-{{ review.titre }}
-{{ review.contenu }}
 
-<a href="{{ path('critique_publier',{id: review.id}) }}"><button class="btn btn-success">Publier</button></a>
-<a href="{{ path('admin_critiqueslist',{page: 1}) }}"><button class="btn btn-danger">Ne pas publier</button></a>
+
+
+<section class="flex jcenter marget">
+    <div class="jumbotron widthsup ">
+        <h2 class="textc">{{ review.titre }}</h2>
+        <p class="textc size">De : {{ review.idutilisateur.username }}</p>
+        <p class="texta">{{ review.contenu }}</p>
+        <hr class="my-4">
+        <p class="textc">Voulez-vous Valider cette critique ?</p>
+        <div class="margina">
+            <div class="flex jcenter">
+                <a href="{{ path('critique_publier',{id: review.id}) }}"><button class="btn btn-success">Publier</button></a>
+                <a href="{{ path('admin_critiqueslist',{page: 1}) }}"><button class="btn btn-danger">Ne pas publier</button></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 {% endblock %}
