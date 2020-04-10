@@ -32,6 +32,14 @@ class TemporaryController extends AbstractController{
     {
         return $this->render('welcome/toBuild.html.twig',[]);
     }
+
+    /**
+     * @Route("/contactus", name="contacter_admin")
+     */
+    public function mailAdmin()
+    {
+        return $this->render('welcome/toBuild.html.twig',[]);
+    }
 }
 
 
