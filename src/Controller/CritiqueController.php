@@ -89,6 +89,8 @@ class CritiqueController extends AbstractController
      */
     public function critConfirmSuppr($id,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
        $critique = $this->getDoctrine()
             ->getRepository(Critique::class)
             ->find($id);
@@ -108,6 +110,8 @@ class CritiqueController extends AbstractController
     */
     public function critiqueDelete(Critique $critique)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($critique);
         $entityManager->flush();
@@ -122,6 +126,8 @@ class CritiqueController extends AbstractController
     */
     public function critiqueFormModif($id, Request $request, Critique $critique, CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(CritiqueType::class, $critique);
         $form->handleRequest($request);
 
@@ -151,6 +157,8 @@ class CritiqueController extends AbstractController
      */
     public function critiqueVerif($id,CritiqueRepository $critiqueRepository){
 
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $review = $critiqueRepository->find($id);
         $notification =  $critiqueRepository->findCountSubmittedCritiques();
 
@@ -166,6 +174,8 @@ class CritiqueController extends AbstractController
      * @Route("/admin/critiquesList/publierCritique/{id}", name="critique_publier")
      */
     public function critiquePublier($id,CritiqueRepository $critiqueRepository){
+
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $review = $critiqueRepository->find($id);
         $review->setPublication(true);
@@ -185,6 +195,8 @@ class CritiqueController extends AbstractController
      */
     public function critiquesList($page,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $critiques = $critiqueRepository->findCritiquePaginator($page);
         $maxPage = ceil(count($critiques)/10);
         /*$tab = [];

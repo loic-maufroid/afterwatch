@@ -16,10 +16,13 @@ class UtilisateurController extends AbstractController
      // Afficher la page de Profil et Modifier donnée
 
     /**
-     * @Route("/{username}/profil", name="profil_page")
+     * @Route("/{username}/profile", name="profil_page")
     */
     public function profilPage($username, Request $request)
-    {
+    {   
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        if ($this->getUser()->getUsername() !== $username)
+        return $this->redirectToRoute('welcome');
         
         $utilisateur = $this->getDoctrine()
             ->getRepository(Utilisateur::class)
@@ -51,6 +54,8 @@ class UtilisateurController extends AbstractController
     */
     public function userToggleBan(Utilisateur $user)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $user->setBan(!($user->getBan()));
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
@@ -68,6 +73,8 @@ class UtilisateurController extends AbstractController
      */
     public function userList($page,UtilisateurRepository $utilisateurRepository,CritiqueRepository $critiqueRepository)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $users = $utilisateurRepository->findUserPaginator($page);
         $maxPage = ceil(count($users)/25);
         $notification = $critiqueRepository->findCountSubmittedCritiques();
@@ -79,6 +86,4 @@ class UtilisateurController extends AbstractController
             'notification' => $notification
         ]);
     }
-
-    
 }
