@@ -16,9 +16,9 @@
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
                     <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                         class="d-block mx-auto img-fluid dimCarr" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h6>{{ filmCarr.titre }}</h6>
-                        <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
+                    <div class="carousel-caption d-none d-md-block  bk_film margina">
+                        <a class="lien-carousel  flex flexdr jcenter" href="{{ path('details_film',{slug: filmCarr.slug}) }}">
+                        <p class="lien-carousel colorp flex flexdr jcenter margt">{{ filmCarr.titre }}</p></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -35,8 +35,8 @@
         </div>
         {% endif %}
 
-        <div class="contenu-a-affiche">
-            <h1 class="title split-character intro-site  margintop margina">A découvrir sur AfterWatch</h1>
+        <div class="contenu-a-affiche margintop">
+           <h1 class="title split-character intro-site  margintop margina">A découvrir sur AfterWatch</h1>
         </div>
         <div class="contenu-a-affiche margina">
             <div id="contenu-a-affiche"></div>

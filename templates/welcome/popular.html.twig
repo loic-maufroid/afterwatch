@@ -16,9 +16,9 @@
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
                     <img src="{% if filmCarr.film.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                         class="d-block mx-auto img-fluid dimCarr" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h6>{{ filmCarr.film.titre }} {{ filmCarr.noteMoy }}</h6>
-                        <a href="{{ path('details_film',{slug: filmCarr.film.slug}) }}">Cliquer ici</a>
+                    <div class="carousel-caption d-none d-md-block bk_film margina">
+                        <a class="lien-carousel  flex flexdr jcenter" href="{{ path('details_film',{slug: filmCarr.film.slug}) }}">
+                        <p class="lien-carousel colorp flex flexdr jcenter margt">{{ filmCarr.film.titre }} {{ filmCarr.noteMoy }}</p></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -35,11 +35,11 @@
         </div>
         {% endif %}
 
-        <div class="contenu-a-affiche">
-            <h1 class="title split-character intro-site margintop margina">A découvrir sur AfterWatch</h1>
+        <div class="contenu-a-affiche  margintop margina">
+            <h1 class="title split-character intro-site margina">A découvrir sur AfterWatch</h1>
         </div>
-        <div class="contenu-a-affiche margina">
-            <div id="contenu-a-affiche"></div>
+        <div class="contenu-a-affiche  margina">
+            <div id="contenu-a-affiche  margina"></div>
 
             <section>
                 <div class="section-film-vu">
@@ -47,7 +47,7 @@
                         <div class="a-affiche-resultats">
                             <h2 class="tout-voir-affiche">
                                 <a href="{{ path('welcome') }}"><button class="btn btn-color" type="button" data-rel="link">Accueil</button></a>
-                                <h2 class="tout-voir-affiche">Recommandations</h2>
+                                <h2 class="tout-voir-affiche ">Recommandations</h2>
                             </h2>
                         </div>
                     </div>
