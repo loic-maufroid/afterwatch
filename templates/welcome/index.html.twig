@@ -62,18 +62,18 @@
                                     <div class="card">
                                         <div class="face face1">
                                             <div class="content">
-                                                <img class="" data-rel="poster" alt=""
+                                                <img class="dimCard" data-rel="poster" alt=""
                                                     src="{% if filmAffiche.affiche %}{{ 'http://image.tmdb.org/t/p/w154/'~filmAffiche.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                                                    width="150" height="204" />
+                                                    />
                                             </div>
                                         </div>
                                         <div class="face face2">
-                                            <div class="content justify-content-center align-items-start">
+                                            <div class="content justify-content-center align-items-start dimCard">
 
                                                 <a href="{{ path('details_film',{slug: filmAffiche.slug}) }}"
                                                     class="w-100 p-0 m-0">
-                                                    <h5 class="text-center">{% if filmAffiche.titre|length > 40 %}{{ filmAffiche.titre[:40] }}...{% else %}{{ filmAffiche.titre }}
-                                                        {% endif %}</h5>
+                                                    <h5 class="text-center">{{ filmAffiche.titre }}
+                                                        </h5>
                                                 </a>
 
                                             </div>
@@ -110,18 +110,18 @@
                                     <div class="card">
                                         <div class="face face1">
                                             <div class="content">
-                                                <img class="" data-rel="poster" alt=""
+                                                <img class="dimCard" data-rel="poster" alt=""
                                                     src="{% if filmSortie.affiche %}{{ 'http://image.tmdb.org/t/p/w154/'~filmSortie.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                                                    width="150" height="204" />
+                                                    />
                                             </div>
                                         </div>
                                         <div class="face face2">
-                                            <div class="content justify-content-center align-items-start">
+                                            <div class="content justify-content-center align-items-start dimCard">
 
                                                 <a class="w-100 m-0 p-0"
                                                     href="{{ path('details_film',{slug: filmSortie.slug}) }}">
-                                                    <h5 class="text-center">{% if filmSortie.titre|length > 40 %}{{ filmSortie.titre[:40] }}...{% else %}{{ filmSortie.titre }}
-                                                        {% endif %}</h5>
+                                                    <h5 class="text-center">{{ filmSortie.titre }}
+                                                        </h5>
                                                 </a>
                             </a>
                             <p>{{ filmSortie.date|date('d M Y',"Europe/Paris") }}</p>

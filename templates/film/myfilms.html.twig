@@ -16,7 +16,7 @@
                 
              
             <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="d-block mx-auto img-fluid" alt="...">
+                <img src="{% if filmCarr.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="d-block mx-auto img-fluid dimCarr" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h6>{{ filmCarr.titre }}</h6>
                     <a href="{{ path('details_film',{slug: filmCarr.slug}) }}">Cliquer ici</a>
@@ -67,11 +67,11 @@
                                 <div class="card">
                                     <div class="face face1">
                                         <div class="content">
-                                          <img src="{% if filmVeutVoir.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmVeutVoir.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" data-rel="poster" alt="" width="150" height="204"/>
+                                          <img class="dimCard" src="{% if filmVeutVoir.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmVeutVoir.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" data-rel="poster" alt=""/>
                                         </div>
                                     </div>
                                         <div class="face face2">
-                                            <div class="content">
+                                            <div class="content dimCard">
                                                 <a class="w-100 m-0 p-0"
                                                     href="{{ path('details_film',{slug: filmVeutVoir.slug}) }}">
                                                     <h5 class="text-center">{{ filmVeutVoir.titre }}</h5>
@@ -112,13 +112,13 @@
                                     <div class="card">
                                         <div class="face face1">
                                             <div class="content">
-                                                <img class="" data-rel="poster" alt=""
+                                                <img class="dimCard" data-rel="poster" alt=""
                                                     src="{% if filmAVu.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~filmAVu.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
-                                                    width="150" height="204" />
+                                                    />
                                             </div>
                                         </div>
                                         <div class="face face2">
-                                            <div class="content">
+                                            <div class="content dimCard">
                                                 <a class="w-100 m-0 p-0"
                                                     href="{{ path('details_film',{slug: filmAVu.slug}) }}">
                                                     <h5 class="text-center">{{ filmAVu.titre }}</h5>
