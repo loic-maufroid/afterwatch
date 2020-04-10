@@ -1,0 +1,23 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="public/css/bootstrap.min.css">
+<link rel="stylesheet" href="public/css/all.min.css">
+<link rel="stylesheet" href="public/css/erreur_style.css">
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Erreur 404{% endblock %}
+
+{% block body %}
+<section class="textc">
+    <img class="img" src="public/img/fourgere.jpg">
+    <h2>Désolé la page que vous avez demandée n'est pas disponible !</h2>
+    <div class="flex jcenter margintop">
+        <a href="{{ path('welcome') }}"><button type="button" class="btn marginr btn-color">Retour Accueil</button></a>
+        <a href="{{ path('contacter_admin') }}"><button type="button" class="btn  btn-color">Contacter un
+                Admin</button></a>
+    </div>
+    {% endblock %}
