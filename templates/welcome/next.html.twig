@@ -58,12 +58,12 @@
 
 
                         <li class="img-a-affiche">
-                            <a class="a-film film-a" href="#" data-rel="button">
+                            <a class="a-film film-a" href="{{ path('details_film',{slug: film.slug}) }}" data-rel="button">
                                 <div class="container">
                                     <div class="card">
                                         <div class="face face1">
                                             <div class="content">
-                                                <img class="dimCard" data-rel="poster" alt="Affiche Godzilla II"
+                                                <img class="dimCard" data-rel="poster" alt=""
                                                     src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w185/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                                                     />
                                             </div>
@@ -74,6 +74,7 @@
                                                     href="{{ path('details_film',{slug: film.slug}) }}">
                                                     <h5 class="text-center">{{ film.titre }}</h5>
                                                 </a>
+                                                <p class="text-center">{{ film.date|date('d M Y',"Europe/Paris") }}</p>
                                             </div>
                                         </div>
                                     </div>

@@ -60,10 +60,10 @@
                                 <div class="recherche-auto-flex flex alignit">
                                     <form class="flex" action="{{ path('search') }}" method="get">
                                         <input list="films" class="searchTerm" type="search" size="75%" id="site-search"
-                                            autocomplete="off" name="searchFilms" placeholder="recherche un film..."
+                                            autocomplete="off" name="searchFilms" placeholder="Recherche un film..."
                                             aria-label="Search through site content">
 
-                                        <button class="searchButton btn btn-color">Rechercher</button>
+                                        <button id="buttonr" class="searchButton btn btn-color">Rechercher</button>
                                     </form>
                                 </div>
                             </div>
@@ -228,9 +228,9 @@
 
             $("#buttonr").click(function (event) {
                 var q = $("#site-search").val();
-                if (q.trim().length <= 1) {
+                if (q.trim().length < 1) {
                     event.preventDefault();
-                    $("#messageErreur").text("L'expression en recherche est trop courte");
+                    $("#messageErreur").text("L'expression en recherche est vide");
                 }
             })
 
