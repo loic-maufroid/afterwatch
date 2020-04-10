@@ -84,8 +84,9 @@ class AppFixtures extends Fixture
         }
 
         //Créer les Films
+    
         $films = [];
-        for ($i = 1; $i <=75; ++$i)
+        for ($i = 1; $i <=10; ++$i)
         {
             $film = new Film();
             $film->setTitre('Titre Film '.$i);

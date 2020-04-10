@@ -16,6 +16,10 @@
 .flexdr{
     flex-direction: row;
 }
+/*met les flex en colonne*/
+.flexdc{
+    flex-direction: column;
+}
 /*centre les flex*/
 .jcenter{
     justify-content: center;
@@ -35,6 +39,10 @@
 /*align au milieu par rapport au haut*/
 .alignit{
     align-items: center;
+}
+/*margin top 0 qui permet le centrage du titre dans carousel*/
+.margt{
+    margin-top: -0.7em;
 }
 /*margint haut du titre*/
 .margint{
@@ -230,6 +238,25 @@ form
 {
     width: 342px;
     height: 413px;
+}
+/*lien du carousel qui dirige vers le film*/
+.lien-carousel{
+    color: #2e2e2e;
+}
+/*lien du carousel qui dirige vers le film*/
+.lien-carousel:hover{
+    color: #888888da;
+}
+/*titre dans limage*/
+.bk_film{
+    background-color: #a1a1a18c;
+    width: 24.5%;
+    height: 10%;
+}
+/*couleur du titre du film et taille*/
+.colorp{
+    color: #ebebeb;
+    font-size: 18px;
 }
 /*fin du carousel*/
 /* Début Main */
