@@ -94,6 +94,8 @@ class FilmController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->getUser()->getUsername() !== $username)
         return $this->redirectToRoute('welcome');
+        if (!$this->getUser()->getBan())
+        return $this->redirectToRoute('app_logout');
 
         $film = $filmRepository->findOneBy(["slug" => $slug]);
 
@@ -137,6 +139,8 @@ class FilmController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->getUser()->getUsername() !== $username)
         return $this->redirectToRoute('welcome');
+        if (!$this->getUser()->getBan())
+        return $this->redirectToRoute('app_logout');
 
         $film = $filmRepository->findOneBy(["slug" => $slug]);
 
@@ -180,6 +184,8 @@ class FilmController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->getUser()->getUsername() !== $username)
         return $this->redirectToRoute('welcome');
+        if (!$this->getUser()->getBan())
+        return $this->redirectToRoute('app_logout');
 
         $film = $filmRepository->findOneBy(["slug" => $slug]);
 
@@ -207,6 +213,8 @@ class FilmController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->getUser()->getUsername() !== $username)
         return $this->redirectToRoute('welcome');
+        if (!$this->getUser()->getBan())
+        return $this->redirectToRoute('app_logout');
 
         $user = $utilisateurRepository->findOneBy(["username" => $username]);
 
