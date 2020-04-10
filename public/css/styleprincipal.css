@@ -221,13 +221,13 @@ form
 }
 /* fin du header */
 
-/* Footer */
+/* Footer 
 #contener_footer
 {
     display: flex;
     flex-direction: inherit;
     padding-left: 10%;
-}
+}*/
 /* Fin du footer */
 
 /* Caroussel*/
