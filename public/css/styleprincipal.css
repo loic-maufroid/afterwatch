@@ -239,10 +239,8 @@ form
     position: relative;
     box-sizing: content-box;
 }
-
 .contenu-a-affiche
 {
-    margin: auto;
     max-width: 90%;
     box-sizing: border-box;
 }
@@ -257,6 +255,7 @@ h1
 {
     font-weight: inherit;
 }
+
 #contenu-a-affiche
 {
     margin: 0 10px 10px;
