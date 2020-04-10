@@ -87,7 +87,11 @@
             <textarea type="text" class="form-control" id="inputSynopsis" placeholder="Synopsis"></textarea>-->
             {{ form_row(form.synopsis) }}
         </div>
-        <div class="flex jcenter margintop">
+        <div class="flex jcenter">
+            <button id="boutonPopu" class="btn btn-color" formnovalidate>Faire la recherche</button>
+            <h4 id="messageRecherche"></h4>
+        </div>
+        <div class="flex jbetween margintop">
             <a href="{{ path('admin',{page: 1}) }}"><button type="button"
                     class="btn btn-danger btnsup">Annuler</button></a>
             <button type="submit" id="submitFilm" class="btn btn-success marginr" formnovalidate>Valider</button>
@@ -96,8 +100,7 @@
         {{ form_end(form) }}
 
 
-        <button id="boutonPopu" formnovalidate>Faire la recherche</button>
-        <h4 id="messageRecherche"></h4>
+        
 
         <div id="selection-films">
             <table class="table table-bordered" id="infos">
