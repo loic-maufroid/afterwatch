@@ -20,6 +20,10 @@
 .jcenter{
     justify-content: center;
 }
+/*justify content space-between des bouton tout voir*/
+.jbet{
+    justify-content: space-between;
+}
 /*met les flex a droite*/
 .jend{
     justify-content: end;
@@ -221,15 +225,6 @@ form
 }
 /* fin du header */
 
-/* Footer 
-#contener_footer
-{
-    display: flex;
-    flex-direction: inherit;
-    padding-left: 10%;
-}*/
-/* Fin du footer */
-
 /* Caroussel*/
 .dimCarr
 {
@@ -274,40 +269,11 @@ h1
     box-sizing: border-box;
    
 }
-.a-affiche-resultats
-{
-    display: block;
-    margin-left: 25px;
-    margin-bottom: 20px;
-    padding-bottom: 5px; 
-}
-.titre-section 
-{
-    background-color: #009193;
-    padding: .5%;
-    color: black;
-}
-.tout-voir
-{
-    background-color: #009193;
-    float: right;
-    margin-right: 10px;
-    padding: 6px 12px;
-    line-height: inherit;
-    outline: 0;
-    overflow: visible;
-    width: auto;
-    font-size: 100%;
-}
-.tout-voir a
-{
-    color: black;
-}
+
+/*h2 actuellement a l'affiche*/
 .tout-voir-affiche
 {
     font-size: 24px;
-    line-height: 36px;
-    vertical-align: middle;
 }
 h2 a
 {

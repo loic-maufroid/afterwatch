@@ -7,6 +7,7 @@
 
     <div class="contenu-main">
 
+        {% if filmsCarr|length > 0 %}
         <div id="xl-carousel" class="carousel slide margintop width" data-ride="carousel">
             <div class="carousel-inner">
 
@@ -34,6 +35,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+        {% endif %}
 
         <div class="contenu-a-affiche">
             <h1 class="title split-character intro-site">A découvrir sur AfterWatch</h1>
@@ -44,12 +46,9 @@
             <section>
                 <div class="section-film-vu">
                     <div class="film-a-affiche">
-                        <div class="a-affiche-resultats">
-                            <h2 class="tout-voir-affiche">
-                                <button class="tout-voir" type="button" data-rel="link"><a
-                                        href="{{ path('alaffiche') }}">Tout voir</a></button>
-                                <button class="titre-section">Actuellement à l'affiche</button>
-                            </h2>
+                        <div class="flex jbet">
+                                <button class=" btn btn-color">Actuellement à l'affiche</button>
+                                <a href="{{ path('alaffiche') }}"><button class="tout-voir btn btn-color" type="button" data-rel="link">Tout voir</button></a>
                         </div>
                     </div>
 
@@ -91,12 +90,9 @@
             <section>
                 <div class="section-film-vu">
                     <div class="film-a-affiche">
-                        <div class="a-affiche-resultats">
-                            <h2 class="tout-voir-affiche">
-                                <button class="tout-voir" type="button" data-rel="link"><a
-                                        href="{{ path('futures_sorties') }}">Tout voir</a></button>
-                                <button class="titre-section">Les futures sorties</button>
-                            </h2>
+                        <div class="flex jbet">
+                                <button class="btn btn-color">Les futures sorties</button>
+                                <a href="{{ path('futures_sorties') }}"><button class="btn btn-color" type="button" data-rel="link">Tout voir</button></a>
                         </div>
                     </div>
 
