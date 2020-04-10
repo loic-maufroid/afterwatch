@@ -243,7 +243,11 @@ li
     position: relative;
 }
 
-/* Caroussel */
+.dimCarr
+{
+    width: 342px;
+    height: 513px;
+}
 
 /* Début Main */
 .main-contenu
