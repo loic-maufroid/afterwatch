@@ -48,11 +48,6 @@ class Utilisateur implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Film", inversedBy="utilisateurs_avu")
-     */
-    private $a_vu;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="id_utilisateur", orphanRemoval=true)
      */
     private $statuses;
@@ -175,32 +170,6 @@ class Utilisateur implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Film[]
-     */
-    public function getAVu(): Collection
-    {
-        return $this->a_vu;
-    }
-
-    public function addAVu(Film $aVu): self
-    {
-        if (!$this->a_vu->contains($aVu)) {
-            $this->a_vu[] = $aVu;
-        }
-
-        return $this;
-    }
-
-    public function removeAVu(Film $aVu): self
-    {
-        if ($this->a_vu->contains($aVu)) {
-            $this->a_vu->removeElement($aVu);
-        }
 
         return $this;
     }
