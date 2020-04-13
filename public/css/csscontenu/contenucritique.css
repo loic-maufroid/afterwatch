@@ -121,7 +121,7 @@ a:hover{
     cursor: pointer;
     font-size: 32px;
     color: #02807d;
-    transition: all 150ms;
+    transition: all 125ms;
     top: 160%;
 }
 /*background de la section de contenu*/

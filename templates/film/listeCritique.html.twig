@@ -49,6 +49,9 @@
                                 class="btn btn-color marginr">Ajouter une Critique</button></a>
                     </div>
                 </section>
+                {% for message in app.flashes('submitted') %}
+                    <div class="bg-info">{{ message }}</div>
+                {% endfor %}
                 <section class="margintop margina width">
                     {% for critique in film.critiques %}
                     {% if critique.publication == 1 %}

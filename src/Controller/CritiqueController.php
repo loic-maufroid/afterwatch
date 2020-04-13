@@ -35,6 +35,11 @@ class CritiqueController extends AbstractController
      */
     public function addCritique($slug, FilmRepository $filmRepository,Request $request, SluggerInterface $slugger)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        if (!$this->getUser()->getBan())
+        return $this->redirectToRoute('app_logout');
+
         $critique = new Critique();
         $film = $filmRepository->findOneBy(["slug" => $slug]);
         $user = $this->getUser();
@@ -52,6 +57,7 @@ class CritiqueController extends AbstractController
             $manager->persist($critique);
             $manager->flush(); 
 
+            $this->addFlash('submitted',"Votre critique du film ".$film->getTitre()." a été enregistrée. Sa publication sur le site est maintenant soumise à l'accord d'un administrateur.");
             return $this->redirectToRoute('critiques', ['slug' => $slug]);
         }
 
