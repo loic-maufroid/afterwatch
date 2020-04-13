@@ -54,7 +54,7 @@ class CritiqueRepository extends ServiceEntityRepository
 
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'SELECT c.id_film_id as idFilm, AVG(c.note) as moyenne FROM critique c GROUP BY c.id_film_id ORDER BY moyenne DESC LIMIT :num';
+        $sql = 'SELECT c.id_film_id as idFilm, AVG(c.note) as moyenne FROM critique c WHERE c.publication = 1 GROUP BY c.id_film_id ORDER BY moyenne DESC LIMIT :num';
         $result = $conn->prepare($sql);
         $result->bindValue("num",$num,\PDO::PARAM_INT);
         $result->execute();
