@@ -33,8 +33,8 @@
                     <div class="card mb-4 margint" style="max-width: 540px;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img src="{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}" class="card-img"
-                                    alt="Affiche du Film {{ film.titre }} indisponible">
+                                <img src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="card-img"
+                                    alt="Affiche du Film {{ film.titre }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
