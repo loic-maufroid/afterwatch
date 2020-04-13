@@ -117,7 +117,7 @@ a:hover{
    justify-content: flex-end ;
 }
 /*couleur et transition avant hover*/
-#stars span {
+.stars span{
     cursor: pointer;
     font-size: 32px;
     color: #02807d;
@@ -144,4 +144,9 @@ a:hover{
 /*retour a la ligne critique vueListeCritique*/
 .ligne{
     word-break: break-word;
+}
+
+/* marges à droite des labels */
+label{
+    margin-right: 1em;
 }
