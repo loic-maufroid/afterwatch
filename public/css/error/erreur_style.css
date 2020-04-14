@@ -1,0 +1,65 @@
+/*couleur de la page*/
+body{
+    background-color: #264747;
+}
+/*Police d'ecriture du titre*/
+.font{
+    font-family: 'Montserrat', sans-serif;
+}
+/*image taille*/
+.img{
+    width: 500px;
+}
+/*taille du titre*/
+.size{
+    font-size: 60px;
+}
+/*couleur du titre*/
+.color:hover{
+    color: #02807d;
+}/*Centrer le text de connexion et le titre*/
+.textc{
+    text-align: center;
+}/*margfint top au dessus des bouton*/
+.margintop{
+    margin-top: 4em;
+}
+/*margfint top au dessous du titre*/
+.margint{
+    margin-top: 0.4em;
+}
+/*taille du formulaire+*/
+.width{
+    width: 40%;
+}
+/*display flex du formulaire*/
+.flex{
+    display: flex;
+}
+/*centrer le formulaire*/
+.jcenter{
+    justify-content: center;
+}
+/*couleur donner au bouton */
+.btn-color{
+    background-image:linear-gradient(60deg, #02aca9, #2d8d8d);
+    color: white;
+} 
+/*couleur donner au bouton au survol*/
+.btn-color:hover{
+    background-image:linear-gradient(60deg, #1e9593, #2e8f8d);
+    color: white;
+}
+/*margin a droite des bouton*/
+.marginr{
+    margin-right: 1em;
+}
+/*taille du 404*/
+h1{
+    font-size: 200px;
+    color: white;
+}
+h2{
+    font-size: 40px;
+    color:  white;
+}
