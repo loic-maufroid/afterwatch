@@ -2,6 +2,10 @@
 
 {% block title %}{{ parent() }} - Recommandations{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/csscontenu/popular-stars.css') }}">
+{% endblock %}
 {% block content %}
 
 <div class="main-contenu mt-4">
@@ -16,9 +20,12 @@
                 <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
                     <img src="{% if filmCarr.film.affiche %}{{ 'http://image.tmdb.org/t/p/w342/'~filmCarr.film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                         class="d-block mx-auto img-fluid dimCarr" alt="...">
-                    <div class="carousel-caption d-none d-md-block bk_film margina">
-                        <a class="lien-carousel  flex flexdr jcenter" href="{{ path('details_film',{slug: filmCarr.film.slug}) }}">
-                        <p class="lien-carousel colorp flex flexdr jcenter margt">{{ filmCarr.film.titre }} {{ filmCarr.noteMoy }}</p></a>
+                    <div class="carousel-caption d-none d-md-block  bk_film margina">
+                        <div class="lien-carousel flex flexdr text-center jcenter">
+                        <a class="jcenter flex flexdr" href="{{ path('details_film',{slug: filmCarr.film.slug}) }}">
+                        <p class="colorp jcenter margt">{{ filmCarr.film.titre }}</p></a>
+                        <div class="stars pl-2 margt" value="{{ filmCarr.noteMoy }}"></div>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -35,8 +42,8 @@
         </div>
         {% endif %}
 
-        <div class="contenu-a-affiche  margintop margina">
-            <h1 class="title split-character intro-site margina">A découvrir sur AfterWatch</h1>
+        <div class="contenu-a-affiche marginl margintop margina">
+            <h1 class="title split-character intro-site margintop margina">A découvrir sur AfterWatch</h1>
         </div>
         <div class="contenu-a-affiche  margina">
             <div id="contenu-a-affiche  margina"></div>
@@ -59,7 +66,6 @@
 
                         <li class="img-a-affiche w-100">
 
-                            <p>Note de {{ film.noteMoy }} en moyenne</p>
                             <a class="a-film film-a" href="{{ path('details_film',{slug: film.film.slug}) }}"
                                 data-rel="button">
                                 <div class="container">
@@ -76,6 +82,7 @@
                                                     href="{{ path('details_film',{slug: film.film.slug}) }}">
                                                     <h5 class="text-center">{{ film.film.titre }}</h5>
                                                 </a>
+                                                <div class="stars text-center" value="{{ film.noteMoy }}"></div>
                                             </div>
                                         </div>
 
@@ -97,4 +104,9 @@
 
     </div>
 
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/utilisateur/critique-stars.js') }}"></script>
     {% endblock %}

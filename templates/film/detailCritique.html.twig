@@ -32,8 +32,8 @@
                 <div class="card mb-3 margint" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}" class="card-img"
-                                alt="Affiche du Film {{ film.titre }} indisponible">
+                            <img src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="card-img"
+                                alt="Affiche du Film {{ film.titre }}">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -49,13 +49,8 @@
                 <article class="marginb">
                     <h5 class="margint flex jcenter">{{ critique.titre }}</h5>
                     <h6 class="margintop flex jcenter">Auteur: {{ critique.idUtilisateur.username }}</h6>
-                    <div id="stars" class="flex jcenter marginb">
-                        {{ critique.note }}
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
+                    <div class="flex jcenter marginb stars" value="{{ critique.note }}">
+                        <div class="note">{{ critique.note }}</div>
                     </div>
                     <p class="card-text sizing justify margina width ligne">
                         {{ critique.contenu }}
@@ -64,4 +59,9 @@
             </section>
         </main>
 
+        {% endblock %}
+
+        {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/utilisateur/critique-stars.js') }}"></script>
         {% endblock %}

@@ -33,7 +33,7 @@
                     {{ form_row(form.note) }}
                 </div>
                 <div class="form-group col-md-12">
-                    {{ form_row(form.contenu, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.contenu, {'attr': {'class': 'form-control','rows': 20}}) }}
                 </div>
             </div>
 
@@ -55,4 +55,9 @@
 
         </section>
 
+        {% endblock %}
+
+        {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/utilisateur/add-critique.js') }}"></script>
         {% endblock %}

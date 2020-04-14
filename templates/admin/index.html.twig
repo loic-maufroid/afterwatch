@@ -41,7 +41,7 @@
             <tr>
                 <td>
                     <img class="minimage"
-                        src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}{% endif %}"
+                        src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w92/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}"
                         alt="{{ film.titre }}">
                 </td>
                 <td>{{ film.titre }}</td>

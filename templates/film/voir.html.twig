@@ -90,11 +90,13 @@
 
       <section id="commentaire">
         <h2>Commentaires</h2>
+        {% if app.user %}
         {{ form_start(form, {'attr': {'class': ' test form margint'}}) }}
         {{ form_errors(form.contenu) }}
         {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
         <button type="submit">Envoyer le Commentaire</button>
         {{ form_end(form) }}
+        {% endif %}
 
         {% for comment in film.commentaires %}
         <article class="marginb">
@@ -106,7 +108,7 @@
                 class="avatar">
             </div>
             <div class="flex flexd">
-              <h6 class="margint marginle">de : {% if is_granted('ROLE_ADMIN') %}
+              <h6 class="margint marginle">de : {% if comment.idUtilisateur.roles[0] == 'ROLE_ADMIN' %}
                 (Admin){% endif %}{{ comment.idUtilisateur.username }}</h6>
               <p class="card-text sizing justify marginle width ligne">
                 {{ comment.contenu }}

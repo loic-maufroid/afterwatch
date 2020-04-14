@@ -9,6 +9,7 @@ use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UtilisateurController extends AbstractController
 {
@@ -18,25 +19,75 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/{username}/profile", name="profil_page")
     */
-    public function profilPage($username, Request $request)
+    public function profilPage($username, Request $request,UserPasswordEncoderInterface $passwordEncoder)
     {   
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->getUser()->getUsername() !== $username)
         return $this->redirectToRoute('welcome');
+        if (!$this->getUser()->getBan())
+        return $this->redirectToRoute('app_logout');
         
         $utilisateur = $this->getDoctrine()
             ->getRepository(Utilisateur::class)
             ->findOneBy(["username" => $username]);
 
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
+
+        $form->remove('password');
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $this->getDoctrine()->getManager()->flush();
+            $flashbag = $this->get('session')->getFlashBag();
 
-            return $this->redirectToRoute('welcome');
+            $manager = $this->getDoctrine()->getManager();
+
+            $image = $form->get('image')->getData();
+
+            if ($image !== null) {
+                // Je récupère le dossier où j'upload mes images
+                $uploadDir = __DIR__.'/../../public/img/avatar/';
+
+                if ($utilisateur->getAvatar())
+                unlink($uploadDir.$utilisateur->getAvatar());
+                // Je fais l'upload en générant un nom pour l'image comme aerf1234.jpg
+                $fileName = uniqid().'.'.$image->guessExtension();
+                $image->move($uploadDir, $fileName);
+                dump($uploadDir);
+                // Je mets à jour l'entité pour la BDD
+                $utilisateur->setAvatar($fileName);
+                
+                
+               $this->addFlash('uploaded','Avatar changé !');
+            }
+            
+            $oldpw = htmlspecialchars(trim($form->get('oldpassword')->getData()));
+            $pw = htmlspecialchars(trim($form->get('newpassword')->getData()));
+            $confirmpw = htmlspecialchars(trim($form->get('confirmpassword')->getData()));
+
+            if ($oldpw && $pw && $confirmpw && $oldpw != "" && $pw != "" && $confirmpw != ""){
+                if ($passwordEncoder->isPasswordValid($utilisateur,$oldpw)){
+                    if ($pw == $confirmpw && strlen($pw) < 4096){
+                    $utilisateur->setPassword($passwordEncoder->encodePassword($utilisateur,$pw));
+                    $this->addFlash('changepw',"Mot de passe bien changé");
+                    }
+                    else
+                    $this->addFlash('pwerror',"Confirmation de nouveau mot de passe erronnée");
+                }
+                else
+                $this->addFlash("pwerror","Le mot de passe entré pour l'ancien mot de passe ne correspond pas à ce dernier.");
+            }
+
+            $form = $this->createForm(UtilisateurType::class, $utilisateur);
+
+            $form->remove('password');
+
+            $manager->flush();
+
         }
+
+        dump($form);
 
         return $this->render('security/userProfil.html.twig', [
             'form' => $form->createView(),

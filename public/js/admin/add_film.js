@@ -1,17 +1,8 @@
 $("#submitFilm").hide();
-$("#film_date").hide();
-$("#film_affiche").hide();
-$("#film_act").hide();
-$("#film_genre").hide();
-$("#film_duree").hide();
-$("#film_synopsis").hide();
-$("#film_nationalite").hide();
-$("#film_trailer").hide();
-$("#film_real").hide();
-$("#film_scen").hide();
+$("#submitFilm").prop('disabled',true);
 $("label").hide();
-$("label[for='film_titre']").show();
-$("label[for='film_legislation']").show();
+$("label[for=film_titre]").show();
+$("label[for=film_legislation]").show();
 
 var films = [];
 var curEntry = [];
@@ -19,7 +10,8 @@ var curEntry = [];
 $("#boutonPopu").click(function(event){
 
     try {
-        
+    
+    event.preventDefault();
     $("#boutonPopu").prop('disabled',true);
     $("#infos").hide();
     $("#messageRecherche").text("");
@@ -134,12 +126,15 @@ $("#boutonPopu").click(function(event){
            $("#film_scen").val(curEntry[numero][1][10]);
            $("#film_trailer").val(curEntry[numero][1][8]);
            $("#film_affiche").val(curEntry[numero][1][6]);
+
+           $("#submitFilm").prop('disabled',false);
            
            $('#scrollform').animate({
                     scrollTop: 0
                 }, 2000);
 
            $(".deselection").click(function(e){
+               $("#submitFilm").prop('disabled',true);
                
                $("#selectedFilm *").html("");
                $("label[for=film_titre]").show();

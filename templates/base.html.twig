@@ -120,7 +120,7 @@
                         <div class="dropdown">
                             <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img style="height: 25px;" src="{{ asset('img/avatar/'~app.user.avatar ) }}"
+                                <img style="height: 25px;" src="{% if app.user.avatar %}{{ asset('img/avatar/'~app.user.avatar ) }}{% else %}{{ asset('img/avatar/utilisateur.png') }}{% endif %}"
                                     alt="image de profil {{ app.user.username }}"> {{ app.user.username }}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

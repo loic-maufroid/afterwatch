@@ -71,6 +71,10 @@ class AppAutheticatorAuthenticator extends AbstractFormLoginAuthenticator implem
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
+        else{
+            if (!$user->getBan())
+            throw new CustomUserMessageAuthenticationException('Ce compte utilisateur a été banni.');
+        }
 
         return $user;
     }

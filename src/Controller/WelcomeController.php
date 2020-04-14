@@ -93,7 +93,7 @@ class WelcomeController extends AbstractController
     }
 
     public function roundNote($rawNote){
-        return intval(round($rawNote * 2))/2;
+        return intval(round($rawNote));
     }
 
     /**

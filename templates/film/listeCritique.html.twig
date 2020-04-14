@@ -33,8 +33,8 @@
                     <div class="card mb-4 margint" style="max-width: 540px;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img src="{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}" class="card-img"
-                                    alt="Affiche du Film {{ film.titre }} indisponible">
+                                <img src="{% if film.affiche %}{{ 'http://image.tmdb.org/t/p/w780/'~film.affiche }}{% else %}{{ asset('img/popcorn.jpg') }}{% endif %}" class="card-img"
+                                    alt="Affiche du Film {{ film.titre }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -49,6 +49,9 @@
                                 class="btn btn-color marginr">Ajouter une Critique</button></a>
                     </div>
                 </section>
+                {% for message in app.flashes('submitted') %}
+                    <div class="bg-info">{{ message }}</div>
+                {% endfor %}
                 <section class="margintop margina width">
                     {% for critique in film.critiques %}
                     {% if critique.publication == 1 %}
@@ -61,20 +64,15 @@
                             </a>
                         </div>
                         <div class="marginb margint flex flexdr">
-                            <div class="flex flexd">
-                                <h6 class=" margina marginb"><a
+                            <div class="flex flexd w-100">
+                                <h6 class="margina marginb"><a
                                         href="{{ path('critiqueview', {slug: film.slug, slug2: critique.slug }) }}">{{ critique.idUtilisateur.username }}
                                         ~ {{ critique.titre }}</a></h6>
-                                <p class="card-text sizing justify margina width ligne">
-                                    {% if critique.contenu|length > 80 %}{{ critique.contenu|slice(0,99) }}{% else %}{{ critique.contenu }}{% endif %}
+                                <p class="card-text sizing margina width ligne">
+                                    {% if critique.contenu|length > 80 %}{{ critique.contenu|slice(0,79) }}(...){% else %}{{ critique.contenu }}{% endif %}
                                 </p>
-                                <div id="stars" class="flex jend">
-                                    {{ critique.note }}
-                                    <span>★</span>
-                                    <span>★</span>
-                                    <span>★</span>
-                                    <span>★</span>
-                                    <span>★</span>
+                                <div class="flex jend stars" value="{{ critique.note }}">
+                                    <div class="note">{{ critique.note }}</div>
                                 </div>
                             </div>
                         </div>
@@ -86,4 +84,9 @@
                 </section>
             </main>
     </body>
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/utilisateur/critique-stars.js') }}"></script>
     {% endblock %}
